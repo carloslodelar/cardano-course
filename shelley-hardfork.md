@@ -91,8 +91,8 @@ sed -i shelley/genesis.spec.json \
 -e 's/"major": 6/"major": 1/' \
 -e 's/"updateQuorum": 3/"updateQuorum": 2/' \
 -e 's/"maxLovelaceSupply": 45000000000000000/"maxLovelaceSupply": 45000000000000/' \
--e 's/"epochLength": 432000/"epochLength": 2160/' \
--e 's/"securityParam": 108/"securityParam": 108/' \
+-e 's/"epochLength": 432000/"epochLength": 9000/' \
+-e 's/"securityParam": 108/"securityParam": 45/' \
 -e 's/"slotLength": 1/"slotLength": 0.20/' 
 ```
 
