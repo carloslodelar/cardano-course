@@ -132,7 +132,7 @@ And a few changes to the config.json template
  -e 's/"EnableP2P": true/"EnableP2P": false/' \
  -e 's/"TestEnableDevelopmentNetworkProtocols": true/"TestEnableDevelopmentNetworkProtocols": false/' \
  -e 's/"TestEnableDevelopmentHardForkEras": true/"TestEnableDevelopmentHardForkEras": false/' \
- -e 's/"LastKnownBlockVersion-Major": 3/"LastKnownBlockVersion-Major": 0/' \
+ -e 's/"LastKnownBlockVersion-Major": 3/"LastKnownBlockVersion-Major": 1/' \
  -e 's/"LastKnownBlockVersion-Minor": 1/"LastKnownBlockVersion-Minor": 0/' \
  -e 's/"TestShelleyHardForkAtEpoch": 0/"TestShelleyHardForkAtEpoch": /' \
  -e 's/"TestAllegraHardForkAtEpoch": 0/"TestAllegraHardForkAtEpoch": /' \
