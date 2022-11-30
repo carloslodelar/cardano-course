@@ -168,7 +168,7 @@ mv byron-genesis.json configuration/
 mv alonzo-genesis.json configuration/
 ```
 
-And let's move our genesis and delegate keys to their corresponging delegate nodes:
+And let's move our delegate keys to their corresponging delegate nodes:
 
 ```
 mv -t bft0/ delegate-keys/byron.000* delegate-keys/shelley.000* 

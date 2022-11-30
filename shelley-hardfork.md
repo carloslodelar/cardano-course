@@ -5,15 +5,15 @@ We don't want to stay on Byron era forever, right? Of course not. Let's move on 
 Create keys and addresses to withdraw the initial UTxO
 
 ```
-cardano-cli keygen --secret byron/payment.000.key
-cardano-cli keygen --secret byron/payment.001.key
+cardano-cli keygen --secret utxo-keys/payment.000.key
+cardano-cli keygen --secret utxo-keys/payment.001.key
 ```
 
 ```
 cardano-cli signing-key-address --testnet-magic 42 \
---secret byron/payment.000.key > byron/payment.000.addr
+--secret utxo-keys/payment.000.key > utxo-keys/payment.000.addr
 cardano-cli signing-key-address --testnet-magic 42 \
---secret byron/payment.001.key > byron/payment.001.addr
+--secret utxo-keys/payment.001.key > utxo-keys/payment.001.addr
 ```
 
 Write genesis addresses to files&#x20;
@@ -21,10 +21,7 @@ Write genesis addresses to files&#x20;
 ```
 cardano-cli signing-key-address \
     --testnet-magic 42 \
-    --secret byron/genesis-keys.000.key > byron/genesis.000.addr
-cardano-cli signing-key-address \
-    --testnet-magic 42 \
-    --secret byron/genesis-keys.001.key > byron/genesis.001.addr
+    --secret utxo-keys/byron.000.key > utxo-keys/byron.000.addr
 ```
 
 Let's spend the genesis utxos and send the funds to the addresses we created above:
@@ -33,10 +30,11 @@ Now we need to send funds from their genesis addresses `genesis.000.addr`, `gene
 
 {% code overflow="wrap" %}
 ```bash
-cat byron/genesis.000.addr
->h 
-2657WMsDfac6rQjUwcQXHWtDKsRUhNLfmnUNC1c4YLpVshZXqDBiu7ddiuzA9jRNb
-VerKey address with root aa419520b7d891f9f0ac8ebc584debca8169a9f7d2366c98157621c7, attributes: AddrAttributes { derivation path: {} }
+cat utxo-keys/byron.000.addr
+
+>
+2657WMsDfac6JrXMvC5KQuYhCFfhoS5c1jfBPje9vn2D86PkugFZa5oMWcBJo1nrt
+VerKey address with root 79ed4e30d7707c20a8c958fe89146fd21e1536e3d29a29e0131deabf, attributes: AddrAttributes { derivation path: {} }
 ```
 {% endcode %}
 
@@ -52,7 +50,7 @@ cardano-cli issue-genesis-utxo-expenditure \
 --testnet-magic 42 \
 --tx transactions/tx0.tx \
 --wallet-key bft0/delegate-keys.000.key \
---rich-addr-from $(head -n 1 byron/genesis.000.addr) \
+--rich-addr-from $(head -n 1 utxo-keys/genesis.000.addr) \
 --txout "(\"$(head -n 1 byron/payment.000.addr)\", 17999999000000)"
 ```
 
