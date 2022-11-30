@@ -34,16 +34,16 @@ cardano-cli address build \
 
 Let's send some funds to our pool owner address:
 
-{% code overflow="wrap" %}
 ```
 cardano-cli transaction build \
 --shelley-era \
+--testnet-magic 42 \
+--invalid-hereafter $(expr $(cardano-cli query tip --testnet-magic 42 | jq .slot) + 1000) \
 --tx-in $(cardano-cli query utxo --address $(cat utxo-keys/user1.payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -r 'keys[]') \
 --tx-out $(cat pool1/payment.addr)+99998000000 \
 --change-address $(cat utxo-keys/user1.payment.addr) \
 --out-file transactions/tx3.raw
 ```
-{% endcode %}
 
 Sign it
 
@@ -83,8 +83,8 @@ cardano-cli node key-gen-VRF \
 &#x20;Generate KES keys
 
 ```
-cardano-cli node key-gen-KES
---verification-key-file pool1/kes.vkey
+cardano-cli node key-gen-KES \
+--verification-key-file pool1/kes.vkey \
 --signing-key-file pool1/kes.skey
 ```
 
@@ -93,7 +93,7 @@ To generate the operational certificate:
 ```
 cardano-cli node issue-op-cert \
 --kes-verification-key-file pool1/kes.vkey \
---cold-signing-key-file pool1/c0old.skey \
+--cold-signing-key-file pool1/cold.skey \
 --operational-certificate-issue-counter pool1/opcert.counter \
 --kes-period 0 \
 --out-file pool1/opcert.cert
