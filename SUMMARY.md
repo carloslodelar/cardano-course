@@ -5,3 +5,4 @@
 * [Shelley hardfork](shelley-hardfork.md)
 * [Move funds to shelley address](move-funds-to-shelley-address.md)
 * [Create stake pools](create-stake-pools.md)
+* [Bring decentralization parameter to .80](bring-decentralization-parameter-to-.80.md)
