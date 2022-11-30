@@ -181,3 +181,8 @@ Give it executable permissions:
 ```
 chmod +x pool1/startnode.sh
 ```
+
+Start the node from the pool1 directory.
+
+
+
