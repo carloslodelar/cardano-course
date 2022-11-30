@@ -144,18 +144,18 @@ And a few changes to the config.json template
 Now we can use the magic of cardano-cli genesis create-cardano
 
 ```
-cardano-cli genesis create-cardano
---genesis-dir ./
---gen-genesis-keys 2
---start-time $(date -u -d "now + 30 minutes" +%FT%Tz)
---supply 30000000000000
---security-param 45
---slot-length 200
---slot-coefficient 5/100
---testnet-magic 42
---byron-template template/byron.json
---shelley-template template/shelley.json
---alonzo-template template/alonzo.json
+cardano-cli genesis create-cardano \
+--genesis-dir ./ \
+--gen-genesis-keys 2 \
+--start-time $(date -u -d "now + 5 minutes" +%FT%Tz) \
+--supply 30000000000000 \
+--security-param 45 \
+--slot-length 200 \
+--slot-coefficient 5/100 \
+--testnet-magic 42 \
+--byron-template template/byron.json \
+--shelley-template template/shelley.json \
+--alonzo-template template/alonzo.json \
 --node-config-template template/config.json
 ```
 
@@ -189,8 +189,8 @@ cardano-node run \
 --database-path db \
 --socket-path bft0.socket \
 --port 3000 \
---delegation-certificate delegation-cert.000.json \
---signing-key delegate-keys.000.key 
+--delegation-certificate byron.000.cert.json \
+--signing-key byron.000.key
 EOF
 ```
 
@@ -206,8 +206,8 @@ cardano-node run \
 --database-path db \
 --socket-path bft1.socket \
 --port 3001 \
---delegation-certificate delegation-cert.001.json \
---signing-key delegate-keys.001.key 
+--delegation-certificate byron.001.cert.json \
+--signing-key byron.001.key 
 EOF
 ```
 
