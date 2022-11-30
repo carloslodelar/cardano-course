@@ -269,3 +269,42 @@ For convinenve, lets save it to a file&#x20;
 ```
 cardano-cli stake-pool metadata-hash --pool-metadata-file pool1/poolmetadata.json --out-file poolmetadata.hash
 ```
+
+Generate the registration certificate
+
+```
+cardano-cli stake-pool registration-certificate \
+--cold-verification-key-file pool1/cold.vkey \
+--vrf-verification-key-file pool1/vrf.vkey \
+--pool-pledge 1000000000000 \
+--pool-cost 340 \
+--pool-margin 10/100 \
+--pool-reward-account-verification-key-file pool1/stake.vkey \
+--pool-owner-stake-verification-key-file pool1/stake.vkey \
+--mainnet \
+--pool-relay-ipv4 127.0.0.1 \
+--pool-relay-port 3002 \
+--metadata-url https://git.io/JJWdJ \
+--metadata-hash $(cat poolmetadata.hash) \
+--out-file pool1/pool-registration.cert
+```
+
+Create a delegation certificate
+
+```
+cardano-cli stake-address delegation-certificate \
+--stake-verification-key-file pool1/stake.vkey \
+--cold-verification-key-file pool1/cold.vkey \
+--out-file pool1/delegation.cert
+```
+
+```
+cardano-cli transaction build-raw \
+--tx-in <TxHash>#<TxIx> \
+--tx-out $(cat payment.addr)+0 \
+--invalid-hereafter 0 \
+--fee 0 \
+--out-file tx.draft \
+--certificate-file pool-registration.cert \
+--certificate-file delegation.cert
+```
