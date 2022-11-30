@@ -120,3 +120,21 @@ cat > pool1/topology.json <<EOF
 EOF
 ```
 
+```
+cat > bft0/topology.json <<EOF
+{
+   "Producers": [
+     {
+       "addr": "127.0.0.1",
+       "port": 3001,
+       "valency": 1
+     },
+     {
+       "addr": "127.0.0.1",
+       "port": 3002,
+       "valency": 1
+     }
+   ]
+ }
+EOF
+```
