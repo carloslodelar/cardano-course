@@ -204,7 +204,7 @@ cardano-cli transaction build \
 --testnet-magic 42 \
 --invalid-hereafter $(expr $(cardano-cli query tip --testnet-magic 42 | jq .slot) + 1000) \
 --tx-in $(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -r 'keys[]') \
---certificate-file stake.cert \
+--certificate-file pool1/stake.cert \
 --change-address $(cat pool1/payment.addr) \
 --out-file transactions/tx4.raw
 ```
