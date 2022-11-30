@@ -112,11 +112,6 @@ Our network will start in Byron era and we will upgrade it all the way up to Bab
 
 Note that this template uses 200 millisecond slots on Byron era. Mainnet used 20 second slots during the Byron era because blocks need to travel the world and 20 seconds ensured that everybody had received the previous block before forging a new one.  In our local cluster we will use 4 second slots in Byron and 0.2 seconds slots on the following eras.  &#x20;
 
-```bash
-sed -i template/byron.json \
--e 's/"slotDuration": "4000"/"slotDuration": "1000"/'
-```
-
 
 
 The rest of the parameters match mainnet ones. For detailed information about the parameters, see:[ Byron genesis data format ](https://github.com/input-output-hk/cardano-node/blob/master/doc/reference/byron-genesis.md)
