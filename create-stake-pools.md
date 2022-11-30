@@ -245,3 +245,15 @@ cardano-cli transaction submit \
 
 #### Register stake pool
 
+Now, it's time to register the stake pool. On a real network we would need to have metadata for our pool so tat it can be properly displayed by wallets.&#x20;
+
+The pool metadata must meet [this requirements](https://docs.cardano.org/development-guidelines/operating-a-stake-pool/public-stake-pools) &#x20;
+
+We will use the same file [https://git.io/JJWdJ ](https://git.io/JJWdJ)
+
+Get the metadata hash
+
+```bash
+wget https://git.io/JJWdJ -O pool1/poolmetadata.json
+```
+
