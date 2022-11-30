@@ -113,7 +113,7 @@ Our network will start in Byron era and we will upgrade it all the way up to Bab
 Note that this template uses 200 millisecond slots on Byron era. Mainnet used 20 second slots during the Byron era because blocks need to travel the world and 20 seconds ensured that everybody had received the previous block before forging a new one.  In our local cluster we will use 1 second slots in Byron and 0.2 seconds slots on the following eras.  &#x20;
 
 ```bash
-sed -i template/shelley.json \
+sed -i template/byron.json \
 -e 's/"slotDuration": "4000"/"slotDuration": "1000"/'
 ```
 
