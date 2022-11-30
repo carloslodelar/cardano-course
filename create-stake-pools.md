@@ -251,9 +251,21 @@ The pool metadata must meet [this requirements](https://docs.cardano.org/develop
 
 We will use the same file [https://git.io/JJWdJ ](https://git.io/JJWdJ)
 
-Get the metadata hash
+Get the file
 
 ```bash
 wget https://git.io/JJWdJ -O pool1/poolmetadata.json
 ```
 
+Get the metadata hash
+
+```
+cardano-cli stake-pool metadata-hash --pool-metadata-file clrpool.json 
+5c93c2c47f115c0184e5b2499b179b36dc385a45a2a809bb3ec2e34047dae04e
+```
+
+For convinenve, lets save it to a file&#x20;
+
+```
+cardano-cli stake-pool metadata-hash --pool-metadata-file pool1/poolmetadata.json --out-file poolmetadata.hash
+```
