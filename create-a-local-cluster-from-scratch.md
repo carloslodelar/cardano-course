@@ -37,7 +37,8 @@ Download the template files and save it in the template folder we just created.&
 <pre class="language-bash" data-overflow="wrap"><code class="lang-bash"><strong>wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/alonzo.json
 </strong>wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/byron.json
 wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/config.json
-wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/shelley.json</code></pre>
+wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/shelley.json
+</code></pre>
 
 Our system will start in Byron era. We will start with 2 BFT nodes. We will add 2 Stake Pools when we transition to Shelley era.  Let's make a directory for each of the nodes and a configuration folder for our configuration files.&#x20;
 
@@ -117,7 +118,6 @@ Let's make a few changes to our shelley.json template
 
 ```
 sed -i template/shelley.json \
--e 's/"major": 6/"major": 0/' \
 -e 's/"updateQuorum": 3/"updateQuorum": 2/' \
 -e 's/"maxLovelaceSupply": 45000000000000000/"maxLovelaceSupply": 45000000000000/' \
 -e 's/"epochLength": 432000/"epochLength": 9000/' \

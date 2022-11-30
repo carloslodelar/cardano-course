@@ -6,14 +6,11 @@ Create keys and addresses to withdraw the initial UTxO
 
 ```
 cardano-cli keygen --secret utxo-keys/payment.000.key
-cardano-cli keygen --secret utxo-keys/payment.001.key
 ```
 
 ```
 cardano-cli signing-key-address --testnet-magic 42 \
 --secret utxo-keys/payment.000.key > utxo-keys/payment.000.addr
-cardano-cli signing-key-address --testnet-magic 42 \
---secret utxo-keys/payment.001.key > utxo-keys/payment.001.addr
 ```
 
 Write genesis addresses to files&#x20;
@@ -49,9 +46,9 @@ cardano-cli issue-genesis-utxo-expenditure \
 --genesis-json configuration/byron-genesis.json \
 --testnet-magic 42 \
 --tx transactions/tx0.tx \
---wallet-key bft0/delegate-keys.000.key \
---rich-addr-from $(head -n 1 utxo-keys/genesis.000.addr) \
---txout "(\"$(head -n 1 byron/payment.000.addr)\", 17999999000000)"
+--wallet-key utxo-keys/byron.000.key \
+--rich-addr-from $(head -n 1 utxo-keys/byron.000.addr) \
+--txout "(\"$(head -n 1 utxo-keys/payment.000.addr)\", 29999999000000)"
 ```
 
 ```
@@ -68,81 +65,31 @@ cardano-cli issue-genesis-utxo-expenditure \
 cardano-cli submit-tx \
             --testnet-magic 42 \
             --tx transactions/tx0.tx
-cardano-cli submit-tx \
-            --testnet-magic 42 \
-            --tx transactions/tx1.tx
 ```
 
 ### Shelley Hardfork&#x20;
 
-Before we can move on to Shelley, we will need a proper Shelley.genesis file&#x20;
-
-```
-mkdir shelley
-cp template/shelley.json shelley/genesis.spec.json
-cp template/alonzo.json shelley/genesis.alonzo.spec.json 
-```
-
-```
-sed -i shelley/genesis.spec.json \
--e 's/"activeSlotsCoeff": 0.05/"activeSlotsCoeff": 0.10/' \
--e 's/"major": 6/"major": 1/' \
--e 's/"updateQuorum": 3/"updateQuorum": 2/' \
--e 's/"maxLovelaceSupply": 45000000000000000/"maxLovelaceSupply": 45000000000000/' \
--e 's/"epochLength": 432000/"epochLength": 9000/' \
--e 's/"securityParam": 108/"securityParam": 45/' \
--e 's/"slotLength": 1/"slotLength": 0.20/' 
-```
-
-```
-cardano-cli genesis create \
---testnet-magic 42 \
---genesis-dir shelley \
---gen-genesis-keys 2
-```
-
-```
-mv shelley/delegate-keys/delegate1* bft1/
-mv shelley/delegate-keys/opcert1.cert bft1/
-mv shelley/delegate-keys/delegate2* bft0/
-mv shelley/delegate-keys/opcert2.cert bft0/opcert0.cert
-cd bft0
-rename 's/delegate2/delegate0/g' *
-```
-
-Back to local-cluster/
-
-```
-cd ..
-```
-
-Replace Shelley and Alonzo genesis files.
-
-```
-rm configuration/shelley-genesis.json configuration/alonzo-genesis.json
-mv shelley/genesis.json configuration/shelley-genesis.json
-mv shelley/genesis.alonzo.json configuration/alonzo-genesis.json
-```
+Let's update our scripts to run the nodes to include Shelley keys:
 
 {% code overflow="wrap" %}
 ```
-sed -i '$ s/$/ --shelley-kes-key delegate0.kes.skey --shelley-vrf-key delegate0.vrf.skey --shelley-operational-certificate opcert0.cert/' bft0/startnode.sh
+sed -i '$ s/$/ --shelley-kes-key shelley.000.kes.skey --shelley-vrf-key shelley.000.vrf.skey --shelley-operational-certificate shelley.000.opcert.json/' bft0/startnode.sh
 ```
 {% endcode %}
 
 {% code overflow="wrap" %}
 ```
-sed -i '$ s/$/ --shelley-kes-key delegate1.kes.skey --shelley-vrf-key delegate1.vrf.skey --shelley-operational-certificate opcert1.cert/' bft1/startnode.sh   
+sed -i '$ s/$/ --shelley-kes-key shelley.001.kes.skey --shelley-vrf-key shelley.001.vrf.skey --shelley-operational-certificate shelley.001.opcert.json/' bft1/startnode.sh  
 ```
 {% endcode %}
 
-We are ready to move to shelley era. So we need to Create, Submit and Vote and update proposal.&#x20;
+We are almost ready to move to shelley era. So we need to Create, Submit and Vote and update proposal.&#x20;
 
 ```bash
 cardano-cli byron governance create-update-proposal \
 --filepath transactions/updateprotov1.proposal \
---testnet-magic "42" \
---signing-key bft0/delegate-keys.000.key \
+--testnet-magic 42 \
+--signing-key bft0/byron.000.key \
 --protocol-version-major "1" \
 --protocol-version-minor "0" \
 --protocol-version-alt "0" \
@@ -155,22 +102,34 @@ cardano-cli byron governance create-update-proposal \
 <pre><code><strong>cardano-cli byron governance create-proposal-vote \
 </strong>--proposal-filepath transactions/updateprotov1.proposal \
 --testnet-magic 42 \
---signing-key bft0/delegate-keys.000.key \
+--signing-key bft0/byron.000.key \
 --vote-yes \
---output-filepath transactions/updateprotov1.000.vote</code></pre>
+--output-filepath transactions/updateprotov1.000.vote
+</code></pre>
 
 <pre><code><strong>cardano-cli byron governance create-proposal-vote \
 </strong>--proposal-filepath transactions/updateprotov1.proposal \
 --testnet-magic 42 \
---signing-key bft1/delegate-keys.001.key \
+--signing-key bft1/byron.001.key \
 --vote-yes \
---output-filepath transactions/updateprotov1.001.vote</code></pre>
+--output-filepath transactions/updateprotov1.001.vote
+</code></pre>
 
-Before we can move on and Submit the proposal and Vote, we need to do another adjustment to our config&#x20;
+Before we can move on and Submit the proposal and Vote, we need to do another adjustment to our config file to say we are ready to move to protocol "LastKnownBlockVersion-Major": 1,
+
+```
+sed -i configuration/config.json \
+-e 's/"LastKnownBlockVersion-Major": 0/"LastKnownBlockVersion-Major": 1/'
+```
+
+Let's restart the nodes to pick the changes on configuration:
+
+
 
 <pre><code><strong>cardano-cli byron submit-update-proposal \
 </strong>            --testnet-magic 42 \
-            --filepath transactions/updateprotov1.proposal</code></pre>
+            --filepath transactions/updateprotov1.proposal
+</code></pre>
 
 ```
 cardano-cli byron submit-proposal-vote  \
@@ -208,8 +167,8 @@ Now lets upgrade to protocol version 2.0.0, The Shelley Era!&#x20;
 ```
 cardano-cli byron governance create-update-proposal \
 --filepath transactions/updateprotov2.proposal \
---testnet-magic "42" \
---signing-key bft0/delegate-keys.000.key \
+--testnet-magic 42 \
+--signing-key bft0/byron.000.key \
 --protocol-version-major "2" \
 --protocol-version-minor "0" \
 --protocol-version-alt "0" \
@@ -219,11 +178,20 @@ cardano-cli byron governance create-update-proposal \
 --installer-hash 0
 ```
 
+Let's adjust the config file again:
+
+```
+sed -i configuration/config.json \
+-e 's/"LastKnownBlockVersion-Major": 1/"LastKnownBlockVersion-Major": 2/'
+```
+
+and restart our nodes once more
+
 ```
 cardano-cli byron governance create-proposal-vote \
 --proposal-filepath transactions/updateprotov2.proposal \
 --testnet-magic 42 \
---signing-key bft0/delegate-keys.000.key \
+--signing-key bft0/byron.000.key \
 --vote-yes \
 --output-filepath transactions/updateprotov2.000.vote
 ```
@@ -232,14 +200,15 @@ cardano-cli byron governance create-proposal-vote \
 cardano-cli byron governance create-proposal-vote \
 --proposal-filepath transactions/updateprotov2.proposal \
 --testnet-magic 42 \
---signing-key bft1/delegate-keys.001.key \
+--signing-key bft1/byron.001.key \
 --vote-yes \
 --output-filepath transactions/updateprotov2.001.vote
 ```
 
 <pre><code><strong>cardano-cli byron submit-update-proposal \
 </strong>            --testnet-magic 42 \
-            --filepath transactions/updateprotov2.proposal</code></pre>
+            --filepath transactions/updateprotov2.proposal
+</code></pre>
 
 ```
 cardano-cli byron submit-proposal-vote  \
