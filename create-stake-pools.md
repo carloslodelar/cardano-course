@@ -98,3 +98,6 @@ cardano-cli node issue-op-cert \
 --kes-period 0 \
 --out-file pool1/opcert.cert
 ```
+
+Let's create a topology file for our pool and update the bft nodes topology so tat they include our pool.&#x20;
+
