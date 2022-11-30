@@ -157,3 +157,27 @@ cat > bft1/topology.json <<EOF
  }
 EOF
 ```
+
+And let's have a simple script to start the pool node.&#x20;
+
+```
+cat > pool1/startnode.sh <<EOF
+#!/usr/bin/env bash
+
+cardano-node run \
+--config ../configuration/config.json \
+--topology topology.json \
+--database-path db \
+--socket-path node.socket \
+--port 3002 \
+--shelley-kes-key kes.skey \
+--shelley-vrf-key vrf.skey \
+--shelley-operational-certificate opcert.cert
+EOF
+```
+
+Give it executable permissions:
+
+```
+chmod +x pool1/startnode.sh
+```
