@@ -101,3 +101,22 @@ cardano-cli node issue-op-cert \
 
 Let's create a topology file for our pool and update the bft nodes topology so tat they include our pool.&#x20;
 
+```
+cat > pool1/topology.json <<EOF
+{
+   "Producers": [
+     {
+       "addr": "127.0.0.1",
+       "port": 3000,
+       "valency": 1
+     },
+     {
+       "addr": "127.0.0.1",
+       "port": 3001,
+       "valency": 1
+     }
+   ]
+ }
+EOF
+```
+
