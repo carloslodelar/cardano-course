@@ -184,5 +184,36 @@ chmod +x pool1/startnode.sh
 
 Start the node from the pool1 directory.
 
+Our pool cannot create blocks just yet. We need to register it. To the blockchain
 
+#### Register stake key
 
+Create a registration certificate
+
+```
+cardano-cli stake-address registration-certificate \
+--stake-verification-key-file pool1/stake.vkey \
+--out-file pool1/stake.cert
+```
+
+Create a transaction to register the stake key
+
+```
+cardano-cli transaction build \
+--shelley-era \
+--testnet-magic 42 \
+--invalid-hereafter $(expr $(cardano-cli query tip --testnet-magic 42 | jq .slot) + 1000) \
+--tx-in $(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -r 'keys[]') \
+--certificate-file stake.cert \
+--change-address $(cat pool1/payment.addr) \
+--out-file transactions/tx4.raw
+```
+
+```
+cardano-cli transaction sign \
+--tx-body-file transactions/tx4.raw \
+--signing-key-file pool1/payment.skey \
+--signing-key-file pool1/stake.skey \
+--testnet-magic 42 \
+--out-file transactions/tx4.signed
+```
