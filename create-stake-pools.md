@@ -199,13 +199,32 @@ cardano-cli stake-address registration-certificate \
 Create a transaction to register the stake key
 
 ```
-cardano-cli transaction build \
+cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42
+                           TxHash                                 TxIx        Amount
+--------------------------------------------------------------------------------------
+3c40b6543a5888a61f630a28de520f6f7ecccc23d0e1e08fd9510a4e61156926     1        99998000000
+```
+
+```
+cardano-cli query protocol-parameters --testnet-magic 42 | grep stakeAddressDeposit
+    "stakeAddressDeposit": 2000000,
+
+```
+
+{% code overflow="wrap" %}
+```
+CHANGE=$(($(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -cs '.[0] | to_entries | .[] | .value.value') - 3000000))
+```
+{% endcode %}
+
+```
+cardano-cli transaction build-raw \
 --shelley-era \
---testnet-magic 42 \
+--fee 1000000 \
 --invalid-hereafter $(expr $(cardano-cli query tip --testnet-magic 42 | jq .slot) + 1000) \
 --tx-in $(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -r 'keys[]') \
+--tx-out $(cat pool1/payment.addr)+$CHANGE \
 --certificate-file pool1/stake.cert \
---change-address $(cat pool1/payment.addr) \
 --out-file transactions/tx4.raw
 ```
 
@@ -223,3 +242,6 @@ cardano-cli transaction submit \
 --testnet-magic 42 \
 --tx-file transactions/tx4.signed
 ```
+
+#### Register stake pool
+
