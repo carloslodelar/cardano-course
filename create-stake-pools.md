@@ -217,3 +217,9 @@ cardano-cli transaction sign \
 --testnet-magic 42 \
 --out-file transactions/tx4.signed
 ```
+
+```
+cardano-cli transaction submit \
+--testnet-magic 42 \
+--tx-file transactions/tx4.signed
+```
