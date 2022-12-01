@@ -318,7 +318,7 @@ CHANGE=$(($(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet
 cardano-cli transaction build-raw \
 --shelley-era \
 --fee 1000000 \
---invalid-hereafter $(expr $(cardano-cli query tip --testnet-magic 42 | jq .slot) + 1000) \
+--invalid-hereafter $(expr $(cardano-cli query tip --testnet-magic 42 | jq .slot) + 10000) \
 --tx-in $(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -r 'keys[]') \
 --tx-out $(cat pool1/payment.addr)+$CHANGE \
 --certificate-file pool1/pool-registration.cert \
