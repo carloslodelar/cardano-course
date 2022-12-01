@@ -341,3 +341,8 @@ cardano-cli transaction submit \
 --testnet-magic 42 \
 --tx-file transactions/tx5.signed
 ```
+
+```
+cardano-cli stake-pool id --cold-verification-key-file pool1/cold.vkey --output-format "hex"
+66da34a16bd8582679442d045514ecd9817f24199e771d017ad7a8c2
+```
