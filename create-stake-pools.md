@@ -281,7 +281,7 @@ cardano-cli stake-pool registration-certificate \
 --pool-margin 10/100 \
 --pool-reward-account-verification-key-file pool1/stake.vkey \
 --pool-owner-stake-verification-key-file pool1/stake.vkey \
---mainnet \
+--testnet-magic 42 \
 --pool-relay-ipv4 127.0.0.1 \
 --pool-relay-port 3002 \
 --metadata-url https://git.io/JJWdJ \
