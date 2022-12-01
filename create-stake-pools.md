@@ -328,7 +328,7 @@ cardano-cli transaction build-raw \
 
 ```
 cardano-cli transaction sign \
---tx-body-file transactions/tx4.raw \
+--tx-body-file transactions/tx5.raw \
 --signing-key-file pool1/payment.skey \
 --signing-key-file pool1/stake.skey \
 --signing-key-file pool1/cold.skey \
