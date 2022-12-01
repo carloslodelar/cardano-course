@@ -311,13 +311,33 @@ So we need to make a deposit of 500 test ADA
 Let's submit both, the delegation certificate and the registration certificate:&#x20;
 
 ```
-cardano-cli transaction build-raw \
---tx-in <TxHash>#<TxIx> \
---tx-out $(cat payment.addr)+0 \
---invalid-hereafter 0 \
---fee 0 \
---out-file tx.draft \
---certificate-file pool-registration.cert \
---certificate-file delegation.cert
+CHANGE=$(($(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -cs '.[0] | to_entries | .[] | .value.value') - 501000000))
 ```
 
+```
+cardano-cli transaction build-raw \
+--shelley-era \
+--fee 1000000 \
+--invalid-hereafter $(expr $(cardano-cli query tip --testnet-magic 42 | jq .slot) + 1000) \
+--tx-in $(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -r 'keys[]') \
+--tx-out $(cat pool1/payment.addr)+$CHANGE \
+--certificate-file pool1/pool-registration.cert \
+--certificate-file pool1/delegation.cert \
+--out-file transactions/tx5.raw
+```
+
+```
+cardano-cli transaction sign \
+--tx-body-file transactions/tx4.raw \
+--signing-key-file pool1/payment.skey \
+--signing-key-file pool1/stake.skey \
+--signing-key-file pool1/cold.skey \
+--testnet-magic 42 \
+--out-file transactions/tx5.signed
+```
+
+```
+cardano-cli transaction submit \
+--testnet-magic 42 \
+--tx-file transactions/tx5.signed
+```
