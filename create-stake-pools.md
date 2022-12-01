@@ -277,7 +277,7 @@ cardano-cli stake-pool registration-certificate \
 --cold-verification-key-file pool1/cold.vkey \
 --vrf-verification-key-file pool1/vrf.vkey \
 --pool-pledge 1000000000000 \
---pool-cost 340 \
+--pool-cost 340000000 \
 --pool-margin 10/100 \
 --pool-reward-account-verification-key-file pool1/stake.vkey \
 --pool-owner-stake-verification-key-file pool1/stake.vkey \
