@@ -2,67 +2,45 @@
 
 ```
 cardano-cli key convert-byron-key \
---byron-signing-key-file byron/payment.000.key \
---out-file byron/payment.000.converted.key \
---byron-payment-key-type
-```
-
-```
-cardano-cli key convert-byron-key \
---byron-signing-key-file byron/payment.001.key \
---out-file byron/payment.001.converted.key \
+--byron-signing-key-file utxo-keys/payment.000.key \
+--out-file utxo-keys/payment.000.converted.key \
 --byron-payment-key-type
 ```
 
 ```
 cardano-cli address key-gen \
---verification-key-file shelley/utxo-keys/payment.000.vkey \
---signing-key-file shelley/utxo-keys/payment.000.skey
+--verification-key-file utxo-keys/user1.payment.vkey \
+--signing-key-file utxo-keys/user1.payment.skey
 ```
 
 ```
 cardano-cli address build \
---payment-verification-key-file shelley/utxo-keys/payment.000.vkey \
+--payment-verification-key-file utxo-keys/user1.payment.vkey \
 --testnet-magic 42 \
---out-file shelley/utxo-keys/payment.000.addr
-
-```
-
-```
-cardano-cli byron transaction txid --tx transactions/tx0.tx
-
-bd946b437bfdb4fb592afbc71cf253d473a3da03f391c3d0987530312483062d
-```
-
-```
-cardano-cli byron transaction txid --tx transactions/tx1.tx
-
-b6e52648a2a855de4600e4d0b75dd4f1e1a32868b20092d23ae959551c1d2216
+--out-file utxo-keys/user1.payment.addr
 ```
 
 ```
 cardano-cli transaction build-raw \
 --shelley-era \
---invalid-hereafter 100000 \
+--invalid-hereafter 12000 \
 --fee 1000000 \
---tx-in bd946b437bfdb4fb592afbc71cf253d473a3da03f391c3d0987530312483062d#0 \
---tx-in b6e52648a2a855de4600e4d0b75dd4f1e1a32868b20092d23ae959551c1d2216#0 \
---tx-out $(cat shelley/utxo-keys/payment.000.addr)+35999997000000 \
---out-file transactions/tx3.raw 
+--tx-in $(cardano-cli byron transaction txid --tx transactions/tx0.tx)#0 \
+--tx-out $(cat utxo-keys/user1.payment.addr)+29999998000000 \
+--out-file transactions/tx1.raw
 ```
 
 ```
 cardano-cli transaction sign \
---tx-body-file transactions/tx3.raw \
---signing-key-file byron/payment.000.converted.key \
---signing-key-file byron/payment.001.converted.key \
+--tx-body-file transactions/tx1.raw \
+--signing-key-file utxo-keys/payment.000.converted.key \
 --testnet-magic 42 \
---out-file transactions/tx3.signed
+--out-file transactions/tx1.signed
 ```
 
 ```
 cardano-cli transaction submit \
---tx-file transactions/tx3.signed --testnet-magic 42
+--tx-file transactions/tx1.signed --testnet-magic 42
 ```
 
 ```
