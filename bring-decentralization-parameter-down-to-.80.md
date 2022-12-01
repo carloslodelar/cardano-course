@@ -40,3 +40,20 @@ cardano-cli transaction sign \
 ```
 cardano-cli transaction submit --testnet-magic 42 --tx-file transactions/update.D80.proposal.txsigned
 ```
+
+So, I submitted the proposal on epoch 26, In the node logs we see that the update proposal will take effect at epoch 27
+
+{% code overflow="wrap" %}
+```
+Event: LedgerUpdate (HardForkUpdateInEra S (Z (WrapLedgerUpdate {unwrapLedgerUpdate = ShelleyUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateProposal = UpdateProposal {proposalParams = PParams {_minfeeA = SNothing, _minfeeB = SNothing, _maxBBSize = SNothing, _maxTxSize = SNothing, _maxBHSize = SNothing, _keyDeposit = SNothing, _poolDeposit = SNothing, _eMax = SNothing, _nOpt = SNothing, _a0 = SNothing, _rho = SNothing, _tau = SNothing, _d = SJust (4 % 5), _extraEntropy = SNothing, _protocolVersion = SNothing, _minUTxOValue = SNothing, _minPoolCost = SNothing}, proposalVersion = Nothing, proposalEpoch = EpochNo 27}, protocolUpdateState = UpdateState {proposalVotes = [KeyHash "5feef96101e0386c56f7661e46438642156f8d1af7e8fec92b1a402a",KeyHash "b8b358d5093f6d1e3a5128a36fe70031c15b7d57817e44f7460142a0"], proposalReachedQuorum = True}}]})))
+```
+{% endcode %}
+
+Voilà! on epoch 27 the stake pool starts producing blocks
+
+{% code overflow="wrap" %}
+```
+[CLR:cardano.node.Forge:Info:32] [2022-12-01 05:00:52.80 UTC] fromList [("credentials",String "Cardano"),("val",Object (fromList [("block",String "1a0702eb290715e76193097e796e8379e54b51337377e0fef27e3015f29802ef"),("blockNo",Number 12286.0),("blockPrev",String "20b92ebfc6218e985bd84790343e9406e92321f78e12350eeb760cde6351a53e"),("kind",String "TraceForgedBlock"),("slot",Number 220894.0)]))]
+
+```
+{% endcode %}
