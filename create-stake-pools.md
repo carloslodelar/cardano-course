@@ -298,6 +298,18 @@ cardano-cli stake-address delegation-certificate \
 --out-file pool1/delegation.cert
 ```
 
+Now, let's query the protocol parameters again to find the pool deposit:
+
+```bash
+cardano-cli query protocol-parameters --testnet-magic 42 | grep stakePoolDeposit
+    "stakePoolDeposit": 500000000,
+
+```
+
+So we need to make a deposit of 500 test ADA
+
+Let's submit both, the delegation certificate and the registration certificate:&#x20;
+
 ```
 cardano-cli transaction build-raw \
 --tx-in <TxHash>#<TxIx> \
@@ -308,3 +320,4 @@ cardano-cli transaction build-raw \
 --certificate-file pool-registration.cert \
 --certificate-file delegation.cert
 ```
+
