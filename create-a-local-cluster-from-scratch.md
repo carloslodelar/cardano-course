@@ -152,7 +152,7 @@ cardano-cli genesis create-cardano \
 --start-time $(date -u -d "now + 5 minutes" +%FT%Tz) \
 --supply 30000000000000 \
 --security-param 45 \
---slot-length 200 \
+--slot-length 100 \
 --slot-coefficient 5/100 \
 --testnet-magic 42 \
 --byron-template template/byron.json \
