@@ -7,3 +7,4 @@
 * [Create first stake pool](create-stake-pools.md)
 * [Bring decentralization parameter down to .80](bring-decentralization-parameter-down-to-.80.md)
 * [Curated playlist](curated-playlist.md)
+* [Page 1](page-1.md)

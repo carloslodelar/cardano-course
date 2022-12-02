@@ -5,15 +5,12 @@ We don't want to stay on Byron era forever, right? Of course not. Let's move on 
 Create keys and addresses to withdraw the initial UTxO
 
 ```
-cardano-cli keygen --secret byron/payment.000.key
-cardano-cli keygen --secret byron/payment.001.key
+cardano-cli keygen --secret utxo-keys/payment.000.key
 ```
 
 ```
 cardano-cli signing-key-address --testnet-magic 42 \
---secret byron/payment.000.key > byron/payment.000.addr
-cardano-cli signing-key-address --testnet-magic 42 \
---secret byron/payment.001.key > byron/payment.001.addr
+--secret utxo-keys/payment.000.key > utxo-keys/payment.000.addr
 ```
 
 Write genesis addresses to files&#x20;
@@ -21,10 +18,7 @@ Write genesis addresses to files&#x20;
 ```
 cardano-cli signing-key-address \
     --testnet-magic 42 \
-    --secret byron/genesis-keys.000.key > byron/genesis.000.addr
-cardano-cli signing-key-address \
-    --testnet-magic 42 \
-    --secret byron/genesis-keys.001.key > byron/genesis.001.addr
+    --secret utxo-keys/byron.000.key > utxo-keys/byron.000.addr
 ```
 
 Let's spend the genesis utxos and send the funds to the addresses we created above:
@@ -33,10 +27,11 @@ Now we need to send funds from their genesis addresses `genesis.000.addr`, `gene
 
 {% code overflow="wrap" %}
 ```bash
-cat byron/genesis.000.addr
->h 
-2657WMsDfac6rQjUwcQXHWtDKsRUhNLfmnUNC1c4YLpVshZXqDBiu7ddiuzA9jRNb
-VerKey address with root aa419520b7d891f9f0ac8ebc584debca8169a9f7d2366c98157621c7, attributes: AddrAttributes { derivation path: {} }
+cat utxo-keys/byron.000.addr
+
+>
+2657WMsDfac6JrXMvC5KQuYhCFfhoS5c1jfBPje9vn2D86PkugFZa5oMWcBJo1nrt
+VerKey address with root 79ed4e30d7707c20a8c958fe89146fd21e1536e3d29a29e0131deabf, attributes: AddrAttributes { derivation path: {} }
 ```
 {% endcode %}
 
@@ -51,100 +46,40 @@ cardano-cli issue-genesis-utxo-expenditure \
 --genesis-json configuration/byron-genesis.json \
 --testnet-magic 42 \
 --tx transactions/tx0.tx \
---wallet-key bft0/delegate-keys.000.key \
---rich-addr-from $(head -n 1 byron/genesis.000.addr) \
---txout "(\"$(head -n 1 byron/payment.000.addr)\", 17999999000000)"
-```
-
-```
-cardano-cli issue-genesis-utxo-expenditure \
---genesis-json configuration/byron-genesis.json \
---testnet-magic 42 \
---tx transactions/tx1.tx \
---wallet-key bft1/delegate-keys.001.key \
---rich-addr-from $(head -n 1 byron/genesis.001.addr) \
---txout "(\"$(head -n 1 byron/payment.001.addr)\", 17999999000000)"
+--wallet-key utxo-keys/byron.000.key \
+--rich-addr-from $(head -n 1 utxo-keys/byron.000.addr) \
+--txout "(\"$(head -n 1 utxo-keys/payment.000.addr)\", 29999999000000)"
 ```
 
 ```
 cardano-cli submit-tx \
             --testnet-magic 42 \
             --tx transactions/tx0.tx
-cardano-cli submit-tx \
-            --testnet-magic 42 \
-            --tx transactions/tx1.tx
 ```
 
 ### Shelley Hardfork&#x20;
 
-Before we can move on to Shelley, we will need a proper Shelley.genesis file&#x20;
-
-```
-mkdir shelley
-cp template/shelley.json shelley/genesis.spec.json
-cp template/alonzo.json shelley/genesis.alonzo.spec.json 
-```
-
-```
-sed -i shelley/genesis.spec.json \
--e 's/"activeSlotsCoeff": 0.05/"activeSlotsCoeff": 0.10/' \
--e 's/"major": 6/"major": 1/' \
--e 's/"updateQuorum": 3/"updateQuorum": 2/' \
--e 's/"maxLovelaceSupply": 45000000000000000/"maxLovelaceSupply": 45000000000000/' \
--e 's/"epochLength": 432000/"epochLength": 9000/' \
--e 's/"securityParam": 108/"securityParam": 45/' \
--e 's/"slotLength": 1/"slotLength": 0.20/' 
-```
-
-```
-cardano-cli genesis create \
---testnet-magic 42 \
---genesis-dir shelley \
---gen-genesis-keys 2
-```
-
-```
-mv shelley/delegate-keys/delegate1* bft1/
-mv shelley/delegate-keys/opcert1.cert bft1/
-mv shelley/delegate-keys/delegate2* bft0/
-mv shelley/delegate-keys/opcert2.cert bft0/opcert0.cert
-cd bft0
-rename 's/delegate2/delegate0/g' *
-```
-
-Back to local-cluster/
-
-```
-cd ..
-```
-
-Replace Shelley and Alonzo genesis files.
-
-```
-rm configuration/shelley-genesis.json configuration/alonzo-genesis.json
-mv shelley/genesis.json configuration/shelley-genesis.json
-mv shelley/genesis.alonzo.json configuration/alonzo-genesis.json
-```
+Let's update our scripts to run the nodes to include Shelley keys:
 
 {% code overflow="wrap" %}
 ```
-sed -i '$ s/$/ --shelley-kes-key delegate0.kes.skey --shelley-vrf-key delegate0.vrf.skey --shelley-operational-certificate opcert0.cert/' bft0/startnode.sh
+sed -i '$ s/$/ --shelley-kes-key shelley.000.kes.skey --shelley-vrf-key shelley.000.vrf.skey --shelley-operational-certificate shelley.000.opcert.json/' bft0/startnode.sh
 ```
 {% endcode %}
 
 {% code overflow="wrap" %}
 ```
-sed -i '$ s/$/ --shelley-kes-key delegate1.kes.skey --shelley-vrf-key delegate1.vrf.skey --shelley-operational-certificate opcert1.cert/' bft1/startnode.sh   
+sed -i '$ s/$/ --shelley-kes-key shelley.001.kes.skey --shelley-vrf-key shelley.001.vrf.skey --shelley-operational-certificate shelley.001.opcert.json/' bft1/startnode.sh  
 ```
 {% endcode %}
 
-We are ready to move to shelley era. So we need to Create, Submit and Vote and update proposal.&#x20;
+We are almost ready to move to shelley era. So we need to Create, Submit and Vote and update proposal.&#x20;
 
 ```bash
 cardano-cli byron governance create-update-proposal \
 --filepath transactions/updateprotov1.proposal \
---testnet-magic "42" \
---signing-key bft0/delegate-keys.000.key \
+--testnet-magic 42 \
+--signing-key bft0/byron.000.key \
 --protocol-version-major "1" \
 --protocol-version-minor "0" \
 --protocol-version-alt "0" \
@@ -157,22 +92,36 @@ cardano-cli byron governance create-update-proposal \
 <pre><code><strong>cardano-cli byron governance create-proposal-vote \
 </strong>--proposal-filepath transactions/updateprotov1.proposal \
 --testnet-magic 42 \
---signing-key bft0/delegate-keys.000.key \
+--signing-key bft0/byron.000.key \
 --vote-yes \
---output-filepath transactions/updateprotov1.000.vote</code></pre>
+--output-filepath transactions/updateprotov1.000.vote
+</code></pre>
 
 <pre><code><strong>cardano-cli byron governance create-proposal-vote \
 </strong>--proposal-filepath transactions/updateprotov1.proposal \
 --testnet-magic 42 \
---signing-key bft1/delegate-keys.001.key \
+--signing-key bft1/byron.001.key \
 --vote-yes \
---output-filepath transactions/updateprotov1.001.vote</code></pre>
+--output-filepath transactions/updateprotov1.001.vote
+</code></pre>
 
-Before we can move on and Submit the proposal and Vote, we need to do another adjustment to our config&#x20;
+Before we can move on and Submit the proposal and Vote let's make sure that our config file says that to we are ready to move to protocol "LastKnownBlockVersion-Major": 1,
+
+```
+jq .'"LastKnownBlockVersion-Major"' configuration/config.json 
+1
+```
+
+grep&#x20;
+
+Let's restart the nodes to pick the changes on configuration:
+
+
 
 <pre><code><strong>cardano-cli byron submit-update-proposal \
 </strong>            --testnet-magic 42 \
-            --filepath transactions/updateprotov1.proposal</code></pre>
+            --filepath transactions/updateprotov1.proposal
+</code></pre>
 
 ```
 cardano-cli byron submit-proposal-vote  \
@@ -187,13 +136,12 @@ Your node logs will show the&#x20;
 
 {% code overflow="wrap" %}
 ```
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateRegistered (SlotNo 7586)}]}))
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateRegistered (SlotNo 457)}]}))
+...
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateConfirmed (SlotNo 467)}]}))
 ....
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateConfirmed (SlotNo 7594)}]}))
-...
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateCandidate (SlotNo 7810) (EpochNo 8)}]}))
-...
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateStableCandidate (EpochNo 8)}]}))
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateCandidate (SlotNo 557) (EpochNo 2)}]}))
+
 ```
 {% endcode %}
 
@@ -210,8 +158,8 @@ Now lets upgrade to protocol version 2.0.0, The Shelley Era!&#x20;
 ```
 cardano-cli byron governance create-update-proposal \
 --filepath transactions/updateprotov2.proposal \
---testnet-magic "42" \
---signing-key bft0/delegate-keys.000.key \
+--testnet-magic 42 \
+--signing-key bft0/byron.000.key \
 --protocol-version-major "2" \
 --protocol-version-minor "0" \
 --protocol-version-alt "0" \
@@ -221,11 +169,20 @@ cardano-cli byron governance create-update-proposal \
 --installer-hash 0
 ```
 
+Let's adjust the config file again:
+
+```
+sed -i configuration/config.json \
+-e 's/"LastKnownBlockVersion-Major": 1/"LastKnownBlockVersion-Major": 2/'
+```
+
+and restart our nodes once more
+
 ```
 cardano-cli byron governance create-proposal-vote \
 --proposal-filepath transactions/updateprotov2.proposal \
 --testnet-magic 42 \
---signing-key bft0/delegate-keys.000.key \
+--signing-key bft0/byron.000.key \
 --vote-yes \
 --output-filepath transactions/updateprotov2.000.vote
 ```
@@ -234,14 +191,15 @@ cardano-cli byron governance create-proposal-vote \
 cardano-cli byron governance create-proposal-vote \
 --proposal-filepath transactions/updateprotov2.proposal \
 --testnet-magic 42 \
---signing-key bft1/delegate-keys.001.key \
+--signing-key bft1/byron.001.key \
 --vote-yes \
 --output-filepath transactions/updateprotov2.001.vote
 ```
 
 <pre><code><strong>cardano-cli byron submit-update-proposal \
 </strong>            --testnet-magic 42 \
-            --filepath transactions/updateprotov2.proposal</code></pre>
+            --filepath transactions/updateprotov2.proposal
+</code></pre>
 
 ```
 cardano-cli byron submit-proposal-vote  \
@@ -254,12 +212,17 @@ cardano-cli byron submit-proposal-vote  \
 
 {% code overflow="wrap" %}
 ```
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 2.0.0, protocolUpdateState = UpdateRegistered (SlotNo 8681)}]}))
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 2.0.0, protocolUpdateState = UpdateRegistered (SlotNo 931)}]}))
 ....
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 2.0.0, protocolUpdateState = UpdateConfirmed (SlotNo 8691)}]}))
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 2.0.0, protocolUpdateState = UpdateConfirmed (SlotNo 938)}]}))
+...
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateStablyConfirmed (fromList [])}]}))
 ....
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 2.0.0, protocolUpdateState = UpdateStablyConfirmed (fromList [])}]}))
-....
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 2.0.0, protocolUpdateState = UpdateCandidate (SlotNo 1028) (EpochNo 3)}]}))
+...
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 2.0.0, protocolUpdateState = UpdateStableCandidate (EpochNo 3)}]}))
+...
+Event: LedgerUpdate (HardForkUpdateTransitionDone <EraIndex Byron> <EraIndex Shelley> (EpochNo 3))
 
 ```
 {% endcode %}
