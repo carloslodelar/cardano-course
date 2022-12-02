@@ -122,9 +122,9 @@ Let's make a few changes to our shelley.json template
 sed -i template/shelley.json \
 -e 's/"updateQuorum": 3/"updateQuorum": 2/' \
 -e 's/"maxLovelaceSupply": 45000000000000000/"maxLovelaceSupply": 45000000000000/' \
--e 's/"epochLength": 432000/"epochLength": 9000/' \
+-e 's/"epochLength": 432000/"epochLength": 6000/' \
 -e 's/"securityParam": 108/"securityParam": 45/' \
--e 's/"slotLength": 1/"slotLength": 0.20/'
+-e 's/"slotLength": 1/"slotLength": 0.10/'
 ```
 
 And a few changes to the config.json template
