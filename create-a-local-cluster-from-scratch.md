@@ -124,7 +124,7 @@ sed -i template/shelley.json \
 -e 's/"maxLovelaceSupply": 45000000000000000/"maxLovelaceSupply": 45000000000000/' \
 -e 's/"epochLength": 432000/"epochLength": 9000/' \
 -e 's/"securityParam": 108/"securityParam": 45/' \
--e 's/"slotLength": 1/"slotLength": 0.10/'
+-e 's/"slotLength": 1/"slotLength": 0.20/'
 ```
 
 And a few changes to the config.json template
@@ -152,7 +152,7 @@ cardano-cli genesis create-cardano \
 --start-time $(date -u -d "now + 5 minutes" +%FT%Tz) \
 --supply 30000000000000 \
 --security-param 45 \
---slot-length 100 \
+--slot-length 200 \
 --slot-coefficient 5/100 \
 --testnet-magic 42 \
 --byron-template template/byron.json \

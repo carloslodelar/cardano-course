@@ -35,11 +35,11 @@ cardano-cli transaction sign \
 --signing-key-file pool1/payment.skey \
 --signing-key-file bft0/shelley.000.skey \
 --signing-key-file bft1/shelley.001.skey \
---out-file transactions/update.D80.proposal.txsigned
+--out-file transactions/update.v3.proposal.txsigned
 ```
 
 ```
-cardano-cli transaction submit --testnet-magic 42 --tx-file transactions/update.v3.proposal.signed
+cardano-cli transaction submit --testnet-magic 42 --tx-file transactions/update.v3.proposal.txsigned
 ```
 
 ```
