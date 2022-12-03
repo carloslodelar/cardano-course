@@ -10,8 +10,8 @@ cardano-cli governance create-update-proposal \
 --epoch $(cardano-cli query tip --testnet-magic 42 | jq .epoch) \
 --protocol-major-version 3 \
 --protocol-minor-version 0 \
---genesis-verification-key-file genesis-keys/non.e.shelley.000.vkey \
---genesis-verification-key-file genesis-keys/non.e.shelley.001.vkey
+--genesis-verification-key-file genesis-keys/shelley.000.vkey \
+--genesis-verification-key-file genesis-keys/shelley.001.vkey
 ```
 
 ```
@@ -33,8 +33,8 @@ cardano-cli transaction build-raw \
 cardano-cli transaction sign \
 --tx-body-file transactions/update.v3.proposal.txbody \
 --signing-key-file pool1/payment.skey \
---signing-key-file bft0/shelley.000.skey \
---signing-key-file bft1/shelley.001.skey \
+--signing-key-file genesis-keys/shelley.000.skey \
+--signing-key-file genesis-keys/shelley.001.skey \
 --out-file transactions/update.v3.proposal.txsigned
 ```
 
