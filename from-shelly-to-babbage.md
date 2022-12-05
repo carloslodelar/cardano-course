@@ -2,6 +2,11 @@
 
 Let's continue upgrading our system to later eras. First we move from Shelley to Allegra.
 
+```
+sed -i configuration/config.json \
+-e 's/"MaxKnownMajorProtocolVersion":2/"MaxKnownMajorProtocolVersion":7/'
+```
+
 This means we need to go to protocol version 3.0&#x20;
 
 ```
