@@ -2,7 +2,18 @@
 
 We will create an update proposal to lower the decentralization parameter. This way, our pool stake will start producing blocks.
 
-Let's create the proposal, make sure to submit it it early in the epoch.
+We first need to generate a non extended verification key for our genesis delegates
+
+```
+cardano-cli key non-extended-key \
+--extended-verification-key-file genesis-keys/shelley.000.vkey \
+--verification-key-file genesis-keys/non.e.shelley.000.vkey
+cardano-cli key non-extended-key \
+--extended-verification-key-file genesis-keys/shelley.001.vkey \
+--verification-key-file genesis-keys/non.e.shelley.001.vkey
+```
+
+Let's create the proposal, make sure to submit it early in the epoch.
 
 ```
 cardano-cli governance create-update-proposal \
