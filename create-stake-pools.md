@@ -68,8 +68,9 @@ cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42
                            TxHash                                 TxIx        Amount
 --------------------------------------------------------------------------------------
 d8dad0d24242b26e037f9b0120030fc2d5c5449d859ecd3267f6453dd66bf0c3     0        50000000000000
-Generate cold keys. 
 ```
+
+Generate cold keys
 
 ```
 cardano-cli node key-gen \
