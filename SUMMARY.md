@@ -7,5 +7,6 @@
 * [Create first stake pool](create-stake-pools.md)
 * [Bring decentralization parameter down to .80](bring-decentralization-parameter-down-to-.80.md)
 * [From Shelly to Alonzo](from-shelly-to-alonzo.md)
+* [The Vasil Hardfork](the-vasil-hardfork.md)
 * [Curated playlist](curated-playlist.md)
 * [Page 1](page-1.md)
