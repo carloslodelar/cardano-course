@@ -158,6 +158,12 @@ Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate
 
 Now lets upgrade to protocol version 2.0.0, The Shelley Era!&#x20;
 
+Let's adjust the config file again:
+
+```
+sed -i 's/"LastKnownBlockVersion-Major":1/"LastKnownBlockVersion-Major":2/' configuration/config.json
+```
+
 ```
 cardano-cli byron governance create-update-proposal \
 --filepath transactions/updateprotov2.proposal \
@@ -170,17 +176,6 @@ cardano-cli byron governance create-update-proposal \
 --software-version-num "1" \
 --system-tag "linux" \
 --installer-hash 0
-```
-
-Let's adjust the config file again:
-
-```
-sed -i configuration/shelley-genesis.json \
--e 's/"major": 1/"major": 2/'
-```
-
-```
-sed -i 's/"LastKnownBlockVersion-Major":1/"LastKnownBlockVersion-Major":2/' configuration/config.json
 ```
 
 and restart our nodes once more
