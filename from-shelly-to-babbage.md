@@ -10,8 +10,7 @@ sed -i configuration/shelley-genesis.json \
 ```
 sed -i configuration/config.json \
 -e 's/LastKnownBlockVersion-Major":2/LastKnownBlockVersion-Major":3/' \
--e 's/"MaxKnownMajorProtocolVersion":2/"MaxKnownMajorProtocolVersion":7/' \
--e 's/"ShelleyGenesisHash":"fe76f6934c3727f226028fb6f0f808973aa9bd2d81aabc568549fec5833d9643"/"ShelleyGenesisHash":"a27045c83812d9b0092c5cbe909204c06dfefa641bbb944f14b1fa5b834ec4d9"/'
+-e 's/"MaxKnownMajorProtocolVersion":2/"MaxKnownMajorProtocolVersion":7/'
 ```
 
 This means we need to go to protocol version 3.0&#x20;
@@ -22,7 +21,7 @@ cardano-cli governance create-update-proposal \
 --genesis-verification-key-file genesis-keys/non.e.shelley.001.vkey \
 --out-file transactions/update.v3.proposal \
 --epoch $(cardano-cli query tip --testnet-magic 42 | jq .epoch) \
---protocol-major-version "2" \
+--protocol-major-version "3" \
 --protocol-minor-version "0" 
 ```
 
@@ -52,9 +51,4 @@ cardano-cli transaction sign \
 
 ```
 cardano-cli transaction submit --testnet-magic 42 --tx-file transactions/update.v3.proposal.txsigned
-```
-
-```
-sed -i configuration/config.json \
--e 's/"LastKnownBlockVersion-Major": 2,/"LastKnownBlockVersion-Major": 3,/'
 ```
