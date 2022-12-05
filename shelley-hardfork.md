@@ -48,7 +48,7 @@ cardano-cli issue-genesis-utxo-expenditure \
 --tx transactions/tx0.tx \
 --wallet-key utxo-keys/byron.000.key \
 --rich-addr-from $(head -n 1 utxo-keys/byron.000.addr) \
---txout "(\"$(head -n 1 utxo-keys/payment.000.addr)\", 29999999000000)"
+--txout "(\"$(head -n 1 utxo-keys/payment.000.addr)\", 29999999999000000)"
 ```
 
 ```
