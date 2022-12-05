@@ -178,11 +178,6 @@ Let's adjust the config file again:
 sed -i 's/"LastKnownBlockVersion-Major":1/"LastKnownBlockVersion-Major":2/' configuration/config.json
 ```
 
-```
-rm configuration/config.json
-cp template/config.json configuration/config.json
-```
-
 and restart our nodes once more
 
 ```
