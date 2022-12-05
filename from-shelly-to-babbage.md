@@ -10,7 +10,7 @@ cardano-cli governance create-update-proposal \
 --genesis-verification-key-file genesis-keys/non.e.shelley.001.vkey \
 --out-file transactions/update.v3.proposal \
 --epoch $(cardano-cli query tip --testnet-magic 42 | jq .epoch) \
---protocol-major-version "7" \
+--protocol-major-version "3" \
 --protocol-minor-version "0" 
 ```
 
