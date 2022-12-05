@@ -73,7 +73,7 @@ sed -i '$ s/$/ --shelley-kes-key shelley.001.kes.skey --shelley-vrf-key shelley.
 ```
 {% endcode %}
 
-We are almost ready to move to shelley era. So we need to Create, Submit and Vote and update proposal.&#x20;
+We are almost ready to move to OBFT era. So we need to Create, Submit and Vote and update proposal.&#x20;
 
 ```bash
 cardano-cli byron governance create-update-proposal \
