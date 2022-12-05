@@ -1,4 +1,4 @@
-# From Shelly to Babbage
+# From Shelly to Alonzo
 
 ### Allegra Hardfork
 

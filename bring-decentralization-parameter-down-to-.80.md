@@ -2,7 +2,51 @@
 
 We will create an update proposal to lower the decentralization parameter. This way, our pool stake will start producing blocks.
 
-Let's create the proposal, make sure to submit it it early in the epoch.
+We first need to generate a non extended verification key for our genesis delegates
+
+```
+cardano-cli key non-extended-key \
+--extended-verification-key-file genesis-keys/shelley.000.vkey \
+--verification-key-file genesis-keys/non.e.shelley.000.vkey
+cardano-cli key non-extended-key \
+--extended-verification-key-file genesis-keys/shelley.001.vkey \
+--verification-key-file genesis-keys/non.e.shelley.001.vkey
+```
+
+A short script to help us find out if we are on time to submit the update proposal in the current epoch
+
+```
+cat > whereinepoch.sh <<EOF
+#!/usr/bin/env bash
+
+BYRON_SLOTS=900
+TIP=$(cardano-cli query tip --testnet-magic 42 | jq .slot)
+SHELLEY_SLOTS=$(($TIP-$BYRON_SLOTS))
+SHELLEY_EPOCH_LENGTH=$(cat configuration/shelley-genesis.json | jq .epochLength)
+K=$(cat configuration/shelley-genesis.json | jq .securityParam)
+F=$(cat configuration/shelley-genesis.json | jq .activeSlotsCoeff)
+
+UPDATE_PROPOSAL_TH=$(echo 4*$K/$F | bc)
+SLOT_IN_EPOCH=$(($SHELLEY_SLOTS % $SHELLEY_EPOCH_LENGTH))
+
+echo "UPDATE-THRESOLD: $UPDATE_PROPOSAL_TH"
+echo "SLOT IN EPOCH: $SLOT_IN_EPOCH"
+EOF
+```
+
+```
+chmod +x whereinepoch.sh
+```
+
+We need to submit the proposal in the first 4k/f slots in the epoch:
+
+```
+./whereinepoch.sh
+UPDATE-THRESOLD: 3600
+SLOT IN EPOCH: 320
+```
+
+Let's create the proposal, make sure to submit it early in the epoch.
 
 ```
 cardano-cli governance create-update-proposal \
