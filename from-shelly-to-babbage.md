@@ -99,7 +99,7 @@ cardano-cli transaction submit --testnet-magic 42 --tx-file transactions/update.
 
 Wait for the next epoch transition to see the Mary hardfork:
 
-### Alonzo hardfork
+### Alonzo hardfork and Alonzo intra-era hardfork
 
 Getting to Alonzo will require the Alonzo Hardfork AND the Alonzo intra-era hardfork, this is, we will move from protocol version 4.0 to 5.0 followed by 6.0&#x20;
 
