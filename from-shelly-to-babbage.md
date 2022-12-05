@@ -7,6 +7,11 @@ sed -i configuration/config.json \
 -e 's/"MaxKnownMajorProtocolVersion":2/"MaxKnownMajorProtocolVersion":7/'
 ```
 
+```
+sed -i configuration/shelley-genesis.json \
+-e 's/"major": 1/"major": 3/'
+```
+
 This means we need to go to protocol version 3.0&#x20;
 
 ```
