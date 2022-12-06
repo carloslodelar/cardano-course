@@ -51,7 +51,7 @@ Sign it
 
 ```
 cardano-cli transaction sign \
---tx-body-file transactions/tx3.raw \
+--tx-body-file transactions/tx6.raw \
 --signing-key-file utxo-keys/user1.payment.skey \
 --testnet-magic 42 \
 --out-file transactions/tx6.signed
@@ -207,7 +207,7 @@ cardano-cli query protocol-parameters --testnet-magic 42 | grep stakeAddressDepo
 
 {% code overflow="wrap" %}
 ```
-CHANGE=$(($(cardano-cli query utxo --address $(cat pool2/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -cs '.[0] | to_entries | .[] | .value.value') - 3000000))
+CHANGE=$(($(cardano-cli query utxo --address $(cat pool2/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -cs '.[0] | to_entries | .[] | .value.value.lovelace') - 3000000))
 ```
 {% endcode %}
 
@@ -220,6 +220,15 @@ cardano-cli transaction build-raw \
 --tx-out $(cat pool2/payment.addr)+$CHANGE \
 --certificate-file pool2/stake.cert \
 --out-file transactions/tx7.raw
+```
+
+```
+cardano-cli transaction sign \
+--tx-body-file transactions/tx7.raw \
+--signing-key-file pool2/payment.skey \
+--signing-key-file pool2/stake.skey \
+--testnet-magic 42 \
+--out-file transactions/tx7.signed
 ```
 
 ```
@@ -249,10 +258,10 @@ cardano-cli stake-pool metadata-hash --pool-metadata-file pool2/poolmetadata.jso
 5c93c2c47f115c0184e5b2499b179b36dc385a45a2a809bb3ec2e34047dae04e
 ```
 
-For convinenve, lets save it to a file&#x20;
+For connivence, lets save it to a file&#x20;
 
 ```
-cardano-cli stake-pool metadata-hash --pool-metadata-file pool2/poolmetadata.json --out-file poolmetadata.hash
+cardano-cli stake-pool metadata-hash --pool-metadata-file pool2/poolmetadata.json --out-file pool2/poolmetadata.hash
 ```
 
 Generate the registration certificate
@@ -270,7 +279,7 @@ cardano-cli stake-pool registration-certificate \
 --pool-relay-ipv4 127.0.0.1 \
 --pool-relay-port 3003 \
 --metadata-url https://git.io/JJWdJ \
---metadata-hash $(cat poolmetadata.hash) \
+--metadata-hash $(cat pool2/poolmetadata.hash) \
 --out-file pool2/pool-registration.cert
 ```
 
@@ -296,7 +305,7 @@ So we need to make a deposit of 500 test ADA
 Let's submit both, the delegation certificate and the registration certificate:&#x20;
 
 ```
-CHANGE=$(($(cardano-cli query utxo --address $(cat pool2/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -cs '.[0] | to_entries | .[] | .value.value') - 501000000))
+CHANGE=$(($(cardano-cli query utxo --address $(cat pool2/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -cs '.[0] | to_entries | .[] | .value.value.lovelace') - 501000000))
 ```
 
 ```
@@ -308,21 +317,25 @@ cardano-cli transaction build-raw \
 --tx-out $(cat pool2/payment.addr)+$CHANGE \
 --certificate-file pool2/pool-registration.cert \
 --certificate-file pool2/delegation.cert \
---out-file transactions/tx5.raw
+--out-file transactions/tx8.raw
 ```
 
 ```
 cardano-cli transaction sign \
---tx-body-file transactions/tx5.raw \
+--tx-body-file transactions/tx8.raw \
 --signing-key-file pool2/payment.skey \
 --signing-key-file pool2/stake.skey \
 --signing-key-file pool2/cold.skey \
 --testnet-magic 42 \
---out-file transactions/tx5.signed
+--out-file transactions/tx8.signed
 ```
 
 ```
 cardano-cli transaction submit \
 --testnet-magic 42 \
---tx-file transactions/tx5.signed
+--tx-file transactions/tx8.signed
+```
+
+```
+cardano-cli stake-pool id --cold-verification-key-file pool1/cold.vkey --output-format "hex"
 ```
