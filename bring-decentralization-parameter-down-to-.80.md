@@ -1,8 +1,8 @@
 # Bring decentralization parameter down to .80
 
-We will create an update proposal to lower the decentralization parameter. This way, our pool stake will start producing blocks.
+For our pool to produce blocks, we need to lower the decentralization parameter. Let's create an update proposal to lower the decentralization parameter.&#x20;
 
-We first need to generate a non extended verification key for our genesis delegates
+We first need to generate non extended verification keys for our genesis delegates.&#x20;
 
 ```
 cardano-cli key non-extended-key \
@@ -13,7 +13,7 @@ cardano-cli key non-extended-key \
 --verification-key-file genesis-keys/non.e.shelley.001.vkey
 ```
 
-A short script to help us find out if we are on time to submit the update proposal in the current epoch
+A short script to help us find out if we are on time to submit the update proposal in the current epoch change the value of Byron slots accordingly.&#x20;
 
 ```
 cat > whereinepoch.sh <<EOF
