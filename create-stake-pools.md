@@ -347,4 +347,4 @@ cardano-cli stake-pool id --cold-verification-key-file pool1/cold.vkey --output-
 66da34a16bd8582679442d045514ecd9817f24199e771d017ad7a8c2
 ```
 
-Now we need to wait 1 epoch for the stake snapshot to pick up our pool and 2 epochs for our pool to start producing blocks. This of course, if we lower the decentralization parameter to something less than 1. Let's do that.&#x20;
+Now we need to wait for the next epoch transition for the stake snapshot to pick up our pool and 2 epochs for our pool to start producing blocks. This of course, if we lower the decentralization parameter (currently set to 1). Let's do that.&#x20;
