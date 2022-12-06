@@ -1,8 +1,8 @@
 # Create a local cluster
 
-Often you will find useful to deploy a local cluster. We provide tools that allow you to deploy a local cluster with little effort. We will use those tools later.  For now we will do it manually.  Hopefully this will help having a better understanding of what happens behind the scenes when using the automated tools.&#x20;
+Sometimes you might need to deploy a local cluster. We provide tools that allow you to do this with little effort. We will use those tools later.  For now we will do it manually.  Hopefully this will help having a better understanding of what happens behind the scenes when using the automated tools.&#x20;
 
-We will start our cluster in Byron era, and upgrade it all the way to Babbage.&#x20;
+In this example we will start a cluster in Byron era, and upgrade it all the way up to Babbage era.&#x20;
 
 ### Configure the network and nodes
 
@@ -12,27 +12,28 @@ We will start our cluster in Byron era, and upgrade it all the way to Babbage.&#
 * cardano-node and cardano-cli in your $PATH
 
 {% hint style="info" %}
-Note: It would be more efficient to have a script for most of the tasks that we will perform, since our intention is making the process as transparent and clear as possible, we will limit the use of scripts.
+Note: In this section of the course we will minimize the use of scripts. The intention is making the process as transparent and clear as possible.&#x20;
 {% endhint %}
 
-To deploy a local cluster we need:&#x20;
+To keep it simple enough we will use the `cardano-cli genesis create-cardano`  command to create most of the files we will need in the local cluster. We need to start from template files:
 
-1. configuration file
-2. topology files&#x20;
-3. Byron genesis file
-4. Shelley genesis file&#x20;
-5. Alonzo genesis file&#x20;
+1. Configuration
+2. Byron genesis template
+3. Shelley genesis template
+4. Alonzo genesis template
 
 #### 1. The configuration files
 
-We will use the[ Cardano World Testnet Templates ](https://github.com/input-output-hk/cardano-world/tree/master/nix/cardano/environments/testnet-template)to generate our genesis files but first, let's create a directory for our project
+[Cardano World Testnet Templates ](https://github.com/input-output-hk/cardano-world/tree/master/nix/cardano/environments/testnet-template)is a nice starting point.&#x20;
+
+&#x20;Let's create a directory for our project
 
 ```bash
 mkdir -p cluster/template
 cd cluster
 ```
 
-Download the template files and save it in the template folder we just created.&#x20;
+Download the template files and save them in the template folder we just created.&#x20;
 
 <pre class="language-bash" data-overflow="wrap"><code class="lang-bash"><strong>wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/alonzo.json
 </strong>wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/byron.json
@@ -40,15 +41,17 @@ wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-worl
 wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/shelley.json
 </code></pre>
 
-Our system will start in Byron era. We will start with 2 BFT nodes. We will add 2 Stake Pools when we transition to Shelley era.  Let's make a directory for each of the nodes and a configuration folder for our configuration files.&#x20;
+Our system will start in Byron era and will have only 2 block producing nodes. We will add 2 Stake Pools later, when we transition to Shelley era.  Let's make a directory for each of the nodes and a configuration folder for our configuration files.&#x20;
 
 ```bash
 mkdir -p bft0 bft1 configuration
 ```
 
-We want our bft nodes to connect to each other. Leet's use port 3000 for node bft0, and port 3001 for node bft1. Now we can create a topology file for each of our nodes. For now we will use classic topology (not P2P).
+We want our nodes to connect to each other, each of the nodes requires a topology file that tells the node to which nodes to connect to.&#x20;
 
-So we create the topology file for bft0 with
+The node bft0 will run on port 3000, and node bft1 on port 3001 for node bft1.  For now we will use classic topology (not P2P).
+
+So we create the topology file for bft0 with:
 
 ```json
 cat > bft0/topology.json <<EOF
@@ -64,7 +67,7 @@ cat > bft0/topology.json <<EOF
 EOF
 ```
 
-For bft1
+And for bft1 with:
 
 ```json
 cat > bft1/topology.json <<EOF
@@ -82,7 +85,7 @@ EOF
 
 #### 3. The genesis files
 
-Our network will start in Byron era and we will upgrade it all the way up to Babbage era, the `byron.json` file that we downloaded is our template, we will use it together with cardano-cli to generate our `byron-genesis.json` file.&#x20;
+Before, we downloaded the `byron.json` template. We will use it together with cardano-cli to generate our `byron-genesis.json` file. Our template looks like this:
 
 ```json
 {
@@ -110,13 +113,18 @@ Our network will start in Byron era and we will upgrade it all the way up to Bab
 }
 ```
 
-Note that this template uses 200 millisecond slots on Byron era. Mainnet used 20 second slots during the Byron era because blocks need to travel the world and 20 seconds ensured that everybody had received the previous block before forging a new one.  In our local cluster we will use 4 second slots in Byron and 0.2 seconds slots on the following eras.  &#x20;
+Note that this template uses 200 millisecond slots on Byron era. Mainnet used 20 second slots during the Byron era and uses 1 second slots during Shelley+ eras.&#x20;
 
+Slots were 20 times longer In Byron era because there was a block in every slot. We needed to ensure that each block had enough time to travel the world and that everybody received the block before forging a next block.  In Shelley+ eras, slots are shorter but not all slots have a block, in mainnet only 5% of the slots have a block, this is the active slot coefficient. This selection of parameters allow for Byron and Shelley epochs to have approximately the same number of blocks.&#x20;
 
+&#x20;In our local cluster we will use 2 second slots in Byron and 0.1 seconds slots on the following eras. The `cardano-cli genesis create-cardano` automatically generates configuration files with this 20:1 ratio.&#x20;
 
-The rest of the parameters match mainnet ones. For detailed information about the parameters, see:[ Byron genesis data format ](https://github.com/input-output-hk/cardano-node/blob/master/doc/reference/byron-genesis.md)
+The rest of our parameters will match mainnet ones. For detailed information about the parameters, see:
 
-Let's make a few changes to our shelley.json template
+1. [Byron genesis data format ](https://github.com/input-output-hk/cardano-node/blob/master/doc/reference/byron-genesis.md)
+2. [Shelley era genesis ](https://github.com/input-output-hk/cardano-node/blob/master/doc/getting-started/understanding-config-files.md)
+
+Let's make a few changes to our shelley.json template. Since we will only have 2 nodes, we bring updateQuorum down to 2, We reduce the epoch length to 9000, the security parameter k to 45,  the shelley era slots will last 1/10th of a second; and to help our cluster to match the progression of mainnet protocol versions, we set major (protocol version) to 2. On mainnet Shelley era is protocol version 2.0&#x20;
 
 ```
 sed -i template/shelley.json \
@@ -127,7 +135,7 @@ sed -i template/shelley.json \
 -e 's/"major": 6/"major": 2/' 
 ```
 
-And a few changes to the config.json template
+We also need a few changes to the config.json template. for now we will disable P2P topology, we will disable EnableDevelopment options because we want to update our cluster using proper update proposals. Initially we will state that our nodes are ready to move to Protocol Version 1.0.0 (PBFT). Logs will come very fast, we will keep the minSeverity in Info. &#x20;
 
 ```
  sed -i template/config.json \
@@ -143,7 +151,7 @@ And a few changes to the config.json template
  -e 's/""minSeverity": "Debug"/"minSeverity": "Info"/' 
 ```
 
-Now we can use the magic of cardano-cli genesis create-cardano
+Now we can use the magic of `cardano-cli genesis create-cardano`
 
 ```
 cardano-cli genesis create-cardano \
