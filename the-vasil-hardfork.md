@@ -431,3 +431,15 @@ cardano-cli transaction sign \
 ```
 cardano-cli transaction submit --testnet-magic 42 --tx-file transactions/update.v7.proposal.txsigned
 ```
+
+```
+{
+    "block": 17002,
+    "epoch": 38,
+    "era": "Babbage",
+    "hash": "6d5d9c23c0679e4005283c9bc27faf487b0407f454
+1a40c8c5ce7a623cee0831",
+    "slot": 327374,
+    "syncProgress": "100.00"
+}
+```
