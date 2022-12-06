@@ -22,7 +22,7 @@ cardano-cli byron governance create-update-proposal \
 --installer-hash 0
 ```
 
-<pre><code><strong>cardano-cli byron governance create-proposal-vote \
+<pre class="language-bash"><code class="lang-bash"><strong>cardano-cli byron governance create-proposal-vote \
 </strong>--proposal-filepath transactions/updateprotov1.proposal \
 --testnet-magic 42 \
 --signing-key bft0/byron.000.key \
@@ -30,7 +30,7 @@ cardano-cli byron governance create-update-proposal \
 --output-filepath transactions/updateprotov1.000.vote
 </code></pre>
 
-<pre><code><strong>cardano-cli byron governance create-proposal-vote \
+<pre class="language-bash"><code class="lang-bash"><strong>cardano-cli byron governance create-proposal-vote \
 </strong>--proposal-filepath transactions/updateprotov1.proposal \
 --testnet-magic 42 \
 --signing-key bft1/byron.001.key \
@@ -40,18 +40,15 @@ cardano-cli byron governance create-update-proposal \
 
 Before we can move on and Submit the proposal and Vote let's make sure that our config file says that to we are ready to move to protocol "LastKnownBlockVersion-Major": 1,
 
-```
+```bash
 jq .'"LastKnownBlockVersion-Major"' configuration/config.json 
+>bash
 1
 ```
 
-grep&#x20;
+We don't need to restart the nodes this time, because our nodes are already announcing 1.0.0 on their block's headers. We are good to submit the update proposals and votes:
 
-Let's restart the nodes to pick the changes on configuration:
-
-
-
-<pre><code><strong>cardano-cli byron submit-update-proposal \
+<pre class="language-bash"><code class="lang-bash"><strong>cardano-cli byron submit-update-proposal \
 </strong>            --testnet-magic 42 \
             --filepath transactions/updateprotov1.proposal
 </code></pre>
