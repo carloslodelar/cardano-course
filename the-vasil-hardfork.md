@@ -387,14 +387,6 @@ Event: LedgerUpdate (HardForkUpdateInEra S (S (S (S (Z (WrapLedgerUpdate {unwrap
 ```
 {% endcode %}
 
-
-
-
-
-
-
-
-
 #### The hardfork
 
 ```
@@ -408,7 +400,7 @@ cardano-cli governance create-update-proposal \
 --genesis-verification-key-file genesis-keys/non.e.shelley.001.vkey \
 --out-file transactions/update.v7.proposal \
 --epoch $(cardano-cli query tip --testnet-magic 42 | jq .epoch) \
---protocol-major-version "6" \
+--protocol-major-version "7" \
 --protocol-minor-version "0" 
 ```
 
@@ -423,19 +415,19 @@ cardano-cli transaction build-raw \
 --invalid-hereafter $(expr $(cardano-cli query tip --testnet-magic 42 | jq .slot) + 1000) \
 --tx-in $(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -r 'keys[]') \
 --tx-out $(cat pool1/payment.addr)+$CHANGE \
---update-proposal-file transactions/update.v6.proposal \
---out-file transactions/update.v6.proposal.txbody
+--update-proposal-file transactions/update.v7.proposal \
+--out-file transactions/update.v7.proposal.txbody
 ```
 
 ```
 cardano-cli transaction sign \
---tx-body-file transactions/update.v6.proposal.txbody \
+--tx-body-file transactions/update.v7.proposal.txbody \
 --signing-key-file pool1/payment.skey \
 --signing-key-file bft0/shelley.000.skey \
 --signing-key-file bft1/shelley.001.skey \
---out-file transactions/update.v6.proposal.txsigned
+--out-file transactions/update.v7.proposal.txsigned
 ```
 
 ```
-cardano-cli transaction submit --testnet-magic 42 --tx-file transactions/update.v6.proposal.txsigned
+cardano-cli transaction submit --testnet-magic 42 --tx-file transactions/update.v7.proposal.txsigned
 ```
