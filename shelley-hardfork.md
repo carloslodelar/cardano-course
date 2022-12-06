@@ -21,9 +21,7 @@ cardano-cli signing-key-address \
     --secret utxo-keys/byron.000.key > utxo-keys/byron.000.addr
 ```
 
-Let's spend the genesis utxos and send the funds to the addresses we created above:
-
-Now we need to send funds from their genesis addresses `genesis.000.addr`, `genesis.001.addr` and `genesis.002.addr`to our newly created regular addresses:
+It is time to spend the genesis utxos and send the funds to the regular byron addresses we created above. We send funds from their genesis addresses `byron.000.addr` to our newly created regular `payment.000.addr`
 
 {% code overflow="wrap" %}
 ```bash
@@ -41,6 +39,8 @@ Create a directory for our transaction files
 mkdir transactions
 ```
 
+And issue a genesis utxo expenditure, note that for simplicity we are being generous with transaction fees. We will pay 1 ADA or 1000000 lovelace.&#x20;
+
 ```
 cardano-cli issue-genesis-utxo-expenditure \
 --genesis-json configuration/byron-genesis.json \
@@ -50,6 +50,8 @@ cardano-cli issue-genesis-utxo-expenditure \
 --rich-addr-from $(head -n 1 utxo-keys/byron.000.addr) \
 --txout "(\"$(head -n 1 utxo-keys/payment.000.addr)\", 29999999999000000)"
 ```
+
+Submit the transaction:
 
 ```
 cardano-cli submit-tx \
