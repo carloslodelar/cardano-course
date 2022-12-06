@@ -86,9 +86,9 @@ cardano-cli byron governance create-update-proposal \
 --installer-hash 0
 ```
 
-Where `byron.000.key` is the Genesis delegate signing key (of a BFT node). This produces the update proposal file `updateprotov1.proposal`
+Where `byron.000.key` is the Genesis delegate signing key (of a BFT node). The proposal is saved in the file `updateprotov1.proposal`which we need to submit to the chain.
 
-Submit the proposal to the chain
+Submit the proposal&#x20;
 
 ```bash
 cardano-cli byron submit-update-proposal \
