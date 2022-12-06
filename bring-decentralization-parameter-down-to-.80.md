@@ -13,7 +13,7 @@ cardano-cli key non-extended-key \
 --verification-key-file genesis-keys/non.e.shelley.001.vkey
 ```
 
-A short script to help us find out if we are on time to submit the update proposal in the current epoch change the value of Byron slots accordingly.&#x20;
+A short script to help us find out if we are on time to submit the update proposal in the current epoch
 
 ```
 cat > whereinepoch.sh <<EOF

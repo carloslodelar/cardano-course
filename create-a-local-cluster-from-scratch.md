@@ -169,7 +169,7 @@ cardano-cli genesis create-cardano \
 --node-config-template template/config.json
 ```
 
-Let's move our genesis files to configuration directory to keep tings in orther
+Let's move our genesis files to configuration directory to keep tings in order:
 
 ```
 mv node-config.json configuration/config.json
@@ -178,16 +178,16 @@ mv byron-genesis.json configuration/
 mv alonzo-genesis.json configuration/
 ```
 
-And let's move our delegate keys to their corresponging delegate nodes:
+And let's move our genesis delegate keys to their corresponding delegate nodes:
 
 ```
 mv -t bft0/ delegate-keys/byron.000* delegate-keys/shelley.000* 
 mv -t bft1/ delegate-keys/byron.001* delegate-keys/shelley.001*
 ```
 
-To make our lives easier we will create scripts to start our nodes.&#x20;
+To make our lives easier we will create bash scripts to start our nodes.&#x20;
 
-For bft0:
+Bft0 will run on port 3000
 
 ```bash
 cat > bft0/startnode.sh <<EOF
@@ -204,7 +204,7 @@ cardano-node run \
 EOF
 ```
 
-For bft1:
+And BFT1 on port 3001&#x20;
 
 ```bash
 cat > bft1/startnode.sh <<EOF
@@ -221,20 +221,20 @@ cardano-node run \
 EOF
 ```
 
-Now let's give them executable permission:
+Now let's give our scripts executable permission:
 
 ```bash
 chmod +x bft0/startnode.sh bft1/startnode.sh 
 ```
 
-Now open a new terminal for each of the nodes, go to the corresponding bft folder and run the script from there:
+Open a new terminal for each of the nodes, go to the corresponding bft folder and run the script from there:
 
 ```bash
 cd bft0
 ./startnode.sh
 ```
 
-Repeat for bft1 and bft2, The nodes will idle until start time is reached, then they will start producing blocks.&#x20;
+Repeat for bft1. The nodes will idle until start time is reached, then they will start producing blocks.&#x20;
 
 Now you can set the environment variable  `CARDANO_NODE_SOCKET_PATH`
 
