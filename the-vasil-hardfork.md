@@ -337,5 +337,5 @@ cardano-cli transaction submit \
 ```
 
 ```
-cardano-cli stake-pool id --cold-verification-key-file pool1/cold.vkey --output-format "hex"
+cardano-cli stake-pool id --cold-verification-key-file pool2/cold.vkey --output-format "hex"
 ```
