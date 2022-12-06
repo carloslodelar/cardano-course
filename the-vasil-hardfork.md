@@ -381,7 +381,11 @@ cardano-cli transaction sign \
 cardano-cli transaction submit --testnet-magic 42 --tx-file transactions/update.D0.proposal.txsigned
 ```
 
-
+{% code overflow="wrap" %}
+```
+Event: LedgerUpdate (HardForkUpdateInEra S (S (S (S (Z (WrapLedgerUpdate {unwrapLedgerUpdate = ShelleyUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateProposal = UpdateProposal {proposalParams = PParams {_minfeeA = SNothing, _minfeeB = SNothing, _maxBBSize = SNothing, _maxTxSize = SNothing, _maxBHSize = SNothing, _keyDeposit = SNothing, _poolDeposit = SNothing, _eMax = SNothing, _nOpt = SNothing, _a0 = SNothing, _rho = SNothing, _tau = SNothing, _d = SJust (0 % 1), _extraEntropy = SNothing, _protocolVersion = SNothing, _minPoolCost = SNothing, _coinsPerUTxOWord = SNothing, _costmdls = SNothing, _prices = SNothing, _maxTxExUnits = SNothing, _maxBlockExUnits = SNothing, _maxValSize = SNothing, _collateralPercentage = SNothing, _maxCollateralInputs = SNothing}, proposalVersion = Nothing, proposalEpoch = EpochNo 37}, protocolUpdateState = UpdateState {proposalVotes = [KeyHash "0bc4c92289432762de7910d9db34ac709228581aea448d0bc3cc8fa6",KeyHash "a9bd5e3a633a9b46a889f974bfea91af8e4d0af9595a9bcd1537472c"], proposalReachedQuorum = True}}]}))))))
+```
+{% endcode %}
 
 
 
