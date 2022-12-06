@@ -11,6 +11,3 @@
   * [From Shelly to Alonzo](from-shelly-to-alonzo.md)
   * [The Vasil Hardfork](setting-up-a-local-cluster/the-vasil-hardfork.md)
 * [Curated playlist](curated-playlist.md)
-* [Page 1](page-1.md)
-
-## Group 1
