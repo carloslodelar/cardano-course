@@ -17,7 +17,7 @@ Transitioning from one era to the next is triggered by an **Update Proposal** th
 
 ### Update proposals
 
-#### Byron era update proposals:
+### Byron era update proposals:
 
 <figure><img src="../.gitbook/assets/Screen Shot 2022-12-06 at 9.57.28.png" alt=""><figcaption></figcaption></figure>
 
@@ -34,7 +34,7 @@ If there was no stable candidate proposal, then nothing happens. Everything is r
 
 A "null" update proposal is one that neither increase the protocol version nor the software version. Such update proposals are invalid according to the Byron specification.
 
-#### Update proposals in Shelley and subsequent eras:
+### Update proposals in Shelley and subsequent eras:
 
 The update mechanism in Shelley is simpler than it is in Byron. There is no distinction between votes and proposals: to \`\`vote'' for a proposal, a Genesis delegate submits the exact same proposal on a regular transaction signed by the delegate key. There is also no separate endorsement step.
 
@@ -47,7 +47,7 @@ The procedure is as follows:
 
 <figure><img src="../.gitbook/assets/Screen Shot 2022-12-06 at 10.06.41.png" alt=""><figcaption></figcaption></figure>
 
-#### Update proposals in practice
+### Update proposals in practice
 
 Until Voltaire era is released, only the holders of the **Genesis delegate keys** can submit and vote on proposals. From time to time you will find it usefull to deploy a local or private testnet, in that case you will need to use the governance commands to upgrade your networl to the desired era. Here is how you do it:
 
