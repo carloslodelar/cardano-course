@@ -5,7 +5,7 @@
   * [Create a local cluster](create-a-local-cluster-from-scratch.md)
   * [Spend genesis UTXO](setting-up-a-local-cluster/spend-genesis-utxo.md)
   * [From Byron to Shelley](shelley-hardfork.md)
-  * [Move funds to shelley address](move-funds-to-shelley-address.md)
+  * [Move funds to a Shelley address](setting-up-a-local-cluster/move-funds-to-a-shelley-address.md)
   * [Create first stake pool](create-stake-pools.md)
   * [Bring decentralization parameter down to .80](bring-decentralization-parameter-down-to-.80.md)
   * [From Shelly to Alonzo](from-shelly-to-alonzo.md)
