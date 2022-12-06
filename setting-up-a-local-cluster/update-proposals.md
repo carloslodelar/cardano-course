@@ -19,6 +19,8 @@ Transitioning from one era to the next is triggered by an **Update Proposal** th
 
 #### Byron era update proposals:
 
+<figure><img src="../.gitbook/assets/Screen Shot 2022-12-06 at 9.57.28.png" alt=""><figcaption></figcaption></figure>
+
 The general mechanism for updating protocol parameters in Byron is as follows:
 
 1. **Update proposal is Registered:** an update proposal starts with a transaction that proposes new values for some protocol parameters or a new protocol version. This kind of transaction can only be initiated by a Genesis key via its Delegate
@@ -43,7 +45,9 @@ The procedure is as follows:
 3. **Quorum:** At the end of the epoch, if the majority of nodes (as determined by the **Quorum** specification constant, which must be greater than half the nodes) have most recently submitted the same exact proposal, then it is adopted.
 4. **Update:** The update is applied at the epoch boundary.
 
-### Update proposals in practice
+<figure><img src="../.gitbook/assets/Screen Shot 2022-12-06 at 10.06.41.png" alt=""><figcaption></figcaption></figure>
+
+#### Update proposals in practice
 
 Until Voltaire era is released, only the holders of the **Genesis delegate keys** can submit and vote on proposals. From time to time you will find it usefull to deploy a local or private testnet, in that case you will need to use the governance commands to upgrade your networl to the desired era. Here is how you do it:
 
