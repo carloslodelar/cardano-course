@@ -52,7 +52,7 @@ cardano-cli transaction submit --testnet-magic 42 --tx-file transactions/update.
 
 Wait for the next epoch transition to see the Allegra hardfork:
 
-#### Mary hardfork
+### Mary hardfork
 
 To get to Mary era we upgrade to protocol version 4.0&#x20;
 
