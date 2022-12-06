@@ -10,6 +10,8 @@ sed -i configuration/config.json \
 -e 's/"MaxKnownMajorProtocolVersion":2/"MaxKnownMajorProtocolVersion":7/'
 ```
 
+Create the proposal:
+
 ```
 cardano-cli governance create-update-proposal \
 --genesis-verification-key-file genesis-keys/non.e.shelley.000.vkey \
@@ -56,7 +58,7 @@ To get to Mary era we upgrade to protocol version 4.0&#x20;
 
 ```
 sed -i configuration/config.json \
--e 's/LastKnownBlockVersion-Major":2/LastKnownBlockVersion-Major":4/'
+-e 's/LastKnownBlockVersion-Major":3/LastKnownBlockVersion-Major":4/'
 ```
 
 ```
@@ -101,11 +103,11 @@ Wait for the next epoch transition to see the Mary hardfork:
 
 ### Alonzo hardfork and Alonzo intra-era hardfork
 
-Getting to Alonzo will require the Alonzo Hardfork AND the Alonzo intra-era hardfork, this is, we will move from protocol version 4.0 to 5.0 followed by 6.0&#x20;
+Getting to Alonzo will require the Alonzo Hardfork AND the Alonzo intra-era hardfork, this is, we will move from protocol version 4.0 to 5.0 and then to 6.0&#x20;
 
 ```
 sed -i configuration/config.json \
--e 's/LastKnownBlockVersion-Major":2/LastKnownBlockVersion-Major":5/'
+-e 's/LastKnownBlockVersion-Major":4/LastKnownBlockVersion-Major":5/'
 ```
 
 ```
@@ -119,12 +121,12 @@ cardano-cli governance create-update-proposal \
 ```
 
 ```
-CHANGE=$(($(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -cs '.[0] | to_entries | .[] | .value.value') - 1000000))
+CHANGE=$(($(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -cs '.[0] | to_entries | .[] | .value.value.lovelace') - 1000000))
 ```
 
 ```
 cardano-cli transaction build-raw \
---shelley-era \
+--mary-era \
 --fee 1000000 \
 --invalid-hereafter $(expr $(cardano-cli query tip --testnet-magic 42 | jq .slot) + 1000) \
 --tx-in $(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -r 'keys[]') \
@@ -146,3 +148,47 @@ cardano-cli transaction sign \
 cardano-cli transaction submit --testnet-magic 42 --tx-file transactions/update.v5.proposal.txsigned
 ```
 
+### Intra-era hardfork
+
+```
+sed -i configuration/config.json \
+-e 's/LastKnownBlockVersion-Major":5/LastKnownBlockVersion-Major":6/'
+```
+
+```
+cardano-cli governance create-update-proposal \
+--genesis-verification-key-file genesis-keys/non.e.shelley.000.vkey \
+--genesis-verification-key-file genesis-keys/non.e.shelley.001.vkey \
+--out-file transactions/update.v6.proposal \
+--epoch $(cardano-cli query tip --testnet-magic 42 | jq .epoch) \
+--protocol-major-version "6" \
+--protocol-minor-version "0" 
+```
+
+```
+CHANGE=$(($(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -cs '.[0] | to_entries | .[] | .value.value.lovelace') - 1000000))
+```
+
+```
+cardano-cli transaction build-raw \
+--alonzo-era \
+--fee 1000000 \
+--invalid-hereafter $(expr $(cardano-cli query tip --testnet-magic 42 | jq .slot) + 1000) \
+--tx-in $(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -r 'keys[]') \
+--tx-out $(cat pool1/payment.addr)+$CHANGE \
+--update-proposal-file transactions/update.v6.proposal \
+--out-file transactions/update.v6.proposal.txbody
+```
+
+```
+cardano-cli transaction sign \
+--tx-body-file transactions/update.v6.proposal.txbody \
+--signing-key-file pool1/payment.skey \
+--signing-key-file bft0/shelley.000.skey \
+--signing-key-file bft1/shelley.001.skey \
+--out-file transactions/update.v6.proposal.txsigned
+```
+
+```
+cardano-cli transaction submit --testnet-magic 42 --tx-file transactions/update.v6.proposal.txsigned
+```
