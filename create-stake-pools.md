@@ -6,7 +6,7 @@ So we are now in Shelley era, but block production is still controlled by our BF
 mkdir pool1
 ```
 
-We will need an address and funds (for the pool owner):
+We need an address and funds (for the pool owner):
 
 ```
 cardano-cli address key-gen \
@@ -14,7 +14,7 @@ cardano-cli address key-gen \
 --signing-key-file pool1/payment.skey
 ```
 
-We will delegate our stake to our pool, so we will need stake keys
+We want to delegate our stake to our pool, so we will need stake keys
 
 ```
 cardano-cli stake-address key-gen \
@@ -22,7 +22,7 @@ cardano-cli stake-address key-gen \
 --signing-key-file pool1/stake.skey
 ```
 
-And we build our address with:
+Build the address:
 
 ```
 cardano-cli address build \
@@ -32,7 +32,7 @@ cardano-cli address build \
 --testnet-magic 42
 ```
 
-Let's send some funds to our pool owner address:
+Send some funds to our pool owner address from `user1.payment.addr`
 
 ```
 cardano-cli transaction build \
