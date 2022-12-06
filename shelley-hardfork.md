@@ -1,24 +1,12 @@
 # From Byron to Shelley
 
-We don't want to stay on Byron era forever, right? Of course not. Let's move on to Shelley era
+We don't want to stay on Byron era forever, right? Of course not. Let's move on to Shelley era, but before we do that we need to go to protocol version 1.0.0 (Ouroboros BFT),  this was referred to as Byron Reboot and was the only real hardfork in the traditional sense.&#x20;
 
 ### Upgrade to Ouroboros BFT&#x20;
 
 Let's update our scripts to run the nodes to include Shelley keys:
 
-{% code overflow="wrap" %}
-```
-sed -i '$ s/$/ --shelley-kes-key shelley.000.kes.skey --shelley-vrf-key shelley.000.vrf.skey --shelley-operational-certificate shelley.000.opcert.json/' bft0/startnode.sh
-```
-{% endcode %}
-
-{% code overflow="wrap" %}
-```
-sed -i '$ s/$/ --shelley-kes-key shelley.001.kes.skey --shelley-vrf-key shelley.001.vrf.skey --shelley-operational-certificate shelley.001.opcert.json/' bft1/startnode.sh  
-```
-{% endcode %}
-
-We are almost ready to move to OBFT era. So we need to Create, Submit and Vote and update proposal.&#x20;
+We need to Create, Submit and Vote and Update Proposal.&#x20;
 
 ```bash
 cardano-cli byron governance create-update-proposal \
@@ -101,9 +89,23 @@ Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate
 
 ### Shelley Hardfork&#x20;
 
-Now lets upgrade to protocol version 2.0.0, The Shelley Era!&#x20;
+Now let's upgrade to protocol version 2.0.0, The Shelley Era!&#x20;
 
-Let's adjust the config file again:
+We add the Shelley keys to our BFT nodes starting scripts:&#x20;
+
+{% code overflow="wrap" %}
+```
+sed -i '$ s/$/ --shelley-kes-key shelley.000.kes.skey --shelley-vrf-key shelley.000.vrf.skey --shelley-operational-certificate shelley.000.opcert.json/' bft0/startnode.sh
+```
+{% endcode %}
+
+{% code overflow="wrap" %}
+```
+sed -i '$ s/$/ --shelley-kes-key shelley.001.kes.skey --shelley-vrf-key shelley.001.vrf.skey --shelley-operational-certificate shelley.001.opcert.json/' bft1/startnode.sh  
+```
+{% endcode %}
+
+Adjust the config file again to say we are ready to go to protocol version 2.0&#x20;
 
 ```
 sed -i 's/"LastKnownBlockVersion-Major":1/"LastKnownBlockVersion-Major":2/' configuration/config.json
