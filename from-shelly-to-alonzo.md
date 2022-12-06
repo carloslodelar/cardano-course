@@ -148,7 +148,7 @@ cardano-cli transaction sign \
 cardano-cli transaction submit --testnet-magic 42 --tx-file transactions/update.v5.proposal.txsigned
 ```
 
-### Intra-era hardfork
+### Alonzo intra-era hardfork
 
 ```
 sed -i configuration/config.json \
