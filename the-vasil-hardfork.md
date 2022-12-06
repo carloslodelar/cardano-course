@@ -42,7 +42,7 @@ cardano-cli transaction build \
 --testnet-magic 42 \
 --invalid-hereafter $(expr $(cardano-cli query tip --testnet-magic 42 | jq .slot) + 1000) \
 --tx-in $(cardano-cli query utxo --address $(cat utxo-keys/user1.payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -r 'keys[]') \
---tx-out $(cat pool1/payment.addr)+50000000000000 \
+--tx-out $(cat pool2/payment.addr)+50000000000000 \
 --change-address $(cat utxo-keys/user1.payment.addr) \
 --out-file transactions/tx6.raw
 ```
@@ -98,7 +98,7 @@ To generate the operational certificate:
 
 ```
 cardano-cli node issue-op-cert \
---kes-verification-key-file pool1/kes.vkey \
+--kes-verification-key-file pool2/kes.vkey \
 --cold-signing-key-file pool2/cold.skey \
 --operational-certificate-issue-counter pool2/opcert.counter \
 --kes-period 0 \
@@ -179,7 +179,7 @@ Give it executable permissions:
 chmod +x pool2/startnode.sh
 ```
 
-Start the node from the pool1 directory.
+Start the node from the pool2 directory.
 
 Our pool cannot create blocks just yet. We need to register it. To the blockchain
 
@@ -207,7 +207,7 @@ cardano-cli query protocol-parameters --testnet-magic 42 | grep stakeAddressDepo
 
 {% code overflow="wrap" %}
 ```
-CHANGE=$(($(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -cs '.[0] | to_entries | .[] | .value.value') - 3000000))
+CHANGE=$(($(cardano-cli query utxo --address $(cat pool2/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -cs '.[0] | to_entries | .[] | .value.value') - 3000000))
 ```
 {% endcode %}
 
@@ -217,7 +217,7 @@ cardano-cli transaction build-raw \
 --fee 1000000 \
 --invalid-hereafter $(expr $(cardano-cli query tip --testnet-magic 42 | jq .slot) + 1000) \
 --tx-in $(cardano-cli query utxo --address $(cat pool2/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -r 'keys[]') \
---tx-out $(cat pool1/payment.addr)+$CHANGE \
+--tx-out $(cat pool2/payment.addr)+$CHANGE \
 --certificate-file pool2/stake.cert \
 --out-file transactions/tx7.raw
 ```
@@ -239,7 +239,7 @@ We will use the same file [https://git.io/JJWdJ ](https://git.io/JJWdJ)
 Get the file
 
 ```bash
-wget https://git.io/JJWdJ -O pool1/poolmetadata.json
+wget https://git.io/JJWdJ -O pool2/poolmetadata.json
 ```
 
 Get the metadata hash
@@ -252,7 +252,7 @@ cardano-cli stake-pool metadata-hash --pool-metadata-file pool2/poolmetadata.jso
 For convinenve, lets save it to a file&#x20;
 
 ```
-cardano-cli stake-pool metadata-hash --pool-metadata-file pool1/poolmetadata.json --out-file poolmetadata.hash
+cardano-cli stake-pool metadata-hash --pool-metadata-file pool2/poolmetadata.json --out-file poolmetadata.hash
 ```
 
 Generate the registration certificate
@@ -304,19 +304,19 @@ cardano-cli transaction build-raw \
 --alonzo-era \
 --fee 1000000 \
 --invalid-hereafter $(expr $(cardano-cli query tip --testnet-magic 42 | jq .slot) + 10000) \
---tx-in $(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -r 'keys[]') \
---tx-out $(cat pool1/payment.addr)+$CHANGE \
---certificate-file pool1/pool-registration.cert \
---certificate-file pool1/delegation.cert \
+--tx-in $(cardano-cli query utxo --address $(cat pool2/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -r 'keys[]') \
+--tx-out $(cat pool2/payment.addr)+$CHANGE \
+--certificate-file pool2/pool-registration.cert \
+--certificate-file pool2/delegation.cert \
 --out-file transactions/tx5.raw
 ```
 
 ```
 cardano-cli transaction sign \
 --tx-body-file transactions/tx5.raw \
---signing-key-file pool1/payment.skey \
---signing-key-file pool1/stake.skey \
---signing-key-file pool1/cold.skey \
+--signing-key-file pool2/payment.skey \
+--signing-key-file pool2/stake.skey \
+--signing-key-file pool2/cold.skey \
 --testnet-magic 42 \
 --out-file transactions/tx5.signed
 ```
