@@ -38,11 +38,11 @@ cardano-cli byron governance create-update-proposal \
 --output-filepath transactions/updateprotov1.001.vote
 </code></pre>
 
-Before we can move on and Submit the proposal and Vote let's make sure that our config file says that to we are ready to move to protocol "LastKnownBlockVersion-Major": 1,
+Before we move on and Submit the proposal, let's make sure that our config file says that to we are ready to move to protocol "LastKnownBlockVersion-Major": 1,
 
 ```bash
 jq .'"LastKnownBlockVersion-Major"' configuration/config.json 
->bash
+>
 1
 ```
 
@@ -62,13 +62,15 @@ cardano-cli byron submit-proposal-vote  \
             --filepath transactions/updateprotov1.001.vote
 ```
 
-Your node logs will show the&#x20;
+Your node logs will show the different stages of the lifecycle of a Byron Update Proposal:&#x20;
 
 {% code overflow="wrap" %}
 ```
 Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateRegistered (SlotNo 457)}]}))
 ...
 Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateConfirmed (SlotNo 467)}]}))
+....
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateStablyConfirmed (fromList [])}]}))
 ....
 Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateCandidate (SlotNo 557) (EpochNo 2)}]}))
 ...
@@ -86,9 +88,9 @@ Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate
 
 ### Shelley Hardfork&#x20;
 
-Now let's upgrade to protocol version 2.0.0, The Shelley Era!&#x20;
+Now we can upgrade to protocol version 2.0, the Shelley Era!&#x20;
 
-We add the Shelley keys to our BFT nodes starting scripts:&#x20;
+First, we add the Shelley keys to our BFT nodes starting scripts:&#x20;
 
 {% code overflow="wrap" %}
 ```
@@ -102,11 +104,13 @@ sed -i '$ s/$/ --shelley-kes-key shelley.001.kes.skey --shelley-vrf-key shelley.
 ```
 {% endcode %}
 
-Adjust the config file again to say we are ready to go to protocol version 2.0&#x20;
+Then, we adjust the config file again to say we are ready to go to protocol version 2.0&#x20;
 
 ```
 sed -i 's/"LastKnownBlockVersion-Major":1/"LastKnownBlockVersion-Major":2/' configuration/config.json
 ```
+
+And generate the update proposal:
 
 ```
 cardano-cli byron governance create-update-proposal \
@@ -122,7 +126,14 @@ cardano-cli byron governance create-update-proposal \
 --installer-hash 0
 ```
 
-and restart our nodes once more
+And submit the proposal:
+
+<pre><code><strong>cardano-cli byron submit-update-proposal \
+</strong>            --testnet-magic 42 \
+            --filepath transactions/updateprotov2.proposal
+</code></pre>
+
+Every genesis delegate can vote on the proposal:
 
 ```
 cardano-cli byron governance create-proposal-vote \
@@ -142,10 +153,7 @@ cardano-cli byron governance create-proposal-vote \
 --output-filepath transactions/updateprotov2.001.vote
 ```
 
-<pre><code><strong>cardano-cli byron submit-update-proposal \
-</strong>            --testnet-magic 42 \
-            --filepath transactions/updateprotov2.proposal
-</code></pre>
+Submit the votes:
 
 ```
 cardano-cli byron submit-proposal-vote  \
