@@ -1,4 +1,6 @@
-# Move funds to shelley address
+# Move funds to a Shelley address
+
+We need to convert our Byron signing key to a corresponding Shelley era key:
 
 ```
 cardano-cli key convert-byron-key \
@@ -7,11 +9,15 @@ cardano-cli key convert-byron-key \
 --byron-payment-key-type
 ```
 
+Now let's generate a new set of Shelley era keys:
+
 ```
 cardano-cli address key-gen \
 --verification-key-file utxo-keys/user1.payment.vkey \
 --signing-key-file utxo-keys/user1.payment.skey
 ```
+
+We build the address with
 
 ```
 cardano-cli address build \
@@ -19,6 +25,8 @@ cardano-cli address build \
 --testnet-magic 42 \
 --out-file utxo-keys/user1.payment.addr
 ```
+
+Build the transaction to move the funds from the their current Byron era address to our newly created Shelley era `user1.payment.add`This address will have all the funds for now:
 
 ```
 cardano-cli transaction build-raw \
@@ -47,5 +55,5 @@ cardano-cli transaction submit \
 cardano-cli query utxo --whole-utxo --testnet-magic 42
                            TxHash                                 TxIx        Amount
 --------------------------------------------------------------------------------------
-e1f4d19c74f5d362d521a7170653c1f91771b6f331a0f4e58f73148ce1b3a6cb     0        35999997000000
+e1f4d19c74f5d362d521a7170653c1f91771b6f331a0f4e58f73148ce1b3a6cb     0     29999999998000000
 ```

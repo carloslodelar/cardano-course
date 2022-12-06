@@ -10,5 +10,6 @@
   * [Create first stake pool](create-stake-pools.md)
   * [Bring decentralization parameter down to .80](bring-decentralization-parameter-down-to-.80.md)
   * [From Shelly to Alonzo](from-shelly-to-alonzo.md)
-  * [The Vasil Hardfork](setting-up-a-local-cluster/the-vasil-hardfork.md)
+  * [Create a second stake pool before we move to Babbage era](setting-up-a-local-cluster/create-a-second-stake-pool-before-we-move-to-babbage-era.md)
+  * [Vasil Hardfork](setting-up-a-local-cluster/vasil-hardfork.md)
 * [Curated playlist](curated-playlist.md)
