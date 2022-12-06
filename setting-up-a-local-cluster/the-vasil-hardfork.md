@@ -2,13 +2,13 @@
 
 The decentralization parameter is removed in Babbage era (Vasil Hardfork). This means that our BFT nodes will not be able to continue producing blocks in Babbage. We will need at least one more stake pool:
 
-&#x20;
-
 ```
 mkdir pool2
 ```
 
-We will need an address and funds (for the pool owner):
+Create keys and an address to send some funds to our second pool.
+
+The payment keys
 
 ```
 cardano-cli address key-gen \
@@ -16,7 +16,7 @@ cardano-cli address key-gen \
 --signing-key-file pool2/payment.skey
 ```
 
-We will delegate our stake to our pool, so we will need stake keys
+The stake keys
 
 ```
 cardano-cli stake-address key-gen \
@@ -24,7 +24,7 @@ cardano-cli stake-address key-gen \
 --signing-key-file pool2/stake.skey
 ```
 
-And we build our address with:
+Build the address
 
 ```
 cardano-cli address build \
@@ -34,7 +34,7 @@ cardano-cli address build \
 --testnet-magic 42
 ```
 
-Let's send some funds to our pool owner address:
+Build the transactions to send some funds to our second pool owner
 
 ```
 cardano-cli transaction build \
@@ -94,7 +94,7 @@ cardano-cli node key-gen-KES \
 --signing-key-file pool2/kes.skey
 ```
 
-To generate the operational certificate:
+The operational certificate:
 
 ```
 cardano-cli node issue-op-cert \
@@ -105,7 +105,7 @@ cardano-cli node issue-op-cert \
 --out-file pool2/opcert.cert
 ```
 
-Let's create a topology file for our pool and update the bft nodes topology so tat they include our pool.&#x20;
+Create a topology file for pool2 and update pool1 topology. We will shut down bft0 and bft1 after the Vasil hardfork so we don't need to update them.&#x20;
 
 ```
 cat > pool1/topology.json <<EOF
