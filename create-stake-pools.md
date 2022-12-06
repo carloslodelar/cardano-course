@@ -6,6 +6,8 @@ So we are now in Shelley era, but block production is still controlled by our BF
 mkdir pool1
 ```
 
+### Generate pool owner keys&#x20;
+
 We need an address and funds (for the pool owner):
 
 ```
@@ -70,7 +72,7 @@ cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42
 d8dad0d24242b26e037f9b0120030fc2d5c5449d859ecd3267f6453dd66bf0c3     0        50000000000000
 ```
 
-#### Generate the Stake pool keys
+### Generate the Stake pool keys
 
 Generate Cold keys
 
@@ -195,7 +197,7 @@ We are ready to start the node from the pool1 directory.&#x20;
 
 Our pool cannot create blocks just yet. We need to register it. To the blockchain
 
-#### Register stake address
+### Register stake address
 
 Create a registration certificate
 
@@ -252,7 +254,7 @@ cardano-cli transaction submit \
 --tx-file transactions/tx4.signed
 ```
 
-#### Register stake pool
+### Register stake pool
 
 Now, it's time to register the stake pool. On a real network we would need to have metadata for our pool so that it can be properly displayed by wallets. The pool metadata must meet [this requirements](https://docs.cardano.org/development-guidelines/operating-a-stake-pool/public-stake-pools) &#x20;
 
