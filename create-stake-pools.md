@@ -6,7 +6,7 @@ So we are now in Shelley era, but block production is still controlled by our BF
 mkdir pool1
 ```
 
-We need an address and funds (for the pool owner):
+We will need an address and funds (for the pool owner):
 
 ```
 cardano-cli address key-gen \
@@ -14,7 +14,7 @@ cardano-cli address key-gen \
 --signing-key-file pool1/payment.skey
 ```
 
-We want to delegate our stake to our pool, so we will need stake keys
+We will delegate our stake to our pool, so we will need stake keys
 
 ```
 cardano-cli stake-address key-gen \
@@ -22,7 +22,7 @@ cardano-cli stake-address key-gen \
 --signing-key-file pool1/stake.skey
 ```
 
-Build the address:
+And we build our address with:
 
 ```
 cardano-cli address build \
@@ -32,7 +32,7 @@ cardano-cli address build \
 --testnet-magic 42
 ```
 
-Send some funds to our pool owner address from `user1.payment.addr`
+Let's send some funds to our pool owner address:
 
 ```
 cardano-cli transaction build \
@@ -70,9 +70,7 @@ cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42
 d8dad0d24242b26e037f9b0120030fc2d5c5449d859ecd3267f6453dd66bf0c3     0        50000000000000
 ```
 
-#### Generate the Stake pool keys
-
-Generate Cold keys
+Generate cold keys
 
 ```
 cardano-cli node key-gen \
@@ -108,7 +106,7 @@ cardano-cli node issue-op-cert \
 --out-file pool1/opcert.cert
 ```
 
-Let's create a topology file for our pool and update the bft nodes topologies so tat they include our pool.&#x20;
+Let's create a topology file for our pool and update the bft nodes topology so tat they include our pool.&#x20;
 
 ```
 cat > pool1/topology.json <<EOF
@@ -167,7 +165,7 @@ cat > bft1/topology.json <<EOF
 EOF
 ```
 
-Let's also have a script to start the stake pool node.&#x20;
+And let's have a simple script to start the pool node.&#x20;
 
 ```
 cat > pool1/startnode.sh <<EOF
@@ -191,11 +189,11 @@ Give it executable permissions:
 chmod +x pool1/startnode.sh
 ```
 
-We are ready to start the node from the pool1 directory.&#x20;
+Start the node from the pool1 directory.
 
 Our pool cannot create blocks just yet. We need to register it. To the blockchain
 
-#### Register stake address
+#### Register stake key
 
 Create a registration certificate
 
@@ -205,22 +203,26 @@ cardano-cli stake-address registration-certificate \
 --out-file pool1/stake.cert
 ```
 
-Registering a stake address requires a 2 ADA deposit:&#x20;
+Create a transaction to register the stake key
 
 ```
- cardano-cli query protocol-parameters --testnet-magic 42 | grep stakeAddressDeposit   
-     "stakeAddressDeposit": 2000000,
+cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42
+                           TxHash                                 TxIx        Amount
+--------------------------------------------------------------------------------------
+3c40b6543a5888a61f630a28de520f6f7ecccc23d0e1e08fd9510a4e61156926     1        99998000000
 ```
 
-We'll use the build-raw command this time, this one does not automatically calculate fees and change. Again, for simplicity we will pay 1 ADA fee and we need to add the 2 ADA deposit.  We can use a variable for our change calculations.    &#x20;
+```
+cardano-cli query protocol-parameters --testnet-magic 42 | grep stakeAddressDeposit
+    "stakeAddressDeposit": 2000000,
+
+```
 
 {% code overflow="wrap" %}
 ```
 CHANGE=$(($(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -cs '.[0] | to_entries | .[] | .value.value') - 3000000))
 ```
 {% endcode %}
-
-Build
 
 ```
 cardano-cli transaction build-raw \
@@ -233,8 +235,6 @@ cardano-cli transaction build-raw \
 --out-file transactions/tx4.raw
 ```
 
-Sign
-
 ```
 cardano-cli transaction sign \
 --tx-body-file transactions/tx4.raw \
@@ -244,8 +244,6 @@ cardano-cli transaction sign \
 --out-file transactions/tx4.signed
 ```
 
-Submit
-
 ```
 cardano-cli transaction submit \
 --testnet-magic 42 \
@@ -254,9 +252,11 @@ cardano-cli transaction submit \
 
 #### Register stake pool
 
-Now, it's time to register the stake pool. On a real network we would need to have metadata for our pool so that it can be properly displayed by wallets. The pool metadata must meet [this requirements](https://docs.cardano.org/development-guidelines/operating-a-stake-pool/public-stake-pools) &#x20;
+Now, it's time to register the stake pool. On a real network we would need to have metadata for our pool so tat it can be properly displayed by wallets.&#x20;
 
-We don't really need it, but for learning purposes we will use this same file [https://git.io/JJWdJ ](https://git.io/JJWdJ)from the documentation.
+The pool metadata must meet [this requirements](https://docs.cardano.org/development-guidelines/operating-a-stake-pool/public-stake-pools) &#x20;
+
+We will use the same file [https://git.io/JJWdJ ](https://git.io/JJWdJ)
 
 Get the file
 
@@ -264,7 +264,14 @@ Get the file
 wget https://git.io/JJWdJ -O pool1/poolmetadata.json
 ```
 
-Get the metadata hash and save it to a file:&#x20;
+Get the metadata hash
+
+```
+cardano-cli stake-pool metadata-hash --pool-metadata-file pool1/poolmetadata.json
+5c93c2c47f115c0184e5b2499b179b36dc385a45a2a809bb3ec2e34047dae04e
+```
+
+For convinenve, lets save it to a file&#x20;
 
 ```
 cardano-cli stake-pool metadata-hash --pool-metadata-file pool1/poolmetadata.json --out-file poolmetadata.hash
@@ -289,7 +296,7 @@ cardano-cli stake-pool registration-certificate \
 --out-file pool1/pool-registration.cert
 ```
 
-Create a delegation certificate to honor our pledge:
+Create a delegation certificate
 
 ```
 cardano-cli stake-address delegation-certificate \
@@ -298,7 +305,7 @@ cardano-cli stake-address delegation-certificate \
 --out-file pool1/delegation.cert
 ```
 
-Query the protocol parameters again to find the pool deposit:
+Now, let's query the protocol parameters again to find the pool deposit:
 
 ```bash
 cardano-cli query protocol-parameters --testnet-magic 42 | grep stakePoolDeposit
@@ -306,7 +313,7 @@ cardano-cli query protocol-parameters --testnet-magic 42 | grep stakePoolDeposit
 
 ```
 
-We need to make a 500 ADA deposit.
+So we need to make a deposit of 500 test ADA
 
 Let's submit both, the delegation certificate and the registration certificate:&#x20;
 
@@ -347,4 +354,4 @@ cardano-cli stake-pool id --cold-verification-key-file pool1/cold.vkey --output-
 66da34a16bd8582679442d045514ecd9817f24199e771d017ad7a8c2
 ```
 
-Now we need to wait for the next epoch transition for the stake snapshot to pick up our pool and 2 epochs for our pool to start producing blocks. This of course, if we lower the decentralization parameter (currently set to 1). Let's do that.&#x20;
+Now we need to wait 1 epoch for the stake snapshot to pick up our pool and 2 epochs for our pool to start producing blocks. This of course, if we lower the decentralization parameter to something less than 1. Let's do that.&#x20;
