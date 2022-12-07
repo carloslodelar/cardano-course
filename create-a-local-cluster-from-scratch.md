@@ -131,14 +131,16 @@ Let's make a few changes to our shelley.json template. Since we will only have 2
 ```
 sed -i template/shelley.json \
 -e 's/"securityParam": 108/"securityParam": 45/' \
--e 's/"major": 6/"major": 2/'
+-e 's/"major": 6/"major": 2/' \
+-e 's/"updateQuorum": 3/"updateQuorum": 2/'
 ```
 {% endtab %}
 
 {% tab title="macOS" %}
 <pre class="language-bash"><code class="lang-bash"><strong>gsed -i template/shelley.json \
 </strong>-e 's/"securityParam": 108/"securityParam": 45/' \
--e 's/"major": 6/"major": 2/' 
+-e 's/"major": 6/"major": 2/' \
+-e 's/"updateQuorum": 3/"updateQuorum": 2/'
 </code></pre>
 {% endtab %}
 {% endtabs %}
