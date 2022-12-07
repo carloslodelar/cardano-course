@@ -79,7 +79,7 @@ d8dad0d24242b26e037f9b0120030fc2d5c5449d859ecd3267f6453dd66bf0c3     0        50
 
 Generate Cold keys
 
-```
+```bash
 cardano-cli node key-gen \
 --cold-verification-key-file pool1/cold.vkey \
 --cold-signing-key-file pool1/cold.skey \
@@ -88,7 +88,7 @@ cardano-cli node key-gen \
 
 Generate VRF keys
 
-```
+```bash
 cardano-cli node key-gen-VRF \
 --verification-key-file pool1/vrf.vkey \
 --signing-key-file pool1/vrf.skey
@@ -96,7 +96,7 @@ cardano-cli node key-gen-VRF \
 
 &#x20;Generate KES keys
 
-```
+```bash
 cardano-cli node key-gen-KES \
 --verification-key-file pool1/kes.vkey \
 --signing-key-file pool1/kes.skey
@@ -104,7 +104,7 @@ cardano-cli node key-gen-KES \
 
 To generate the operational certificate:
 
-```
+```bash
 cardano-cli node issue-op-cert \
 --kes-verification-key-file pool1/kes.vkey \
 --cold-signing-key-file pool1/cold.skey \
@@ -115,7 +115,7 @@ cardano-cli node issue-op-cert \
 
 Let's create a topology file for our pool and update the bft nodes topologies so tat they include our pool.&#x20;
 
-```
+```bash
 cat > pool1/topology.json <<EOF
 {
    "Producers": [
@@ -134,7 +134,7 @@ cat > pool1/topology.json <<EOF
 EOF
 ```
 
-```
+```bash
 cat > bft0/topology.json <<EOF
 {
    "Producers": [
@@ -153,7 +153,7 @@ cat > bft0/topology.json <<EOF
 EOF
 ```
 
-```
+```bash
 cat > bft1/topology.json <<EOF
 {
    "Producers": [
@@ -174,7 +174,7 @@ EOF
 
 Let's also have a script to start the stake pool node.&#x20;
 
-```
+```bash
 cat > pool1/startnode.sh <<EOF
 #!/usr/bin/env bash
 
@@ -192,7 +192,7 @@ EOF
 
 Give it executable permissions:
 
-```
+```bash
 chmod +x pool1/startnode.sh
 ```
 
@@ -204,7 +204,7 @@ Our pool cannot create blocks just yet. We need to register it. To the blockchai
 
 Create a registration certificate
 
-```
+```bash
 cardano-cli stake-address registration-certificate \
 --stake-verification-key-file pool1/stake.vkey \
 --out-file pool1/stake.cert
@@ -212,7 +212,7 @@ cardano-cli stake-address registration-certificate \
 
 Registering a stake address requires a 2 ADA deposit:&#x20;
 
-```
+```bash
  cardano-cli query protocol-parameters --testnet-magic 42 | grep stakeAddressDeposit   
      "stakeAddressDeposit": 2000000,
 ```
@@ -220,14 +220,14 @@ Registering a stake address requires a 2 ADA deposit:&#x20;
 We'll use the build-raw command this time, this one does not automatically calculate fees and change. Again, for simplicity we will pay 1 ADA fee and we need to add the 2 ADA deposit.  We can use a variable for our change calculations.    &#x20;
 
 {% code overflow="wrap" %}
-```
+```bash
 CHANGE=$(($(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -cs '.[0] | to_entries | .[] | .value.value') - 3000000))
 ```
 {% endcode %}
 
 Build
 
-```
+```bash
 cardano-cli transaction build-raw \
 --shelley-era \
 --fee 1000000 \
@@ -240,7 +240,7 @@ cardano-cli transaction build-raw \
 
 Sign
 
-```
+```bash
 cardano-cli transaction sign \
 --tx-body-file transactions/tx4.raw \
 --signing-key-file pool1/payment.skey \
@@ -251,7 +251,7 @@ cardano-cli transaction sign \
 
 Submit
 
-```
+```bash
 cardano-cli transaction submit \
 --testnet-magic 42 \
 --tx-file transactions/tx4.signed
@@ -271,13 +271,14 @@ wget https://git.io/JJWdJ -O pool1/poolmetadata.json
 
 Get the metadata hash and save it to a file:&#x20;
 
-```
-cardano-cli stake-pool metadata-hash --pool-metadata-file pool1/poolmetadata.json --out-file poolmetadata.hash
+```bash
+cardano-cli stake-pool metadata-hash \
+--pool-metadata-file pool1/poolmetadata.json --out-file poolmetadata.hash
 ```
 
 Generate the registration certificate
 
-```
+```bash
 cardano-cli stake-pool registration-certificate \
 --cold-verification-key-file pool1/cold.vkey \
 --vrf-verification-key-file pool1/vrf.vkey \
@@ -296,7 +297,7 @@ cardano-cli stake-pool registration-certificate \
 
 Create a delegation certificate to honor our pledge:
 
-```
+```bash
 cardano-cli stake-address delegation-certificate \
 --stake-verification-key-file pool1/stake.vkey \
 --cold-verification-key-file pool1/cold.vkey \
@@ -315,11 +316,11 @@ We need to make a 500 ADA deposit.
 
 Let's submit both, the delegation certificate and the registration certificate:&#x20;
 
-```
+```bash
 CHANGE=$(($(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -cs '.[0] | to_entries | .[] | .value.value') - 501000000))
 ```
 
-```
+```bash
 cardano-cli transaction build-raw \
 --shelley-era \
 --fee 1000000 \
@@ -331,7 +332,7 @@ cardano-cli transaction build-raw \
 --out-file transactions/tx5.raw
 ```
 
-```
+```bash
 cardano-cli transaction sign \
 --tx-body-file transactions/tx5.raw \
 --signing-key-file pool1/payment.skey \
@@ -341,13 +342,13 @@ cardano-cli transaction sign \
 --out-file transactions/tx5.signed
 ```
 
-```
+```bash
 cardano-cli transaction submit \
 --testnet-magic 42 \
 --tx-file transactions/tx5.signed
 ```
 
-```
+```bash
 cardano-cli stake-pool id --cold-verification-key-file pool1/cold.vkey --output-format "hex"
 66da34a16bd8582679442d045514ecd9817f24199e771d017ad7a8c2
 ```
