@@ -130,20 +130,14 @@ Let's make a few changes to our shelley.json template. Since we will only have 2
 {% tab title="Linux" %}
 ```
 sed -i template/shelley.json \
--e 's/"updateQuorum": 3/"updateQuorum": 2/' \
--e 's/"epochLength": 432000/"epochLength": 9000/' \
 -e 's/"securityParam": 108/"securityParam": 45/' \
--e 's/"slotLength": 1/"slotLength": 0.10/' \
--e 's/"major": 6/"major": 2/' 
+-e 's/"major": 6/"major": 2/'
 ```
 {% endtab %}
 
 {% tab title="macOS" %}
 <pre class="language-bash"><code class="lang-bash"><strong>gsed -i template/shelley.json \
-</strong>-e 's/"updateQuorum": 3/"updateQuorum": 2/' \
--e 's/"epochLength": 432000/"epochLength": 9000/' \
--e 's/"securityParam": 108/"securityParam": 45/' \
--e 's/"slotLength": 1/"slotLength": 0.10/' \
+</strong>-e 's/"securityParam": 108/"securityParam": 45/' \
 -e 's/"major": 6/"major": 2/' 
 </code></pre>
 {% endtab %}
