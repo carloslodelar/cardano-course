@@ -126,6 +126,8 @@ The rest of our parameters will match mainnet ones. For detailed information abo
 
 Let's make a few changes to our shelley.json template. Since we will only have 2 nodes, we bring updateQuorum down to 2, We reduce the epoch length to 9000, the security parameter k to 45,  the shelley era slots will last 1/10th of a second; and to help our cluster to match the progression of mainnet protocol versions, we set major (protocol version) to 2. On mainnet Shelley era is protocol version 2.0&#x20;
 
+{% tabs %}
+{% tab title="Linux" %}
 ```
 sed -i template/shelley.json \
 -e 's/"updateQuorum": 3/"updateQuorum": 2/' \
@@ -134,9 +136,26 @@ sed -i template/shelley.json \
 -e 's/"slotLength": 1/"slotLength": 0.10/' \
 -e 's/"major": 6/"major": 2/' 
 ```
+{% endtab %}
+
+{% tab title="macOS" %}
+<pre class="language-bash"><code class="lang-bash"><strong>gsed -i template/shelley.json \
+</strong>-e 's/"updateQuorum": 3/"updateQuorum": 2/' \
+-e 's/"epochLength": 432000/"epochLength": 9000/' \
+-e 's/"securityParam": 108/"securityParam": 45/' \
+-e 's/"slotLength": 1/"slotLength": 0.10/' \
+-e 's/"major": 6/"major": 2/' 
+</code></pre>
+{% endtab %}
+{% endtabs %}
+
+```
+```
 
 We also need a few changes to the config.json template. for now we will disable P2P topology, we will disable EnableDevelopment options because we want to update our cluster using proper update proposals. Initially we will state that our nodes are ready to move to Protocol Version 1.0.0 (PBFT). Logs will come very fast, we will keep the minSeverity in Info. &#x20;
 
+{% tabs %}
+{% tab title="Linux" %}
 ```
  sed -i template/config.json \
  -e 's/"EnableP2P": true/"EnableP2P": false/' \
@@ -150,10 +169,30 @@ We also need a few changes to the config.json template. for now we will disable 
  -e 's/"TestAlonzoHardForkAtEpoch": 0/"TestAlonzoHardForkAtEpoch": /' \
  -e 's/""minSeverity": "Debug"/"minSeverity": "Info"/' 
 ```
+{% endtab %}
+
+{% tab title="macOS" %}
+```
+ gsed -i template/config.json \
+ -e 's/"EnableP2P": true/"EnableP2P": false/' \
+ -e 's/"TestEnableDevelopmentNetworkProtocols": true/"TestEnableDevelopmentNetworkProtocols": false/' \
+ -e 's/"TestEnableDevelopmentHardForkEras": true/"TestEnableDevelopmentHardForkEras": false/' \
+ -e 's/"LastKnownBlockVersion-Major": 3/"LastKnownBlockVersion-Major": 1/' \
+ -e 's/"LastKnownBlockVersion-Minor": 1/"LastKnownBlockVersion-Minor": 0/' \
+ -e 's/"TestShelleyHardForkAtEpoch": 0/"TestShelleyHardForkAtEpoch": /' \
+ -e 's/"TestAllegraHardForkAtEpoch": 0/"TestAllegraHardForkAtEpoch": /' \
+ -e 's/"TestMaryHardForkAtEpoch": 0/"TestMaryHardForkAtEpoch": /' \
+ -e 's/"TestAlonzoHardForkAtEpoch": 0/"TestAlonzoHardForkAtEpoch": /' \
+ -e 's/""minSeverity": "Debug"/"minSeverity": "Info"/' 
+```
+{% endtab %}
+{% endtabs %}
 
 Now we can use the magic of `cardano-cli genesis create-cardano`
 
-```
+{% tabs %}
+{% tab title="Linux" %}
+```bash
 cardano-cli genesis create-cardano \
 --genesis-dir ./ \
 --gen-genesis-keys 2 \
@@ -168,14 +207,32 @@ cardano-cli genesis create-cardano \
 --alonzo-template template/alonzo.json \
 --node-config-template template/config.json
 ```
+{% endtab %}
+
+{% tab title="macOS" %}
+```bash
+cardano-cli genesis create-cardano \
+--genesis-dir ./ \
+--gen-genesis-keys 2 \
+--start-time $(gdate -u -d "now + 5 minutes" +%FT%Tz) \
+--supply 30000000000000000 \
+--security-param 45 \
+--slot-length 100 \
+--slot-coefficient 5/100 \
+--testnet-magic 42 \
+--byron-template template/byron.json \
+--shelley-template template/shelley.json \
+--alonzo-template template/alonzo.json \
+--node-config-template template/config.json
+```
+{% endtab %}
+{% endtabs %}
 
 Let's move our genesis files to configuration directory to keep tings in order:
 
-```
+```bash
 mv node-config.json configuration/config.json
-mv shelley-genesis.json configuration/
-mv byron-genesis.json configuration/
-mv alonzo-genesis.json configuration/
+mv shelley-genesis.json byron-genesis.json alonzo-genesis.json configuration/
 ```
 
 And let's move our genesis delegate keys to their corresponding delegate nodes:
