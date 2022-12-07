@@ -2,13 +2,15 @@
 
 So we are now in Shelley era, but block production is still controlled by our BFT nodes. Let's create the first stake pool for our system:
 
-```
+```bash
 mkdir pool1
 ```
 
+### Generate pool owner keys&#x20;
+
 We need an address and funds (for the pool owner):
 
-```
+```bash
 cardano-cli address key-gen \
 --verification-key-file pool1/payment.vkey \
 --signing-key-file pool1/payment.skey
@@ -16,7 +18,7 @@ cardano-cli address key-gen \
 
 We want to delegate our stake to our pool, so we will need stake keys
 
-```
+```bash
 cardano-cli stake-address key-gen \
 --verification-key-file pool1/stake.vkey \
 --signing-key-file pool1/stake.skey
@@ -24,7 +26,7 @@ cardano-cli stake-address key-gen \
 
 Build the address:
 
-```
+```bash
 cardano-cli address build \
 --payment-verification-key-file pool1/payment.vkey \
 --stake-verification-key-file pool1/stake.vkey \
@@ -34,7 +36,7 @@ cardano-cli address build \
 
 Send some funds to our pool owner address from `user1.payment.addr`
 
-```
+```bash
 cardano-cli transaction build \
 --shelley-era \
 --testnet-magic 42 \
@@ -47,7 +49,7 @@ cardano-cli transaction build \
 
 Sign it
 
-```
+```bash
 cardano-cli transaction sign \
 --tx-body-file transactions/tx3.raw \
 --signing-key-file utxo-keys/user1.payment.skey \
@@ -57,7 +59,7 @@ cardano-cli transaction sign \
 
 Submit to the blockchain
 
-```
+```bash
 cardano-cli transaction submit \
 --testnet-magic 42 \
 --tx-file transactions/tx3.signed
@@ -65,12 +67,15 @@ cardano-cli transaction submit \
 
 ```
 cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42
-                           TxHash                                 TxIx        Amount
+```
+
+```
+  TxHash                                 TxIx        Amount
 --------------------------------------------------------------------------------------
 d8dad0d24242b26e037f9b0120030fc2d5c5449d859ecd3267f6453dd66bf0c3     0        50000000000000
 ```
 
-#### Generate the Stake pool keys
+### Generate the Stake pool keys
 
 Generate Cold keys
 
@@ -195,7 +200,7 @@ We are ready to start the node from the pool1 directory.&#x20;
 
 Our pool cannot create blocks just yet. We need to register it. To the blockchain
 
-#### Register stake address
+### Register stake address
 
 Create a registration certificate
 
@@ -252,7 +257,7 @@ cardano-cli transaction submit \
 --tx-file transactions/tx4.signed
 ```
 
-#### Register stake pool
+### Register stake pool
 
 Now, it's time to register the stake pool. On a real network we would need to have metadata for our pool so that it can be properly displayed by wallets. The pool metadata must meet [this requirements](https://docs.cardano.org/development-guidelines/operating-a-stake-pool/public-stake-pools) &#x20;
 
