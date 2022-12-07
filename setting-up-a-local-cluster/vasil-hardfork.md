@@ -1,24 +1,13 @@
 # Vasil Hardfork
 
-As always, let's start by tweaking our config.json file:
 
-{% tabs %}
-{% tab title="Linux" %}
-```
+
+#### The hardfork
+
+```bash
 sed -i configuration/config.json \
 -e 's/LastKnownBlockVersion-Major":6/LastKnownBlockVersion-Major":7/'
 ```
-{% endtab %}
-
-{% tab title="macOS" %}
-```bash
-gsed -i configuration/config.json \
--e 's/LastKnownBlockVersion-Major":6/LastKnownBlockVersion-Major":7/'
-```
-{% endtab %}
-{% endtabs %}
-
-Create the proposal saying that we want to move to protocol version 7.0
 
 ```bash
 cardano-cli governance create-update-proposal \

@@ -237,9 +237,9 @@ mv shelley-genesis.json byron-genesis.json alonzo-genesis.json configuration/
 
 And let's move our genesis delegate keys to their corresponding delegate nodes:
 
-```
-mv -t bft0/ delegate-keys/byron.000* delegate-keys/shelley.000* 
-mv -t bft1/ delegate-keys/byron.001* delegate-keys/shelley.001*
+```bash
+mv delegate-keys/byron.000* delegate-keys/shelley.000* bft0/
+mv delegate-keys/byron.001* delegate-keys/shelley.001* bft1/
 ```
 
 To make our lives easier we will create bash scripts to start our nodes.&#x20;
