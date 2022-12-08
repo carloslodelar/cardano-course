@@ -1,10 +1,10 @@
 # Table of contents
 
 * [Building the node](README.md)
+* [Update proposals](update-proposals.md)
 * [Setting up a local cluster](setting-up-a-local-cluster/README.md)
   * [Create a local cluster](create-a-local-cluster-from-scratch.md)
   * [Spend genesis UTXO](setting-up-a-local-cluster/spend-genesis-utxo.md)
-  * [Update proposals](setting-up-a-local-cluster/update-proposals.md)
   * [From Byron to Shelley](shelley-hardfork.md)
   * [Move funds to a Shelley address](move-funds-to-shelley-address.md)
   * [Create first stake pool](create-stake-pools.md)

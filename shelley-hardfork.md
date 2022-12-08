@@ -49,17 +49,17 @@ jq .'"LastKnownBlockVersion-Major"' configuration/config.json
 We don't need to restart the nodes this time, because our nodes are already announcing 1.0.0 on their block's headers. We are good to submit the update proposals and votes:
 
 <pre class="language-bash"><code class="lang-bash"><strong>cardano-cli byron submit-update-proposal \
-</strong>            --testnet-magic 42 \
-            --filepath transactions/updateprotov1.proposal
-</code></pre>
+</strong><strong>--testnet-magic 42 \
+</strong><strong>--filepath transactions/updateprotov1.proposal
+</strong></code></pre>
 
-```
+```bash
 cardano-cli byron submit-proposal-vote  \
-            --testnet-magic 42 \
-            --filepath transactions/updateprotov1.000.vote
+--testnet-magic 42 \
+--filepath transactions/updateprotov1.000.vote
 cardano-cli byron submit-proposal-vote  \
-            --testnet-magic 42 \
-            --filepath transactions/updateprotov1.001.vote
+--testnet-magic 42 \
+--filepath transactions/updateprotov1.001.vote
 ```
 
 Your node logs will show the different stages of the lifecycle of a Byron Update Proposal:&#x20;
@@ -92,27 +92,57 @@ Now we can upgrade to protocol version 2.0, the Shelley Era!&#x20;
 
 First, we add the Shelley keys to our BFT nodes starting scripts:&#x20;
 
+{% tabs %}
+{% tab title="Linux" %}
 {% code overflow="wrap" %}
-```
+```bash
 sed -i '$ s/$/ --shelley-kes-key shelley.000.kes.skey --shelley-vrf-key shelley.000.vrf.skey --shelley-operational-certificate shelley.000.opcert.json/' bft0/startnode.sh
 ```
 {% endcode %}
 
 {% code overflow="wrap" %}
+```bash
+sed -i '$ s/$/ --shelley-kes-key shelley.001.kes.skey --shelley-vrf-key shelley.001.vrf.skey --shelley-operational-certificate shelley.001.opcert.json/' bft1/startnode.sh 
 ```
-sed -i '$ s/$/ --shelley-kes-key shelley.001.kes.skey --shelley-vrf-key shelley.001.vrf.skey --shelley-operational-certificate shelley.001.opcert.json/' bft1/startnode.sh  
+{% endcode %}
+{% endtab %}
+
+{% tab title="macOS" %}
+
+
+{% code overflow="wrap" %}
+```bash
+gsed -i '$ s/$/ --shelley-kes-key shelley.000.kes.skey --shelley-vrf-key shelley.000.vrf.skey --shelley-operational-certificate shelley.000.opcert.json/' bft0/startnode.sh
 ```
 {% endcode %}
 
-Then, we adjust the config file again to say we are ready to go to protocol version 2.0&#x20;
-
+{% code overflow="wrap" %}
+```bash
+gsed -i '$ s/$/ --shelley-kes-key shelley.001.kes.skey --shelley-vrf-key shelley.001.vrf.skey --shelley-operational-certificate shelley.001.opcert.json/' bft1/startnode.sh 
 ```
+{% endcode %}
+{% endtab %}
+{% endtabs %}
+
+Then, we adjust the config file again to say we are ready to go to protocol version 2.0
+
+{% tabs %}
+{% tab title="Linux" %}
+```bash
 sed -i 's/"LastKnownBlockVersion-Major":1/"LastKnownBlockVersion-Major":2/' configuration/config.json
 ```
+{% endtab %}
+
+{% tab title="macOS" %}
+```bash
+gsed -i 's/"LastKnownBlockVersion-Major":1/"LastKnownBlockVersion-Major":2/' configuration/config.json
+```
+{% endtab %}
+{% endtabs %}
 
 And generate the update proposal:
 
-```
+```bash
 cardano-cli byron governance create-update-proposal \
 --filepath transactions/updateprotov2.proposal \
 --testnet-magic 42 \
@@ -129,8 +159,8 @@ cardano-cli byron governance create-update-proposal \
 And submit the proposal:
 
 <pre><code><strong>cardano-cli byron submit-update-proposal \
-</strong>            --testnet-magic 42 \
-            --filepath transactions/updateprotov2.proposal
+</strong><strong>--testnet-magic 42 \
+</strong>--filepath transactions/updateprotov2.proposal
 </code></pre>
 
 Every genesis delegate can vote on the proposal:

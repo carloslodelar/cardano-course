@@ -4,7 +4,7 @@ For our pool to produce blocks, we need to lower the decentralization parameter.
 
 We first need to generate non extended verification keys for our genesis delegates.&#x20;
 
-```
+```bash
 cardano-cli key non-extended-key \
 --extended-verification-key-file genesis-keys/shelley.000.vkey \
 --verification-key-file genesis-keys/non.e.shelley.000.vkey
@@ -15,7 +15,7 @@ cardano-cli key non-extended-key \
 
 Update proposals need to be submitted during the first 4k/f slots of the epoch. Keep in mind that Shelley epochs have 20 times more slots than Byron epochs. This short script will help us find out if we are on time to submit the update proposal in the current epoch.  Change the value of Byron slots so that we can subtract them from them from the current tip  (In our case it was 1350).&#x20;
 
-```
+```bash
 cat > whereinepoch.sh <<EOF
 #!/usr/bin/env bash
 
@@ -34,20 +34,20 @@ echo "SLOT IN EPOCH: $SLOT_IN_EPOCH"
 EOF
 ```
 
-```
+```bash
 chmod +x whereinepoch.sh
 ```
 
 We need to submit the proposal in the first 4k/f slots in the epoch, so before the slot 3600 of the current epoch:&#x20;
 
-<pre><code><strong>./whereinepoch.sh
+<pre class="language-bash"><code class="lang-bash"><strong>./whereinepoch.sh
 </strong>UPDATE-THRESOLD: 3600
 SLOT IN EPOCH: 320
 </code></pre>
 
 We are good to go, let's create the proposal:
 
-```
+```bash
 cardano-cli governance create-update-proposal \
 --out-file transactions/update.D80.proposal \
 --epoch $(cardano-cli query tip --testnet-magic 42 | jq .epoch) \
@@ -56,11 +56,11 @@ cardano-cli governance create-update-proposal \
 --decentralization-parameter 80/100
 ```
 
-```
+```bash
 CHANGE=$(($(cardano-cli query utxo --address $(cat pool1/payment.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -cs '.[0] | to_entries | .[] | .value.value') - 1000000))
 ```
 
-```
+```bash
 cardano-cli transaction build-raw \
 --shelley-era \
 --fee 1000000 \
@@ -71,7 +71,7 @@ cardano-cli transaction build-raw \
 --out-file transactions/update.D80.proposal.txbody
 ```
 
-```
+```bash
 cardano-cli transaction sign \
 --tx-body-file transactions/update.D80.proposal.txbody \
 --signing-key-file pool1/payment.skey \
@@ -80,8 +80,9 @@ cardano-cli transaction sign \
 --out-file transactions/update.D80.proposal.txsigned
 ```
 
-```
-cardano-cli transaction submit --testnet-magic 42 --tx-file transactions/update.D80.proposal.txsigned
+```bash
+cardano-cli transaction submit --testnet-magic 42 \
+--tx-file transactions/update.D80.proposal.txsigned
 ```
 
 So, I submitted the proposal on epoch 5,  the node logs show that the update proposal will take effect at epoch 6
