@@ -130,7 +130,9 @@ Let's make a few changes to our shelley.json template. Since we will only have 2
 {% tab title="Linux" %}
 ```
 sed -i template/shelley.json \
+-e 's/"securityParam": 108/"securityParam": 45/' \
 -e 's/"major": 6/"major": 2/' \
+-e 's/"updateQuorum": 3/"updateQuorum": 2/'
 ```
 {% endtab %}
 
