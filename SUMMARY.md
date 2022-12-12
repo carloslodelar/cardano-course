@@ -1,7 +1,7 @@
 # Table of contents
 
 * [Building the node](README.md)
-* [Update proposals](update-proposals.md)
+* [Cardano Governance](cardano-governance.md)
 * [Setting up a local cluster](setting-up-a-local-cluster/README.md)
   * [Create a local cluster](create-a-local-cluster-from-scratch.md)
   * [Spend genesis UTXO](setting-up-a-local-cluster/spend-genesis-utxo.md)
