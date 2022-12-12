@@ -21,7 +21,7 @@ Transitioning from one era to the next is triggered by an **Update Proposal** th
 
 ### Byron era update proposals:
 
-<figure><img src=".gitbook/assets/Screen Shot 2022-12-06 at 9.57.28.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/byronUP.png" alt=""><figcaption><p>Byron era update proposals</p></figcaption></figure>
 
 The general mechanism for updating protocol parameters in Byron is as follows:
 
@@ -40,13 +40,13 @@ A "null" update proposal is one that neither increase the protocol version nor t
 
 The update mechanism in Shelley is simpler than it is in Byron. There is no distinction between votes and proposals: to \`\`vote'' for a proposal, a Genesis delegate submits the exact same proposal on a regular transaction signed by the delegate key. There is also no separate endorsement step.
 
+<figure><img src=".gitbook/assets/shelleyUP.png" alt=""><figcaption></figcaption></figure>
+
 The procedure is as follows:
 
 1. **Register the proposal:** During each epoch, a genesis key can submit (via its delegates) zero, one, or many proposals; each submission overrides the previous one. Proposals can be explicitly marked to be for future epochs; in that case, these are simply not considered until that epoch is reached.
 2. **Voting:** The window for Submitting proposals ends 6k/f slots before the end of the epoch. Where k is the security parameter and f is the _active slot coefficient_.
 3. **Quorum:** At the end of the epoch, if the majority of nodes (as determined by the **Quorum** specification constant, which must be greater than half the nodes) have most recently submitted the same exact proposal, then it is adopted.
 4. **Update:** The update is applied at the epoch boundary.
-
-<figure><img src=".gitbook/assets/Screen Shot 2022-12-06 at 10.06.41.png" alt=""><figcaption></figcaption></figure>
 
 Until Voltaire era is released, only the holders of the **Genesis delegate keys** can submit and vote on proposals. From time to time you will find it useful to deploy a local or private testnet, in that case you will need to use the governance commands to upgrade your network to the desired era.&#x20;
