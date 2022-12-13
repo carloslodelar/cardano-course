@@ -22,6 +22,23 @@ cardano-cli byron governance create-update-proposal \
 --installer-hash 0
 ```
 
+And submit the update proposal
+
+<pre class="language-bash"><code class="lang-bash"><strong>cardano-cli byron submit-update-proposal \
+</strong><strong>--testnet-magic 42 \
+</strong><strong>--filepath transactions/updateprotov1.proposal
+</strong></code></pre>
+
+Monitor the log files from the node, we should see:&#x20;
+
+{% code overflow="wrap" %}
+```
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateRegistered (SlotNo )}]}))
+```
+{% endcode %}
+
+Now we create the votes for both of our genesis keys
+
 <pre class="language-bash"><code class="lang-bash"><strong>cardano-cli byron governance create-proposal-vote \
 </strong>--proposal-filepath transactions/updateprotov1.proposal \
 --testnet-magic 42 \
@@ -38,20 +55,7 @@ cardano-cli byron governance create-update-proposal \
 --output-filepath transactions/updateprotov1.001.vote
 </code></pre>
 
-Before we move on and Submit the proposal, let's make sure that our config file says that to we are ready to move to protocol "LastKnownBlockVersion-Major": 1,
-
-```bash
-jq .'"LastKnownBlockVersion-Major"' configuration/config.json 
->
-1
-```
-
-We don't need to restart the nodes this time, because our nodes are already announcing 1.0.0 on their block's headers. We are good to submit the update proposals and votes:
-
-<pre class="language-bash"><code class="lang-bash"><strong>cardano-cli byron submit-update-proposal \
-</strong><strong>--testnet-magic 42 \
-</strong><strong>--filepath transactions/updateprotov1.proposal
-</strong></code></pre>
+Submit the votes
 
 ```bash
 cardano-cli byron submit-proposal-vote  \
@@ -62,15 +66,43 @@ cardano-cli byron submit-proposal-vote  \
 --filepath transactions/updateprotov1.001.vote
 ```
 
-Your node logs will show the different stages of the lifecycle of a Byron Update Proposal:&#x20;
+With the first vote we should see
 
 {% code overflow="wrap" %}
 ```
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateRegistered (SlotNo 457)}]}))
 ...
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateActive (fromList [KeyHash {unKeyHash = ecbea8138406046dce27933de08f4f33fd9a3746f1149c77b6cb83ec}])}]}))
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateActive (fromList [KeyHash {unKeyHash = }])}]}))
 ...
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateConfirmed (SlotNo 467)}]}))
+```
+{% endcode %}
+
+When we submit the second vote we reach the threshold, the update proposal is confirmed.&#x20;
+
+{% code overflow="wrap" %}
+```
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateConfirmed (SlotNo )}]}))
+```
+{% endcode %}
+
+It's time to endorse the proposal. Update our config file to indicate we are ready to move to protocol "LastKnownBlockVersion-Major": 1,
+
+{% tabs %}
+{% tab title="Linux" %}
+```
+sed -i configuration/config.json \
+-e 's/"LastKnownBlockVersion-Major": 0/"LastKnownBlockVersion-Major": 1/'
+```
+{% endtab %}
+{% endtabs %}
+
+We need to restart the nodes to pick-up the new configuration.&#x20;
+
+
+
+{% code overflow="wrap" %}
+```
+
+
 ....
 Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateStablyConfirmed (fromList [])}]}))
 ....
