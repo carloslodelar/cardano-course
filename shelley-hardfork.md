@@ -178,23 +178,7 @@ gsed -i '$ s/$/ --shelley-kes-key shelley.001.kes.skey --shelley-vrf-key shelley
 {% endtab %}
 {% endtabs %}
 
-Then, we adjust the config file again to say we are ready to go to protocol version 2.0
-
-{% tabs %}
-{% tab title="Linux" %}
-```bash
-sed -i 's/"LastKnownBlockVersion-Major":1/"LastKnownBlockVersion-Major":2/' configuration/config.json
-```
-{% endtab %}
-
-{% tab title="macOS" %}
-```bash
-gsed -i 's/"LastKnownBlockVersion-Major":1/"LastKnownBlockVersion-Major":2/' configuration/config.json
-```
-{% endtab %}
-{% endtabs %}
-
-And generate the update proposal:
+Create the update proposal:
 
 ```bash
 cardano-cli byron governance create-update-proposal \
@@ -210,14 +194,14 @@ cardano-cli byron governance create-update-proposal \
 --installer-hash 0
 ```
 
-And submit the proposal:
+Submit the proposal:
 
 <pre><code><strong>cardano-cli byron submit-update-proposal \
 </strong><strong>--testnet-magic 42 \
 </strong>--filepath transactions/updateprotov2.proposal
 </code></pre>
 
-Every genesis delegate can vote on the proposal:
+Create the votes:
 
 ```
 cardano-cli byron governance create-proposal-vote \
@@ -248,21 +232,41 @@ cardano-cli byron submit-proposal-vote  \
             --filepath transactions/updateprotov2.001.vote
 ```
 
+Then, we adjust the config file again to say we are ready to go to protocol version 2.0
+
+{% tabs %}
+{% tab title="Linux" %}
+```bash
+sed -i 's/"LastKnownBlockVersion-Major":1/"LastKnownBlockVersion-Major":2/' configuration/config.json
+```
+{% endtab %}
+
+{% tab title="macOS" %}
+```bash
+gsed -i 's/"LastKnownBlockVersion-Major":1/"LastKnownBlockVersion-Major":2/' configuration/config.json
+```
+{% endtab %}
+{% endtabs %}
+
+Restart the nodes to pick the new configuration and endorse the proposal.&#x20;
+
+
+
 {% code overflow="wrap" %}
 ```
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 2.0.0, protocolUpdateState = UpdateRegistered (SlotNo 931)}]}))
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 2.0.0, protocolUpdateState = UpdateRegistered (SlotNo )}]}))
 ....
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 2.0.0, protocolUpdateState = UpdateConfirmed (SlotNo 938)}]}))
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 2.0.0, protocolUpdateState = UpdateConfirmed (SlotNo )}]}))
 ...
 Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 2.0.0, protocolUpdateState = UpdateStablyConfirmed (fromList [])}]}))
 ....
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 2.0.0, protocolUpdateState = UpdateCandidate (SlotNo 1028) (EpochNo 3)}]}))
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 2.0.0, protocolUpdateState = UpdateCandidate (SlotNo ) (EpochNo )}]}))
 ...
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 2.0.0, protocolUpdateState = UpdateStableCandidate (EpochNo 3)}]}))
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 2.0.0, protocolUpdateState = UpdateStableCandidate (EpochNo )}]}))
 ...
-Event: LedgerUpdate (HardForkUpdateTransitionDone <EraIndex Byron> <EraIndex Shelley> (EpochNo 3))
+Event: LedgerUpdate (HardForkUpdateTransitionDone <EraIndex Byron> <EraIndex Shelley> (EpochNo ))
 
 ```
 {% endcode %}
 
-Take note of the epoch at which the Shlley hardfork will take place. TIn this case The Shelley hardfork happened at the transition to epoch 3. Our Byron epochs lasted 450 slots (10 times the security parameter k) so it happened at slot 1350.  This information will be useful later, so write it down somewhere.&#x20;
+IMPORTANT: Take note of the epoch at which the Shlley hardfork will take place. TIn this case The Shelley hardfork happened at the transition to epoch 3. Our Byron epochs lasted 450 slots (10 times the security parameter k) so it happened at slot 1350.  This information will be useful later, so write it down somewhere.&#x20;
