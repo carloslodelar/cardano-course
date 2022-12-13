@@ -22,6 +22,23 @@ cardano-cli byron governance create-update-proposal \
 --installer-hash 0
 ```
 
+And submit the update proposal
+
+<pre class="language-bash"><code class="lang-bash"><strong>cardano-cli byron submit-update-proposal \
+</strong><strong>--testnet-magic 42 \
+</strong><strong>--filepath transactions/updateprotov1.proposal
+</strong></code></pre>
+
+Monitor the log files from the node, we should see:&#x20;
+
+{% code overflow="wrap" %}
+```
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateRegistered (SlotNo )}]}))
+```
+{% endcode %}
+
+Now we create the votes for both of our genesis keys
+
 <pre class="language-bash"><code class="lang-bash"><strong>cardano-cli byron governance create-proposal-vote \
 </strong>--proposal-filepath transactions/updateprotov1.proposal \
 --testnet-magic 42 \
@@ -29,6 +46,26 @@ cardano-cli byron governance create-update-proposal \
 --vote-yes \
 --output-filepath transactions/updateprotov1.000.vote
 </code></pre>
+
+Submit the first vote
+
+```bash
+cardano-cli byron submit-proposal-vote  \
+--testnet-magic 42 \
+--filepath transactions/updateprotov1.000.vote
+```
+
+We should see `UpdateActive`
+
+{% code overflow="wrap" %}
+```
+...
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateActive (fromList [KeyHash {unKeyHash = }])}]}))
+...
+```
+{% endcode %}
+
+Create and submit the second vote:
 
 <pre class="language-bash"><code class="lang-bash"><strong>cardano-cli byron governance create-proposal-vote \
 </strong>--proposal-filepath transactions/updateprotov1.proposal \
@@ -38,49 +75,64 @@ cardano-cli byron governance create-update-proposal \
 --output-filepath transactions/updateprotov1.001.vote
 </code></pre>
 
-Before we move on and Submit the proposal, let's make sure that our config file says that to we are ready to move to protocol "LastKnownBlockVersion-Major": 1,
-
 ```bash
-jq .'"LastKnownBlockVersion-Major"' configuration/config.json 
->
-1
-```
-
-We don't need to restart the nodes this time, because our nodes are already announcing 1.0.0 on their block's headers. We are good to submit the update proposals and votes:
-
-<pre class="language-bash"><code class="lang-bash"><strong>cardano-cli byron submit-update-proposal \
-</strong><strong>--testnet-magic 42 \
-</strong><strong>--filepath transactions/updateprotov1.proposal
-</strong></code></pre>
-
-```bash
-cardano-cli byron submit-proposal-vote  \
---testnet-magic 42 \
---filepath transactions/updateprotov1.000.vote
 cardano-cli byron submit-proposal-vote  \
 --testnet-magic 42 \
 --filepath transactions/updateprotov1.001.vote
 ```
 
-Your node logs will show the different stages of the lifecycle of a Byron Update Proposal:&#x20;
+This vote completes the vote threshold, the update proposal is confirmed
 
 {% code overflow="wrap" %}
 ```
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateRegistered (SlotNo 457)}]}))
 ...
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateActive (fromList [KeyHash {unKeyHash = ecbea8138406046dce27933de08f4f33fd9a3746f1149c77b6cb83ec}])}]}))
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateConfirmed (SlotNo )}]}))
 ...
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateConfirmed (SlotNo 467)}]}))
-....
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateStablyConfirmed (fromList [])}]}))
-....
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateCandidate (SlotNo 557) (EpochNo 2)}]}))
-...
-Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateStableCandidate (EpochNo 2)}]}))
 ```
 {% endcode %}
 
-Hardfork occurred
+It's time to endorse the proposal. Let's update our config file to indicate that we are ready to move to protocol "LastKnownBlockVersion-Major": 1,
+
+{% tabs %}
+{% tab title="Linux" %}
+```bash
+sed -i configuration/config.json \
+-e 's/"LastKnownBlockVersion-Major":0/"LastKnownBlockVersion-Major":1/'
+```
+{% endtab %}
+
+{% tab title="macOS" %}
+```bash
+gsed -i configuration/config.json \
+-e 's/"LastKnownBlockVersion-Major":0/"LastKnownBlockVersion-Major":1/'
+```
+{% endtab %}
+{% endtabs %}
+
+IMPORTANT: We need to restart the nodes to pick-up the new configuration. \
+
+
+As soon as we restart the second node and produce a block with it, the update proposal has received the required endorsements. It becomes a Candidate, and we know at what epochNo the transition will take place if it becomes an Stable Candidate
+
+{% code overflow="wrap" %}
+```
+...
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateCandidate (SlotNo ) (EpochNo )}]}))
+...
+```
+{% endcode %}
+
+2k slots later, it becomes an stable candidate
+
+{% code overflow="wrap" %}
+```
+...
+Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate = ByronUpdatedProtocolUpdates [ProtocolUpdate {protocolUpdateVersion = 1.0.0, protocolUpdateState = UpdateStableCandidate (EpochNo )}]}))
+...
+```
+{% endcode %}
+
+The update proposal is adopted at the epoch transition:
 
 {% code overflow="wrap" %}
 ```
