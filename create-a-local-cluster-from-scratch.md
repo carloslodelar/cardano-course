@@ -131,18 +131,17 @@ Let's make a few changes to our shelley.json template. Since we will only have 2
 ```
 sed -i template/shelley.json \
 -e 's/"major": 6/"major": 2/' \
+-e 's/"updateQuorum": 3/"updateQuorum": 2/'
 ```
 {% endtab %}
 
 {% tab title="macOS" %}
 <pre class="language-bash"><code class="lang-bash"><strong>gsed -i template/shelley.json \
-</strong>-e 's/"major": 6/"major": 2/'
+</strong>-e 's/"major": 6/"major": 2/' \
+-e 's/"updateQuorum": 3/"updateQuorum": 2/'
 </code></pre>
 {% endtab %}
 {% endtabs %}
-
-```
-```
 
 We also need a few changes to the config.json template. for now we will disable P2P topology, we will disable EnableDevelopment options because we want to update our cluster using proper update proposals. Initially we will state that our nodes are ready to move to Protocol Version 1.0.0 (PBFT). Logs will come very fast, we will keep the minSeverity in Info. &#x20;
 
@@ -153,7 +152,7 @@ We also need a few changes to the config.json template. for now we will disable 
  -e 's/"EnableP2P": true/"EnableP2P": false/' \
  -e 's/"TestEnableDevelopmentNetworkProtocols": true/"TestEnableDevelopmentNetworkProtocols": false/' \
  -e 's/"TestEnableDevelopmentHardForkEras": true/"TestEnableDevelopmentHardForkEras": false/' \
- -e 's/"LastKnownBlockVersion-Major": 3/"LastKnownBlockVersion-Major": 1/' \
+ -e 's/"LastKnownBlockVersion-Major": 3/"LastKnownBlockVersion-Major": 0/' \
  -e 's/"LastKnownBlockVersion-Minor": 1/"LastKnownBlockVersion-Minor": 0/' \
  -e 's/"TestShelleyHardForkAtEpoch": 0/"TestShelleyHardForkAtEpoch": /' \
  -e 's/"TestAllegraHardForkAtEpoch": 0/"TestAllegraHardForkAtEpoch": /' \
@@ -169,7 +168,7 @@ We also need a few changes to the config.json template. for now we will disable 
  -e 's/"EnableP2P": true/"EnableP2P": false/' \
  -e 's/"TestEnableDevelopmentNetworkProtocols": true/"TestEnableDevelopmentNetworkProtocols": false/' \
  -e 's/"TestEnableDevelopmentHardForkEras": true/"TestEnableDevelopmentHardForkEras": false/' \
- -e 's/"LastKnownBlockVersion-Major": 3/"LastKnownBlockVersion-Major": 1/' \
+ -e 's/"LastKnownBlockVersion-Major": 3/"LastKnownBlockVersion-Major": 0/' \
  -e 's/"LastKnownBlockVersion-Minor": 1/"LastKnownBlockVersion-Minor": 0/' \
  -e 's/"TestShelleyHardForkAtEpoch": 0/"TestShelleyHardForkAtEpoch": /' \
  -e 's/"TestAllegraHardForkAtEpoch": 0/"TestAllegraHardForkAtEpoch": /' \
@@ -177,6 +176,25 @@ We also need a few changes to the config.json template. for now we will disable 
  -e 's/"TestAlonzoHardForkAtEpoch": 0/"TestAlonzoHardForkAtEpoch": /' \
  -e 's/""minSeverity": "Debug"/"minSeverity": "Info"/' 
 ```
+{% endtab %}
+{% endtabs %}
+
+We'll also change a couple of Byron parameters for our local cluster. Change `minThd` to `"1000000000000000"`  so that update proposals need both genesis keys positive votes to be approved. And  change `"updateImplicit"` to 450, so that update proposals expire if they have not accumulated enough votes after 450 slots. &#x20;
+
+{% tabs %}
+{% tab title="Linux" %}
+```
+sed -i template/byron.json \
+-e 's/"minThd": "600000000000000"/"minThd": "1000000000000000"/' \
+-e 's/"updateImplicit": "10000"/"updateImplicit": "450"/'
+```
+{% endtab %}
+
+{% tab title="macOS" %}
+<pre><code><strong>gsed -i template/byron.json \
+</strong>-e 's/"minThd": "600000000000000"/"minThd": "1000000000000000"/' \
+-e 's/"updateImplicit": "10000"/"updateImplicit": "450"/'
+</code></pre>
 {% endtab %}
 {% endtabs %}
 
@@ -188,7 +206,7 @@ Now we can use the magic of `cardano-cli genesis create-cardano`
 cardano-cli genesis create-cardano \
 --genesis-dir ./ \
 --gen-genesis-keys 2 \
---start-time $(date -u -d "now + 5 minutes" +%FT%Tz) \
+--start-time $(date -u -d "now + 2 minutes" +%FT%Tz) \
 --supply 30000000000000000 \
 --security-param 45 \
 --slot-length 100 \
@@ -220,7 +238,7 @@ cardano-cli genesis create-cardano \
 {% endtab %}
 {% endtabs %}
 
-Let's move our genesis files to configuration directory to keep tings in order:
+Move genesis files to configuration directory to keep tings in order:
 
 ```bash
 mv node-config.json configuration/config.json
