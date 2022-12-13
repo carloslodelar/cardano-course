@@ -124,12 +124,6 @@ The rest of our parameters will match mainnet ones. For detailed information abo
 1. [Byron genesis data format ](https://github.com/input-output-hk/cardano-node/blob/master/doc/reference/byron-genesis.md)
 2. [Shelley era genesis ](https://github.com/input-output-hk/cardano-node/blob/master/doc/getting-started/understanding-config-files.md)
 
-{% tabs %}
-{% tab title="macOS" %}
-
-{% endtab %}
-{% endtabs %}
-
 Let's make a few changes to our shelley.json template. Since we will only have 2 nodes, we bring updateQuorum down to 2, We reduce the epoch length to 9000, the security parameter k to 45,  the shelley era slots will last 1/10th of a second; and to help our cluster to match the progression of mainnet protocol versions, we set major (protocol version) to 2. On mainnet Shelley era is protocol version 2.0&#x20;
 
 {% tabs %}
@@ -188,6 +182,25 @@ We also need a few changes to the config.json template. for now we will disable 
 {% endtab %}
 {% endtabs %}
 
+We'll also change a couple of Byron parameters for our local cluster. Change `minThd` to `"1000000000000000"`  so that update proposals need both genesis keys positive votes to be approved. And  change `"updateImplicit"` to 450, so that update proposals expire if they have not accumulated enough votes after 450 slots. &#x20;
+
+{% tabs %}
+{% tab title="Linux" %}
+```
+sed -i template/byron.json \
+-e 's/"minThd": "600000000000000"/"minThd": "1000000000000000"/' \
+-e 's/"updateImplicit": "10000"/"updateImplicit": "450"/'
+```
+{% endtab %}
+
+{% tab title="macOS" %}
+<pre><code><strong>gsed -i template/byron.json \
+</strong>-e 's/"minThd": "600000000000000"/"minThd": "1000000000000000"/' \
+-e 's/"updateImplicit": "10000"/"updateImplicit": "450"/'
+</code></pre>
+{% endtab %}
+{% endtabs %}
+
 Now we can use the magic of `cardano-cli genesis create-cardano`
 
 {% tabs %}
@@ -225,25 +238,6 @@ cardano-cli genesis create-cardano \
 --alonzo-template template/alonzo.json \
 --node-config-template template/config.json
 ```
-{% endtab %}
-{% endtabs %}
-
-We'll also change a couple of Byron parameters for our local cluster. Change `minThd` to `"1000000000000000"`  so that update proposals need both genesis keys positive votes to be approved. And  change `"updateImplicit"` to 450, so that update proposals expire if they have not accumulated enough votes after 450 slots. &#x20;
-
-{% tabs %}
-{% tab title="Linux" %}
-```
-sed -i template/byron.json \
--e 's/"minThd": "600000000000000"/"minThd": "1000000000000000" \
--e 's/"updateImplicit": "10000"/"updateImplicit": "450"
-```
-{% endtab %}
-
-{% tab title="macOS" %}
-<pre><code><strong>gsed -i template/byron.json \
-</strong>-e 's/"minThd": "600000000000000"/"minThd": "1000000000000000" \
--e 's/"updateImplicit": "10000"/"updateImplicit": "450"
-</code></pre>
 {% endtab %}
 {% endtabs %}
 
