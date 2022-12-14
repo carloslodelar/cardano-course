@@ -26,7 +26,7 @@ SHELLEY_EPOCH_LENGTH=$(cat configuration/shelley-genesis.json | jq .epochLength)
 K=$(cat configuration/shelley-genesis.json | jq .securityParam)
 F=$(cat configuration/shelley-genesis.json | jq .activeSlotsCoeff)
 
-UPDATE_PROPOSAL_TH=$(echo 4*$K/$F | bc)
+UPDATE_PROPOSAL_TH=$(echo "4*$K/$F" | bc)
 SLOT_IN_EPOCH=$(($SHELLEY_SLOTS % $SHELLEY_EPOCH_LENGTH))
 
 echo "UPDATE-THRESOLD: $UPDATE_PROPOSAL_TH"
