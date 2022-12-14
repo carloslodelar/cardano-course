@@ -16,7 +16,6 @@ cardano-cli key non-extended-key \
 Update proposals need to be submitted during the first 4k/f slots of the epoch. Keep in mind that Shelley epochs have 20 times more slots than Byron epochs. This short script will help us find out if we are on time to submit the update proposal in the current epoch.  Change the value of Byron slots so that we can subtract them from them from the current tip  (In our case it was 1350).&#x20;
 
 ```bash
-cat > whereinepoch.sh <<EOF
 #!/usr/bin/env bash
 
 BYRON_SLOTS=1350
@@ -31,7 +30,6 @@ SLOT_IN_EPOCH=$(($SHELLEY_SLOTS % $SHELLEY_EPOCH_LENGTH))
 
 echo "UPDATE-THRESOLD: $UPDATE_PROPOSAL_TH"
 echo "SLOT IN EPOCH: $SLOT_IN_EPOCH"
-EOF
 ```
 
 ```bash
