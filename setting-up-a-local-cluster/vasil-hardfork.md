@@ -49,7 +49,7 @@ cardano-cli transaction build-raw \
 cardano-cli transaction sign \
 --tx-body-file transactions/update.v7.proposal.txbody \
 --signing-key-file pool1/payment.skey \
---signing-key-file bft0/shelley.000.skey \
+--signing-key-file delegate-keys/new.shelley.delegate.000.skey \
 --signing-key-file bft1/shelley.001.skey \
 --out-file transactions/update.v7.proposal.txsigned
 ```
