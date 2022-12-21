@@ -206,7 +206,6 @@ Now we can use the magic of `cardano-cli genesis create-cardano`
 cardano-cli genesis create-cardano \
 --genesis-dir ./ \
 --gen-genesis-keys 2 \
---gen-utxo-keys 2 \
 --start-time $(date -u -d "now + 2 minutes" +%FT%Tz) \
 --supply 30000000000000000 \
 --security-param 45 \

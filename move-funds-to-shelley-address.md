@@ -31,7 +31,7 @@ Build the transaction to move the funds from the their current Byron era address
 ```bash
 cardano-cli transaction build-raw \
 --shelley-era \
---invalid-hereafter 12000 \
+--invalid-hereafter $((cardano-cli query tip --testnet-magic 42 | jq .slot)+1000) \
 --fee 1000000 \
 --tx-in $(cardano-cli byron transaction txid --tx transactions/tx0.tx)#0 \
 --tx-out $(cat utxo-keys/user1.payment.addr)+29999999998000000 \
