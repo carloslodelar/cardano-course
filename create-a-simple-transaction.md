@@ -86,3 +86,31 @@ cardano-cli transaction submit \
 --testnet-magic 1 \
 --tx-file tx.signed 
 ```
+
+### Create a transaction with `build`
+
+Lets now send the rest of the funds in payment.addr to paymentwithstake.addr This time we will use the build command which will automatically take care of the fees, simplifying the process
+
+```
+cardano-cli transaction build --babbage-era \
+--testnet-magic 1 \
+--tx-in $(cardano-cli query utxo --address $(cat paymentwithstake.addr) --testnet-magic 1 --out-file  /dev/stdout | jq -r 'keys[]') \
+--change-address $(cat paymentwithstake.addr) \
+--out-file tx.raw
+```
+
+Sign and submit as before
+
+```
+cardano-cli transaction sign \
+--tx-body-file tx.raw \
+--signing-key-file payment.skey \
+--testnet-magic 1 \
+--out-file tx.signed
+```
+
+```
+cardano-cli transaction submit \
+--testnet-magic 1 \
+--tx-file tx.signed 
+```
