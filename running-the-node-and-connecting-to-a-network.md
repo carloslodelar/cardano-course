@@ -79,6 +79,16 @@ cardano-cli query tip --testnet-magic 1
 
 ### Running a mainnet node
 
+Get the configuration files
+
+```
+wget https://book.world.dev.cardano.org/environments/mainnet/config.json
+wget https://book.world.dev.cardano.org/environments/mainnet/topology.json
+wget https://book.world.dev.cardano.org/environments/mainnet/byron-genesis.json
+wget https://book.world.dev.cardano.org/environments/mainnet/shelley-genesis.json
+wget https://book.world.dev.cardano.org/environments/mainnet/alonzo-genesis.json
+```
+
 ```
 cardano-node run --topology topology.json \
 --database-path db \
