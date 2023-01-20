@@ -65,7 +65,7 @@ cardano-node run --topology topology.json \
 --config config.json 
 ```
 
-Create the CARDANO\_NODE\_SOCKET\_PATH environment variable
+Open a new terminal and Create the CARDANO\_NODE\_SOCKET\_PATH environment variable
 
 ```bash
 export CARDANO_NODE_SOCKET_PATH="$HOME/preprod/node.socket"
@@ -78,6 +78,13 @@ cardano-cli query tip --testnet-magic 1
 ```
 
 ### Running a mainnet node
+
+Create a directory for the mainnet node
+
+```
+mkdir mainnet
+cd mainnet
+```
 
 Get the configuration files
 
@@ -95,5 +102,11 @@ cardano-node run --topology topology.json \
 --socket-path node.socket \
 --port 3001 \
 --config config.json 
+```
+
+On a new terminal
+
+```
+export CARDANO_NODE_SOCKET_PATH="$HOME/mainnet/node.socket"
 ```
 
