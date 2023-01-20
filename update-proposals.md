@@ -6,14 +6,14 @@ Currently, and until Voltaire era (decentralized governance) is released, Cardan
 
 Cardano has come through different **eras**: Byron --> Shelley --> Allegra --> Mary --> Alonzo --> Babbage (current). Each era introduced a new set of functionalities, more eras will come in the future introducing more functionalities.
 
-| Era     | Key features                                                                                        | Consensus                        | Protocol Versions (Major.Minor) | Hardfork Event Name            |
-| ------- | --------------------------------------------------------------------------------------------------- | -------------------------------- | :-----------------------------: | ------------------------------ |
-| Byron   | POS                                                                                                 | <p>Ouroboros classic<br>PBFT</p> |        <p>0.0<br>1.0</p>        | <p>Genesis<br>Byron reboot</p> |
-| Shelley | <p>Decentralization of block production<br>Rewards</p>                                              | TPraos                           |               2.0               | Shelley                        |
-| Allegra | Token locking                                                                                       | TPraos                           |               3.0               | Allegra                        |
-| Mary    | Native assets                                                                                       | TPraos                           |               4.0               | Mary                           |
-| Alonzo  | Smart contracts with Plutus                                                                         | TPraos                           |        <p>5.0<br>6.0</p>        | Alonzo                         |
-| Babbage | <p>PlutusV2<br>Reference inputs<br>Inline datums<br>Reference scripts<br>Removal of d parameter</p> | Praos                            |               7.0               | Vasil                          |
+| Era     | Key features                                                                                        | Consensus                        | Protocol Versions (Major.Minor) | Hardfork Event Name                     |
+| ------- | --------------------------------------------------------------------------------------------------- | -------------------------------- | :-----------------------------: | --------------------------------------- |
+| Byron   | POS                                                                                                 | <p>Ouroboros classic<br>PBFT</p> |        <p>0.0<br>1.0</p>        | <p>Genesis<br>Byron reboot</p>          |
+| Shelley | <p>Decentralization of block production<br>Rewards</p>                                              | TPraos                           |               2.0               | Shelley                                 |
+| Allegra | Token locking                                                                                       | TPraos                           |               3.0               | Allegra                                 |
+| Mary    | Native assets                                                                                       | TPraos                           |               4.0               | Mary                                    |
+| Alonzo  | Smart contracts with Plutus                                                                         | TPraos                           |        <p>5.0<br>6.0</p>        | Alonzo                                  |
+| Babbage | <p>PlutusV2<br>Reference inputs<br>Inline datums<br>Reference scripts<br>Removal of d parameter</p> | Praos                            |        <p>7.0<br>8.0</p>        | <p>Vasil<br>secp intra era hardfork</p> |
 
 Transitioning from one era to the next is triggered by an **Update Proposal** that updates the protocol version.
 
@@ -21,7 +21,7 @@ Transitioning from one era to the next is triggered by an **Update Proposal** th
 
 ### Byron era update proposals:
 
-<figure><img src=".gitbook/assets/byronUP.png" alt=""><figcaption><p>Byron era update proposals</p></figcaption></figure>
+<figure><img src=".gitbook/assets/upbyron.png" alt=""><figcaption></figcaption></figure>
 
 The general mechanism for updating protocol parameters in Byron is as follows:
 
@@ -40,7 +40,7 @@ A "null" update proposal is one that neither increase the protocol version nor t
 
 The update mechanism in Shelley is simpler than it is in Byron. There is no distinction between votes and proposals: to \`\`vote'' for a proposal, a Genesis delegate submits the exact same proposal on a regular transaction signed by the delegate key. There is also no separate endorsement step.
 
-<figure><img src=".gitbook/assets/shelleyUP.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/upshelley.png" alt=""><figcaption></figcaption></figure>
 
 The procedure is as follows:
 
