@@ -4,7 +4,7 @@ description: 'Objective: Create payment and stake keys, build addresses'
 
 # Create keys and addresses
 
-A quick look to addresses
+### A quick look to addresses
 
 {% embed url="https://cips.cardano.org/cips/cip19/" %}
 
@@ -30,6 +30,8 @@ Lets create a directory for our keys:
 mkdir -p keys
 cd keys
 ```
+
+### Generate a payment key pair and address
 
 ```
 cardano-cli address key-gen \
@@ -87,3 +89,19 @@ cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 1
 cardanoscan.io will also show the transaction
 
 {% embed url="https://preprod.cardanoscan.io/" %}
+
+### Generate a stake key pair and a type 0 address
+
+```
+cardano-cli stake-address key-gen \
+--verification-key-file stake.vkey \
+--signing-key-file stake.skey
+```
+
+```
+cardano-cli address build \
+--payment-verification-key-file payment.vkey \
+--stake-verification-key-file stake.vkey \
+--out-file paymentwithstake.addr \
+--testnet-magic 1
+```
