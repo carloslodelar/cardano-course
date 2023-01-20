@@ -105,3 +105,7 @@ cardano-cli address build \
 --out-file paymentwithstake.addr \
 --testnet-magic 1
 ```
+
+```bash
+cat paymentwithstake.addr | cardano-address address inspect
+```
