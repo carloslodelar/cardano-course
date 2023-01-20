@@ -94,7 +94,7 @@ Now, let's send the rest of the funds in `payment.addr` to `paymentwithstake.add
 ```
 cardano-cli transaction build --babbage-era \
 --testnet-magic 1 \
---tx-in $(cardano-cli query utxo --address $(cat paymentwithstake.addr) --testnet-magic 1 --out-file  /dev/stdout | jq -r 'keys[]') \
+--tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 1 --out-file  /dev/stdout | jq -r 'keys[]') \
 --change-address $(cat paymentwithstake.addr) \
 --out-file tx.raw
 ```
