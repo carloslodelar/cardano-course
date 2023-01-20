@@ -32,7 +32,7 @@ cardano-cli query protocol-parameters --testnet-magic 1 --out-file pparams.json
 cardano-cli transaction build-raw --babbage-era \
 --tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 1 --out-file  /dev/stdout | jq -r 'keys[]') \
 --tx-out $(cat paymentwithstake.addr)+5000000000 \
---tx-out $(cat payment.addr)+5000000000
+--tx-out $(cat payment.addr)+5000000000 \
 --fee 0 \
 --protocol-params-file pparams.json \
 --out-file tx.draft
