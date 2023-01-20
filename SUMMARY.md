@@ -15,3 +15,4 @@
   * [Redelegate genesis keys](setting-up-a-local-cluster/redelegate-genesis-keys.md)
   * [Vasil Hardfork](setting-up-a-local-cluster/vasil-hardfork.md)
 * [Curated playlist](curated-playlist.md)
+* [Create keys and addresses](create-keys-and-addresses.md)
