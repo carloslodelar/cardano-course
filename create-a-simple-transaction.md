@@ -81,7 +81,7 @@ cardano-cli transaction sign \
 --out-file tx.signed
 ```
 
-```
+```bash
 cardano-cli transaction submit \
 --testnet-magic 1 \
 --tx-file tx.signed 
@@ -89,7 +89,7 @@ cardano-cli transaction submit \
 
 ### Create a transaction with `build`
 
-Lets now send the rest of the funds in payment.addr to paymentwithstake.addr This time we will use the build command which will automatically take care of the fees, simplifying the process
+Now, let's send the rest of the funds in `payment.addr` to `paymentwithstake.addr` This time we will use the build command which will automatically take care of the fees, simplifying the process
 
 ```
 cardano-cli transaction build --babbage-era \

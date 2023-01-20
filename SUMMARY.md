@@ -4,6 +4,7 @@
 * [Running the node and connecting to a network](running-the-node-and-connecting-to-a-network.md)
 * [Create keys and addresses](create-keys-and-addresses.md)
 * [Create a simple transaction](create-a-simple-transaction.md)
+* [Register stake address and delegate](register-stake-address-and-delegate.md)
 * [Configuration files and protocol parameters](configuration-files-and-protocol-parameters.md)
 * [Cardano Governance](update-proposals.md)
 * [Setting up a local cluster](setting-up-a-local-cluster/README.md)
