@@ -77,3 +77,13 @@ cat payment.addr | cardano-address address inspect
 Now, lets get some funds from the faucet:
 
 {% embed url="https://docs.cardano.org/cardano-testnet/tools/faucet" %}
+
+When sucesfull we can cardano-cli to verify that we have received the funds:
+
+```
+cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 1
+```
+
+cardanoscan.io will also show the transaction
+
+{% embed url="https://preprod.cardanoscan.io/" %}
