@@ -14,3 +14,4 @@
   * [Redelegate genesis keys](setting-up-a-local-cluster/redelegate-genesis-keys.md)
   * [Vasil Hardfork](setting-up-a-local-cluster/vasil-hardfork.md)
 * [Curated playlist](curated-playlist.md)
+* [Running the node and connecting to a network](running-the-node-and-connecting-to-a-network.md)
