@@ -76,6 +76,19 @@ We can use `cardano-address` to inspect our address. Back to the keys directory&
 cat payment.addr | cardano-address address inspect
 ```
 
+we should see something close to
+
+```json
+{
+    "stake_reference": "none",
+    "spending_key_hash_bech32": "addr_vkh1tc0da5jwszr8f875jcpdmx3lmfgfcuxxvexggufyvmnhg3r5p2x",
+    "address_style": "Shelley",
+    "spending_key_hash": "5e1eded24e8086749fd49602dd9a3fda509c70c6664c84712466e774",
+    "network_tag": 0,
+    "address_type": 6
+}
+```
+
 Now, lets get some funds from the faucet:
 
 {% embed url="https://docs.cardano.org/cardano-testnet/tools/faucet" %}
@@ -108,4 +121,19 @@ cardano-cli address build \
 
 ```bash
 cat paymentwithstake.addr | cardano-address address inspect
+```
+
+It should look something like this
+
+```json
+{
+    "stake_reference": "by value",
+    "stake_key_hash_bech32": "stake_vkh1kevs5lhejnxy3j6dnq8wsh6k66e6yn8atev5e3jy7asajygx8zx",
+    "stake_key_hash": "b6590a7ef994cc48cb4d980ee85f56d6b3a24cfd5e594cc644f761d9",
+    "spending_key_hash_bech32": "addr_vkh1tc0da5jwszr8f875jcpdmx3lmfgfcuxxvexggufyvmnhg3r5p2x",
+    "address_style": "Shelley",
+    "spending_key_hash": "5e1eded24e8086749fd49602dd9a3fda509c70c6664c84712466e774",
+    "network_tag": 0,
+    "address_type": 0
+}
 ```
