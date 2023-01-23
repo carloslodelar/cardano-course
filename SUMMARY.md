@@ -1,7 +1,7 @@
 # Table of contents
 
 * [Cardano-node course](README.md)
-* [Building the node](<README (1).md>)
+* [Building the node](README.md)
 * [Running the node and connecting to a network](running-the-node-and-connecting-to-a-network.md)
 * [Create keys and addresses](create-keys-and-addresses.md)
 * [Create a simple transaction](create-a-simple-transaction.md)
