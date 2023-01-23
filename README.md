@@ -1,7 +1,7 @@
 ---
 description: A hands-on introduction to cardano node
 cover: .gitbook/assets/Cardano-RGB_Logo-Full-Blue.png
-coverY: 0
+coverY: 3.455847255369928
 ---
 
 # Cardano-node course
