@@ -26,11 +26,11 @@ Embed video intro here.
 
 ## Contents
 
-| Section                       | Video lessons | Course Materials |
-| ----------------------------- | ------------- | ---------------- |
-| Building and running the node |               |                  |
-|                               |               |                  |
-|                               |               |                  |
+| Section                       | Video lessons | Course Materials                                                                                                                                                                                                                                           |
+| ----------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Building and running the node |               | [https://app.gitbook.com/o/-MCqdzJOLYGhUUAZWk8K/s/XBrFxra9Xk2qbyC9AUaf/1-building-and-running-the-node/1.1-building-the-node](https://app.gitbook.com/o/-MCqdzJOLYGhUUAZWk8K/s/XBrFxra9Xk2qbyC9AUaf/1-building-and-running-the-node/1.1-building-the-node) |
+|                               |               |                                                                                                                                                                                                                                                            |
+|                               |               |                                                                                                                                                                                                                                                            |
 
 
 

@@ -1,10 +1,10 @@
-# 1.1 Building the node
+---
+description: Building the node with cabal
+---
 
-Building the node with cabal, follow the official documentation
+# Building the node
 
 {% embed url="https://github.com/input-output-hk/cardano-node/blob/master/doc/getting-started/install.md" %}
-
-
 
 Building the node with Nix
 
