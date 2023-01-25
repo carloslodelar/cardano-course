@@ -1,2 +1,0 @@
-# Scripts and smart contracts
-
