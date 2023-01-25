@@ -24,13 +24,15 @@ Embed video intro here.
 
 
 
+<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td>Building the node with cabal</td><td></td><td></td><td><a href="building-and-running-the-node/">building-and-running-the-node</a></td><td><a href=".gitbook/assets/BUILD WITH CABAL CARD.png">BUILD WITH CABAL CARD.png</a></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
+
 ## Contents
 
-| Section                       | Video lessons | Course Materials                                                                                                                                                                                                                                           |
-| ----------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Building and running the node |               | [https://app.gitbook.com/o/-MCqdzJOLYGhUUAZWk8K/s/XBrFxra9Xk2qbyC9AUaf/1-building-and-running-the-node/1.1-building-the-node](https://app.gitbook.com/o/-MCqdzJOLYGhUUAZWk8K/s/XBrFxra9Xk2qbyC9AUaf/1-building-and-running-the-node/1.1-building-the-node) |
-|                               |               |                                                                                                                                                                                                                                                            |
-|                               |               |                                                                                                                                                                                                                                                            |
+| Section                       | Video lessons | Course Materials |
+| ----------------------------- | ------------- | ---------------- |
+| Building and running the node |               |                  |
+|                               |               |                  |
+|                               |               |                  |
 
 
 
