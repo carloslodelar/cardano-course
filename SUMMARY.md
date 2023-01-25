@@ -1,12 +1,12 @@
 # Table of contents
 
 * [Cardano-node course](README.md)
-* [Building and running the node](building-and-running-the-node/README.md)
-  * [Building the node](<README (1).md>)
-  * [Running the node and connecting to a network](running-the-node-and-connecting-to-a-network.md)
-  * [Create keys and addresses](create-keys-and-addresses.md)
-  * [Create a simple transaction](create-a-simple-transaction.md)
-  * [Register stake address and delegate](register-stake-address-and-delegate.md)
+* [1 Building and running the node](1-building-and-running-the-node/README.md)
+  * [Building the node](1-building-and-running-the-node/building-the-node.md)
+  * [Running the node and connecting to a network](1-building-and-running-the-node/running-the-node-and-connecting-to-a-network.md)
+  * [Create keys and addresses](1-building-and-running-the-node/create-keys-and-addresses.md)
+  * [Create a simple transaction](1-building-and-running-the-node/create-a-simple-transaction.md)
+  * [Register stake address and delegate](1-building-and-running-the-node/register-stake-address-and-delegate.md)
 * [Protocol parameters and Configuration files](protocol-parameters-and-configuration-files/README.md)
   * [Protocol parameters](configuration-files-and-protocol-parameters.md)
   * [Byron genesis file](protocol-parameters-and-configuration-files/byron-genesis-file.md)
