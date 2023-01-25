@@ -1,2 +1,2 @@
-# 7 P2P topology
+# P2P topology
 

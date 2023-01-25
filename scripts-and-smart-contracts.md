@@ -1,2 +1,2 @@
-# 6 Simple scripts and Plutus scripts
+# Scripts and smart contracts
 
