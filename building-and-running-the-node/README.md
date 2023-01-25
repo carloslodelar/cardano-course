@@ -10,3 +10,6 @@
 
 {% embed url="https://youtu.be/cXGA2tmwQyw" %}
 
+#### Running the node and connecting to Preproduction and Mainnet
+
+{% embed url="https://youtu.be/Ta-ktg8Qwx0" %}
