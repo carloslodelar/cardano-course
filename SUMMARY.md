@@ -29,6 +29,6 @@
   * [4.11 secp intra era hardfork](4-setting-up-a-local-cluster/4.11-secp-intra-era-hardfork.md)
 * [5 Create a stake pool on preview testnet](create-a-stake-pool-on-preview-testnet.md)
 * [6 Simple scripts and Plutus scripts](scripts-and-smart-contracts.md)
-* [7 P2P topology](7-p2p-topology.md)
-* [8 New tracing system](8-new-tracing-system.md)
+* [7 P2P topology](p2p-topology.md)
+* [8 New tracing system](new-tracing-system.md)
 * [Curated playlist](curated-playlist.md)
