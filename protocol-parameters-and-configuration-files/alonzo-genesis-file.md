@@ -1,2 +1,2 @@
-# 2.4 Alonzo genesis file
+# Alonzo genesis file
 

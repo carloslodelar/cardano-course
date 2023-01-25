@@ -1,2 +1,2 @@
-# 1 Building and running the node
+# Building and running the node
 

@@ -1,4 +1,4 @@
-# 4.5 Create first stake pool
+# Create first stake pool
 
 So we are now in Shelley era, but block production is still controlled by our BFT nodes. Let's create the first stake pool for our system:
 

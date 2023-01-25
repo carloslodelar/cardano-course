@@ -1,2 +1,2 @@
-# 2.3 Shelley genesis file
+# Shelley genesis file
 

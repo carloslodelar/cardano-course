@@ -1,2 +1,2 @@
-# 2.5 Node configuration file
+# Node configuration file
 

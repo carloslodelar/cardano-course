@@ -2,7 +2,7 @@
 description: 'Objective: Learn how to run cardano-node and connect to different networks'
 ---
 
-# 1.2 Running the node and connecting to a network
+# Running the node and connecting to a network
 
 ### Public networks
 

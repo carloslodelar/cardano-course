@@ -1,2 +1,2 @@
-# 2.2 Byron genesis file
+# Byron genesis file
 

@@ -1,4 +1,4 @@
-# 4.10 Vasil Hardfork
+# Vasil Hardfork
 
 As always, let's start by tweaking our config.json file:
 

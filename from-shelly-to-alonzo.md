@@ -1,4 +1,4 @@
-# 4.7 From Shelly to Alonzo
+# From Shelly to Alonzo
 
 ### Allegra Hardfork
 

@@ -1,4 +1,4 @@
-# 4.2 Spend genesis UTXO
+# Spend genesis UTXO
 
 Create keys and addresses to withdraw the initial UTxO
 

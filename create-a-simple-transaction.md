@@ -2,7 +2,7 @@
 description: 'Objective: Learn how to use build-raw and build to create a simple transaction'
 ---
 
-# 1.4 Create a simple transaction
+# Create a simple transaction
 
 We can use `cardano-cli` to create transactions.
 

@@ -1,2 +1,2 @@
-# 2 Protocol parameters and Configuration files
+# Protocol parameters and Configuration files
 

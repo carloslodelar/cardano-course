@@ -2,7 +2,7 @@
 description: 'Objective: Create payment and stake keys, build addresses'
 ---
 
-# 1.3 Create keys and addresses
+# Create keys and addresses
 
 ### A quick look to addresses
 

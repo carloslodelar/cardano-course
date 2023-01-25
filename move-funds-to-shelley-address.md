@@ -1,4 +1,4 @@
-# 4.4 Move funds to a Shelley address
+# Move funds to a Shelley address
 
 We need to convert our Byron signing key to a corresponding Shelley era key:
 
