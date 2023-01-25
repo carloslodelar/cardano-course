@@ -31,4 +31,6 @@
 * [6 Simple scripts and Plutus scripts](scripts-and-smart-contracts.md)
 * [7 P2P topology](p2p-topology.md)
 * [8 New tracing system](new-tracing-system.md)
+* [9 Running SMASH server](9-running-smash-server.md)
+* [10 Running Token metadata server](10-running-token-metadata-server.md)
 * [Curated playlist](curated-playlist.md)
