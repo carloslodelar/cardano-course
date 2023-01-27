@@ -1,7 +1,2 @@
----
-cover: .gitbook/assets/scripts.png
-coverY: 0
----
-
-# 6 Simple scripts and Plutus scripts
+# Scripts and smart contracts
 
