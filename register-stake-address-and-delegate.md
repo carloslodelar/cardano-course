@@ -4,7 +4,7 @@ description: >-
   that include certificates
 ---
 
-# Register stake address and delegate
+# 1.5 Register stake address and delegate
 
 Let's do somehting a little bit more interesting. Let's delegate our stake so that we can participate in the protocol and get rewarded for it.&#x20;
 
@@ -52,6 +52,7 @@ cat registration.cert
 
 Now we need to submit our certificate to the blockchain. We will use the `build` command. This time we need to use a few more options to build the transaction. We will use `--certificate-file` to include our registration certificate, and `--witness-override` to specify that this will be signed by 2 witnesses: `payment.skey` and `stake.skey`
 
+{% code overflow="wrap" %}
 ```bash
 cardano-cli transaction build --babbage-era \
 --testnet-magic 1 \
@@ -61,6 +62,7 @@ cardano-cli transaction build --babbage-era \
 --certificate-file registration.cert \
 --out-file tx.raw
 ```
+{% endcode %}
 
 Sign it with both keys
 
