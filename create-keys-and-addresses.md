@@ -2,7 +2,7 @@
 description: 'Objective: Create payment and stake keys, build addresses'
 ---
 
-# Create keys and addresses
+# 1.3 Create keys and addresses
 
 ### A quick look to addresses
 
@@ -116,7 +116,7 @@ cardano-cli address build \
 --payment-verification-key-file payment.vkey \
 --stake-verification-key-file stake.vkey \
 --out-file paymentwithstake.addr \
---testnet-magic 1
+--testnet-magic 2
 ```
 
 ```bash

@@ -55,7 +55,7 @@ Now we need to submit our certificate to the blockchain. We will use the `build`
 {% code overflow="wrap" %}
 ```bash
 cardano-cli transaction build --babbage-era \
---testnet-magic 1 \
+--testnet-magic 2 \
 --witness-override 2 \
 --tx-in $(cardano-cli query utxo --address $(cat paymentwithstake.addr) --testnet-magic 1 --out-file  /dev/stdout | jq -r 'keys[1]') \
 --change-address $(cat paymentwithstake.addr) \
@@ -71,13 +71,13 @@ cardano-cli transaction sign \
 --tx-body-file tx.raw \
 --signing-key-file payment.skey \
 --signing-key-file stake.skey \
---testnet-magic 1 \
+--testnet-magic 2 \
 --out-file tx.signed
 ```
 
 ```
 cardano-cli transaction submit \
---testnet-magic 1 \
+--testnet-magic 2 \
 --tx-file tx.signed 
 ```
 
@@ -110,7 +110,7 @@ cardano-cli stake-address delegation-certificate \
 
 ```
 cardano-cli transaction build --babbage-era \
---testnet-magic 1 \
+--testnet-magic 2 \
 --witness-override 2 \
 --tx-in $(cardano-cli query utxo --address $(cat paymentwithstake.addr) --testnet-magic 1 --out-file  /dev/stdout | jq -r 'keys[1]') \
 --change-address $(cat paymentwithstake.addr) \
@@ -123,12 +123,12 @@ cardano-cli transaction sign \
 --tx-body-file tx.raw \
 --signing-key-file payment.skey \
 --signing-key-file stake.skey \
---testnet-magic 1 \
+--testnet-magic 2 \
 --out-file tx.signed
 ```
 
 ```
 cardano-cli transaction submit \
---testnet-magic 1 \
+--testnet-magic 2 \
 --tx-file tx.signed 
 ```

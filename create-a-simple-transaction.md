@@ -2,7 +2,7 @@
 description: 'Objective: Learn how to use build-raw and build to create a simple transaction'
 ---
 
-# Create a simple transaction
+# 1.4 Create a simple transaction
 
 We can use `cardano-cli` to create transactions.
 
@@ -77,13 +77,13 @@ Now we just need to sign and submit the transaction. Of course, we sign it with 
 cardano-cli transaction sign \
 --tx-body-file tx.raw \
 --signing-key-file payment.skey \
---testnet-magic 1 \
+--testnet-magic 2 \
 --out-file tx.signed
 ```
 
 ```bash
 cardano-cli transaction submit \
---testnet-magic 1 \
+--testnet-magic 2 \
 --tx-file tx.signed 
 ```
 
@@ -93,7 +93,7 @@ Now, let's send the rest of the funds in `payment.addr` to `paymentwithstake.add
 
 ```
 cardano-cli transaction build --babbage-era \
---testnet-magic 1 \
+--testnet-magic 2 \
 --tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 1 --out-file  /dev/stdout | jq -r 'keys[]') \
 --change-address $(cat paymentwithstake.addr) \
 --out-file tx.raw
@@ -105,12 +105,12 @@ Sign and submit as before
 cardano-cli transaction sign \
 --tx-body-file tx.raw \
 --signing-key-file payment.skey \
---testnet-magic 1 \
+--testnet-magic 2 \
 --out-file tx.signed
 ```
 
 ```
 cardano-cli transaction submit \
---testnet-magic 1 \
+--testnet-magic 2 \
 --tx-file tx.signed 
 ```
