@@ -2,7 +2,7 @@
 description: 'Objective: Learn how to run cardano-node and connect to different networks'
 ---
 
-# Running the node and connecting to a network
+# 1.2 Running the node and connecting to a network
 
 ### Public networks
 
@@ -55,7 +55,7 @@ Usage: cardano-node run [--topology FILEPATH]
                           ]
 ```
 
-### Running a passive node on Pre-production Testnet
+### Running a passive node on Preview Testnet
 
 ```bash
 cardano-node run --topology topology.json \
@@ -74,7 +74,7 @@ export CARDANO_NODE_SOCKET_PATH="$HOME/preprod/node.socket"
 Check that the node is syncing
 
 ```
-cardano-cli query tip --testnet-magic 1
+cardano-cli query tip --testnet-magic 2
 ```
 
 ### Running a mainnet node
