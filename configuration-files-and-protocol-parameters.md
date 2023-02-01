@@ -5,7 +5,7 @@ coverY: 0
 
 # 2.1 Protocol parameters
 
-* Cardano-SL&#x20;
+* Cardano-SL [https://github.com/serokell/cardano-sl/blob/master/docs/configuration.md](https://github.com/serokell/cardano-sl/blob/master/docs/configuration.md)&#x20;
 * Cardano-ledger repository contains the formal specifications, executable models, and implementations of the Cardano Ledger.
 
 {% embed url="https://github.com/input-output-hk/cardano-ledger" %}
