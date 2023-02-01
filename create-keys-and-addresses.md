@@ -61,7 +61,7 @@ wget https://github.com/input-output-hk/cardano-addresses/releases/download/3.12
 ```
 
 ```
-tar -xf cardano-addresses-3.12.0-linux64.tar.gzcodecode
+tar -xf cardano-addresses-3.12.0-linux64.tar.gz
 ```
 
 ```
