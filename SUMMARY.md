@@ -2,6 +2,7 @@
 
 * [Cardano-node course](README.md)
 * [1 Building and running the node](building-and-running-the-node/README.md)
+  * [Video lessons](1-building-and-running-the-node/video-lessons.md)
   * [1.1 Building the node](<README (1).md>)
   * [1.2 Running the node and connecting to a network](running-the-node-and-connecting-to-a-network.md)
   * [1.3 Create keys and addresses](create-keys-and-addresses.md)
