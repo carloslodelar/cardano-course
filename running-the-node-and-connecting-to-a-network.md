@@ -15,18 +15,18 @@ The latest supported networks can be found at [https://book.world.dev.cardano.or
 Lets create a directory for our node files:
 
 ```bash
-mkdir preprod
-cd preprod
+mkdir preview
+cd preview
 ```
 
 Download the configuration files&#x20;
 
 ```bash
-wget https://book.world.dev.cardano.org/environments/preprod/config.json
-wget https://book.world.dev.cardano.org/environments/preprod/topology.json
-wget https://book.world.dev.cardano.org/environments/preprod/byron-genesis.json
-wget https://book.world.dev.cardano.org/environments/preprod/shelley-genesis.json
-wget https://book.world.dev.cardano.org/environments/preprod/alonzo-genesis.json
+wget https://book.world.dev.cardano.org/environments/preview/config.json
+wget https://book.world.dev.cardano.org/environments/preview/topology.json
+wget https://book.world.dev.cardano.org/environments/preview/byron-genesis.json
+wget https://book.world.dev.cardano.org/environments/preview/shelley-genesis.json
+wget https://book.world.dev.cardano.org/environments/preview/alonzo-genesis.json
 ```
 
 ```bash
@@ -70,7 +70,7 @@ cardano-node run --topology topology.json \
 Open a new terminal and Create the CARDANO\_NODE\_SOCKET\_PATH environment variable
 
 ```bash
-export CARDANO_NODE_SOCKET_PATH="$HOME/preprod/node.socket"
+export CARDANO_NODE_SOCKET_PATH="$HOME/preview/node.socket"
 ```
 
 Check that the node is syncing
