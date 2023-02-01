@@ -13,6 +13,7 @@
   * [2.3 Shelley genesis file](protocol-parameters-and-configuration-files/shelley-genesis-file.md)
   * [2.4 Alonzo genesis file](protocol-parameters-and-configuration-files/alonzo-genesis-file.md)
   * [2.5 Node configuration file](protocol-parameters-and-configuration-files/node-configuration-file.md)
+  * [2.6 Topology file](2-protocol-parameters-and-configuration-files/2.6-topology-file.md)
 * [3 Cardano Governance](update-proposals.md)
   * [3.1 Update proposals](3-cardano-governance/3.1-update-proposals.md)
 * [4 Setting up a local cluster](setting-up-a-local-cluster/README.md)
