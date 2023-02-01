@@ -30,17 +30,15 @@ cardano-cli query protocol-parameters --testnet-magic 2 --out-file pparams.json
 
 &#x20;Let's send 5,000 ada to our `paymentwithstake.addr`
 
-{% code overflow="wrap" %}
 ```bash
 cardano-cli transaction build-raw --babbage-era \
---tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2 --out-file  /dev/stdout | jq -r 'keys[0]') \
+--tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 1 --out-file  /dev/stdout | jq -r 'keys[]') \
 --tx-out $(cat paymentwithstake.addr)+5000000000 \
 --tx-out $(cat payment.addr)+5000000000 \
 --fee 0 \
 --protocol-params-file pparams.json \
 --out-file tx.draft
 ```
-{% endcode %}
 
 ```bash
 cardano-cli transaction calculate-min-fee --tx-body-file tx.draft \
@@ -65,17 +63,15 @@ Now we need to rebuild the transaction body adding the fees and recalculating th
  > 4999828647
 ```
 
-{% code overflow="wrap" %}
 ```
 cardano-cli transaction build-raw --babbage-era \
---tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2 --out-file  /dev/stdout | jq -r 'keys[0]') \
+--tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 1 --out-file  /dev/stdout | jq -r 'keys[]') \
 --tx-out $(cat paymentwithstake.addr)+5000000000 \
---tx-out $(cat payment.addr)+4999828647 \
+--tx-out $(cat payment.addr)+4999828647
 --fee 171353 \
 --protocol-params-file pparams.json \
 --out-file tx.raw
 ```
-{% endcode %}
 
 Now we just need to sign and submit the transaction. Of course, we sign it with the `payment.skey` that we generated in the first place.&#x20;
 
@@ -97,15 +93,13 @@ cardano-cli transaction submit \
 
 Now, let's send the rest of the funds in `payment.addr` to `paymentwithstake.addr` This time we will use the build command which will automatically take care of the fees, simplifying the process
 
-{% code overflow="wrap" %}
 ```
 cardano-cli transaction build --babbage-era \
 --testnet-magic 2 \
---tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2 --out-file  /dev/stdout | jq -r 'keys[0]') \
+--tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 1 --out-file  /dev/stdout | jq -r 'keys[]') \
 --change-address $(cat paymentwithstake.addr) \
 --out-file tx.raw
 ```
-{% endcode %}
 
 Sign and submit as before
 

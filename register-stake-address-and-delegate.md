@@ -59,7 +59,7 @@ Now we need to submit our certificate to the blockchain. We will use the `build`
 cardano-cli transaction build --babbage-era \
 --testnet-magic 2 \
 --witness-override 2 \
---tx-in $(cardano-cli query utxo --address $(cat paymentwithstake.addr) --testnet-magic 1 --out-file  /dev/stdout | jq -r 'keys[1]') \
+--tx-in $(cardano-cli query utxo --address $(cat paymentwithstake.addr) --testnet-magic 2 --out-file  /dev/stdout | jq -r 'keys[1]') \
 --change-address $(cat paymentwithstake.addr) \
 --certificate-file registration.cert \
 --out-file tx.raw
@@ -114,7 +114,7 @@ cardano-cli stake-address delegation-certificate \
 cardano-cli transaction build --babbage-era \
 --testnet-magic 2 \
 --witness-override 2 \
---tx-in $(cardano-cli query utxo --address $(cat paymentwithstake.addr) --testnet-magic 1 --out-file  /dev/stdout | jq -r 'keys[1]') \
+--tx-in $(cardano-cli query utxo --address $(cat paymentwithstake.addr) --testnet-magic 2 --out-file  /dev/stdout | jq -r 'keys[1]') \
 --change-address $(cat paymentwithstake.addr) \
 --certificate-file delegation.cert \
 --out-file tx.raw
