@@ -1,6 +1,6 @@
 # Video lessons
 
-Building the node with cabal
+#### Building the node with cabal
 
 {% embed url="https://youtu.be/v8I6e4B5a5w" %}
 
