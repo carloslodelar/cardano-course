@@ -1,4 +1,9 @@
-# Vasil Hardfork
+---
+cover: ../.gitbook/assets/cluster (1).png
+coverY: 0
+---
+
+# 4.10 Vasil Hardfork
 
 As always, let's start by tweaking our config.json file:
 

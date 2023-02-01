@@ -1,3 +1,8 @@
+---
+cover: .gitbook/assets/cluster (1).png
+coverY: 0
+---
+
 # 4.1 Create a local cluster
 
 Sometimes you might need to deploy a local cluster. We provide tools that allow you to do this with little effort. We will use those tools later.  For now we will do it manually.  Hopefully this will help having a better understanding of what happens behind the scenes when using the automated tools.&#x20;

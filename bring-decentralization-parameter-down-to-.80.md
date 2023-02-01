@@ -1,4 +1,9 @@
-# Bring decentralization parameter down to .80
+---
+cover: .gitbook/assets/cluster (1).png
+coverY: 0
+---
+
+# 4.6 Bring decentralization parameter down to .80
 
 For our pool to produce blocks, we need to lower the decentralization parameter. Let's create an update proposal to lower the decentralization parameter.&#x20;
 
