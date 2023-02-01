@@ -10,6 +10,8 @@ coverY: -223
 
 Welcome to the course on Cardano Node and Cardano-CLI! This course is designed to provide you with the knowledge and skills needed to use the Cardano Node and Cardano-CLI as an end user, a stake pool operator and a governance actor. By the end of this course, you will have a solid understanding of how to use the Cardano Node and Cardano-CLI in a variety of roles and scenarios.
 
+{% embed url="https://youtu.be/Ny4xwzLw14s" %}
+
 ### What you will learn?
 
 * Building and running cardano-node on different environments
