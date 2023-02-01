@@ -7,24 +7,24 @@ coverY: 0
 
 #### Building the node with cabal
 
-{% embed url="https://youtu.be/v8I6e4B5a5w" %}
+{% embed url="https://youtu.be/lIrF5-797Vg" %}
 
 #### Building the node with Nix
 
-{% embed url="https://youtu.be/cXGA2tmwQyw" %}
+{% embed url="https://youtu.be/KwIE2ScvSZA" %}
 
-#### Running the node and connecting to Preproduction and Mainnet
+#### Running the node and connecting to Preview and Mainnet
 
-{% embed url="https://youtu.be/Ta-ktg8Qwx0" %}
+{% embed url="https://youtu.be/cxbzpI9UrwE" %}
 
 #### Create keys and addresses
 
-{% embed url="https://youtu.be/pY8SQ62UrpI" %}
+{% embed url="https://youtu.be/rx9b7o-Z80k" %}
 
 #### Create a simple transaction
 
-{% embed url="https://youtu.be/EZobKtP8d1Y" %}
+{% embed url="https://youtu.be/VbenssoGcyE" %}
 
-#### Register stake key and delegate using cardano-cli&#x20;
+#### Register stake address and delegate using cardano-cli&#x20;
 
-{% embed url="https://youtu.be/J9oamCrNdA8" %}
+{% embed url="https://youtu.be/bbj7zQcioIk" %}
