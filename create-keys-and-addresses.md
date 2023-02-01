@@ -47,7 +47,7 @@ Let's generate a type 6 address, one which associated stake can't be delegated.
 cardano-cli address build \
 --payment-verification-key-file payment.vkey \
 --out-file payment.addr \
---testnet-magic 1
+--testnet-magic 2
 ```
 
 Just for fun, lets install `cardano-address`&#x20;
@@ -98,7 +98,7 @@ Now, lets get some funds from the faucet:
 When sucesfull we can cardano-cli to verify that we have received the funds:
 
 ```
-cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 1
+cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2
 ```
 
 cardanoscan.io will also show the transaction
