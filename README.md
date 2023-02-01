@@ -1,5 +1,7 @@
 ---
 description: A hands-on introduction to cardano node
+cover: .gitbook/assets/cardano.png
+coverY: -223
 ---
 
 # Cardano-node course
