@@ -1,3 +1,8 @@
+---
+cover: ../.gitbook/assets/RUNNING (1).png
+coverY: 0
+---
+
 # Video lessons
 
 #### Building the node with cabal
