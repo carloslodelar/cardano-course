@@ -10,7 +10,7 @@ coverY: 0
 
 The latest supported networks can be found at [https://book.world.dev.cardano.org/environments.html](https://book.world.dev.cardano.org/environments.html)
 
-### Get configuration files for Pre-Production Testnet
+### Get configuration files for Preview Testnet
 
 Lets create a directory for our node files:
 

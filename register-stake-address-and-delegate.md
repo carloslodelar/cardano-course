@@ -110,7 +110,6 @@ cardano-cli stake-address delegation-certificate \
 
 ~~Rinse and repeat.~~ Build, sign and submit the transaction with the certificate
 
-{% code overflow="wrap" %}
 ```
 cardano-cli transaction build --babbage-era \
 --testnet-magic 2 \
@@ -120,7 +119,6 @@ cardano-cli transaction build --babbage-era \
 --certificate-file delegation.cert \
 --out-file tx.raw
 ```
-{% endcode %}
 
 ```
 cardano-cli transaction sign \
