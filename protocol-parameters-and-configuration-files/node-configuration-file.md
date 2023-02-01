@@ -1,3 +1,8 @@
+---
+cover: ../.gitbook/assets/config files.png
+coverY: 0
+---
+
 # 2.5 Node configuration file
 
 ### Cardano mainnet node configuration file

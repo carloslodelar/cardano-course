@@ -1,3 +1,8 @@
+---
+cover: ../.gitbook/assets/config files.png
+coverY: 0
+---
+
 # 2.2 Byron genesis file
 
 #### Cardano mainnet Byron genesis file

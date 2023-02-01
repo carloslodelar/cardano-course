@@ -1,3 +1,8 @@
+---
+cover: .gitbook/assets/RUNNING (1).png
+coverY: 624.0849256900212
+---
+
 # 1.1 Building the node
 
 Building the node with cabal, follow the official documentation

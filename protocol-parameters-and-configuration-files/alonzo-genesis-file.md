@@ -1,3 +1,8 @@
+---
+cover: ../.gitbook/assets/config files.png
+coverY: 0
+---
+
 # 2.4 Alonzo genesis file
 
 #### Cardano mainnet Alonzo genesis file

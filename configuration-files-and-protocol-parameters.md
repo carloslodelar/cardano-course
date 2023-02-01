@@ -1,3 +1,8 @@
+---
+cover: .gitbook/assets/config files.png
+coverY: 0
+---
+
 # 2.1 Protocol parameters
 
 * Cardano-SL&#x20;

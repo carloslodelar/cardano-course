@@ -1,3 +1,8 @@
+---
+cover: ../.gitbook/assets/config files.png
+coverY: 0
+---
+
 # 2.3 Shelley genesis file
 
 #### Cardano mainnet Shelley genesis file

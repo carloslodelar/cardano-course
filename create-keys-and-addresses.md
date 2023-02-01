@@ -1,5 +1,7 @@
 ---
 description: 'Objective: Create payment and stake keys, build addresses'
+cover: .gitbook/assets/RUNNING (1).png
+coverY: 343
 ---
 
 # 1.3 Create keys and addresses
