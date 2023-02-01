@@ -1,6 +1,6 @@
 ---
-cover: .gitbook/assets/RUNNING (1).png
-coverY: 624.0849256900212
+cover: .gitbook/assets/CABAL (1).png
+coverY: 0
 ---
 
 # 1.1 Building the node

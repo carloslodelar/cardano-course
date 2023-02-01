@@ -2,8 +2,8 @@
 description: >-
   Objective:  Understand generation of certificates and creating transactions
   that include certificates
-cover: .gitbook/assets/RUNNING (1).png
-coverY: 361
+cover: .gitbook/assets/CABAL (1).png
+coverY: 0
 ---
 
 # 1.5 Register stake address and delegate

@@ -1,6 +1,6 @@
 ---
-cover: ../.gitbook/assets/RUNNING (1).png
-coverY: 315.2375790424571
+cover: ../.gitbook/assets/CABAL (1).png
+coverY: 0
 ---
 
 # Video lessons

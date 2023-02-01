@@ -1,7 +1,7 @@
 ---
 description: 'Objective: Learn how to run cardano-node and connect to different networks'
-cover: .gitbook/assets/RUNNING (1).png
-coverY: 410
+cover: .gitbook/assets/CABAL (1).png
+coverY: 0
 ---
 
 # 1.2 Running the node and connecting to a network
