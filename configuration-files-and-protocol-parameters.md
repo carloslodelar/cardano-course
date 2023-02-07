@@ -65,6 +65,12 @@ In addtion to **Protocol parameters** we have **Global constants**. Unlike proto
 
 
 
+| Protocol parameter | Description | Notes |
+| ------------------ | ----------- | ----- |
+|                    |             |       |
+|                    |             |       |
+|                    |             |       |
+
 
 
 * Cardano-SL [https://github.com/serokell/cardano-sl/blob/master/docs/configuration.md](https://github.com/serokell/cardano-sl/blob/master/docs/configuration.md)&#x20;
