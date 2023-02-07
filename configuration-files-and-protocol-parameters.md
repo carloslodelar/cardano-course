@@ -61,7 +61,7 @@ So, the CLI is getting the protocol parameters from the Ledger state, this means
 
 Protocol parameters can be updated, via an update proposal.&#x20;
 
-Apart from the protocol parameters we have Global constants. Unlike protocol parameters, Global constants can only be updated with a Softfork or a Hardfork. &#x20;
+In addtion to **Protocol parameters** we have **Global constants**. Unlike protocol parameters, Global constants can only be updated with a Softfork or a Hardfork. &#x20;
 
 
 
