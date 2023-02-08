@@ -5,6 +5,8 @@ coverY: 0
 
 # 2.1 Protocol parameters
 
+
+
 We can think of the protocol parameters as the set of rules that govern the Cardano.
 
 Let's explore the protocol parameters with the Cardano-CLI. Note that we will use mainnet this time as testnets might have different values on the parameters. Also note that we are simplifying the out by colapsing the cost models.&#x20;
@@ -35,7 +37,7 @@ $ cardano-cli query protocol-parameters --mainnet
         "memory": 14000000,
         "steps": 10000000000
     },
-    "maxTxSize": 16384,
+    "maxTxSize": 16384, 
     "maxValueSize": 5000,
     "minPoolCost": 340000000,
     "minUTxOValue": null,
@@ -76,17 +78,46 @@ NetworkId
 MaxLovelaceSupply
 ```
 
+Below you will find a description of the protocol parameters and global constants, we have rearranged them to a more logical order:
 
-
-&#x20;
-
-
-
-| Protocol parameter | Description | Notes |
-| ------------------ | ----------- | ----- |
-|                    |             |       |
-|                    |             |       |
-|                    |             |       |
+|                                                         | Description | Notes |
+| ------------------------------------------------------- | ----------- | ----- |
+| NetworkId                                               |             |       |
+| MaxLovelaceSupply                                       |             |       |
+| ActiveSlotCoeff                                         |             |       |
+| SlotsPerEpoch                                           |             |       |
+| Quorum                                                  |             |       |
+| MaxMajorPV                                              |             |       |
+| MaxKESEvolutions                                        |             |       |
+| SlotsPerKESPeriod                                       |             |       |
+| StabilityWindow                                         |             |       |
+| RandomnessStabilisationWindow                           |             |       |
+| maxTxSize                                               |             |       |
+| maxBlockBodySize                                        |             |       |
+| maxBlockHeaderSize                                      |             |       |
+| maxValueSize                                            |             |       |
+| minUTxOValue                                            |             |       |
+| utxoCostPerWord                                         |             |       |
+| utxoCostPerByte                                         |             |       |
+| txFeeFixed                                              |             |       |
+| txFeePerByte                                            |             |       |
+| stakeAddressDeposit                                     |             |       |
+| stakePoolDeposit                                        |             |       |
+| stakePoolTargetNum                                      |             |       |
+| treasuryCut                                             |             |       |
+| monetaryExpansion                                       |             |       |
+| poolPledgeInfluence                                     |             |       |
+| minPoolCost                                             |             |       |
+| poolRetireMaxEpoch                                      |             |       |
+| decentralization                                        |             |       |
+| collateralPercentage                                    |             |       |
+| maxCollateralInputs                                     |             |       |
+| <p>costModels<br>PlutusV1<br>PlutusV2</p>               |             |       |
+| <p>executionUnitPrices<br>priceMemory<br>priceSteps</p> |             |       |
+| <p>maxBlockExecutionUnits<br>memory<br>steps</p>        |             |       |
+| extraPraosEntropy                                       |             |       |
+| <p>protocolVersion<br>major<br>minor</p>                |             |       |
+|                                                         |             |       |
 
 
 
