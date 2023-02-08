@@ -120,11 +120,10 @@ Below you will find a description of the protocol parameters and global constant
 
 
 
-* Cardano-SL [https://github.com/serokell/cardano-sl/blob/master/docs/configuration.md](https://github.com/serokell/cardano-sl/blob/master/docs/configuration.md)&#x20;
-* Cardano-ledger repository contains the formal specifications, executable models, and implementations of the Cardano Ledger.
+#### Resources
 
-{% embed url="https://github.com/input-output-hk/cardano-ledger" %}
-
-{% embed url="https://cips.cardano.org/cips/cip9/" %}
-CIP9&#x20;
-{% endembed %}
+* [Cardano-ledger ](https://github.com/input-output-hk/cardano-ledger)repository contains the formal specifications, executable models, and implementations of the Cardano Ledger.
+* [Cardano improvement proposal 9](https://cips.cardano.org/cips/cip9/)
+* [Cardano improvement proposal 28](https://cips.cardano.org/cips/cip28/)
+* [Cardano improvement proposal 55](https://cips.cardano.org/cips/cip55/)
+* Original implementation, Cardano-SL [https://github.com/serokell/cardano-sl/blob/master/docs/configuration.md](https://github.com/serokell/cardano-sl/blob/master/docs/configuration.md)&#x20;
