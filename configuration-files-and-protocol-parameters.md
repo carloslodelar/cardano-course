@@ -61,9 +61,32 @@ So, the CLI is getting the protocol parameters from the Ledger state, this means
 
 Protocol parameters can be updated, via an update proposal.&#x20;
 
-Apart from the protocol parameters we have Global constants. Unlike protocol parameters, Global constants can only be updated with a Softfork or a Hardfork. &#x20;
+In addition to **protocol parameters** we have **global constants**. Unlike protocol parameters, global constants can only be updated with a software update which always include increasing the protocol version. An increase in the major version indicates a hard fork, and the minor version a soft fork (meaning old software can validate but not produce new blocks).&#x20;
+
+```
+SlotsPerEpoch
+SlotsPerKESPeriod
+MaxKESEvolutions
+StabilityWindow
+RandomnessStabilisationWindow
+Quorum
+MaxMajorPV
+ActiveSlotCoeff
+NetworkId
+MaxLovelaceSupply
+```
 
 
+
+&#x20;
+
+
+
+| Protocol parameter | Description | Notes |
+| ------------------ | ----------- | ----- |
+|                    |             |       |
+|                    |             |       |
+|                    |             |       |
 
 
 
