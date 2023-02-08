@@ -80,7 +80,7 @@ securityParam
 slotLength
 ```
 
-Below you will find a description of the protocol parameters and global constants, we have rearranged them to a more logical order:
+Below you will find a description of the protocol parameters and global constants:
 
 |                                                         | Description                                                                                                                                                                             | Value                                                                                                                                                                                                                    |
 | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
