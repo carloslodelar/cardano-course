@@ -7,6 +7,4 @@ coverY: 173
 
 ### Video lessons on this section
 
-#### Update proposals
-
-{% embed url="https://youtu.be/dfP01O-Ewq8" %}
+####
