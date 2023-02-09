@@ -1,7 +1,7 @@
 # Table of contents
 
 * [Cardano-node course](README.md)
-* [Video lessons](video-lessons.md)
+* [Video lessons](1-building-and-running-the-node/video-lessons.md)
 * [1 Building and running the node](building-and-running-the-node/README.md)
   * [1.1 Building the node](<README (1).md>)
   * [1.2 Running the node and connecting to a network](running-the-node-and-connecting-to-a-network.md)
