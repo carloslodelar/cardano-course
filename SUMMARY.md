@@ -27,7 +27,7 @@
   * [4.8 Create a second stake pool before we move to Babbage era](setting-up-a-local-cluster/create-a-second-stake-pool-before-we-move-to-babbage-era.md)
   * [4.9 Redelegate genesis keys](setting-up-a-local-cluster/redelegate-genesis-keys.md)
   * [4.10 Vasil Hardfork](setting-up-a-local-cluster/vasil-hardfork.md)
-* [5 Create a stake pool on preview testnet](create-a-stake-pool-on-preview-testnet.md)
+* [5 Create a stake pool](5-create-a-stake-pool.md)
 * [6 Simple scripts and Plutus scripts](scripts-and-smart-contracts.md)
 * [7 P2P topology](p2p-topology.md)
 * [8 New tracing system](new-tracing-system.md)
