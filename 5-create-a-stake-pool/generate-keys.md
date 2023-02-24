@@ -53,6 +53,8 @@ cardano-cli address build \
 --testnet-magic 2 \
 --out-file payment.addr
 ```
+
+
 {% endtab %}
 
 {% tab title="From recovery phrase" %}
@@ -144,3 +146,29 @@ cardano-cli stake-address build --testnet-magic 2 \
 
 {% endtab %}
 {% endtabs %}
+
+#### Cold keys
+
+```
+cardano-cli node key-gen \
+--cold-verification-key-file cold.vkey \
+--cold-signing-key-file cold.skey \
+--operational-certificate-issue-counter-file opcert.counter
+```
+
+#### Key Evolving Signature  (KES) keys
+
+```
+cardano-cli node key-gen-KES \
+--verification-key-file kes.vkey \
+--signing-key-file kes.skey
+```
+
+#### Verifiable Random Function (VRF) keys&#x20;
+
+```
+cardano-cli node key-gen-VRF \
+--verification-key-file vrf.vkey \
+--signing-key-file vrf.skey
+```
+
