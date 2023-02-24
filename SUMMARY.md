@@ -30,6 +30,7 @@
 * [5 Create a stake pool](create-a-stake-pool-on-preview-testnet.md)
   * [The setup](5-create-a-stake-pool/the-setup.md)
   * [Generate keys](5-create-a-stake-pool/generate-keys.md)
+  * [Register stake pool](5-create-a-stake-pool/register-stake-pool.md)
 * [6 Simple scripts and Plutus scripts](scripts-and-smart-contracts.md)
 * [7 P2P topology](p2p-topology.md)
 * [8 New tracing system](new-tracing-system.md)
