@@ -14,12 +14,12 @@ The **block producer** node will hold the KES signing key, the VRF signing key a
 
 **Relay** nodes do not need any keys.&#x20;
 
+In addition, we will need an **air gapped machine** (specially when running a pool on mainnet) **** to keep Cold keys and wallet keys secure and never exposed to the internet.&#x20;
+
 The **block producer** must be well secured and **only** connect to its own relay nodes.&#x20;
 
-**Relay nodes** will connect to its own block producer and to 15-20 other relays on the network. P2P ensures duplex connections, using classic topology requires other relays to include our relays on their topologies. Some agreeements might be needed.&#x20;
+**Relay nodes** will connect to its own block producer and to 15-20 other relays on the network.&#x20;
 
-
-
-
+P2P ensures duplex connections, using classic topology requires other relays to include our relays on their topologies. Some agreements with other stake pool operators might be needed.&#x20;
 
 <figure><img src="../.gitbook/assets/Screen Shot 2023-02-24 at 12.33.39.png" alt=""><figcaption></figcaption></figure>
