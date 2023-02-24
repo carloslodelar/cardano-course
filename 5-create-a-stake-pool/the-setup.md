@@ -20,6 +20,6 @@ The **block producer** must be well secured and **only** connect to its own rela
 
 **Relay nodes** will connect to its own block producer and to 15-20 other relays on the network.&#x20;
 
-P2P ensures duplex connections, using classic topology requires other relays to include our relays on their topologies. Some agreements with other stake pool operators might be needed.&#x20;
+P2P ensures duplex connections, using classic topology requires other relays to include our relays on their topology. Some agreements with other stake pool operators might be needed.&#x20;
 
 <figure><img src="../.gitbook/assets/Screen Shot 2023-02-24 at 12.33.39.png" alt=""><figcaption></figcaption></figure>
