@@ -11,7 +11,7 @@
    1. Create registration certificate
    2. Create delegation certificate
    3. Submit certificates
-   4. Get delegation from the testnet faucet
+5. [Get delegation from the testnet faucet](https://docs.cardano.org/cardano-testnet/tools/faucet)
 
 
 

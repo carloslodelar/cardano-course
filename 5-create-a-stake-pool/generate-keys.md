@@ -147,10 +147,6 @@ cardano-cli stake-address build --testnet-magic 2 \
 {% endtab %}
 {% endtabs %}
 
-{% hint style="info" %}
-REQUEST FUNDS FROM THE FAUCET!
-{% endhint %}
-
 #### Cold keys
 
 ```
