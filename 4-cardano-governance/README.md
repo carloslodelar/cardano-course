@@ -7,4 +7,4 @@ coverY: 173
 
 ####
 
-<table><thead><tr><th>Video lessons</th><th data-type="content-ref">Course materials</th></tr></thead><tbody><tr><td>▶︎ <a href="https://youtu.be/HodK-ZKULHM">Cardano governance</a></td><td><a href="3.1-update-proposals.md">3.1-update-proposals.md</a></td></tr></tbody></table>
+<table><thead><tr><th>Video lessons</th><th data-type="content-ref">Course materials</th></tr></thead><tbody><tr><td>▶︎ <a href="https://youtu.be/HodK-ZKULHM">Cardano governance</a></td><td><a href="4.1-update-proposals.md">4.1-update-proposals.md</a></td></tr></tbody></table>
