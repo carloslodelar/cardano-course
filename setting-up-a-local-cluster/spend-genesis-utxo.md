@@ -3,7 +3,7 @@ cover: ../.gitbook/assets/cluster (1).png
 coverY: 0
 ---
 
-# 4.2 Spend genesis UTXO
+# Spend genesis UTXO
 
 Create keys and addresses to withdraw the initial UTxO
 

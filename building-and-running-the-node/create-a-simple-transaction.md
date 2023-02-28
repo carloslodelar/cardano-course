@@ -4,7 +4,7 @@ cover: ../.gitbook/assets/CABAL (1).png
 coverY: 0
 ---
 
-# 1.4 Create a simple transaction
+# Create a simple transaction
 
 We can use `cardano-cli` to create transactions.
 

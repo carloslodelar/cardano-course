@@ -6,7 +6,7 @@ cover: ../.gitbook/assets/CABAL (1).png
 coverY: 0
 ---
 
-# 1.5 Register stake address and delegate
+# Register stake address and delegate
 
 Let's do somehting a little bit more interesting. Let's delegate our stake so that we can participate in the protocol and get rewarded for it.&#x20;
 

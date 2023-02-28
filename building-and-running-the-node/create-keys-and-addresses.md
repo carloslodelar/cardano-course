@@ -4,7 +4,7 @@ cover: ../.gitbook/assets/CABAL (1).png
 coverY: 0
 ---
 
-# 1.3 Create keys and addresses
+# Create keys and addresses
 
 ### A quick look to addresses
 

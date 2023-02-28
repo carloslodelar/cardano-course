@@ -3,7 +3,7 @@ cover: ../.gitbook/assets/governance.png
 coverY: 202
 ---
 
-# 3.1 Update proposals
+# Update proposals
 
 Currently, and until Voltaire era (decentralized governance) is released, Cardano has a **federated governance** mechanism that allows updating the protocol parameters, i.e. adding new features. Such updates are done through and Update Proposal.  Only the holders of the Genesis delegate keys can submit and vote on proposals.
 

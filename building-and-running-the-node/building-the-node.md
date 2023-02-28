@@ -3,7 +3,7 @@ cover: ../.gitbook/assets/CABAL (1).png
 coverY: 0
 ---
 
-# 1.1 Building the node
+# Building the node
 
 Building the node with cabal, follow the official documentation
 

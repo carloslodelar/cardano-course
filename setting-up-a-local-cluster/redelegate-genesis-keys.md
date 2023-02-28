@@ -3,7 +3,7 @@ cover: ../.gitbook/assets/cluster (1).png
 coverY: 0
 ---
 
-# 4.9 Redelegate genesis keys
+# Redelegate genesis keys
 
 In a real-life scenario a holder of a genesis key may wish to delegate to a new key. &#x20;
 

@@ -4,7 +4,7 @@ cover: ../.gitbook/assets/CABAL (1).png
 coverY: 0
 ---
 
-# 1.2 Running the node and connecting to a network
+# Running the node and connecting to a network
 
 ### Public networks
 
