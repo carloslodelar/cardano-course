@@ -129,9 +129,9 @@ cardano-cli key non-extended-key \
 Finally, generate payment address
 
 ```
-cardano-cli address build --testnet-magic 2
---payment-verification-key $(cat payment-0.pub)
---stake-verification-key $(cat stake.pub)
+cardano-cli address build --testnet-magic 2 \
+--payment-verification-key $(cat payment-0.pub) \
+--stake-verification-key $(cat stake.pub) \
 --out-file payment-0.address
 ```
 
