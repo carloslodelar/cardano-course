@@ -85,7 +85,4 @@ We have 2 options:
 In either case:&#x20;
 
 * Configure grafana [https://prometheus.io/docs/visualization/grafana/](https://prometheus.io/docs/visualization/grafana/)
-*
-
-
 
