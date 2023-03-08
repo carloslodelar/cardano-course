@@ -11,14 +11,14 @@ Currently, and until Voltaire era (decentralized governance) is released, Cardan
 
 Cardano has come through different **eras**: Byron --> Shelley --> Allegra --> Mary --> Alonzo --> Babbage (current). Each era introduced a new set of functionalities, more eras will come in the future introducing more functionalities.
 
-| Era     | Key features                                                                                        | Consensus                        | Protocol Versions (Major.Minor) | Hardfork Event Name                     |
-| ------- | --------------------------------------------------------------------------------------------------- | -------------------------------- | :-----------------------------: | --------------------------------------- |
-| Byron   | POS                                                                                                 | <p>Ouroboros classic<br>PBFT</p> |        <p>0.0<br>1.0</p>        | <p>Genesis<br>Byron reboot</p>          |
-| Shelley | <p>Decentralization of block production<br>Rewards</p>                                              | TPraos                           |               2.0               | Shelley                                 |
-| Allegra | Token locking                                                                                       | TPraos                           |               3.0               | Allegra                                 |
-| Mary    | Native assets                                                                                       | TPraos                           |               4.0               | Mary                                    |
-| Alonzo  | Smart contracts with Plutus                                                                         | TPraos                           |        <p>5.0<br>6.0</p>        | Alonzo                                  |
-| Babbage | <p>PlutusV2<br>Reference inputs<br>Inline datums<br>Reference scripts<br>Removal of d parameter</p> | Praos                            |        <p>7.0<br>8.0</p>        | <p>Vasil<br>secp intra era hardfork</p> |
+| Era     | Key features                                                                                        | Consensus                        | Protocol Versions (Major.Minor) | Hardfork Event Name              |
+| ------- | --------------------------------------------------------------------------------------------------- | -------------------------------- | :-----------------------------: | -------------------------------- |
+| Byron   | POS                                                                                                 | <p>Ouroboros classic<br>PBFT</p> |        <p>0.0<br>1.0</p>        | <p>Genesis<br>Byron reboot</p>   |
+| Shelley | <p>Decentralization of block production<br>Rewards</p>                                              | TPraos                           |               2.0               | Shelley                          |
+| Allegra | Token locking                                                                                       | TPraos                           |               3.0               | Allegra                          |
+| Mary    | Native assets                                                                                       | TPraos                           |               4.0               | Mary                             |
+| Alonzo  | Smart contracts with Plutus                                                                         | TPraos                           |        <p>5.0<br>6.0</p>        | Alonzo                           |
+| Babbage | <p>PlutusV2<br>Reference inputs<br>Inline datums<br>Reference scripts<br>Removal of d parameter</p> | Praos                            |        <p>7.0<br>8.0</p>        | <p>Vasil<br>Valentine (secp)</p> |
 
 Transitioning from one era to the next is triggered by an **Update Proposal** that updates the protocol version.
 

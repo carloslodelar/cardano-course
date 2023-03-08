@@ -14,12 +14,6 @@ cardano-cli transaction
 
 ### Create a transaction with `build-raw`
 
-We need to know the transaction hash and index we will send funds from
-
-```bash
-cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2
-```
-
 we will need the protocol parameters, so that we can later calculate the transaction fee
 
 {% code overflow="wrap" %}
@@ -27,6 +21,12 @@ we will need the protocol parameters, so that we can later calculate the transac
 cardano-cli query protocol-parameters --testnet-magic 2 --out-file pparams.json
 ```
 {% endcode %}
+
+We need to know the transaction hash and index we will send funds from
+
+```bash
+cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2
+```
 
 &#x20;Let's send 5,000 ada to our `paymentwithstake.addr`
 
