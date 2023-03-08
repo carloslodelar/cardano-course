@@ -9,7 +9,6 @@ coverY: 0
 
 {% embed url="https://docs.cardano.org/explore-cardano/cardano-network/p2p-networking" %}
 
-\
 To Enable P2P, we do it from the configuration file, take for example the Preview testnet [configuration file](https://book.world.dev.cardano.org/environments/preview/config.json), it contains the field  `"EnableP2P".` It can be set to `false` or `true`
 
 For example, on Preview testnet the default is `true` since this network is already running with P2P.&#x20;
@@ -26,3 +25,6 @@ For example, on Preview testnet the default is `true` since this network is alre
 }
 </code></pre>
 
+#### The P2P topology file&#x20;
+
+{% embed url="https://github.com/input-output-hk/cardano-node/blob/master/doc/getting-started/understanding-config-files.md" %}
