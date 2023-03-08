@@ -20,7 +20,7 @@
   * [Generate keys](create-a-stake-pool/generate-keys.md)
   * [Register stake pool](create-a-stake-pool/register-stake-pool.md)
   * [Pool Maintainance](create-a-stake-pool/pool-maintainance.md)
-* [Monitoring the node](monitoring-the-node.md)
+* [Monitoring our nodes](monitoring-our-nodes.md)
 * [Cardano Governance](cardano-governance/README.md)
   * [Update proposals](cardano-governance/update-proposals.md)
 * [Setting up a local cluster](setting-up-a-local-cluster/README.md)
