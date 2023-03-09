@@ -122,3 +122,27 @@ cardano-cli transaction submit \
 --testnet-magic 2 \
 --tx-file tx.signed 
 ```
+
+#### The delegation cycle
+
+The delegation cycle comprises four (4) epochs:&#x20;
+
+The cycle starts when the stakeholder delegates his stake to a stake pool. This involves the creation of a _**Delegation Certificate**_ that is then embedded in a _**transaction**_ and _**registered**_ in the blockchain.  In our example below, this happens at any slot of _**Epoch N**_.&#x20;
+
+Then, **** the protocol captures a stake snapshot (_**stakedist)**_ at the last slot of _**Epoch N,**_ recording 3 important pieces of information:&#x20;
+
+1. The balance of each stake key registered in the blockchain,
+2. To which stake pool each stake key is delegated,&#x20;
+3. The parameters (pool cost, margin, pledge, etc) that each stake pool has set.&#x20;
+
+This snapshot is then used at the end of _**Epoch N+1**_ to randomly select the slot leaders for _**Epoch N+2**_. This process is the essence of Ouroboros as a Proof-of-Stake consensus algorithm:  the bigger the stake, the more chances to be slot leader.  &#x20;
+
+During _**Epoch N+2**_ the stake pools produce the blocks they are entitled to as per the slot leader election. Naturally, stake pools that control more stake will be entitled to more blocks.
+
+In the transition between _**Epoch N+2 and Epoch N+3,**_ a new snapshot registers the rewards collected. And the protocol uses the stake distribution recorded at the end of _**Epoch N**_  to calculate how much of the rewards belongs to each stake key,
+
+Finally, at the transition between _**Epoch N+3**_ and _**Epoch N+4**_  the protocol distributes the rewards to all stake keys. Which show up in wallets at the very start of _**Epoch N+4**_ and credited to the wallet's balance and will count as part of the stake for the snapshot to be taken at the last slot of _**Epoch N+4**_
+
+
+
+<figure><img src="../.gitbook/assets/delegationcycle.gif" alt=""><figcaption></figcaption></figure>
