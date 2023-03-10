@@ -7,7 +7,7 @@ coverY: 0
 
 {% embed url="https://www.youtube.com/watch?v=wnv7VCa79eo" %}
 
-#### What we achieve with P2P
+### What we achieve with P2P
 
 * With automatic P2P, (registered) nodes can discover and establish connections with each other without the need of an static topology file
 * Nodes can establish full duplex  connections (simultaneous server and client side)
@@ -20,9 +20,9 @@ coverY: 0
 
     Newly discovered peers are initially added to the cold peer set. The P2P governor is then responsible for peer connection management.
 
-<figure><img src=".gitbook/assets/peer-discovery (1).jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/peer-discovery.jpeg" alt=""><figcaption></figcaption></figure>
 
-#### What is next
+### What is next
 
 * Peer sharing&#x20;
 * Release Ouroboros Genesis
@@ -30,6 +30,8 @@ coverY: 0
 {% hint style="info" %}
 Learn more: [Peer-to-peer (P2P) networking](https://docs.cardano.org/explore-cardano/cardano-network/p2p-networking)
 {% endhint %}
+
+### Configuring the node to use P2P
 
 To Enable P2P, we do it from the configuration file, take for example the Preview testnet [configuration file](https://book.world.dev.cardano.org/environments/preview/config.json), it contains the field  `"EnableP2P".` It can be set to `false` or `true`
 
