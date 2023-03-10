@@ -3,9 +3,7 @@ cover: .gitbook/assets/p2p.png
 coverY: 0
 ---
 
-# P2P topology
-
-{% embed url="https://www.youtube.com/watch?v=wnv7VCa79eo" %}
+# Peer-to-peer (P2P) networking
 
 ### What do we achieve with P2P
 
@@ -32,7 +30,11 @@ coverY: 0
 * Release Ouroboros Genesis
 
 {% hint style="info" %}
-Learn more: [Peer-to-peer (P2P) networking](https://docs.cardano.org/explore-cardano/cardano-network/p2p-networking)
+Learn more:&#x20;
+
+[Peer-to-peer (P2P) networking](https://docs.cardano.org/explore-cardano/cardano-network/p2p-networking)
+
+[https://youtu.be/wnv7VCa79eo](https://youtu.be/wnv7VCa79eo)
 {% endhint %}
 
 ### Configuring the node to use P2P
