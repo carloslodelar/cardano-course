@@ -8,8 +8,9 @@ coverY: 0
 ### What do we achieve with P2P
 
 * With automatic P2P, (registered) nodes can discover and establish connections with each other&#x20;
-* Nodes can establish full duplex  connections (simultaneous server and client side)
-* Nodes can maintain some static topology i.e. its own relays and bp, and trusted peers with which we always want to keep a connection
+* Nodes can establish full duplex  connections (simultaneous server and client side of the mini-protocols)
+* Nodes can maintain some static topology i.e. its own relays and bp, and trusted peers with which we always want to keep a connection.&#x20;
+* RootPeers reload with SIGHUP signal, no need to restart.&#x20;
 *   The node dynamically manages the connections:  Each node maintains a set of peers mapped into three categories:
 
     * **cold peers** ‒ existing (known) peers without an established network connection
