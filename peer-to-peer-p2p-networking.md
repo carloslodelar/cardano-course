@@ -14,16 +14,14 @@ coverY: 0
 *   The node dynamically manages the connections:  Each node maintains a set of peers mapped into three categories:
 
     * **cold peers** ‒ existing (known) peers without an established network connection
-    * **warm peers** ‒ peers with an established bearer connection, which is only used for network measurements without implementing any of the node-to-node mini-protocols.
-    * **hot peers** ‒ peers that have a connection, which is being used by all three node-to-node mini-protocols
+    * **warm peers** ‒ peers with an established bearer connection, which is only used for network measurements without implementing any of the node-to-node mini-protocols (not active).
+    * **hot peers** ‒ peers that have a connection, which is being used by all three node-to-node mini-protocols (active peers)
 
     Newly discovered peers are initially added to the cold peer set. The P2P governor is then responsible for peer connection management.
 * Maintaining diversity in hop distances contributes to better block distribution times across the globally distributed network.
 * In the case of adversarial behavior, the peer can be immediately demoted from the hot, warm, or cold sets.
 
-
-
-<figure><img src=".gitbook/assets/peer-discovery.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/Screen Shot 2023-03-10 at 13.40.58.png" alt=""><figcaption><p>We classify upstream peers in 3 nested categories: Known/Established/Active</p></figcaption></figure>
 
 ### What is next
 
