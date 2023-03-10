@@ -28,3 +28,7 @@ For example, on Preview testnet the default is `true` since this network is alre
 #### The P2P topology file&#x20;
 
 {% embed url="https://github.com/input-output-hk/cardano-node/blob/master/doc/getting-started/understanding-config-files.md" %}
+
+#### New P2P topology file format (please use it on node 1.35.6 Single Relay)
+
+{% embed url="https://github.com/input-output-hk/cardano-node/issues/4559" %}
