@@ -21,7 +21,9 @@ coverY: 0
 * Maintaining diversity in hop distances contributes to better block distribution times across the globally distributed network.
 * In the case of adversarial behavior, the peer can be immediately demoted from the hot, warm, or cold sets.
 
-<figure><img src=".gitbook/assets/Screen Shot 2023-03-10 at 13.40.58.png" alt=""><figcaption><p>We classify upstream peers in 3 nested categories: Known/Established/Active</p></figcaption></figure>
+We classify upstream peers in 3 nested categories: Known/Established/Active
+
+<figure><img src=".gitbook/assets/Screen Shot 2023-03-10 at 13.40.58.png" alt=""><figcaption></figcaption></figure>
 
 ### What is next
 
