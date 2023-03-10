@@ -7,7 +7,7 @@ coverY: 0
 
 {% embed url="https://www.youtube.com/watch?v=wnv7VCa79eo" %}
 
-### What we achieve with P2P
+### What do we achieve with P2P
 
 * With automatic P2P, (registered) nodes can discover and establish connections with each other without the need of an static topology file
 * Nodes can establish full duplex  connections (simultaneous server and client side)
