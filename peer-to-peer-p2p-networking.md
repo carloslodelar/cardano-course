@@ -34,7 +34,7 @@ Learn more:&#x20;
 
 [Peer-to-peer (P2P) networking](https://docs.cardano.org/explore-cardano/cardano-network/p2p-networking)
 
-[https://youtu.be/wnv7VCa79eo](https://youtu.be/wnv7VCa79eo)
+[Interview with Networking team lead ](https://youtu.be/wnv7VCa79eo)
 {% endhint %}
 
 ### Configuring the node to use P2P
@@ -51,7 +51,6 @@ For example, on Preview testnet the default is `true` since this network is alre
   "TargetNumberOfEstablishedPeers": 40,
   "TargetNumberOfKnownPeers": 100,
   "TargetNumberOfRootPeers": 100,
-  "TestEnableDevelopmentNetworkProtocols": true,
 }
 </code></pre>
 
