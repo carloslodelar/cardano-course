@@ -14,7 +14,7 @@
   * [Alonzo genesis file](protocol-parameters-and-configuration-files/alonzo-genesis-file.md)
   * [Node configuration file](protocol-parameters-and-configuration-files/node-configuration-file.md)
   * [Topology file](protocol-parameters-and-configuration-files/topology-file.md)
-* [P2P topology](p2p-topology.md)
+* [Peer-to-peer (P2P) networking](peer-to-peer-p2p-networking.md)
 * [Create a stake pool](create-a-stake-pool/README.md)
   * [The setup](create-a-stake-pool/the-setup.md)
   * [Generate keys](create-a-stake-pool/generate-keys.md)
