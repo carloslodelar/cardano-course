@@ -62,3 +62,58 @@ For example, on Preview testnet the default is `true` since this network is alre
 #### New P2P topology file format (please use it on node 1.35.6 Single Relay)
 
 {% embed url="https://github.com/input-output-hk/cardano-node/issues/4559" %}
+
+### Example of topology files for a stakepool
+
+The block-producer node includes it's own relays (`x.x.x.x` and `y.y.y.y`) under local roots. Note that we use `"useLedgerAfterSlot": -1` to indicate that it should never use LedgerPeers.
+
+```
+{
+  "localRoots": [
+      { "accessPoints":
+            [ { "address": "x.x.x.x"
+              , "port": 3000
+              },
+              { "address": "y.y.y.y"
+              , "port": 3000
+              },
+            ]
+      , "advertise": false
+      , "valency": 1
+      }
+    ]
+, "publicRoots": [
+    { "accessPoints": []
+    , "advertise": false
+    }
+  ]
+, "useLedgerAfterSlot": -1
+}
+```
+
+The relay `x.x.x.x`  inlcudes its own block producer node (`z.z.z.z`) and the other relay (`y.y.y.y`) under local roots, and a few other root peers under public roots. Note that this time we do want to use LedgerPeers, thus we use `"useLedgerAfterSlot": 10000000`
+
+<pre><code><strong>{
+</strong>  "localRoots": [
+      { "accessPoints":[ 
+            { "address": "z.z.z.z"
+            , "port": 3000
+            },
+            { "address": "y.y.y.y"
+            , "port": 3000
+            }]
+      , "advertise": false
+      , "valency": 1
+      }
+    ]
+, "publicRoots": [
+    { "accessPoints": [
+          { "address": "relays-new.cardano-mainnet.iohk.io"
+          , "port": 3001
+          }]
+    , "advertise": false
+    }
+  ]
+, "useLedgerAfterSlot": 10000000
+}
+</code></pre>
