@@ -117,7 +117,7 @@ The relay `x.x.x.x`  inlcudes its own block producer node (`z.z.z.z`) and the ot
 }
 ```
 
-### Example topology file for a node not involved in block production or block propagation
+### Example of a topology file for a node not involved in block production or block propagation
 
 ```json
 {
