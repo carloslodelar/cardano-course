@@ -17,6 +17,7 @@
 * [Peer-to-peer (P2P) networking](peer-to-peer-p2p-networking.md)
 * [Create a stake pool](create-a-stake-pool/README.md)
   * [The setup](create-a-stake-pool/the-setup.md)
+  * [Runtime System Options](create-a-stake-pool/runtime-system-options.md)
   * [Generate keys](create-a-stake-pool/generate-keys.md)
   * [Register stake pool](create-a-stake-pool/register-stake-pool.md)
   * [Pool Maintainance](create-a-stake-pool/pool-maintainance.md)
