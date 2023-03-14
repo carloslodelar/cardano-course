@@ -1,6 +1,26 @@
 # Generate keys
 
-So we will need the following:
+We register a stake pool with the following command:
+
+```
+cardano-cli stake-pool registration-certificate \
+--cold-verification-key-file cold.vkey \
+--vrf-verification-key-file vrf.vkey \
+--pool-pledge <AMOUNT TO PLEDGE IN LOVELACE> \
+--pool-cost <POOL COST PER EPOCH IN LOVELACE> \
+--pool-margin <POOL OPERATOR MARGIN > \
+--pool-reward-account-verification-key-file stake.vkey \
+--pool-owner-stake-verification-key-file stake.vkey \
+--testnet-magic 2 \
+--pool-relay-ipv4 <RELAY NODE PUBLIC IP> \
+--pool-relay-port <RELAY NODE PORT> \
+--single-host-pool-relay STRING <The stake pool relay's DNS name that corresponds to an A or AAAA DNS record> \
+--metadata-url https://git.io/JJWdJ \
+--metadata-hash <POOL METADATA HASH> \
+--out-file pool-registration.cert
+```
+
+So we will need to generate all the following artifacts:
 
 | `payment.vkey`   | payment verification key         |
 | ---------------- | -------------------------------- |
@@ -17,8 +37,10 @@ So we will need the following:
 | `vrf.vkey`       | VRF verification key             |
 | `opcert.cert`    | operational certificate          |
 | `opcert.counter` | issue counter                    |
+| metadata url     |                                  |
+| metadata hash    |                                  |
 
-####
+#### Lets start with a new payment and stake ke pairs:
 
 {% hint style="info" %}
 WE WILL GENERATE KEYS IN OUR AIR-GAPPED MACHINE.&#x20;
@@ -148,7 +170,7 @@ cardano-cli stake-address build --testnet-magic 2 \
 {% endtabs %}
 
 {% hint style="info" %}
-REQUEST FUNDS FROM THE FAUCET!
+REQUEST FUNDS FROM THE FAUCET.
 {% endhint %}
 
 #### Cold keys
@@ -191,7 +213,7 @@ scp kes.skey vrf.skey opcert.cert remote_username@10.10.0.2:/remote/directory
 ```
 
 {% hint style="info" %}
-DO NOT COPY **COLD KEYS** OR **PAYMENT KEYS** TO THE BLOCK PRODUCER
+DO NOT COPY **COLD KEYS** OR **PAYMENT KEYS** TO THE BLOCK PRODUCER OR RELAY NODES.&#x20;
 {% endhint %}
 
 &#x20;
