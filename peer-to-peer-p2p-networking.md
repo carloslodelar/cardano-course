@@ -48,6 +48,34 @@ Learn more:&#x20;
 
 {% embed url="https://github.com/input-output-hk/cardano-node/issues/4559" %}
 
+### Example of a topology file for a node not involved in block production or block propagation
+
+```json
+{
+   "localRoots":[
+      {
+         "accessPoints":[
+            
+         ],
+         "advertise":false,
+         "valency":1
+      }
+   ],
+   "publicRoots":[
+      {
+         "accessPoints":[
+            {
+               "address":"relays-new.cardano-mainnet.iohk.io",
+               "port":3001
+            }
+         ],
+         "advertise":false
+      }
+   ],
+   "useLedgerAfterSlot":322000
+}
+```
+
 ### Example of topology files for a stakepool
 
 The block-producer node includes it's own relays (`x.x.x.x` and `y.y.y.y`) under local roots. Note that we use `"useLedgerAfterSlot": -1` to indicate that it should never use LedgerPeers.
@@ -116,36 +144,6 @@ The relay `x.x.x.x`  inlcudes its own block producer node (`z.z.z.z`) and the ot
    "useLedgerAfterSlot":322000
 }
 ```
-
-### Example of a topology file for a node not involved in block production or block propagation
-
-```json
-{
-   "localRoots":[
-      {
-         "accessPoints":[
-            
-         ],
-         "advertise":false,
-         "valency":1
-      }
-   ],
-   "publicRoots":[
-      {
-         "accessPoints":[
-            {
-               "address":"relays-new.cardano-mainnet.iohk.io",
-               "port":3001
-            }
-         ],
-         "advertise":false
-      }
-   ],
-   "useLedgerAfterSlot":322000
-}
-```
-
-
 
 ### Configuring the node to use P2P
 
