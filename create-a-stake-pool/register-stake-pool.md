@@ -7,7 +7,7 @@
 3. [Issue Operational Certificate](https://github.com/input-output-hk/cardano-node/blob/master/doc/stake-pool-operations/7\_KES\_period.md)
    1. Calculate current KES period
    2. Issue Operational Certificate
-4. [Register stake pool ](register-stake-pool.md)
+4. [Register stake pool ](https://github.com/input-output-hk/cardano-node/blob/master/doc/stake-pool-operations/8\_register\_stakepool.md#generate-stake-pool-registration-certificate)
    1. Create registration certificate
    2. Create delegation certificate
    3. Submit certificates
