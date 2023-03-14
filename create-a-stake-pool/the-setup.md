@@ -2,7 +2,7 @@
 
 A stake pool requires a number of artifacts:&#x20;
 
-* **Cold keys**: used to register and register a stake pool,  to control the stake pool parameters, issue operational certificate and  retiring a stake pool.
+* **Cold keys**: used to register a stake pool,  to control the stake pool parameters, issue operational certificate and  retiring a stake pool.
 * **Operational keys**, also called **KES key**s: used together with the operational certificate to sign blocks.
 * **VRF keys**: used in the slot leader election process, and to contribute to the evolving nonce.&#x20;
 * **Operational certificate:** to transfer stake rights from Cold keys to KES keys. The certificate is included in the block header.&#x20;
