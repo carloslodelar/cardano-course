@@ -85,6 +85,14 @@ cardano-node run --topology configuration/topology.json \
 
 ### Setup cardano-node to run as systemd service
 
+To run cardano-node as a systemd service, make sure that cardano-node and cardano-cli binaries are installed on:
+
+```
+/usr/local/bin/
+```
+
+Then, create the cardano-node.service file. We will save on `/etc/systemd/system/`
+
 ```
 sudo nano /etc/systemd/system/cardano-node.service
 ```
