@@ -21,7 +21,7 @@
   * [Register stake pool](create-a-stake-pool/register-stake-pool.md)
   * [Runtime System Options](create-a-stake-pool/runtime-system-options.md)
   * [Running the nodes](create-a-stake-pool/running-the-nodes.md)
-  * [Pool Maintainance](create-a-stake-pool/pool-maintainance.md)
+  * [Pool Operations/Maintenance](create-a-stake-pool/pool-operations-maintenance.md)
 * [Monitoring our nodes](monitoring-our-nodes.md)
 * [Cardano Governance](cardano-governance/README.md)
   * [Update proposals](cardano-governance/update-proposals.md)
