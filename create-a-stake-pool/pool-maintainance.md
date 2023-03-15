@@ -1,4 +1,4 @@
-# Pool Maintainance
+# Pool Operations/Maintenance
 
 1. [Renew KES key and operational certificate](https://github.com/input-output-hk/cardano-node/blob/master/doc/stake-pool-operations/7\_KES\_period.md)
    1. How to know if Operational certificate and KES keys have expired

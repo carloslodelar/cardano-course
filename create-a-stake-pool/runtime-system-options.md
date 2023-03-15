@@ -9,8 +9,6 @@ At a high level, the Haskell runtime system provides the following services:
 3. Concurrency and Parallelism: The Haskell runtime system provides support for concurrency and parallelism through features like lightweight threads, software transactional memory, and parallel arrays. This enables Haskell programs to take advantage of modern multicore processors and to execute computations in parallel.
 4. Exception Handling: The Haskell runtime system provides a mechanism for handling exceptions that occur during program execution. This includes both synchronous exceptions, which occur as a result of a program error, and asynchronous exceptions, which occur as a result of external events such as signals.
 
-In summary, the Haskell runtime system provides a set of essential services that enable Haskell programs to execute on a computer, including memory management, garbage collection, concurrency and parallelism, and exception handling.
-
 {% embed url="https://downloads.haskell.org/ghc/latest/docs/users_guide/runtime_control.html#runtime-system-rts-options" %}
 
 We can use RTS options to achieve a better perfromance from cardano-node, for example:
