@@ -76,8 +76,7 @@ cardano-cli stake-pool registration-certificate \
 --mainnet \
 --pool-relay-ipv4 <RELAY NODE PUBLIC IP> \
 --pool-relay-port <RELAY NODE PORT> \
---single-host-pool-relay STRING <The stake pool relay's DNS name that corresponds to an A or AAAA DNS record> \
---metadata-url https://git.io/JJWdJ \
+--metadata-url <URL> \
 --metadata-hash <POOL METADATA HASH> \
 --out-file pool-registration.cert
 ```
