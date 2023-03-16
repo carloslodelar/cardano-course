@@ -125,12 +125,6 @@ cardano-node run \
 
 ### Setup cardano-node to run as systemd service
 
-To run cardano-node as a systemd service, make sure that cardano-node and cardano-cli binaries are installed on:
-
-```
-/usr/local/bin/
-```
-
 Then, create the cardano-node.service file. We will save on `/etc/systemd/system/`
 
 ```
@@ -146,22 +140,22 @@ Description       = Cardano Node Service
 Wants             = network-online.target
 After             = network-online.target
 
- [Service]
-User              = clr
-Type              = simple
-WorkingDirectory  = /home/clr
-ExecStart         = /home/clr/startnode.sh
-KillSignal        = SIGINT
-RestartKillSignal = SIGINT
-TimeoutStopSec    = 300
-LimitNOFILE       = 32768
-Restart           = always
-RestartSec        = 5
-SyslogIdentifier  = cardano-node
+[Service]
+User=clr
+Type=simple
+WorkingDirectory=/home/clr
+ExecStartPre=/usr/bin/pgrep cardano-node || /home/clr/startnode.sh
+ExecStart=/home/clr/startnode.sh
+KillSignal=SIGINT
+RestartKillSignal=SIGINT
+TimeoutStopSec=300
+LimitNOFILE=32768
+Restart=always
+RestartSec=5
+SyslogIdentifier=cardano-node
 
  [Install]
 WantedBy          = multi-user.target
-
 ```
 
 ```
