@@ -30,7 +30,6 @@ cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2
 
 &#x20;Let's send 5,000 ada to our `paymentwithstake.addr`
 
-{% code overflow="wrap" %}
 ```bash
 cardano-cli transaction build-raw --babbage-era \
 --tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2 --out-file  /dev/stdout | jq -r 'keys[0]') \
@@ -40,7 +39,6 @@ cardano-cli transaction build-raw --babbage-era \
 --protocol-params-file pparams.json \
 --out-file tx.draft
 ```
-{% endcode %}
 
 ```bash
 cardano-cli transaction calculate-min-fee --tx-body-file tx.draft \
