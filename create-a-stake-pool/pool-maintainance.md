@@ -1,6 +1,6 @@
 # Pool Operations/Maintenance
 
-#### Query stake snapshot
+### Query stake snapshot
 
 ```bash
 cardano-cli query stake-snapshot \
@@ -8,7 +8,7 @@ cardano-cli query stake-snapshot \
 --stake-pool-id <pool_id>
 ```
 
-#### Query leadership schedule
+### Query leadership schedule
 
 ```bash
 cardano-cli query leadership-schedule \
@@ -28,7 +28,7 @@ cardano-cli query leadership-schedule \
 --next
 ```
 
-#### Check the validity of your KES keys:
+### Check the validity of your KES keys:
 
 ```bash
 > cardano-cli query kes-period-info \
@@ -36,7 +36,7 @@ cardano-cli query leadership-schedule \
 --op-cert-file opcert.cert
 ```
 
-#### Renew KES keys and operational certificate
+### Renew KES keys and operational certificate
 
 ```bash
 cardano-cli node key-gen-KES \
@@ -52,7 +52,7 @@ cardano-cli node key-gen-KES \
   --out-file opcert.cert
 ```
 
-#### Withdraw rewards
+### Withdraw rewards
 
 ```bash
 cardano-cli query stake-address-info \
@@ -60,7 +60,7 @@ cardano-cli query stake-address-info \
 --address $(cat stake.addr)
 ```
 
-#### Changing pool parameters
+### Changing pool parameters
 
 Updating pool parameters is done with a new registration certificate. This time you will not pay the 500 ADA deposit.&#x20;
 
@@ -116,7 +116,34 @@ cardano-cli transaction submit \
 --tx-file tx.sigend 
 ```
 
-#### Retire a stake pool
+### Update cardano-node and cardano-cli
+
+1. Build cardano-node and cardano-cli on you local machine
+2. Upload the new binaries to your node server
+
+```
+scp cardano-node cardano-cli user@host:~/ 
+```
+
+3. Stop your node
+
+```
+sudo systemctl stop cardano-node.service
+```
+
+4. Replace the old binaries with the new ones.
+
+```
+mv cardano* /usr/local/bin 
+```
+
+5. Restart the node
+
+```
+sudo systemctl start cardano-node.service
+```
+
+### Retire a stake pool
 
 {% hint style="info" %}
 Pool deposit is refunded to rewards address. do not unregister the stake address before you get the deposit back. \
