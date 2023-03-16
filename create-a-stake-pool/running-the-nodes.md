@@ -69,18 +69,58 @@ Relay
 }
 ```
 
-## Prepare startup script
+## Prepare startup scripts
 
+For the block producer
+
+```bash
+#!/bin/bash
+
+# Configuration variables
+TOPOLOGY_FILE="configuration/topology.json"
+CONFIG_FILE="configuration/config.json"
+DATABASE_PATH="db"
+SOCKET_PATH="socket/node.socket"
+KES_PATH="keys/kes.skey"
+VRF_PATH="keys/vrf.skey"
+OPCERT_PATH="keys/opcert.cert"
+HOST_ADDR="0.0.0.0"
+PORT="3000"
+
+cardano-node run \
+    --topology "${TOPOLOGY_FILE}" \
+    --database-path "${DATABASE_PATH}" \
+    --socket-path "${SOCKET_PATH}" \
+    --host-addr "${HOST_ADDR}" \
+    --shelley-kes-key "${KES_PATH}"  \ 
+    --shelley-vrf-key "${VRF_PATH}" \
+    --shelley-operational-certificate "${OPCERT_PATH}" \
+    --port "${PORT}" \
+    --config "${CONFIG_FILE}" \
+    +RTS -N2 -A16m -qg -qb --disable-delayed-os-memory-return -RTS
 ```
-#! /bin/bash
 
-cardano-node run --topology configuration/topology.json \
---database-path db \
---socket-path socket/node.socket \
---host-addr 0.0.0.0 \
---port 3000 \
---config configuration/config.json \
-+RTS -N2 -A16m -qg -qb --disable-delayed-os-memory-return -RTS
+For the Relays
+
+```bash
+#!/bin/bash
+
+# Configuration variables
+TOPOLOGY_FILE="configuration/topology.json"
+CONFIG_FILE="configuration/config.json"
+DATABASE_PATH="db"
+SOCKET_PATH="socket/node.socket"
+HOST_ADDR="0.0.0.0"
+PORT="3000"
+
+cardano-node run \
+    --topology "${TOPOLOGY_FILE}" \
+    --database-path "${DATABASE_PATH}" \
+    --socket-path "${SOCKET_PATH}" \
+    --host-addr "${HOST_ADDR}" \
+    --port "${PORT}" \
+    --config "${CONFIG_FILE}" \
+    +RTS -N2 -A16m -qg -qb --disable-delayed-os-memory-return -RTS
 ```
 
 ### Setup cardano-node to run as systemd service
