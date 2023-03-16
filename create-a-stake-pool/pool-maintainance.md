@@ -66,6 +66,7 @@ Updating pool parameters is done with a new registration certificate. This time 
 
 ```bash
 cardano-cli stake-pool registration-certificate \
+--testnet-magic 2 \
 --cold-verification-key-file cold.vkey \
 --vrf-verification-key-file vrf.vkey \
 --pool-pledge <AMOUNT TO PLEDGE IN LOVELACE> \
@@ -73,7 +74,6 @@ cardano-cli stake-pool registration-certificate \
 --pool-margin <POOL OPERATOR MARGIN > \
 --pool-reward-account-verification-key-file stake.vkey \
 --pool-owner-stake-verification-key-file stake.vkey \
---mainnet \
 --pool-relay-ipv4 <RELAY NODE PUBLIC IP> \
 --pool-relay-port <RELAY NODE PORT> \
 --metadata-url <URL> \
