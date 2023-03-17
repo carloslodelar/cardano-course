@@ -67,47 +67,7 @@ cardano-cli stake-pool metadata-hash --pool-metadata-file clrsp.json
 3c914463aa1cddb425fba48b21c4db31958ea7a30e077f756a82903f30e04905
 ```
 
-### [Issue Operational Certificate](https://github.com/input-output-hk/cardano-node/blob/master/doc/stake-pool-operations/7\_KES\_period.md)
-
-#### Calculate current KES period
-
-There are 129600 slots in a KES period
-
-```
-cat shelley-genesis.json | grep KES
-"slotsPerKESPeriod": 129600,
-"maxKESEvolutions": 62,
-```
-
-Current slot is can be obtained with query tip
-
-```
-cardano-cli query tip --testnet-magic 2 
-
->
-{
-    "block": 552276,
-    "epoch": 143,
-    "era": "Babbage",
-    "hash": "fe9c9b4b3f70262f60183bf0d8e72077c559345b22b47d4d4af91d4e5a4b5994",
-    "slot": 12380321,
-    "syncProgress": "100.00"
-}
-```
-
-Devide
-
-```
-echo $((12380321 / 129600))
-```
-
-Or in one line
-
-```
-echo $(($(cardano-cli query tip --testnet-magic 2 | jq .slot) / 129600))
-```
-
-#### [Register stake pool ](https://github.com/input-output-hk/cardano-node/blob/master/doc/stake-pool-operations/8\_register\_stakepool.md#generate-stake-pool-registration-certificate)
+### [Register stake pool ](https://github.com/input-output-hk/cardano-node/blob/master/doc/stake-pool-operations/8\_register\_stakepool.md#generate-stake-pool-registration-certificate)
 
 #### Create registration certificate
 
@@ -176,7 +136,55 @@ cardano-cli stake-pool id \
 --output-format bech32
 ```
 
+### [Issue Operational Certificate](https://github.com/input-output-hk/cardano-node/blob/master/doc/stake-pool-operations/7\_KES\_period.md)
 
+#### Calculate current KES period
+
+There are 129600 slots in a KES period
+
+```
+cat shelley-genesis.json | grep KES
+"slotsPerKESPeriod": 129600,
+"maxKESEvolutions": 62,
+```
+
+Current slot is can be obtained with query tip
+
+```
+cardano-cli query tip --testnet-magic 2 
+
+>
+{
+    "block": 552276,
+    "epoch": 143,
+    "era": "Babbage",
+    "hash": "fe9c9b4b3f70262f60183bf0d8e72077c559345b22b47d4d4af91d4e5a4b5994",
+    "slot": 12380321,
+    "syncProgress": "100.00"
+}
+```
+
+Devide
+
+```
+echo $((12380321 / 129600))
+```
+
+Or in one line
+
+```
+echo $(($(cardano-cli query tip --testnet-magic 2 | jq .slot) / 129600))
+```
+
+On the air-gappad machine
+
+```
+cardano-cli node issue-op-cert --kes-verification-key-file kes.vkey \
+--cold-signing-key-file cold.skey \
+--operational-certificate-issue-counter-file opcert.counter \
+--kes-period <current kes period> \
+--out-file opcert.cert
+```
 
 
 
