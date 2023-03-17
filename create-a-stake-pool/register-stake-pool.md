@@ -3,8 +3,8 @@
 ### [Register stake address](https://github.com/input-output-hk/cardano-node/blob/master/doc/stake-pool-operations/5\_register\_key.md)
 
 ```
-cardano-cli stake-address registration-certificate
---stake-verification-key-file stake.vkey
+cardano-cli stake-address registration-certificate \
+--stake-verification-key-file stake.vkey \
 --out-file stake.cert
 ```
 
