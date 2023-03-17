@@ -109,11 +109,72 @@ echo $(($(cardano-cli query tip --testnet-magic 2 | jq .slot) / 129600))
 
 #### [Register stake pool ](https://github.com/input-output-hk/cardano-node/blob/master/doc/stake-pool-operations/8\_register\_stakepool.md#generate-stake-pool-registration-certificate)
 
-Create registration certificate
+#### Create registration certificate
 
-1. Create delegation certificate
-2. Submit certificates
-3. [Get delegation from the testnet faucet](https://docs.cardano.org/cardano-testnet/tools/faucet)
+```
+cardano-cli stake-pool registration-certificate \
+--cold-verification-key-file cold.vkey \
+--vrf-verification-key-file vrf.vkey \
+--pool-pledge 9000000000 \
+--pool-cost 340000000 \
+--pool-margin .05 \
+--pool-reward-account-verification-key-file stake.vkey \
+--pool-owner-stake-verification-key-file stake.vkey \
+--testnet-magic 2 \
+--pool-relay-ipv4 <RELAY NODE PUBLIC IP> \
+--pool-relay-port <RELAY NODE PORT> \
+--metadata-url https://git.io/JJWdJ \
+--metadata-hash <POOL METADATA HASH> \
+--out-file pool-registration.cert
+```
+
+#### Create delegation certificate, to honor the pledge
+
+```
+cardano-cli stake-address delegation-certificate \
+--stake-verification-key-file stake.vkey \
+--cold-verification-key-file cold.vkey \
+--out-file delegation.cert
+```
+
+#### Submit certificates
+
+```
+cardano-cli transaction build \
+--testnet-magic 2 \
+--witness-override 3 \
+--tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2 --out-file  /dev/stdout | jq -r 'keys[1]') \
+--change-address $(cat payment.addr) \
+--certificate-file pool-registration.cert \
+--certificate-file delegation.cert \
+--out-file tx.raw
+```
+
+```
+cardano-cli transaction sign \
+--tx-body-file tx.raw \
+--signing-key-file payment.skey \
+--signing-key-file cold.skey
+--signing-key-file stake.skey \
+--testnet-magic 2 \
+--out-file tx.signed
+```
+
+```
+cardano-cli transaction submit \
+--testnet-magic 2 \
+--tx-file tx.signed 
+```
+
+#### [Get delegation from the testnet faucet](https://docs.cardano.org/cardano-testnet/tools/faucet)
+
+The faucet only takes the beck32 pool id
+
+```
+cardano-cli stake-pool id \
+--cold-verification-key-file cold.vkey \
+--output-format bech32
+```
 
 
 
