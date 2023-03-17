@@ -125,15 +125,19 @@ cardano-node run \
 ```
 
 {% hint style="info" %}
-If you get an error about VRF keys:\
-\
-VRF private key file /keylocation/vrf.skey has “other” file permissions. Please remove all “other” file permissions.\
-``\
-`Fix it with`&#x20;
+**If you get an error about VRF keys:**\
+****\
+**VRF private key file /keylocation/vrf.skey has “other” file permissions. Please remove all “other” file permissions.**\
+**``**\
+**`Fix it with`**&#x20;
 
-``
+**``**
 
-`chmod og-rwx vrf.skey`
+**chmod 0400 vrf.skey**
+
+**`OR`**
+
+**`chmod og-rwx vrf.skey`**
 {% endhint %}
 
 ### Setup cardano-node to run as systemd service
