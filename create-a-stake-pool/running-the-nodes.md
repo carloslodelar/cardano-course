@@ -121,7 +121,20 @@ cardano-node run \
     --port "${PORT}" \
     --config "${CONFIG_FILE}" \
     +RTS -N2 -A16m -qg -qb --disable-delayed-os-memory-return -RTS
+    
 ```
+
+{% hint style="info" %}
+If you get an error about VRF keys:\
+\
+VRF private key file /keylocation/vrf.skey has “other” file permissions. Please remove all “other” file permissions.\
+``\
+`Fix it with`&#x20;
+
+``
+
+`chmod og-rwx vrf.skey`
+{% endhint %}
 
 ### Setup cardano-node to run as systemd service
 
