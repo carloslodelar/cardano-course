@@ -12,7 +12,7 @@ cardano-cli stake-address registration-certificate \
 cardano-cli transaction build \
 --testnet-magic 2 \
 --witness-override 2 \
---tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2 --out-file  /dev/stdout | jq -r 'keys[1]') \
+--tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2 --out-file  /dev/stdout | jq -r 'keys[0]') \
 --change-address $(cat payment.addr) \
 --certificate-file registration.cert \
 --out-file tx.raw
