@@ -1,6 +1,6 @@
 # Monitoring our nodes
 
-Cardano-node can offers very important metrics about itself and the network. Makes them  available for Prometheus and EKG. Let's set up a nice dashboard monitor our nodes.&#x20;
+Cardano-node offers very important metrics about itself and the network. Makes them available for Prometheus and EKG. Let's set up a nice dashboard monitor our nodes.&#x20;
 
 ## Prometheus and node exporter
 
