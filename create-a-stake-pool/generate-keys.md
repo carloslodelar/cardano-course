@@ -209,7 +209,7 @@ mkdir keys
 Use a USB drive to bring `kes.skey vrf.skey` and `opcert.cert` to your working machine and from there, upload&#x20;
 
 ```bash
-scp kes.skey vrf.skey opcert.cert remote_username@10.10.0.2:/remote/directory
+scp kes.skey vrf.skey opcert.cert username@host:/remote/directory
 ```
 
 {% hint style="info" %}
