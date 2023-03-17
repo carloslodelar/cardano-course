@@ -144,7 +144,6 @@ After             = network-online.target
 User=clr
 Type=simple
 WorkingDirectory=/home/clr
-ExecStartPre=/usr/bin/pgrep cardano-node || /home/clr/startnode.sh
 ExecStart=/home/clr/startnode.sh
 KillSignal=SIGINT
 RestartKillSignal=SIGINT
