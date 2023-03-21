@@ -8,7 +8,9 @@ Our video tutorials are easy to follow and provide step-by-step instructions, ma
 
 ### Videos
 
-Click on the links below to open the video lesson of your interest, next to the module title you will find a link to the relevant section on the handbook.
+Click on the link to open the video lesson of your interest, next to the module title you will find a link to the relevant section on the handbook.
+
+
 
 Module 1 Setup the node (Handbook: [Module 1](handbook/module-1-build-and-run-the-node/))&#x20;
 
