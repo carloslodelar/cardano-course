@@ -23,19 +23,19 @@ Module 2 Basic operations (Handbook: [Module 2](building-and-running-the-node/))
 3. [Simple transactions with "build" command](https://youtu.be/AVz\_zsDd6wE)
 4. [Register stake address and create a delegation certificate](https://youtu.be/m0BmjjNt19w)
 
-Module 3 Protocol parameters
+Module 3 Protocol parameters (Handbook: [Module 3](protocol-parameters-and-configuration-files/))
 
 1. [Protocol parameters part 1/4](https://youtu.be/Czwc4U3B5k8)
 2. [Protocol parameters part 2/4](https://youtu.be/aZgmopk09aM)
 3. [Protocol parameters part 3/4](https://youtu.be/mJZSHfBr5aQ)
 4. [Protocol parameters part 4/4](https://youtu.be/uK7m5xdl\_Tw)
 
-Module 4 Peer to peer netwroking
+Module 4 Peer to peer networking (Handbook: [Module 4](peer-to-peer-p2p-networking.md))
 
-1. How P2P works
-2. Preparing the configuration and topology files
+1. [How P2P works](https://youtu.be/7YyCJ3fDN0I)
+2. [Preparing the configuration and topology files](https://youtu.be/DUZ-dqtDzQk)
 
-Module 5 Creating a stake pool on the preview testnet
+Module 5 Creating a stake pool on the preview testnet (Handbook: [Module 5](create-a-stake-pool/))
 
 1. [The setup](https://youtu.be/6AQaPdmxnfo)
 2. [Generate stake pool keys](https://youtu.be/xydi4\_pqOdo)
@@ -47,11 +47,14 @@ Module 5 Creating a stake pool on the preview testnet
 
 Module 6 Monitoring our nodes
 
-Module 7  Governance
+1. Setup prometheus and node exporter
+2. Configure a Grafana board
+
+Module 7  Governance (Handbook: [Module 7](cardano-governance/))
 
 1. Cardano Governance
 
-Module 8 Local cluster
+Module 8 Local cluster (Handbook: [Module 8](setting-up-a-local-cluster/))
 
 1. Create a local cluster that starts in Byron
 2. From Byron to Shelley
