@@ -22,4 +22,4 @@ The **block producer** must be well secured and **only** connect to its own rela
 
 P2P ensures duplex connections, using classic topology requires other relays to include our relays on their topology. Some agreements with other stake pool operators might be needed.&#x20;
 
-<figure><img src="../../.gitbook/assets/Screen Shot 2023-02-24 at 12.33.39.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Screen Shot 2023-02-24 at 12.33.39.png" alt=""><figcaption></figcaption></figure>

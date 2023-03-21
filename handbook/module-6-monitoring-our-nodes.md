@@ -1,4 +1,4 @@
-# Monitoring our nodes
+# Module 6 Monitoring our nodes
 
 Cardano-node offers very important metrics about itself and the network. Makes them available for Prometheus and EKG. Let's set up a nice dashboard monitor our nodes.&#x20;
 
@@ -6,7 +6,7 @@ Cardano-node offers very important metrics about itself and the network. Makes t
 
 A reasonable monitoring setup looks like this:
 
-<figure><img src=".gitbook/assets/monitoring.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/monitoring.png" alt=""><figcaption></figcaption></figure>
 
 First, lets configure our nodes to export metrics to prometheus, in the configuration file:
 

@@ -1,5 +1,5 @@
 ---
-cover: ../../.gitbook/assets/stake pool.png
+cover: ../.gitbook/assets/stake pool.png
 coverY: 0
 ---
 

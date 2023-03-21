@@ -1,5 +1,5 @@
 ---
-cover: ../.gitbook/assets/p2p.png
+cover: .gitbook/assets/p2p.png
 coverY: 0
 ---
 
@@ -23,7 +23,7 @@ coverY: 0
 
 We classify upstream peers in 3 nested categories: Known/Established/Active
 
-<figure><img src="../.gitbook/assets/Screen Shot 2023-03-10 at 13.40.58.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/Screen Shot 2023-03-10 at 13.40.58.png" alt=""><figcaption></figcaption></figure>
 
 ### What is next
 
