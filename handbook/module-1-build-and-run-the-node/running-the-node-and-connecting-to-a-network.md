@@ -1,6 +1,6 @@
 ---
 description: 'Objective: Learn how to run cardano-node and connect to different networks'
-cover: ../.gitbook/assets/CABAL (1).png
+cover: ../../.gitbook/assets/CABAL (1).png
 coverY: 0
 ---
 

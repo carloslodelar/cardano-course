@@ -2,7 +2,7 @@
 description: >-
   Objective:  Understand generation of certificates and creating transactions
   that include certificates
-cover: ../.gitbook/assets/CABAL (1).png
+cover: ../../.gitbook/assets/CABAL (1).png
 coverY: 0
 ---
 
@@ -157,4 +157,4 @@ In the transition between _**Epoch N+2 and Epoch N+3,**_ a new snapshot register
 
 Finally, at the transition between _**Epoch N+3**_ and _**Epoch N+4**_  the protocol distributes the rewards to all stake keys. Which show up in wallets at the very start of _**Epoch N+4**_ and credited to the wallet's balance and will count as part of the stake for the snapshot to be taken at the last slot of _**Epoch N+4**_
 
-<figure><img src="../.gitbook/assets/delegationcycle.gif" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/delegationcycle.gif" alt=""><figcaption></figcaption></figure>

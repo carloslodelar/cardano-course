@@ -10,13 +10,13 @@ Our video tutorials are easy to follow and provide step-by-step instructions, ma
 
 Click on the links below to open the video lesson of your interest. &#x20;
 
-Module 1 Setup the node
+Module 1 Setup the node ([Handbook link](handbook/module-2/))
 
 1. [Building the node with cabal](https://youtu.be/csqvbw3F\_BU)
 2. [Building the node with Nix](https://youtu.be/iREukg3-JSM)
 3. [Running the node and connecting to different networks](https://youtu.be/YlUljmlCPYs)
 
-Module 2 Basic operations
+Module 2 Basic operations (
 
 1. [Generate keys and addresses](https://youtu.be/8ZYuiRxPAZc)
 2. [Create simple transactions using "build-raw" command](https://youtu.be/rbst\_uiGpI4)
