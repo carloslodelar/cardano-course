@@ -47,8 +47,8 @@ Module 5 Creating a stake pool on the preview testnet (Handbook: [Module 5](crea
 
 Module 6 Monitoring our nodes
 
-1. Setup prometheus and node exporter
-2. Configure a Grafana board
+1. Setup prometheus and node exporter (WIP)
+2. Configure a Grafana board (WIP)
 
 Module 7  Governance (Handbook: [Module 7](cardano-governance/))
 
@@ -61,5 +61,13 @@ Module 8 Local cluster (Handbook: [Module 8](setting-up-a-local-cluster/))
 3. [Create a stake pool](https://youtu.be/0svni-Dy4zM)
 4. [Bring the "d" parameter down ](https://youtu.be/LNUzmhdGPbY)
 5. [From Shelley to Alonzo](https://youtu.be/mFyutul\_5mU)
-6. The Vasil Hardfork
-7. The SECP intra-era hardfork
+6. The Vasil Hardfork (WIP)
+7. The SECP intra-era hardfork (WIP)
+
+Module 9 Simple scripts and Plutus scripts (WIP)
+
+Module 10 New tracing system (WIP)
+
+Module 11 Running a SMASH server (WIP)
+
+Module 12 Running a token metadata server (WIP)
