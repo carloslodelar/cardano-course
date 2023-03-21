@@ -10,11 +10,46 @@ Our video tutorials are easy to follow and provide step-by-step instructions, ma
 
 Click on the links below to open the video lesson of your interest. &#x20;
 
+Module 1 Setup the node
+
 1. [Building the node with cabal](https://youtu.be/csqvbw3F\_BU)
 2. [Building the node with Nix](https://youtu.be/iREukg3-JSM)
 3. [Running the node and connecting to different networks](https://youtu.be/YlUljmlCPYs)
-4. [Generate keys and addresses](https://youtu.be/8ZYuiRxPAZc)
-5. [Create simple transactions using "build-raw" command](https://youtu.be/rbst\_uiGpI4)
-6. [Simple transactions with "build" command](https://youtu.be/AVz\_zsDd6wE)
-7. [Register stake address and create a delegation certificate](https://youtu.be/m0BmjjNt19w)
-8.
+
+Module 2 Basic operations
+
+1. [Generate keys and addresses](https://youtu.be/8ZYuiRxPAZc)
+2. [Create simple transactions using "build-raw" command](https://youtu.be/rbst\_uiGpI4)
+3. [Simple transactions with "build" command](https://youtu.be/AVz\_zsDd6wE)
+4. [Register stake address and create a delegation certificate](https://youtu.be/m0BmjjNt19w)
+
+Module 3 Protocol parameters
+
+1. [Protocol parameters part 1/4](https://youtu.be/Czwc4U3B5k8)
+2. [Protocol parameters part 2/4](https://youtu.be/aZgmopk09aM)
+3. [Protocol parameters part 3/4](https://youtu.be/mJZSHfBr5aQ)
+4. [Protocol parameters part 4/4](https://youtu.be/uK7m5xdl\_Tw)
+
+Module 4 Creating a stake pool on the preview testnet
+
+1. [The setup](https://youtu.be/6AQaPdmxnfo)
+2. [Generate stake pool keys](https://youtu.be/xydi4\_pqOdo)
+3. [Registering the stake pool on chain](https://youtu.be/9UK\_EFG-nkA)
+4. [Stakepool's topology file, startup script and systemd](https://youtu.be/iTMSztJSybU)
+5. Request delegation from the faucet (WIP)
+6. Stake snapshots (WIP)
+7. Stake pool operations (WIP)
+
+Module 5  Governance
+
+1. Cardano Governance
+
+Module 6 Local cluster
+
+1. Create a local cluster that starts in Byron
+2. From Byron to Shelley
+3. Create a stake pool
+4. Bring d parameter down&#x20;
+5. From Shelley to Alonzo
+6. The Vasil Hardfork
+7. The SECP intra-era hardfork
