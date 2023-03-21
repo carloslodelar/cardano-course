@@ -6,6 +6,10 @@ Whether you're a beginner or an experienced developer, our tutorials cover a ran
 
 Our video tutorials are easy to follow and provide step-by-step instructions, making it easy for you to get up and running with Cardano. The [Handbook](handbook/) section offers written guides and reference materials, which you can use to supplement your learning.&#x20;
 
+### Videos
+
+Click on the links below to open the video lesson of your interest. &#x20;
+
 1. [Building the node with cabal](https://youtu.be/csqvbw3F\_BU)
 2. [Building the node with Nix](https://youtu.be/iREukg3-JSM)
 3. [Running the node and connecting to different networks](https://youtu.be/YlUljmlCPYs)
