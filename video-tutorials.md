@@ -10,7 +10,7 @@ Our video tutorials are easy to follow and provide step-by-step instructions, ma
 
 Click on the links below to open the video lesson of your interest. &#x20;
 
-Module 1 Setup the node ([Handbook link](building-and-running-the-node/))
+Module 1 Setup the node (Handbook: [Module 1](handbook/module-1-build-and-run-the-node/))&#x20;
 
 1. [Building the node with cabal](https://youtu.be/csqvbw3F\_BU)
 2. [Building the node with Nix](https://youtu.be/iREukg3-JSM)
