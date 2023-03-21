@@ -5,6 +5,8 @@ coverY: 0
 
 # Module 4 Peer-to-peer (P2P) networking
 
+{% embed url="https://youtu.be/zOTfhcK-Wf4" %}
+
 ### What do we achieve with P2P
 
 * With automatic P2P, (registered) nodes can discover and establish connections with each other&#x20;
