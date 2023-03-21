@@ -56,10 +56,10 @@ Module 7  Governance (Handbook: [Module 7](cardano-governance/))
 
 Module 8 Local cluster (Handbook: [Module 8](setting-up-a-local-cluster/))
 
-1. Create a local cluster that starts in Byron
-2. From Byron to Shelley
-3. Create a stake pool
-4. Bring d parameter down&#x20;
-5. From Shelley to Alonzo
+1. [Create a local cluster that starts in Byron](https://youtu.be/2oAonlDUcNY)
+2. [From Byron to Shelley](https://youtu.be/8Sp2ljOrXXw)
+3. [Create a stake pool](https://youtu.be/0svni-Dy4zM)
+4. [Bring the "d" parameter down ](https://youtu.be/LNUzmhdGPbY)
+5. [From Shelley to Alonzo](https://youtu.be/mFyutul\_5mU)
 6. The Vasil Hardfork
 7. The SECP intra-era hardfork
