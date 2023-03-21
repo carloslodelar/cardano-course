@@ -1,5 +1,5 @@
 ---
-cover: ../../.gitbook/assets/CABAL (1).png
+cover: ../.gitbook/assets/CABAL (1).png
 coverY: 0
 ---
 
