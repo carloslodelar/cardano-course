@@ -41,14 +41,6 @@ Relay
    "localRoots":[
       {
          "accessPoints":[
-            {
-               "address":"z.z.z.z",
-               "port":3000
-            },
-            {
-               "address":"y.y.y.y",
-               "port":3000
-            }
          ],
          "advertise":false,
          "valency":1
