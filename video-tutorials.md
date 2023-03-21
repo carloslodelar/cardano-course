@@ -52,7 +52,7 @@ Module 6 Monitoring our nodes
 
 Module 7  Governance (Handbook: [Module 7](cardano-governance/))
 
-1. Cardano Governance
+1. [Cardano Governance](https://youtu.be/biUHK1UDkAY)
 
 Module 8 Local cluster (Handbook: [Module 8](setting-up-a-local-cluster/))
 
