@@ -16,7 +16,7 @@ Module 1 Setup the node (Handbook: [Module 1](handbook/module-1-build-and-run-th
 2. [Building the node with Nix](https://youtu.be/iREukg3-JSM)
 3. [Running the node and connecting to different networks](https://youtu.be/YlUljmlCPYs)
 
-Module 2 Basic operations (
+Module 2 Basic operations (Handbook: [Module 2](building-and-running-the-node/))
 
 1. [Generate keys and addresses](https://youtu.be/8ZYuiRxPAZc)
 2. [Create simple transactions using "build-raw" command](https://youtu.be/rbst\_uiGpI4)
@@ -30,7 +30,12 @@ Module 3 Protocol parameters
 3. [Protocol parameters part 3/4](https://youtu.be/mJZSHfBr5aQ)
 4. [Protocol parameters part 4/4](https://youtu.be/uK7m5xdl\_Tw)
 
-Module 4 Creating a stake pool on the preview testnet
+Module 4 Peer to peer netwroking
+
+1. How P2P works
+2. Preparing the configuration and topology files
+
+Module 5 Creating a stake pool on the preview testnet
 
 1. [The setup](https://youtu.be/6AQaPdmxnfo)
 2. [Generate stake pool keys](https://youtu.be/xydi4\_pqOdo)
@@ -40,11 +45,13 @@ Module 4 Creating a stake pool on the preview testnet
 6. Stake snapshots (WIP)
 7. Stake pool operations (WIP)
 
-Module 5  Governance
+Module 6 Monitoring our nodes
+
+Module 7  Governance
 
 1. Cardano Governance
 
-Module 6 Local cluster
+Module 8 Local cluster
 
 1. Create a local cluster that starts in Byron
 2. From Byron to Shelley
