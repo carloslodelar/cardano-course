@@ -1,5 +1,4 @@
 ---
-description: 'Objective: Learn how to use build-raw and build to create a simple transaction'
 cover: ../.gitbook/assets/CABAL (1).png
 coverY: 0
 ---

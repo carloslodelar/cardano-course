@@ -1,5 +1,4 @@
 ---
-description: 'Objective: Create payment and stake keys, build addresses'
 cover: ../.gitbook/assets/CABAL (1).png
 coverY: 0
 ---
@@ -9,22 +8,6 @@ coverY: 0
 ### A quick look to addresses
 
 {% embed url="https://cips.cardano.org/cips/cip19/" %}
-
-Create keys and addresses&#x20;
-
-```bash
-cardano-cli
-```
-
-```
-cardano-cli address
-```
-
-```
-cardano-cli address key-gen
-```
-
-Let's create a payment key pair
 
 Lets create a directory for our keys:
 
@@ -41,6 +24,8 @@ cardano-cli address key-gen \
 --signing-key-file payment.skey
 ```
 
+### Build an address
+
 Let's generate a type 6 address, one which associated stake can't be delegated.
 
 ```
@@ -49,6 +34,8 @@ cardano-cli address build \
 --out-file payment.addr \
 --testnet-magic 2
 ```
+
+### Install cardano-address
 
 Just for fun, lets install `cardano-address`&#x20;
 
@@ -95,7 +82,9 @@ Now, lets get some funds from the faucet:
 
 {% embed url="https://docs.cardano.org/cardano-testnet/tools/faucet" %}
 
-When sucesfull we can cardano-cli to verify that we have received the funds:
+### Query the balance of an address
+
+When successful we can cardano-cli to verify that we have received the funds:
 
 ```
 cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2

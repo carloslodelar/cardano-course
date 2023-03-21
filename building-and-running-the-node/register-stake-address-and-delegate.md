@@ -1,7 +1,4 @@
 ---
-description: >-
-  Objective:  Understand generation of certificates and creating transactions
-  that include certificates
 cover: ../.gitbook/assets/CABAL (1).png
 coverY: 0
 ---
