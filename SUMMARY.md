@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Cardano-node course](README.md)
+* [Handbook](handbook.md)
 * [Building and running the node](building-and-running-the-node/README.md)
   * [Building the node](building-and-running-the-node/building-the-node.md)
   * [Running the node and connecting to a network](building-and-running-the-node/running-the-node-and-connecting-to-a-network.md)
