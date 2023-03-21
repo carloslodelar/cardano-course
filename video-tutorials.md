@@ -1,9 +1,3 @@
----
-description: >-
-  Here you will find a collection of video tutorials and guides designed to help
-  you use cardano-node and cardano-cli.
----
-
 # Video tutorials
 
 1. Building the node with cabal
