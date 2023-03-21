@@ -1,5 +1,5 @@
 ---
-cover: ../../.gitbook/assets/governance.png
+cover: ../.gitbook/assets/governance.png
 coverY: 202
 ---
 
@@ -26,7 +26,7 @@ Transitioning from one era to the next is triggered by an **Update Proposal** th
 
 ### Byron era update proposals:
 
-<figure><img src="../../.gitbook/assets/upbyron.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/upbyron.png" alt=""><figcaption></figcaption></figure>
 
 The general mechanism for updating protocol parameters in Byron is as follows:
 
@@ -45,7 +45,7 @@ A "null" update proposal is one that neither increase the protocol version nor t
 
 The update mechanism in Shelley is simpler than it is in Byron. There is no distinction between votes and proposals: to \`\`vote'' for a proposal, a Genesis delegate submits the exact same proposal on a regular transaction signed by the delegate key. There is also no separate endorsement step.
 
-<figure><img src="../../.gitbook/assets/upshelley.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/upshelley.png" alt=""><figcaption></figcaption></figure>
 
 The procedure is as follows:
 
