@@ -224,13 +224,25 @@ sudo systemctl start cardano-node.service
 
 **Use journalctl to inspect you node logs:**
 
+Follow the logs in real time
+
 ```
 journalctl --unit=cardano-node --follow
 ```
 
+Show only the actual message (pure node logs) without any metadata from journalctl
+
+```
+journalctl --unit=cardano-node --follow --output=cat
+```
+
+Filter logs from a specific date
+
 ```
 journalctl --unit=cardano-node --since=today
 ```
+
+
 
 {% hint style="info" %}
 Useful resources: \
