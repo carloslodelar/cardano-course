@@ -27,7 +27,7 @@ In addition, the course will also include a series of exercises that will allow 
 
 The course consists of 2 main sections:&#x20;
 
-* the [video lessons](video-tutorials.md) where the instructor guides you through the process of doing things
+* the [video lessons](video-lessons.md) where the instructor guides you through the process of doing things
 * the [handbook](handbook/) containing detailed instructions and links to documentation, tutorials and other relevant materials. &#x20;
 
-<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td></td><td>Handbook</td><td></td><td><a href="handbook/">handbook</a></td><td><a href=".gitbook/assets/config files.png">config files.png</a></td></tr><tr><td></td><td>Video lessons</td><td></td><td><a href="video-tutorials.md">video-tutorials.md</a></td><td><a href=".gitbook/assets/stake pool.png">stake pool.png</a></td></tr></tbody></table>
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td></td><td>Handbook</td><td></td><td><a href="handbook/">handbook</a></td><td><a href=".gitbook/assets/config files.png">config files.png</a></td></tr><tr><td></td><td>Video lessons</td><td></td><td><a href="video-lessons.md">video-lessons.md</a></td><td><a href=".gitbook/assets/stake pool.png">stake pool.png</a></td></tr></tbody></table>

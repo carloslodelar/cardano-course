@@ -1,7 +1,7 @@
 # Table of contents
 
 * [Welcome!](README.md)
-* [Video tutorials](video-tutorials.md)
+* [Video lessons](video-lessons.md)
 * [Handbook](handbook/README.md)
   * [Module 1 Build and run the node](handbook/module-1-build-and-run-the-node/README.md)
     * [Building the node](building-and-running-the-node/building-the-node.md)
