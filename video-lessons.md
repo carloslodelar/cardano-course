@@ -1,4 +1,4 @@
-# Video tutorials
+# Video lessons
 
 Here you will find a collection of video tutorials and guides designed to help you become proficient in using these tools for your Cardano projects.
 
@@ -43,9 +43,8 @@ Module 5 Creating a stake pool on the preview testnet (Handbook: [Module 5](crea
 2. [Generate stake pool keys](https://youtu.be/xydi4\_pqOdo)
 3. [Registering the stake pool on chain](https://youtu.be/9UK\_EFG-nkA)
 4. [Stakepool's topology file, startup script and systemd](https://youtu.be/iTMSztJSybU)
-5. Request delegation from the faucet (WIP)
-6. Stake snapshots (WIP)
-7. Stake pool operations (WIP)
+5. [Request delegation from the faucet and Stake snapshots ](https://youtu.be/ZB4WC0-lErI)
+6. Stake pool operations (WIP)
 
 Module 6 Monitoring our nodes
 
