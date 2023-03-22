@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Cardano-node course](README.md)
+* [Welcome!](README.md)
 * [Video tutorials](video-tutorials.md)
 * [Handbook](handbook/README.md)
   * [Module 1 Build and run the node](handbook/module-1-build-and-run-the-node/README.md)

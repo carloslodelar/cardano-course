@@ -1,12 +1,9 @@
 ---
-description: A hands-on introduction to cardano-node and cardano-cli
 cover: .gitbook/assets/cardano.png
 coverY: -223
 ---
 
-# Cardano-node course
-
-### Welcome!&#x20;
+# Welcome!
 
 Welcome to the course on Cardano Node and Cardano-CLI! This course is designed to provide you with the knowledge and skills needed to use the Cardano Node and Cardano-CLI as an end user, a stake pool operator and a governance actor. By the end of this course, you will have a solid understanding of how to use the Cardano Node and Cardano-CLI in a variety of roles and scenarios.
 
