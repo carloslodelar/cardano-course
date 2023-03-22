@@ -11,3 +11,14 @@ You can query the stake snapshots:
 cardano-cli query stake-snapshot --testnet-magic 2 --stake-pool-id <POOL_ID>
 ```
 {% endcode %}
+
+```
+{
+    "activeStakeGo": 145769691498797,
+    "activeStakeMark": 147258956481483,
+    "activeStakeSet": 146034637994668,
+    "poolStakeGo": 9497641630,
+    "poolStakeMark": 9497641630,
+    "poolStakeSet": 9497641630
+}
+```
