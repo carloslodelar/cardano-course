@@ -41,6 +41,14 @@ Relay
    "localRoots":[
       {
          "accessPoints":[
+            {
+               "address":"z.z.z.z",
+               "port":3000
+            },
+            {
+               "address":"y.y.y.y",
+               "port":3000
+            }
          ],
          "advertise":false,
          "valency":1
@@ -50,9 +58,9 @@ Relay
       {
          "accessPoints":[
             {
-               "address":"relays-new.cardano-mainnet.iohk.io",
-               "port":3001
-            }
+               "address":"preview-node.world.dev.cardano.org",
+               "port":30002
+            }         
          ],
          "advertise":false
       }
