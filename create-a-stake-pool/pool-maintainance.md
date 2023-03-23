@@ -31,7 +31,7 @@ cardano-cli query leadership-schedule \
 ### Check the validity of your KES keys:
 
 ```bash
-> cardano-cli query kes-period-info \
+cardano-cli query kes-period-info \
 --testnet-magic 2 \
 --op-cert-file opcert.cert
 ```
