@@ -54,10 +54,59 @@ cardano-cli node key-gen-KES \
 
 ### Withdraw rewards
 
+Build the stake address
+
+```bash
+cardano-cli stake-address build \
+--testnet-magic 2 \
+--stake-verification-key-file stake.vkey \
+--out-file stake.addr
+```
+
+Query its balance
+
 ```bash
 cardano-cli query stake-address-info \
 --testnet-magic 2 \
 --address $(cat stake.addr)
+```
+
+example output&#x20;
+
+```
+[
+    {
+        "address": "stake_test1urdflexy7e3uuflpvs0zycrc7zc8rtg9hguglvwq545j7mqf09vna",
+        "delegation": "pool15r46gslrnhpe7ekvecfl895sm2pzhsxa8dhwh9ymgf06st3l86e",
+        "rewardAccountBalance": 1834628277
+    }
+]
+```
+
+Build a transaction to withdraw rewards
+
+<pre><code>cardano-cli transaction build \
+--testnet-magic 2 \
+<strong>--witness-override 2 \
+</strong><strong>--tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2 --out-file  /dev/stdout | jq -r 'keys[0]') \
+</strong>--withdrawal $(cat stake.addr)+1834628277 \
+--change-address $(cat payment.addr) \
+--out-file withdraw_tx.raw
+</code></pre>
+
+```
+cardano-cli transaction sign \
+--tx-body-file withdraw_tx.raw  \
+--signing-key-file payment.skey \
+--signing-key-file stake.skey \
+--testnet-magic 2 \
+--out-file withdraw_tx.signed
+```
+
+```
+cardano-cli transaction submit \
+--tx-file withdraw_rewards.signed \
+--testnet-magic 2
 ```
 
 ### Changing pool parameters
