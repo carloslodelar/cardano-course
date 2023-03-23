@@ -1,5 +1,11 @@
 # Running the nodes
 
+It will be usefull to set your time zone to UTC
+
+```
+sudo timedatectl set-timezone UTC
+```
+
 ## Prepare topology file
 
 Block producer
@@ -242,7 +248,11 @@ Filter logs from a specific date
 journalctl --unit=cardano-node --since=today
 ```
 
+Delete old logs
 
+```
+sudo journalctl --vacuum-time=5d
+```
 
 {% hint style="info" %}
 Useful resources: \
