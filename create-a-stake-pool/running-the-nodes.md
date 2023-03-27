@@ -25,7 +25,7 @@ Block producer
             }
          ],
          "advertise":false,
-         "valency":1
+         "valency":2
       }
    ],
    "publicRoots":[
