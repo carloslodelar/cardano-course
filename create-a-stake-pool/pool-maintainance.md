@@ -226,8 +226,8 @@ cardano-cli transaction sign \
 ```
 
 ```
-cardano-cli transaction submit
---testnet-magic 2
---tx-file tx.sigend
+cardano-cli transaction submit \
+--testnet-magic 2 \
+--tx-file tx.signed
 ```
 
