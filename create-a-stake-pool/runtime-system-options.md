@@ -42,7 +42,7 @@ cardano-node +RTS --info
 
 Users can choose to use different options by tweaking  `-with-rtsopts` on the node's cabal file, and building the node with the new options.&#x20;
 
-Alternatively, users can override options in `-with-rtsopts`  running cardano node with command-line RTS options, for example:&#x20;
+Alternatively, users can override options in `-with-rtsopts`  running cardano-node with command-line RTS options, for example:&#x20;
 
 ```
 cardano-node run --topology configuration/topology.json \
@@ -53,7 +53,7 @@ cardano-node run --topology configuration/topology.json \
 +RTS -N2 -A16m -qg -qb --disable-delayed-os-memory-return -RTS
 ```
 
-Where `+RTS ... -RTS`  Signal to the runtime system that we are passing runtime system options.
+Where `+RTS ... -RTS`  Signal to the runtime system that we are passing runtime system options. In the above example we are using:
 
 * **-N2**: When we specify "-N", the runtime system creates that many operating system threads and assigns each thread a Haskell computation to execute. The runtime system can then schedule these threads to execute concurrently on different cores of the CPU, which can lead to significant performance gains.
 * **-A16m**: Set the allocation area size used by the garbage collector.  In general settings >= 4MB can reduce performance in some cases, in particular for single threaded operation. However in a **parallel setting** increasing the allocation area to `16MB`, or even `64MB` can increase gc throughput significantly.
