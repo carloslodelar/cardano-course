@@ -114,7 +114,7 @@ cardano-cli transaction build \
 cardano-cli transaction sign \
 --tx-body-file tx.raw \
 --signing-key-file payment.skey \
---signing-key-file cold.skey
+--signing-key-file cold.skey \
 --signing-key-file stake.skey \
 --testnet-magic 2 \
 --out-file tx.signed
