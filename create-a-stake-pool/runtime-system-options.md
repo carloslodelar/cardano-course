@@ -11,11 +11,7 @@ At a high level, the Haskell runtime system provides the following services:
 
 {% embed url="https://downloads.haskell.org/ghc/latest/docs/users_guide/runtime_control.html#runtime-system-rts-options" %}
 
-IOG released binaries are built with the following RTS options (-with-rtsopts):  `-T -I0 -A16m -N2 --disable-delayed-os-memory-return` . Meaning that by default the node uses these options.&#x20;
-
-
-
-You can check it with:
+IOG-released binaries are built with the following RTS options (-with-rtsopts):  `-T -I0 -A16m -N2 --disable-delayed-os-memory-return` . Meaning that by default the node uses these options at runtime.  You can check it with:
 
 ```
 cardano-node +RTS --info
@@ -42,9 +38,11 @@ cardano-node +RTS --info
  ]
 ```
 
-&#x20;
+### Customized RTS options
 
-Users can choose to use different options by using tweaking  `-with-rtsopts` on the cabal file, and building the node with the new options. Alternatively, users can override options in `-with-rtsopts`  running cardano node with command-line RTS options, for example:&#x20;
+Users can choose to use different options by tweaking  `-with-rtsopts` on the node's cabal file, and building the node with the new options.&#x20;
+
+Alternatively, users can override options in `-with-rtsopts`  running cardano node with command-line RTS options, for example:&#x20;
 
 ```
 cardano-node run --topology configuration/topology.json \
