@@ -57,7 +57,7 @@ Relay
             }
          ],
          "advertise":false,
-         "valency":1
+         "valency":2
       }
    ],
    "publicRoots":[
