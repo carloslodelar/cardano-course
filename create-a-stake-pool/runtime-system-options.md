@@ -40,7 +40,11 @@ cardano-node +RTS --info
 
 ### Customized RTS options
 
-Users can choose to use different options by tweaking  `-with-rtsopts` on the node's cabal file, and building the node with the new options.&#x20;
+Users can choose to use different options by tweaking  `-with-rtsopts` on the node's [cabal file](https://github.com/input-output-hk/cardano-node/blob/master/cardano-node/cardano-node.cabal), and building the node with the new options. For example:
+
+```
+ghc-options:    "-with-rtsopts=-T -I0 -A16m -N2 -qg -qb --disable-delayed-os-memory-return"
+```
 
 Alternatively, users can override options in `-with-rtsopts`  running cardano-node with command-line RTS options, for example:&#x20;
 
