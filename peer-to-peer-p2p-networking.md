@@ -86,7 +86,8 @@ Learn more:&#x20;
 ### Block Producer
 
 * The block-producer node includes it's own relays (`x.x.x.x` and `y.y.y.y`) under local roots.
-* Note that value of valency must equal the number of local roots in that group.&#x20;
+* The value of valency must equal the number of local roots in that group.&#x20;
+* Do not use Public roots in a block producer.
 * Note that we use `"useLedgerAfterSlot": -1` to indicate that it should never use LedgerPeers.
 
 ```json
@@ -110,7 +111,6 @@ Learn more:&#x20;
    "publicRoots":[
       {
          "accessPoints":[
-            
          ],
          "advertise":false
       }
@@ -203,10 +203,8 @@ Assume a.a.a.a is a DNS of a partner pool, say it can resolve to 2 IPs. We want 
       }
    ],
    "useLedgerAfterSlot":1000000
-}
+} 
 ```
-
-### &#x20;
 
 ### Configuring the node to use P2P
 
