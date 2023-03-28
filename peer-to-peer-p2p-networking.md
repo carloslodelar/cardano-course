@@ -52,7 +52,8 @@ Learn more:&#x20;
 
 ### Example of a topology file for a node not involved in block production or block propagation
 
-* As a node that is not involved in block production/propagation we don't need local roots, we can put IOG relays under public roots.&#x20;
+* As a node that is not involved in block production/propagation we don't need local roots, we can put IOG relays under **Public Roots**.&#x20;
+* **Advertise** field does not have any effect at the moment. It is intended for later when peer sharing is released.&#x20;
 * Note that we are using    `"useLedgerAfterSlot":0` This will disable Ledger peers the first time we run the node, i.e. joining the network for the first time, the next time we run the node, it will pick-up ledger peers.&#x20;
 
 ```json
@@ -84,9 +85,10 @@ Learn more:&#x20;
 
 ### Block Producer
 
-* The block-producer node includes it's own relays (`x.x.x.x` and `y.y.y.y`) under local roots.
-* The value of valency must equal the number of local roots in that group.&#x20;
-* Do not use Public roots in a block producer.
+* The block-producer node includes it's own relays (`x.x.x.x` and `y.y.y.y`) under **Local Roots.**
+* **Advertise** is not used, this is for use when peer sharing is released.&#x20;
+* The value of **valency** must equal the number of local roots in that group.&#x20;
+* Do not use **Public Roots** in a block producer.
 * Note that we use `"useLedgerAfterSlot": -1` to indicate that it should never use LedgerPeers.
 
 ```json
