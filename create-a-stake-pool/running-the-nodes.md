@@ -6,16 +6,16 @@ It will be usefull to set your time zone to UTC
 sudo timedatectl set-timezone UTC
 ```
 
-## Prepare topology file
+## Prepare topology files
 
-Block Producer
+#### Block Producer
 
 {% tabs %}
 {% tab title="IP addresses on local roots" %}
 A basic setup where x.x.x.x and y.y.y.y are IP addresses of our own relays.&#x20;
 
-* `Valency` determines the total number of connections to local roots, i.e. if we want a hot connection to each relay we use `Valency 2`
-* We don't use PublicRoots in our Block Producer. &#x20;
+* `Valency` determines the total number of connections to local roots, i.e. if we want a hot connection with both x.x.x.x and y.y.y.y relays, we use `Valency 2.`Valency 1 would give us a hot connection to only one of them. &#x20;
+* Don't use PublicRoots in our Block Producer. &#x20;
 * `UseLedgerAfterSlot` is set to -1  so that we never use ledger peers on the block producer.&#x20;
 
 ```
@@ -126,9 +126,12 @@ We can set groups with different valencies. In this example, we will try to main
 {% endtab %}
 {% endtabs %}
 
-Block producer
+#### Relays
 
-Relay
+* Our relays will connect to the block producer z.z.z.z and to our other relay y.y.y.y.&#x20;
+* We use Valency 2 to tell the node maintain a hot connection with both nodes.&#x20;
+* Here we can use IOG relays (and any other trusted peer) under Public Roots&#x20;
+* Set `useLedgerAfterSlot: 1000000.` We just need to make sure that the target slot is not too old, in particular if we are syncing the chain for the first time.&#x20;
 
 ```
 {
@@ -159,7 +162,7 @@ Relay
          "advertise":false
       }
    ],
-   "useLedgerAfterSlot":322000
+   "useLedgerAfterSlot":1000000
 }
 ```
 
