@@ -97,7 +97,7 @@ The block-producer node includes it's own relays (`x.x.x.x` and `y.y.y.y`) under
             }
          ],
          "advertise":false,
-         "valency":1
+         "valency":2
       }
    ],
    "publicRoots":[
@@ -129,7 +129,7 @@ The relay `x.x.x.x`  inlcudes its own block producer node (`z.z.z.z`) and the ot
             }
          ],
          "advertise":false,
-         "valency":1
+         "valency":2
       }
    ],
    "publicRoots":[
@@ -143,7 +143,7 @@ The relay `x.x.x.x`  inlcudes its own block producer node (`z.z.z.z`) and the ot
          "advertise":false
       }
    ],
-   "useLedgerAfterSlot":322000
+   "useLedgerAfterSlot":1000000
 }
 ```
 
