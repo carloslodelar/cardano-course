@@ -10,11 +10,9 @@ sudo timedatectl set-timezone UTC
 
 #### Block Producer
 
-{% tabs %}
-{% tab title="IP addresses on local roots" %}
 A basic setup where x.x.x.x and y.y.y.y are IP addresses of our own relays.&#x20;
 
-* `Valency` determines the total number of connections to local roots, i.e. if we want a hot connection with both x.x.x.x and y.y.y.y relays, we use `Valency 2.`Valency 1 would give us a hot connection to only one of them. &#x20;
+* `Valency` determines the total number of connections to local roots, i.e. if we want a hot connection with both x.x.x.x and y.y.y.y relays, we use `Valency 2.`
 * Don't use PublicRoots in our Block Producer. &#x20;
 * `UseLedgerAfterSlot` is set to -1  so that we never use ledger peers on the block producer.&#x20;
 
@@ -46,85 +44,7 @@ A basic setup where x.x.x.x and y.y.y.y are IP addresses of our own relays.&#x20
    ],
    "useLedgerAfterSlot":-1
 }
-
 ```
-{% endtab %}
-
-{% tab title="DNS on local roots" %}
-Assume a DNS pool.dns.com that can resolve to 2 IP addresses, If we want to have a "hot" connection to at least one of the resolved IPs we use "valency": 1; if we want a "hot connection to both IPs we use "valency": 2
-
-```
-{
-   "localRoots":[
-      {
-         "accessPoints":[
-            {
-               "address":"pool.dns.com",
-               "port":3000
-            }
-         ],
-         "advertise":false,
-         "valency":2
-      }
-   ],
-   "publicRoots":[
-      {
-         "accessPoints":[
-            
-         ],
-         "advertise":false
-      }
-   ],
-   "useLedgerAfterSlot":-1
-}
-```
-{% endtab %}
-
-{% tab title="Setting different groups" %}
-We can set groups with different valencies. In this example, we will try to maintain a "hot" connection with both x.x.x.x and y.y.y.y (valency 2) and one hot connection to one of the resolved addresses of pool.dns.com
-
-```
-{
-  "localRoots": [
-    {
-      "accessPoints": [
-        {
-          "address": "x.x.x.x",
-          "port": 3000
-        },
-        {
-          "address": "y.y.y.y",
-          "port": 3000
-        }
-      ],
-      "advertise": false,
-      "valency": 2
-    },
-    {
-      "accessPoints": [
-        {
-          "address": "pool.dns.com",
-          "port": 4000
-        }
-      ],
-      "advertise": false,
-      "valency": 1
-    }
-  ],
-  "publicRoots": [
-    {
-      "accessPoints": [],
-      "advertise": false
-    }
-  ],
-  "useLedgerAfterSlot": -1
-}
-```
-
-\
-
-{% endtab %}
-{% endtabs %}
 
 #### Relays
 
