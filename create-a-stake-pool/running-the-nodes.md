@@ -8,7 +8,15 @@ sudo timedatectl set-timezone UTC
 
 ## Prepare topology file
 
-Block producer
+Block Producer
+
+{% tabs %}
+{% tab title="IP addresses on local roots" %}
+A basic setup where x.x.x.x and y.y.y.y are IP addresses of our own relays.&#x20;
+
+* `Valency` determines the total number of connections to local roots, i.e. if we want a hot connection to each relay we use `Valency 2`
+* We don't use PublicRoots in our Block Producer. &#x20;
+* `UseLedgerAfterSlot` is set to -1  so that we never use ledger peers on the block producer.&#x20;
 
 ```
 {
@@ -39,6 +47,46 @@ Block producer
    "useLedgerAfterSlot":-1
 }
 ```
+{% endtab %}
+
+{% tab title="DNS on local roots" %}
+```
+{
+   "localRoots":[
+      {
+         "accessPoints":[
+            {
+               "address":"x.x.x.x",
+               "port":3000
+            },
+            {
+               "address":"y.y.y.y",
+               "port":3000
+            }
+         ],
+         "advertise":false,
+         "valency":2
+      }
+   ],
+   "publicRoots":[
+      {
+         "accessPoints":[
+            
+         ],
+         "advertise":false
+      }
+   ],
+   "useLedgerAfterSlot":-1
+}
+```
+{% endtab %}
+
+{% tab title="IP address and DNS on local roots" %}
+
+{% endtab %}
+{% endtabs %}
+
+Block producer
 
 Relay
 
