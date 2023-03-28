@@ -54,7 +54,7 @@ cardano-node run --topology configuration/topology.json \
 --socket-path socket/node.socket \
 --port 3000 \
 --config configuration/config.json \
-+RTS -N2 -A16m -qg -qb --disable-delayed-os-memory-return -RTS
++RTS -N2 -A16m -I0 -qg -qb --disable-delayed-os-memory-return -RTS
 ```
 
 Where `+RTS ... -RTS`  Signal to the runtime system that we are passing runtime system options. In the above example we are using:
