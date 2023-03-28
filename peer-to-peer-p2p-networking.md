@@ -52,6 +52,9 @@ Learn more:&#x20;
 
 ### Example of a topology file for a node not involved in block production or block propagation
 
+* As a node that is not involved in block production/propagation we don't need local roots, we can put IOG relays under public roots.&#x20;
+* Note that we are using    `"useLedgerAfterSlot":0` This will disable Ledger peers the first time we run the node, i.e. joining the network for the first time, the next time we run the node, it will pick-up ledger peers.&#x20;
+
 ```json
 {
    "localRoots":[
@@ -67,14 +70,14 @@ Learn more:&#x20;
       {
          "accessPoints":[
             {
-               "address":"relays-new.cardano-mainnet.iohk.io",
-               "port":3001
+               "address":"preview-node.world.dev.cardano.org",
+               "port":30002
             }
          ],
          "advertise":false
       }
    ],
-   "useLedgerAfterSlot":322000
+   "useLedgerAfterSlot":0
 }
 ```
 
@@ -145,8 +148,8 @@ Learn more:&#x20;
       {
          "accessPoints":[
             {
-               "address":"relays-new.cardano-mainnet.iohk.io",
-               "port":3001
+               "address":"preview-node.world.dev.cardano.org",
+               "port":30002
             }
          ],
          "advertise":false
@@ -160,7 +163,7 @@ Learn more:&#x20;
 
 Assume a.a.a.a is a DNS of a partner pool, say it can resolve to 2 IPs. We want to have 1 "hot" connection to any of the resolved IPs without compromising our connections to our block producer z.z.z.z and our relay y.y.y.y; in that case we put them on separate groups:
 
-```
+```json
 {
    "localRoots":[
       {
@@ -192,8 +195,8 @@ Assume a.a.a.a is a DNS of a partner pool, say it can resolve to 2 IPs. We want 
       {
          "accessPoints":[
             {
-               "address":"relays-new.cardano-mainnet.iohk.io",
-               "port":3001
+               "address":"preview-node.world.dev.cardano.org",
+               "port":30002
             }
          ],
          "advertise":false
