@@ -161,7 +161,7 @@ Learn more:&#x20;
 
 ### Relays with more than one group in local roots
 
-Assume a.a.a.a is a DNS of a partner pool, say it can resolve to 2 IPs. We want to have 1 "hot" connection to any of the resolved IPs without compromising our connections to our block producer z.z.z.z and our relay y.y.y.y; in that case we put them on separate groups:
+Assume a.a.a.a is a DNS of a partner pool to which we always want to have a connection with. Let's say this DNS can resolve to 2 IPs. We want to have 1 "hot" connection to any of the resolved IPs without compromising our connections to our block producer z.z.z.z and our relay y.y.y.y; in that case we put them on separate groups:
 
 ```json
 {
