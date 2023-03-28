@@ -51,7 +51,7 @@ A basic setup where x.x.x.x and y.y.y.y are IP addresses of our own relays.&#x20
 {% endtab %}
 
 {% tab title="DNS on local roots" %}
-Assume a DNS pool.dns.com
+Assume a DNS pool.dns.com that can resolve to 2 IP addresses, If we want to have a "hot" connection to at least one of the resolved IPs we use "valency": 1; if we want a "hot connection to both IPs we use "valency": 2
 
 ```
 {
@@ -64,7 +64,7 @@ Assume a DNS pool.dns.com
             }
          ],
          "advertise":false,
-         "valency":1
+         "valency":2
       }
    ],
    "publicRoots":[
@@ -80,7 +80,47 @@ Assume a DNS pool.dns.com
 ```
 {% endtab %}
 
-{% tab title="IP address and DNS on local roots" %}
+{% tab title="Setting different groups" %}
+In this example, we will try to maintain a "hot" connection with both x.x.x.x and y.y.y.y (valency 2) and one hot connection to with one of the resolved addresses of pool.dns.com
+
+```
+{
+  "localRoots": [
+    {
+      "accessPoints": [
+        {
+          "address": "x.x.x.x",
+          "port": 3000
+        },
+        {
+          "address": "y.y.y.y",
+          "port": 3000
+        }
+      ],
+      "advertise": false,
+      "valency": 2
+    },
+    {
+      "accessPoints": [
+        {
+          "address": "pool.dns.com",
+          "port": 4000
+        }
+      ],
+      "advertise": false,
+      "valency": 1
+    }
+  ],
+  "publicRoots": [
+    {
+      "accessPoints": [],
+      "advertise": false
+    }
+  ],
+  "useLedgerAfterSlot": -1
+}
+```
+
 \
 
 {% endtab %}
