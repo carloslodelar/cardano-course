@@ -81,7 +81,7 @@ Assume a DNS pool.dns.com that can resolve to 2 IP addresses, If we want to have
 {% endtab %}
 
 {% tab title="Setting different groups" %}
-In this example, we will try to maintain a "hot" connection with both x.x.x.x and y.y.y.y (valency 2) and one hot connection to with one of the resolved addresses of pool.dns.com
+We can set groups with different valencies. In this example, we will try to maintain a "hot" connection with both x.x.x.x and y.y.y.y (valency 2) and one hot connection to one of the resolved addresses of pool.dns.com
 
 ```
 {
