@@ -60,7 +60,6 @@ Learn more:&#x20;
    "localRoots":[
       {
          "accessPoints":[
-            
          ],
          "advertise":false,
          "valency":1
