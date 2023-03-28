@@ -46,26 +46,25 @@ A basic setup where x.x.x.x and y.y.y.y are IP addresses of our own relays.&#x20
    ],
    "useLedgerAfterSlot":-1
 }
+
 ```
 {% endtab %}
 
 {% tab title="DNS on local roots" %}
+Assume a DNS pool.dns.com
+
 ```
 {
    "localRoots":[
       {
          "accessPoints":[
             {
-               "address":"x.x.x.x",
-               "port":3000
-            },
-            {
-               "address":"y.y.y.y",
+               "address":"pool.dns.com",
                "port":3000
             }
          ],
          "advertise":false,
-         "valency":2
+         "valency":1
       }
    ],
    "publicRoots":[
@@ -82,6 +81,7 @@ A basic setup where x.x.x.x and y.y.y.y are IP addresses of our own relays.&#x20
 {% endtab %}
 
 {% tab title="IP address and DNS on local roots" %}
+\
 
 {% endtab %}
 {% endtabs %}
