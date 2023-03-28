@@ -80,7 +80,11 @@ Learn more:&#x20;
 
 ### Example of topology files for a stakepool
 
-The block-producer node includes it's own relays (`x.x.x.x` and `y.y.y.y`) under local roots. Note that we use `"useLedgerAfterSlot": -1` to indicate that it should never use LedgerPeers.
+### Block Producer
+
+* The block-producer node includes it's own relays (`x.x.x.x` and `y.y.y.y`) under local roots.
+* Note that value of valency must equal the number of local roots in that group.&#x20;
+* Note that we use `"useLedgerAfterSlot": -1` to indicate that it should never use LedgerPeers.
 
 ```json
 {
@@ -112,7 +116,12 @@ The block-producer node includes it's own relays (`x.x.x.x` and `y.y.y.y`) under
 }
 ```
 
-The relay `x.x.x.x`  inlcudes its own block producer node (`z.z.z.z`) and the other relay (`y.y.y.y`) under local roots, and a few other root peers under public roots. Note that this time we do want to use LedgerPeers, thus we use `"useLedgerAfterSlot": 10000000`
+### Relays
+
+* The relay `x.x.x.x`  includes its own block producer node (`z.z.z.z`) and the other relay (`y.y.y.y`) under local roots.&#x20;
+* Again,  value of valency must equal the number of local roots in that group, so it's 2. &#x20;
+* We can have other peers under public roots.&#x20;
+* On relays we do want to use LedgerPeers, thus we use `"useLedgerAfterSlot": 10000000`
 
 ```json
 {
@@ -146,6 +155,55 @@ The relay `x.x.x.x`  inlcudes its own block producer node (`z.z.z.z`) and the ot
    "useLedgerAfterSlot":1000000
 }
 ```
+
+### Relays with more than one group in local roots
+
+Assume a.a.a.a is a DNS of a partner pool, say it can resolve to 2 IPs. We want to have 1 "hot" connection to any of the resolved IPs without compromising our connections to our block producer z.z.z.z and our relay y.y.y.y; in that case we put them on separate groups:
+
+```
+{
+   "localRoots":[
+      {
+         "accessPoints":[
+            {
+               "address":"z.z.z.z",
+               "port":3000
+            },
+            {
+               "address":"y.y.y.y",
+               "port":3000
+            }
+         ],
+         "advertise":false,
+         "valency":2
+      },
+      {
+         "accessPoints":[
+            {
+               "address":"a.a.a.a",
+               "port":3000
+            },
+         ],
+         "advertise":false,
+         "valency":1
+      }
+   ],
+   "publicRoots":[
+      {
+         "accessPoints":[
+            {
+               "address":"relays-new.cardano-mainnet.iohk.io",
+               "port":3001
+            }
+         ],
+         "advertise":false
+      }
+   ],
+   "useLedgerAfterSlot":1000000
+}
+```
+
+### &#x20;
 
 ### Configuring the node to use P2P
 
