@@ -114,7 +114,7 @@ cardano-node run \
     --shelley-operational-certificate "${OPCERT_PATH}" \
     --port "${PORT}" \
     --config "${CONFIG_FILE}" \
-    +RTS -N2 -A16m I0 -qg -qb --disable-delayed-os-memory-return -RTS
+    +RTS -N2 -A16m I0 --disable-delayed-os-memory-return -RTS
 ```
 
 For the Relays
@@ -137,7 +137,7 @@ cardano-node run \
     --host-addr "${HOST_ADDR}" \
     --port "${PORT}" \
     --config "${CONFIG_FILE}" \
-    +RTS -N2 -A16m I0 -qg -qb --disable-delayed-os-memory-return -RTS
+    +RTS -N2 -A16m I0 --disable-delayed-os-memory-return -RTS
     
 ```
 

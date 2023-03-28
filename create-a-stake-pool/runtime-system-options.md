@@ -43,7 +43,7 @@ cardano-node +RTS --info
 Users can choose to use different options by tweaking  `-with-rtsopts` on the node's [cabal file](https://github.com/input-output-hk/cardano-node/blob/master/cardano-node/cardano-node.cabal), and building the node with the new options. For example:
 
 ```
-ghc-options:    "-with-rtsopts=-T -I0 -A16m -N2 -qg -qb --disable-delayed-os-memory-return"
+ghc-options:    "-with-rtsopts=-T -I0 -A16m -N2 --disable-delayed-os-memory-return"
 ```
 
 Alternatively, users can override options in `-with-rtsopts`  running cardano-node with command-line RTS options, for example:&#x20;
@@ -54,13 +54,12 @@ cardano-node run --topology configuration/topology.json \
 --socket-path socket/node.socket \
 --port 3000 \
 --config configuration/config.json \
-+RTS -N2 -A16m -I0 -qg -qb --disable-delayed-os-memory-return -RTS
++RTS -N2 -A16m -I0 --disable-delayed-os-memory-return -RTS
 ```
 
 Where `+RTS ... -RTS`  Signal to the runtime system that we are passing runtime system options. In the above example we are using:
 
-* **-N2**: When we specify "-N", the runtime system creates that many operating system threads and assigns each thread a Haskell computation to execute. The runtime system can then schedule these threads to execute concurrently on different cores of the CPU, which can lead to significant performance gains.
-* **-A16m**: Set the allocation area size used by the garbage collector.  In general settings >= 4MB can reduce performance in some cases, in particular for single threaded operation. However in a **parallel setting** increasing the allocation area to `16MB`, or even `64MB` can increase gc throughput significantly.
-* \-**qg**: Enables parallel garbage collection support.
-* **-qb**: Use load-balancing in the parallel GC in generation ⟨gen⟩ and higher. Omitting ⟨gen⟩ disables load-balancing entirely. Load-balancing shares out the work of GC between the available cores.
+* **-N2**: Used to specify the number of threads to use for parallel execution. The `-N2` flag specifies that the Haskell runtime system should use two parallel threads.
+* **-A16m**: sets the maximum heap size for the generational garbage collector to 16 megabytes.&#x20;
+* **-I0:** The `-I0` flag is an option for the Haskell runtime system (RTS) that controls the amount of time spent performing idle garbage collection. Disabling idle garbage collection using `-I0` can be useful to maximize performance and minimize any potential overhead from garbage collection. However, it's important to note that disabling idle garbage collection can also lead to increased memory usage and longer pause times when garbage collection does need to be performed.
 * **--disable-delayed-os-memory-return**:  To control the behavior of the garbage collector when it releases memory back to the operating system. By default, the Haskell runtime system's garbage collector delays releasing memory back to the operating system. This is because releasing memory back to the operating system can be an expensive operation, and delaying it can improve performance.
