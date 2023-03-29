@@ -169,7 +169,7 @@ cardano-node run --topology configuration/topology.json \
 +RTS -qg -qb
 ```
 
-Where `+RTS ... -RTS`  Signal to the runtime system that we are passing runtime system options. In the above example we are using:
+Where `+RTS ...`  Signal to the runtime system that we are passing runtime system options. In the above example we are using:
 
 * ****[**-T**](https://downloads.haskell.org/ghc/latest/docs/users\_guide/runtime\_control.html#rts-flag--T)**:** Produce runtime-system statistics, such as the amount of time spent executing the program and in the garbage collector, the amount of memory allocated, the maximum size of the heap, and so on. The three variants give different levels of detail: `-T` collects the data but produces no output. Access the statistics using [GHC.Stats](https://downloads.haskell.org/ghc/latest/docs/libraries/base-4.18.0.0/GHC-Stats.html).
 * ****[**-N2**](https://downloads.haskell.org/ghc/latest/docs/users\_guide/using-concurrent.html#rts-options-for-smp-parallelism): Used to specify the number of threads to use for parallel execution. The `-N2` flag specifies that the Haskell runtime system should use two parallel threads.

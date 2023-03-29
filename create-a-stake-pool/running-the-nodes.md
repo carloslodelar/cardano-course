@@ -113,8 +113,7 @@ cardano-node run \
     --shelley-vrf-key "${VRF_PATH}" \
     --shelley-operational-certificate "${OPCERT_PATH}" \
     --port "${PORT}" \
-    --config "${CONFIG_FILE}" \
-    +RTS -N2 -A16m I0 --disable-delayed-os-memory-return -RTS
+    --config "${CONFIG_FILE}" 
 ```
 
 For the Relays
@@ -136,9 +135,7 @@ cardano-node run \
     --socket-path "${SOCKET_PATH}" \
     --host-addr "${HOST_ADDR}" \
     --port "${PORT}" \
-    --config "${CONFIG_FILE}" \
-    +RTS -N2 -A16m I0 --disable-delayed-os-memory-return -RTS
-    
+    --config "${CONFIG_FILE}"
 ```
 
 {% hint style="info" %}
