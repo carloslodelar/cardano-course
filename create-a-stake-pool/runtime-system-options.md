@@ -1,6 +1,6 @@
 # Runtime System Options
 
-The Haskell runtime system is a software layer that provides a set of services that enable Haskell programs to execute on a computer. It is responsible for managing the execution of Haskell programs, including memory management, garbage collection, and scheduling computations on available processor cores.
+The Haskell runtime system is a software layer that provides a set of services that enable Haskell programs to execute. It is responsible for managing the execution of Haskell programs, including memory management, garbage collection, and scheduling computations on available processor cores.
 
 At a high level, the Haskell runtime system provides the following services:
 
