@@ -1,11 +1,5 @@
 # Running the nodes
 
-It will be usefull to set your time zone to UTC
-
-```
-sudo timedatectl set-timezone UTC
-```
-
 ## Prepare topology files
 
 #### Block Producer
@@ -156,7 +150,13 @@ cardano-node run \
 
 ### Setup cardano-node to run as systemd service
 
-Then, create the cardano-node.service file. We will save on `/etc/systemd/system/`
+It will be usefull to set your time zone to UTC
+
+```
+sudo timedatectl set-timezone UTC
+```
+
+Create the cardano-node.service file. We will save on `/etc/systemd/system/`
 
 ```
 sudo nano /etc/systemd/system/cardano-node.service
