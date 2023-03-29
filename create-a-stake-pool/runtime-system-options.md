@@ -46,9 +46,9 @@ Users can choose to use different options by tweaking  `-with-rtsopts` on the no
 ghc-options:    "-with-rtsopts=-T -I0 -A16m -N2 --disable-delayed-os-memory-return"
 ```
 
-Alternatively, users can override options in `-with-rtsopts`  running cardano-node with command-line RTS options, for example:&#x20;
+&#x20;Users can extend and override options in `-with-rtsopts`  running cardano-node with command-line RTS options, for example:&#x20;
 
-```
+```bash
 cardano-node run --topology configuration/topology.json \
 --database-path db \
 --socket-path socket/node.socket \
