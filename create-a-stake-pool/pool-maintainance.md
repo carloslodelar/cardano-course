@@ -104,7 +104,7 @@ Build a transaction to withdraw rewards, use `--witness-override 2.` It will be 
 </strong><strong>--tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2 --out-file  /dev/stdout | jq -r 'keys[0]') \
 </strong>--withdrawal $(cat stake.addr)+1834628277 \
 --change-address $(cat payment.addr) \
---out-file withdraw_tx.raw
+--out-file withdraw-tx.raw
 </code></pre>
 
 Or something more automatic
@@ -116,7 +116,7 @@ cardano-cli transaction build \
 --tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2 --out-file  /dev/stdout | jq -r 'keys[0]') \
 --withdrawal $(cardano-cli query stake-address-info --testnet-magic 2 --address $(cat stake.addr) | jq -r '.[0].address + "+" + (.[0].rewardAccountBalance|tostring)') \
 --change-address $(cat payment.addr) \
---out-file withdraw_tx.raw
+--out-file withdraw-tx.raw
 ```
 
 ```
@@ -125,12 +125,12 @@ cardano-cli transaction sign \
 --signing-key-file payment.skey \
 --signing-key-file stake.skey \
 --testnet-magic 2 \
---out-file withdraw_tx.signed
+--out-file withdraw-tx.signed
 ```
 
 ```
 cardano-cli transaction submit \
---tx-file withdraw_rewards.signed \
+--tx-file withdraw-tx.signed \
 --testnet-magic 2
 ```
 
