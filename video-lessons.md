@@ -50,11 +50,12 @@ Module 5 Creating a stake pool on the preview testnet (Handbook: [Module 5](crea
    3. Query KES period info
    4. Renew KES Keys and operational certificate
       1. Fixing over incremented counter
-7. Stake pool operations part 2
-   1. Withdraw rewards
-   2. Change pool parameters
-   3. Updating cardano-node and cardano-cli
-   4. Retiring a stake pool
+7. [Stake pool operations part 2](https://youtu.be/2LHCWyvM4Lc)
+   1. Change pool parameters
+   2. Withdraw rewards
+8. Stake pool operations part 3 (WIP)
+   1. Updating cardano-node and cardano-cli
+   2. Retiring a stake pool
 
 Module 6 Monitoring our nodes
 
