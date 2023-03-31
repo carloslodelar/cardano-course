@@ -83,9 +83,22 @@ example output&#x20;
 ]
 ```
 
+We can use jq to parse the output, for example this jq command will help us :
+
+{% code overflow="wrap" %}
+```bash
+cardano-cli query stake-address-info \
+--testnet-magic 2 \
+--address $(cat stake.addr) | jq -r '.[0].address + "+" + (.[0].rewardAccountBalance|tostring)'
+
+stake_test1upcezzdyhjcdcgdh28gy3w2xkfdxvs0hmee2p0v25l9uc8cgpaq2e+1579546084
+```
+{% endcode %}
+
+\
 Build a transaction to withdraw rewards, use `--witness-override 2.` It will be signed by stake and payment keys
 
-<pre><code>cardano-cli transaction build \
+<pre class="language-bash"><code class="lang-bash">cardano-cli transaction build \
 --testnet-magic 2 \
 <strong>--witness-override 2 \
 </strong><strong>--tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2 --out-file  /dev/stdout | jq -r 'keys[0]') \
@@ -93,6 +106,18 @@ Build a transaction to withdraw rewards, use `--witness-override 2.` It will be 
 --change-address $(cat payment.addr) \
 --out-file withdraw_tx.raw
 </code></pre>
+
+Or something more automatic
+
+```bash
+cardano-cli transaction build \
+--testnet-magic 2 \
+--witness-override 2 \
+--tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2 --out-file  /dev/stdout | jq -r 'keys[0]') \
+--withdrawal $(cardano-cli query stake-address-info --testnet-magic 2 --address $(cat stake.addr) | jq -r '.[0].address + "+" + (.[0].rewardAccountBalance|tostring)') \
+--change-address $(cat payment.addr) \
+--out-file withdraw_tx.raw
+```
 
 ```
 cardano-cli transaction sign \
