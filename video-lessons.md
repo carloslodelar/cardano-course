@@ -35,7 +35,7 @@ Module 3 Protocol parameters (Handbook: [Module 3](protocol-parameters-and-confi
 Module 4 Peer to peer networking (Handbook: [Module 4](peer-to-peer-p2p-networking.md))
 
 1. [How P2P works](https://youtu.be/7YyCJ3fDN0I)
-2. [Preparing the configuration and topology files](https://youtu.be/DUZ-dqtDzQk)
+2. [Preparing the configuration and topology files](https://youtu.be/hOFVL6gjFrw)
 
 Module 5 Creating a stake pool on the preview testnet (Handbook: [Module 5](create-a-stake-pool/))
 
