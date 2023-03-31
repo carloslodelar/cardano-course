@@ -83,14 +83,20 @@ example output&#x20;
 ]
 ```
 
-We can use jq to parse the output, for example this jq command will help us :
+We can use jq to parse the output, for example this jq command outputs  "address+balance" which will be useful later when we build our transaction
 
 {% code overflow="wrap" %}
 ```bash
 cardano-cli query stake-address-info \
 --testnet-magic 2 \
 --address $(cat stake.addr) | jq -r '.[0].address + "+" + (.[0].rewardAccountBalance|tostring)'
+```
+{% endcode %}
 
+output:
+
+{% code overflow="wrap" %}
+```
 stake_test1upcezzdyhjcdcgdh28gy3w2xkfdxvs0hmee2p0v25l9uc8cgpaq2e+1579546084
 ```
 {% endcode %}
