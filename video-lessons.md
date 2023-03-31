@@ -44,7 +44,8 @@ Module 5 Creating a stake pool on the preview testnet (Handbook: [Module 5](crea
 3. [Registering the stake pool on chain](https://youtu.be/9UK\_EFG-nkA)
 4. [Stakepool's topology file, startup script and systemd](https://youtu.be/1CaMmsgFPnw)
 5. [Request delegation from the faucet and Stake snapshots ](https://youtu.be/t5BOFmy6IYg)
-6. Stake pool operations (WIP)
+6. [Stake pool operations part 1](https://youtu.be/NCdsk75-7NA)
+7. Stake pool operations part 2
 
 Module 6 Monitoring our nodes
 
