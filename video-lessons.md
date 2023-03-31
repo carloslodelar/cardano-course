@@ -45,7 +45,16 @@ Module 5 Creating a stake pool on the preview testnet (Handbook: [Module 5](crea
 4. [Stakepool's topology file, startup script and systemd](https://youtu.be/1CaMmsgFPnw)
 5. [Request delegation from the faucet and Stake snapshots ](https://youtu.be/t5BOFmy6IYg)
 6. [Stake pool operations part 1](https://youtu.be/NCdsk75-7NA)
+   1. Query stake snapshot
+   2. Query leadership schedule
+   3. Query KES period info
+   4. Renew KES Keys and operational certificate
+      1. Fixing over incremented counter
 7. Stake pool operations part 2
+   1. Withdraw rewards
+   2. Change pool parameters
+   3. Updating cardano-node and cardano-cli
+   4. Retiring a stake pool
 
 Module 6 Monitoring our nodes
 

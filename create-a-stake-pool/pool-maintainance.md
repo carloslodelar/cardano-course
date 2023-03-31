@@ -83,7 +83,7 @@ example output&#x20;
 ]
 ```
 
-Build a transaction to withdraw rewards
+Build a transaction to withdraw rewards, use `--witness-override 2.` It will be signed by stake and payment keys
 
 <pre><code>cardano-cli transaction build \
 --testnet-magic 2 \
