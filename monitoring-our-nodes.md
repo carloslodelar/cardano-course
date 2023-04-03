@@ -8,7 +8,13 @@ A reasonable monitoring setup looks like this, where we have a dedicated monitor
 
 <figure><img src=".gitbook/assets/monitoring-cardano-node.png" alt=""><figcaption></figcaption></figure>
 
-First, lets configure our nodes to export metrics to prometheus, in the configuration file:
+#### Configure cardano-node to export metrics:
+
+\
+First, let's configure our nodes to export metrics to prometheus.&#x20;
+
+* Turn on log metrics setting it's value to "true"
+* Set the listening port for `hasPrometheus`.  The default value is 127.0.0.1, let's change that to 0.0.0.0 so that it can accept connections from our monitoring server. You can use any port you want, I'll stick with the default 12798
 
 ```
 {
@@ -23,7 +29,9 @@ First, lets configure our nodes to export metrics to prometheus, in the configur
 }
 ```
 
-Now, lets install node-exporter in our relays and block producer nodes.&#x20;
+#### Install Prometheus node exporter
+
+Prometheus node\_exporter can be useful as well, so let's install node\_exporter:&#x20;
 
 * [https://prometheus.io/docs/guides/node-exporter/#monitoring-linux-host-metrics-with-the-node-exporter](https://prometheus.io/docs/guides/node-exporter/#monitoring-linux-host-metrics-with-the-node-exporter)
 
@@ -65,11 +73,9 @@ sudo systemctl daemon-reload
 sudo systemctl start node_exporter
 ```
 
-* Update firewall rules to allow connections to port 9100, the default port for node-exporter
+* Update firewall rules to allow connections to port 12798 (to access our cardano-node metrics) and 9100 (the default port for node-exporter)
 
-
-
-Install prometheus on our monitoring server
+#### Install prometheus on our monitoring server
 
 * [https://prometheus.io/download/](https://prometheus.io/download/)
 * Configure prometheus
