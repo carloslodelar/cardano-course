@@ -61,6 +61,9 @@ After=network.target
 User=clr
 Type=simple
 ExecStart=/usr/local/bin/node_exporter
+KillSignal=SIGINT
+RestartKillSignal=SIGINT
+TimeoutStopSec=300
 Restart=always
 RestartSec=5
 
