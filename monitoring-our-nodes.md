@@ -4,9 +4,9 @@ Cardano-node offers very important metrics about itself and the network. Makes t
 
 ## Prometheus and node exporter
 
-A reasonable monitoring setup looks like this, where we have a dedicated monitoring server which will scrape and collect data from all our nodes:
+A reasonable monitoring setup looks like this, where we have a dedicated monitoring server which will scrape and collect data from all our nodes and make it available for a Grafana dashboard:
 
-<figure><img src=".gitbook/assets/monitoring.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/monitoring-cardano-node.png" alt=""><figcaption></figcaption></figure>
 
 First, lets configure our nodes to export metrics to prometheus, in the configuration file:
 
