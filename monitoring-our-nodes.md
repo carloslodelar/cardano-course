@@ -29,7 +29,7 @@ First, let's configure our nodes to export metrics to prometheus.&#x20;
 }
 ```
 
-#### Install Prometheus node exporter
+#### Install Prometheus node exporter (Optional)
 
 Prometheus node\_exporter can be useful as well, so let's install node\_exporter:&#x20;
 
@@ -61,9 +61,9 @@ After=network.target
 User=clr
 Type=simple
 ExecStart=/usr/local/bin/node_exporter
-KillSignal=SIGINT
-RestartKillSignal=SIGINT
-TimeoutStopSec=300
+KillSignal=SIGTERM
+RestartKillSignal=SIGTERM
+TimeoutStopSec=30s
 Restart=always
 RestartSec=5
 
