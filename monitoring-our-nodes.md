@@ -96,13 +96,13 @@ rule_files:
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
-   - job_name: 'CRSE-node' # To scrape data from the cardano node
+   - job_name: 'CARDANO-NODE' # To scrape data from the cardano node
      scrape_interval: 1s
      static_configs:
        - targets: ['x.x.x.x:12798']
        - targets: ['y.y.y.y:12798']
        - targets: ['z.z.z.z:12798']
-   - job_name: 'CRSE-exporter' # To scrape data from a node exporter to monitor your linux host metrics.
+   - job_name: 'EXPORTER' # To scrape data from a node exporter to monitor your linux host metrics.
      scrape_interval: 1s
      static_configs:
        - targets: ['x.x.x.x:9100']
