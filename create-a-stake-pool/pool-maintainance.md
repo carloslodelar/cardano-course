@@ -36,6 +36,24 @@ cardano-cli query kes-period-info \
 --op-cert-file opcert.cert
 ```
 
+```
+✓ Operational certificate's KES period is within the correct KES period interval
+✓ The operational certificate counter agrees with the node protocol state counter
+{
+    "qKesCurrentKesPeriod": 107,
+    "qKesEndKesInterval": 166,
+    "qKesKesKeyExpiry": null,
+    "qKesMaxKESEvolutions": 62,
+    "qKesNodeStateOperationalCertificateNumber": 2,
+    "qKesOnDiskOperationalCertificateNumber": 2,
+    "qKesRemainingSlotsInKesPeriod": 7632249,
+    "qKesSlotsPerKesPeriod": 129600,
+    "qKesStartKesInterval": 104
+}
+```
+
+
+
 ### Renew KES keys and operational certificate
 
 ```bash
@@ -51,6 +69,8 @@ cardano-cli node key-gen-KES \
   --kes-period <current kes period> \
   --out-file opcert.cert
 ```
+
+Upload the new `kes.skey` and `opcert.cert` to your BP node.
 
 ### Withdraw rewards
 
