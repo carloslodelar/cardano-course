@@ -61,6 +61,8 @@ After=network.target
 User=clr
 Type=simple
 ExecStart=/usr/local/bin/node_exporter
+Restart=always
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
