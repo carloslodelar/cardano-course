@@ -4,7 +4,7 @@ Cardano-node offers very important metrics about itself and the network. Makes t
 
 ## Prometheus and node exporter
 
-A reasonable monitoring setup looks like this:
+A reasonable monitoring setup looks like this, where we have a dedicated monitoring server which will scrape and collect data from all our nodes:
 
 <figure><img src=".gitbook/assets/monitoring.png" alt=""><figcaption></figcaption></figure>
 
@@ -26,7 +26,19 @@ First, lets configure our nodes to export metrics to prometheus, in the configur
 Now, lets install node-exporter in our relays and block producer nodes.&#x20;
 
 * [https://prometheus.io/docs/guides/node-exporter/#monitoring-linux-host-metrics-with-the-node-exporter](https://prometheus.io/docs/guides/node-exporter/#monitoring-linux-host-metrics-with-the-node-exporter)
-* Update firewall rules to allow connections to port 9100
+
+```
+wget https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz
+tar xfvz node_exporter-1.5.0.linux-amd64.tar.gz
+```
+
+* Copy node-exporter executable to /usr/local/bin/
+
+```
+sudo cp node_exporter-1.5.0.linux-amd64/node_exporter /usr/local/bin/
+```
+
+* Update firewall rules to allow connections to port 9100, the default port for node-exporter
 
 
 
@@ -57,14 +69,18 @@ rule_files:
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
-   - job_name: 'cardano' # To scrape data from the cardano node
+   - job_name: 'CRSE-node' # To scrape data from the cardano node
      scrape_interval: 1s
      static_configs:
-       - targets: ['127.0.0.1:12798']
-   - job_name: 'node' # To scrape data from a node exporter to monitor your linux host metrics.
+       - targets: ['x.x.x.x:12798']
+       - targets: ['y.y.y.y:12798']
+       - targets: ['z.z.z.z:12798']
+   - job_name: 'CRSE-exporter' # To scrape data from a node exporter to monitor your linux host metrics.
      scrape_interval: 1s
      static_configs:
-       - targets: ['127.0.0.1:9100']
+       - targets: ['x.x.x.x:9100']
+       - targets: ['y.y.y.y:9100']
+       - targets: ['z.z.z.z:9100']
 ```
 
 * Run Prometheus
