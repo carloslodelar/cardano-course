@@ -32,10 +32,37 @@ wget https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_e
 tar xfvz node_exporter-1.5.0.linux-amd64.tar.gz
 ```
 
-* Copy node-exporter executable to /usr/local/bin/
+* Copy `node_exporter` executable to /usr/local/bin/
+
+```bash
+sudo cp node_exporter-1.5.0.linux-amd64/node_exporter /usr/local/bin/
+```
+
+Configure node exporter as a systemd unit
 
 ```
-sudo cp node_exporter-1.5.0.linux-amd64/node_exporter /usr/local/bin/
+sudo nano /etc/systemd/system/node_exporter.service
+```
+
+```yaml
+[Unit]
+Description=Node Exporter
+After=network.target
+
+[Service]
+User=clr
+Type=simple
+ExecStart=/usr/local/bin/node_exporter
+
+[Install]
+WantedBy=multi-user.target
+```
+
+* start node exporter
+
+```
+sudo systemctl daemon-reload
+sudo systemctl start node_exporter
 ```
 
 * Update firewall rules to allow connections to port 9100, the default port for node-exporter
