@@ -108,13 +108,13 @@ rule_files:
 # Here it's Prometheus itself.
 scrape_configs:
    - job_name: 'CARDANO-NODE' # To scrape data from the cardano node
-     scrape_interval: 1s
+     scrape_interval: 5s
      static_configs:
        - targets: ['x.x.x.x:12798']
        - targets: ['y.y.y.y:12798']
        - targets: ['z.z.z.z:12798']
    - job_name: 'EXPORTER' # To scrape data from a node exporter to monitor your linux host metrics.
-     scrape_interval: 1s
+     scrape_interval: 5s
      static_configs:
        - targets: ['x.x.x.x:9100']
        - targets: ['y.y.y.y:9100']
