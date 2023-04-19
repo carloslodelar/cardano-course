@@ -60,7 +60,7 @@ Module 5 Creating a stake pool on the preview testnet (Handbook: [Module 5](crea
 
 Module 6 Monitoring our nodes
 
-1. [Setup prometheus and node exporter](https://youtu.be/iqAmwhk7djE)
+1. [Setup a monitoring server with prometheus](https://youtu.be/iqAmwhk7djE)
 2. Configure a Grafana board (WIP)
 
 Module 7  Governance (Handbook: [Module 7](cardano-governance/))
