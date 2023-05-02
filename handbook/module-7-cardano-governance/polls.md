@@ -14,9 +14,10 @@ cardano-cli governance create-poll \
 --answer "Cheeto" \
 --answer "Ham" \
 --answer "Rocco" \
---out-file names.poll
+--out-file poll.json
 ```
 
+{% code overflow="wrap" %}
 ```
 Poll created successfully.
 Please submit a transaction using the resulting metadata.
@@ -73,13 +74,14 @@ Please submit a transaction using the resulting metadata.
 Hint (1): Use '--json-metadata-detailed-schema' and '--metadata-json-file' from the build or build-raw commands.
 Hint (2): You can redirect the standard output of this command to a JSON file to capture metadata.
 
-Note: A serialized version of the poll suitable for sharing with participants has been generated at 'names.poll'.
+Note: A serialized version of the poll suitable for sharing with participants has been generated at 'poll.json'.
 ```
+{% endcode %}
 
 Let's take a look to the serialized version of the poll
 
 ```
-cat names.poll
+cat poll.json
 
 {
     "type": "GovernancePoll",
@@ -88,11 +90,11 @@ cat names.poll
 }
 ```
 
-Participants (SPO's) will use `names.poll` file to create and submit their responses&#x20;
+Participants (SPO's) will use `poll.json`file to create and submit their responses&#x20;
 
 ### Answering the poll
 
-Use `answer-poll` to create a response. You can use the `--answer`option to record your answer right away, or omit it to access the interactive method.&#x20;
+Use `answer-poll` to create a response. You can use the `--answer`option to record your answer right away providing the index of your response, or omit it to access the interactive method.&#x20;
 
 Note that in any case we are redirecting the output to `poll-answer.json`
 
@@ -100,7 +102,7 @@ Note that in any case we are redirecting the output to `poll-answer.json`
 
 ```
 cardano-cli governance answer-poll \
---poll-file names.poll \
+--poll-file poll.json \
 --answer 0 > poll-answer.json
 ```
 
@@ -123,7 +125,7 @@ Hint (2): You can redirect the standard output of this command to a JSON file to
 
 ```
 cardano-cli governance answer-poll \
---poll-file names.poll > poll-answer.json
+--poll-file poll.json > poll-answer.json
 ```
 
 {% code overflow="wrap" %}
@@ -146,5 +148,53 @@ Hint (2): You can redirect the standard output of this command to a JSON file to
 ```
 {% endcode %}
 
-#### Submit the response
+#### Submit the response in a transaction
 
+```
+cardano-cli transaction build \
+    --babbage-era \
+    --testnet-magic 42 \
+    --tx-in $(cardano-cli query utxo --address $(cat utxo-keys/utxo1.addr) --testnet-magic 42 --out-file  /dev/stdout | jq -r 'keys[0]') \
+    --change-address $(cat utxo-keys/utxo1.addr) \
+    --metadata-json-file poll-answer.json \
+    --json-metadata-detailed-schema \
+    --required-signer pools/cold1.skey \
+    --out-file answer.tx
+```
+
+```
+cardano-cli transaction sign \
+--tx-body-file answer.tx \
+--signing-key-file pools/cold1.skey \
+--signing-key-file utxo-keys/utxo1.skey \
+--testnet-magic 42 \
+--out-file answer.signed
+```
+
+```
+cardano-cli transaction submit \
+--testnet-magic 42 \
+--tx-file answer.signed
+
+Transaction successfully submitted.
+```
+
+#### Verifying Answers <a href="#verifying-answers" id="verifying-answers"></a>
+
+Finally, it’s possible to verify answers seen on-chain using the `governance verify-poll` command. What ‘verify’ means here is two-folds:
+
+* It checks that an answer is valid within the context of a given survey
+* It returns the list of signatories key hashes found in the transaction;\
+  in the case of a valid submission, one key hash will correspond to a known\
+  stake pool id.
+
+```
+cardano-cli governance verify-poll \
+--poll-file poll.json \
+--signed-tx-file answer.signed
+
+Found valid poll answer, signed by:
+[
+    "bea662a2aaefd5b4c7b92aaa5d8b59d9d22fb7034e5b309d56d54084"
+]
+```
