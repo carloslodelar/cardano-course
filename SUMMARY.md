@@ -29,6 +29,7 @@
   * [Module 6 Monitoring our nodes](monitoring-our-nodes.md)
   * [Module 7 Cardano Governance](cardano-governance/README.md)
     * [Update proposals](cardano-governance/update-proposals.md)
+    * [Polls](handbook/module-7-cardano-governance/polls.md)
   * [Module 8 Setting up a local cluster](setting-up-a-local-cluster/README.md)
     * [Create a local cluster](setting-up-a-local-cluster/create-a-local-cluster.md)
     * [Spend genesis UTXO](setting-up-a-local-cluster/spend-genesis-utxo.md)
