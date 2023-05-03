@@ -278,7 +278,7 @@ Get the metadata hash and save it to a file:&#x20;
 
 ```bash
 cardano-cli stake-pool metadata-hash \
---pool-metadata-file pool1/poolmetadata.json --out-file poolmetadata.hash
+--pool-metadata-file pool1/poolmetadata.json --out-file pool1/poolmetadata.hash
 ```
 
 Generate the registration certificate
@@ -296,7 +296,7 @@ cardano-cli stake-pool registration-certificate \
 --pool-relay-ipv4 127.0.0.1 \
 --pool-relay-port 3002 \
 --metadata-url https://git.io/JJWdJ \
---metadata-hash $(cat poolmetadata.hash) \
+--metadata-hash $(cat pool1/poolmetadata.hash) \
 --out-file pool1/pool-registration.cert
 ```
 
