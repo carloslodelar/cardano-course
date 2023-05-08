@@ -92,7 +92,7 @@ cat poll.cbor
 
 Participants (SPO's) will use `poll.cbor`file to create and submit their responses&#x20;
 
-The Delegate key holder proposing the poll will publish the poll in a transaction. To build such transaction we do:
+The _Delegate-key-holder_ proposing the poll will publish the poll in a transaction. To build such transaction we do:
 
 {% code overflow="wrap" %}
 ```
@@ -108,7 +108,7 @@ cardano-cli transaction build \
 ```
 {% endcode %}
 
-Note that when building the transaction can use `--required-signer-hash` (as opposed to `--required-signer`) since the signing keys are on cold storage and build requires access to a live node.\
+Note that when building the transaction we can use `--required-signer-hash` or `--required-signer` . Since the signing keys are on cold storage and build requires access to a live node, in this example we are using `--required-signer-hash` \
 \
 Sign the transaction with the delegate signing key and with a payment signing key.&#x20;
 
