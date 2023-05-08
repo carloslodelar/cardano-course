@@ -451,6 +451,4 @@ ConwayGenesisFile: genesis/shelley/genesis.conway.json
 ...
 ```
 
-\
-&#x20;
-
+Finally, it is possible that dbsync complains about StartTime mismatch. If this happens, please make sure to replace the `StartTime` on `Shelley Genesis` with the value from `StartTime` on `Byron Genesis.` &#x20;
