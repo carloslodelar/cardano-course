@@ -254,7 +254,7 @@ Hint (2): You can redirect the standard output of this command to a JSON file to
 
 ```
 cardano-cli governance answer-poll \
---poll-file poll.json > poll-answer.json
+--poll-file poll.cbor > poll-answer.json
 ```
 
 {% code overflow="wrap" %}
