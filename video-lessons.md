@@ -66,9 +66,7 @@ Module 6 Monitoring our nodes
 Module 7  Governance (Handbook: [Module 7](cardano-governance/))
 
 1. [Cardano Governance](https://youtu.be/biUHK1UDkAY)
-2. SPO Polls (WIP)
-   1. Create polls
-   2. Answer polls
+2. [SPO Polls](https://youtu.be/pGiZzH5caL8)
 
 Module 8 Local cluster (Handbook: [Module 8](setting-up-a-local-cluster/))
 
