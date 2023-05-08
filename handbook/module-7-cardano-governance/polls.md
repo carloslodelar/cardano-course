@@ -2,29 +2,6 @@
 
 On cardano-node 8.0.0 we introduced a new subset of commands to create polls among stake pool operators. A poll is official when it is signed using a signature from the genesis delegate keys.&#x20;
 
-{% hint style="info" %}
-To practice creating and answering polls we will create a local cluster.
-{% endhint %}
-
-This example was done with
-
-```
-cardano-node --version 
-cardano-node 8.0.0 - linux-x86_64 - ghc-8.10 
-git rev d78924027e8ffb9c49ea2fc791648bf63d3fc3db
-```
-
-To create the local-cluster files please clone cardano-node repo and edit the file `scripts/babbage/mkfiles.sh`; comment (#) the line&#x20;
-
-```
-# echo "TestConwayHardForkAtEpoch: 0" >> "${ROOT}/configuration.yaml" 
-```
-
-this will make your local cluster start in Babbage era on epoch 0. This is relevant because transactions won't work in conway era just yet, so we want to stay in Babbage. \
-
-
-When you are ready run the `mkfiles.sh` script and start your nodes.  &#x20;
-
 ### Create a poll
 
 ```
@@ -423,3 +400,31 @@ Found valid poll answer with 1 signatories
     "939b194da1f5620da299f855ca9dca0c5a6b33d2584b7164cc69a3f7"
 ]
 ```
+
+
+
+{% hint style="info" %}
+To practice creating and answering polls you can create a local cluster.
+{% endhint %}
+
+The examples above were done with
+
+```
+cardano-node --version 
+cardano-node 8.0.0 - linux-x86_64 - ghc-8.10 
+git rev d78924027e8ffb9c49ea2fc791648bf63d3fc3db
+```
+
+To create the local-cluster files please clone cardano-node repo and edit the file `scripts/babbage/mkfiles.sh`; comment (#) the line&#x20;
+
+```
+# echo "TestConwayHardForkAtEpoch: 0" >> "${ROOT}/configuration.yaml" 
+```
+
+this will make your local cluster start in Babbage era on epoch 0. This is relevant because transactions won't work in conway era just yet, so we want to stay in Babbage.&#x20;
+
+When you are ready run the `mkfiles.sh` script and start your nodes. \
+
+
+&#x20; &#x20;
+
