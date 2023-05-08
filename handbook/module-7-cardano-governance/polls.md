@@ -175,6 +175,8 @@ witnesses:
 ```
 {% endcode %}
 
+Note that required signers and witnesses fields match our delegate keys data, so we are ok. &#x20;
+
 And finally submit the transaction and usual:
 
 ```
