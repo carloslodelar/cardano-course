@@ -124,7 +124,7 @@ cardano-cli transaction sign \
 When we inspect the transaction (question.tx.signed)&#x20;
 
 ```
-cardano-cli transaction view --tx-file question.signed
+cardano-cli transaction view --tx-file question.tx.signed
 ```
 
 we should see something like this: &#x20;
@@ -180,7 +180,7 @@ And finally submit the transaction and usual:
 ```
 cardano-cli transaction submit \
 --testnet-magic 42 \
---tx-file question.signed
+--tx-file question.tx.signed
 ```
 
 We can use _**dbsync**_ to check how it was registered online:
@@ -211,17 +211,31 @@ Of course, the hash matches the hash of the delegate key. This way, when SPOs se
 
 ### Answering the poll
 
-Use `answer-poll` to create a response. You can use the `--answer`option to record your answer right away providing the index of your response, or omit it to access the interactive method.&#x20;
+Use `answer-poll` to create a response. You can use the `--answer`option to record your answer right away by providing the index of your response, or omit it to access the interactive method.&#x20;
 
 Note that in any case we are redirecting the output to `poll-answer.json`
+
+The proponents of the poll will have distributed the `poll.cbor` file from above. As an SPO, you will need it to answer the poll. Again, it will look like this:
+
+```
+cat poll.cbor
+
+{
+    "type": "GovernancePoll",
+    "description": "An on-chain poll for SPOs: Best name for a dog?",
+    "cborHex": "a1185ea200817442657374206e616d6520666f72206120646f673f0183816643686565746f816348616d8165526f63636f"
+}
+```
 
 #### Using --answer
 
 ```
 cardano-cli governance answer-poll \
---poll-file poll.json \
+--poll-file poll.cbor \
 --answer 0 > poll-answer.json
 ```
+
+In this example we vote for option with index \[0], Cheeto.&#x20;
 
 {% code overflow="wrap" %}
 ```
@@ -275,7 +289,7 @@ cardano-cli transaction build \
     --change-address $(cat utxo-keys/utxo1.addr) \
     --metadata-json-file poll-answer.json \
     --json-metadata-detailed-schema \
-    --required-signer pools/cold1.skey \
+    --required-signer-hash $(cat pools/pool.hex.id) \
     --out-file answer.tx
 ```
 
@@ -285,15 +299,89 @@ cardano-cli transaction sign \
 --signing-key-file pools/cold1.skey \
 --signing-key-file utxo-keys/utxo1.skey \
 --testnet-magic 42 \
---out-file answer.signed
+--out-file answer.tx.signed
 ```
+
+When we inspect the signed transaction, required signers and witnesses fields should include our cold key signature:
+
+```
+cardano-cli transaction view --tx-file answer.tx.signed
+```
+
+{% code overflow="wrap" %}
+```
+auxiliary scripts: null
+certificates: null
+collateral inputs: []
+era: Babbage
+fee: 173377 Lovelace
+inputs:
+- a218b5e10b821a407b82378daaef83991672ecf0b8eca234569cba73efde1000#0
+metadata:
+  '94':
+  - - 2
+    - '"@%\184\148''\143s\204\DEL\129\156=}\230\231\149W>,\ENQ\SYN7q\170S\218\196\189ij\198`"'
+  - - 3
+    - 0
+mint: null
+outputs:
+- address: addr_test1vzm3wju8c3u5w4vdq2ydes73vqz9kfx40j99cwjjvpefpmcg36av4
+  address era: Shelley
+  amount:
+    lovelace: 299999652894
+  datum: null
+  network: Testnet
+  payment credential key hash: b7174b87c47947558d0288dcc3d160045b24d57c8a5c3a52607290ef
+  reference script: null
+  stake reference: null
+reference inputs: []
+required signers (payment key hashes needed for scripts):
+- 939b194da1f5620da299f855ca9dca0c5a6b33d2584b7164cc69a3f7
+return collateral: null
+total collateral: null
+update proposal: null
+validity range:
+  lower bound: null
+  upper bound: null
+withdrawals: null
+witnesses:
+- key: VKey (VerKeyEd25519DSIGN "e292c1986cc4882dc187258526da83b80b9905104d661bb9ee3aca81aafe9c9d")
+  signature: SignedDSIGN (SigEd25519DSIGN "7a5ca4aab04e58d7d32e5e9ce8cea5db260997e69d2f287d67e2d4421cb6ef9353ebaf18558f6a08604daa18c2b4c81006fa7d30a3f1ffdb8accb0f09a99580f")
+- key: VKey (VerKeyEd25519DSIGN "da962fd3e59db09e724d698914a83bf7eacfbdccae07a78957c03b617f06e26e")
+  signature: SignedDSIGN (SigEd25519DSIGN "f99334fa305ea2941b631ab7b2c5badd57234045b6d181dbbb11b68a3c584e80d2bcb56f76a01436e2b5635c43bbeb25fabc23578c2dccac21070d004ceb5602")
+```
+{% endcode %}
 
 ```
 cardano-cli transaction submit \
 --testnet-magic 42 \
---tx-file answer.signed
+--tx-file answer.tx.signed
+```
 
-Transaction successfully submitted.
+We can use _**dbsync**_ again to track responses:
+
+```
+SELECT * FROM tx_metadata WHERE key = 94;
+```
+
+```
+ id | key |                                        json                                         |                                                bytes                                                 | tx_id
+----+-----+-------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+-------
+  1 |  94 | {"0": ["Best name for a dog?"], "1": [["Cheeto"], ["Ham"], ["Rocco"]]}              | \xa1185ea200817442657374206e616d6520666f72206120646f673f0183816643686565746f816348616d8165526f63636f |    11
+  2 |  94 | {"2": "0x4025b894278f73cc7f819c3d7de6e795573e2c05163771aa53dac4bd696ac660", "3": 0} | \xa1185ea20258204025b894278f73cc7f819c3d7de6e795573e2c05163771aa53dac4bd696ac6600300                 |    12
+(2 rows)
+```
+
+```
+SELECT * FROM extra_key_witness;
+```
+
+```
+ id |                            hash                            | tx_id
+----+------------------------------------------------------------+-------
+  1 | \x186c97a1194d2c62e3bfafef7b471cb0bb4ce09322ca44a908e81bee |    11
+  2 | \x939b194da1f5620da299f855ca9dca0c5a6b33d2584b7164cc69a3f7 |    12
+(2 rows)
 ```
 
 #### Verifying Answers <a href="#verifying-answers" id="verifying-answers"></a>
@@ -307,11 +395,10 @@ Finally, it’s possible to verify answers seen on-chain using the `governance v
 
 ```
 cardano-cli governance verify-poll \
---poll-file poll.json \
---signed-tx-file answer.signed
-
-Found valid poll answer, signed by:
+--poll-file poll.cbor \
+--tx-file answer.tx.signed
+Found valid poll answer with 1 signatories
 [
-    "bea662a2aaefd5b4c7b92aaa5d8b59d9d22fb7034e5b309d56d54084"
+    "939b194da1f5620da299f855ca9dca0c5a6b33d2584b7164cc69a3f7"
 ]
 ```
