@@ -104,7 +104,21 @@ cardano-cli transaction build \
 ```
 {% endcode %}
 
-Note that when building the transaction we can use `--required-signer-hash` or `--required-signer` . Since the signing keys are on cold storage and build requires access to a live node, in this example we are using `--required-signer-hash` \
+{% hint style="info" %}
+When building the transaction we can use `--required-signer-hash` or `--required-signer` .&#x20;
+
+
+
+Since the delegate signing keys are on cold storage and `build` command requires access to a live node, in this example we are using `--required-signer-hash` \
+\
+To get the hash of a delegate key we run:
+
+```
+cardano-cli genesis key-hash --verification-key-file delegate-keys/delegate1.vkey
+0f455663bd57b2145bcea12302664a842bd4b8e69a1e05bb9f8e45ed
+```
+{% endhint %}
+
 \
 Sign the transaction with the delegate signing key and with a payment signing key.&#x20;
 
