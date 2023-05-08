@@ -401,7 +401,7 @@ Found valid poll answer with 1 signatories
 ]
 ```
 
-
+#### To test this on a local cluster
 
 {% hint style="info" %}
 To practice creating and answering polls you can create a local cluster.
@@ -415,16 +415,42 @@ cardano-node 8.0.0 - linux-x86_64 - ghc-8.10
 git rev d78924027e8ffb9c49ea2fc791648bf63d3fc3db
 ```
 
-To create the local-cluster files please clone cardano-node repo and edit the file `scripts/babbage/mkfiles.sh`; comment (#) the line&#x20;
+To create the local-cluster files please clone cardano-node repo and edit the file [scripts/babbage/mkfiles.sh](https://github.com/input-output-hk/cardano-node/blob/master/scripts/babbage/mkfiles.sh); you will need to comment (#) the line&#x20;
 
 ```
 # echo "TestConwayHardForkAtEpoch: 0" >> "${ROOT}/configuration.yaml" 
 ```
 
-this will make your local cluster start in Babbage era on epoch 0. This is relevant because transactions won't work in conway era just yet, so we want to stay in Babbage.&#x20;
+this will make your local cluster start in Babbage era on epoch 0. This is relevant because by default the script starts in Conway era, but transactions won't work in Conway era just yet, so we want to stay in Babbage.&#x20;
 
-When you are ready run the `mkfiles.sh` script and start your nodes. \
+When you are ready run the `mkfiles.sh` script and start your nodes.&#x20;
 
+Also note that if you want to use _dbsync_, you will need to add the hashes of Byron, Shelley and Alonzo genesis files to the `confoguration.yaml` file produced by the `mkfiles.sh` script, for example:&#x20;
 
-&#x20; &#x20;
+```
+cardano-cli byron genesis print-genesis-hash \
+--genesis-json example/genesis/byron/genesis.json
+```
+
+```
+cardano-cli genesis hash \
+--genesis example/genesis/shelley/genesis.json
+```
+
+&#x20;  Add the hashes to the configuration file (by default it only contains the paths):
+
+```
+...
+ByronGenesisFile: genesis/byron/genesis.json
+ByronGenesisHash: f80aef63f3ad1dbd52ac08d783e27f3d94d10ce6904001a0ff98a9f3fb2a1592
+ShelleyGenesisFile: genesis/shelley/genesis.json
+ShelleyGenesisHash: 3d3ab4fd42e0edea27c04e55d4c39b0e3d99c44b3cb0cd65ec78960d8be79c74
+AlonzoGenesisFile: genesis/shelley/genesis.alonzo.json
+AlonzoGenesisHash: b9c80a36b643e1b0be59e5aabe9d5ca705635ac4583ff217ce7283ad96fd7d5c
+ConwayGenesisFile: genesis/shelley/genesis.conway.json
+...
+```
+
+\
+&#x20;
 
