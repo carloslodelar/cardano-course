@@ -92,7 +92,7 @@ cat poll.cbor
 
 Participants (SPO's) will use `poll.cbor`file to create and submit their responses&#x20;
 
-The Delegate key holder proposing the poll will publish the poll in a transaction, to build the transaction we do:
+The Delegate key holder proposing the poll will publish the poll in a transaction. To build such transaction we do:
 
 {% code overflow="wrap" %}
 ```
