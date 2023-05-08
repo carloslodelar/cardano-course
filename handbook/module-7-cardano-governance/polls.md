@@ -8,7 +8,11 @@ To practice creating and answering polls we will create a local cluster.
 
 This example was done with
 
-`cardano-node --version cardano-node 8.0.0 - linux-x86_64 - ghc-8.10 git rev d78924027e8ffb9c49ea2fc791648bf63d3fc3db`
+```
+cardano-node --version 
+cardano-node 8.0.0 - linux-x86_64 - ghc-8.10 
+git rev d78924027e8ffb9c49ea2fc791648bf63d3fc3db
+```
 
 To create the local-cluster files please clone cardano-node repo and edit the file `scripts/babbage/mkfiles.sh`; comment (#) the line&#x20;
 
