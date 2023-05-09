@@ -1,5 +1,13 @@
 # Polls
 
+{% hint style="success" %}
+This tutorial requires cardano-node 8.0.0 \
+\
+[https://github.com/input-output-hk/cardano-node/releases/tag/8.0.0](https://github.com/input-output-hk/cardano-node/releases/tag/8.0.0)
+{% endhint %}
+
+
+
 On cardano-node 8.0.0 we introduced a new subset of commands to create polls among stake pool operators. A poll is official when it is signed using a signature from the genesis delegate keys.&#x20;
 
 ### Create a poll
@@ -14,7 +22,7 @@ cardano-cli governance create-poll \
 --out-file poll.cbor > poll.json
 ```
 
-`--nonce` is a optional, but recommended option. It takes a UINT,  it is used as a unique identifier so that the same question can be asked at different times.&#x20;
+`--nonce` is an optional, yet a recommended option. It takes a UINT,  it is used as a unique identifier so that the same question can be asked at different times.&#x20;
 
 {% code overflow="wrap" %}
 ```
