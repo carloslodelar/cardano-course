@@ -14,6 +14,8 @@ cardano-cli governance create-poll \
 --out-file poll.cbor > poll.json
 ```
 
+`--nonce` is a optional, but recommended option. It takes a UINT,  it is used as a unique identifier so that the same question can be asked at different times.&#x20;
+
 {% code overflow="wrap" %}
 ```
 Poll created successfully.
