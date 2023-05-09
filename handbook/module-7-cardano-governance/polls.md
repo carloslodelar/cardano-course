@@ -8,7 +8,7 @@ This tutorial requires cardano-node 8.0.0 \
 
 
 
-On cardano-node 8.0.0 we introduced a new subset of commands to conduct polls among stake pool operators. A poll is official when it is signed using a signature from the genesis delegate keys.&#x20;
+On cardano-node 8.0.0 we introduced a new subset of commands to conduct polls among stake pool operators. A poll is official when it is signed by a genesis delegate key.&#x20;
 
 ### Create a poll
 
