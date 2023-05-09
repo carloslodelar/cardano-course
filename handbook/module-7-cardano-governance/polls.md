@@ -10,6 +10,7 @@ cardano-cli governance create-poll \
 --answer "Cheeto" \
 --answer "Ham" \
 --answer "Rocco" \
+--nonce 1 \
 --out-file poll.cbor > poll.json
 ```
 
@@ -441,7 +442,7 @@ When you are ready run the `mkfiles.sh` script and start your nodes.&#x20;
 
 #### Using dbsync on your test?&#x20;
 
-Note that the configuration.yaml file produced by mkfiles.sh script does not contain the hashes of the genesis files, but dbsync demands them. Therefore, if you want to use _dbsync_, you will need to manually add the hashes of Byron, Shelley and Alonzo genesis files to the `example/configuration.yaml`file. for example&#x20;
+Note that the `configuration.yaml` file produced by mkfiles.sh script does not contain the hashes of the genesis files, but dbsync demands them. Therefore, if you want to use _dbsync_, you will need to manually add the hashes of Byron, Shelley and Alonzo genesis files to the `example/configuration.yaml`file. for example&#x20;
 
 ```
 cardano-cli byron genesis print-genesis-hash \
