@@ -5,6 +5,10 @@ coverY: 0
 
 # Create a local cluster
 
+{% hint style="success" %}
+This tutorial has been updated to work with [cardano-node 8.0.0 ](https://github.com/input-output-hk/cardano-node/releases/tag/8.0.0)
+{% endhint %}
+
 Sometimes you might need to deploy a local cluster. We provide tools that allow you to do this with little effort. We will use those tools later.  For now we will do it manually.  Hopefully this will help having a better understanding of what happens behind the scenes when using the automated tools.&#x20;
 
 In this example we will start a cluster in Byron era, and upgrade it all the way up to Babbage era.&#x20;
