@@ -9,9 +9,9 @@ coverY: 0
 This tutorial has been updated to work with [cardano-node 8.0.0 ](https://github.com/input-output-hk/cardano-node/releases/tag/8.0.0)
 {% endhint %}
 
-Sometimes you might need to deploy a local cluster. We provide tools that allow you to do this with little effort. We will use those tools later.  For now we will do it manually.  Hopefully this will help having a better understanding of what happens behind the scenes when using the automated tools.&#x20;
+In certain situations, it may be necessary to set up a local cluster. To simplify this process, we offer user-friendly tools that require minimal effort to deploy. However, in order to gain a deeper comprehension of the automated tools and the underlying processes involved, we will begin by setting up the cluster manually. This hands-on approach will provide valuable insights into the steps required.
 
-In this example we will start a cluster in Byron era, and upgrade it all the way up to Babbage era.&#x20;
+In the following example, we will initiate a cluster during the Byron era and subsequently upgrade it progressively until we reach the Babbage era. By following this step-by-step process, we can better understand the evolution and advancements of the cluster as we transition through different eras.
 
 ### Configure the network and nodes
 
