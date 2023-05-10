@@ -15,6 +15,7 @@
     * [Byron genesis file](protocol-parameters-and-configuration-files/byron-genesis-file.md)
     * [Shelley genesis file](protocol-parameters-and-configuration-files/shelley-genesis-file.md)
     * [Alonzo genesis file](protocol-parameters-and-configuration-files/alonzo-genesis-file.md)
+    * [Conway genesis file](handbook/module-3-protocol-parameters-and-configuration-files/conway-genesis-file.md)
     * [Node configuration file](protocol-parameters-and-configuration-files/node-configuration-file.md)
     * [Topology file](protocol-parameters-and-configuration-files/topology-file.md)
   * [Module 4 Peer-to-peer (P2P) networking](peer-to-peer-p2p-networking.md)
