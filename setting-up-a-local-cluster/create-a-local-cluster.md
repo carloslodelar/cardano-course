@@ -44,6 +44,7 @@ Download the template files and save them in the template folder we just created
 </strong>wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/byron.json
 wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/config.json
 wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/shelley.json
+wget https://github.com/input-output-hk/cardano-world/blob/master/nix/cardano/environments/testnet-template/conway.json
 </code></pre>
 
 Our system will start in Byron era and will have only 2 block producing nodes. We will add 2 Stake Pools later, when we transition to Shelley era.  Let's make a directory for each of the nodes and a configuration folder for our configuration files.&#x20;
@@ -155,8 +156,8 @@ We also need a few changes to the config.json template. for now we will disable 
 ```
  sed -i template/config.json \
  -e 's/"EnableP2P": true/"EnableP2P": false/' \
- -e 's/"TestEnableDevelopmentNetworkProtocols": true/"TestEnableDevelopmentNetworkProtocols": false/' \
- -e 's/"TestEnableDevelopmentHardForkEras": true/"TestEnableDevelopmentHardForkEras": false/' \
+ -e 's/"ExperimentalProtocolsEnabled": true/"ExperimentalProtocolsEnabled": false/' \
+ -e 's/"ExperimentalHardForksEnabled": true/"ExperimentalHardForksEnabled": false/' \
  -e 's/"LastKnownBlockVersion-Major": 3/"LastKnownBlockVersion-Major": 0/' \
  -e 's/"LastKnownBlockVersion-Minor": 1/"LastKnownBlockVersion-Minor": 0/' \
  -e 's/"TestShelleyHardForkAtEpoch": 0/"TestShelleyHardForkAtEpoch": /' \
