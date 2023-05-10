@@ -5,6 +5,10 @@ coverY: 0
 
 # Running the node and connecting to a network
 
+{% hint style="success" %}
+This tutorial has been updated to work with [cardano-node 8.0.0](https://github.com/input-output-hk/cardano-node/releases/tag/8.0.0)
+{% endhint %}
+
 ### Public networks
 
 The latest supported networks can be found at [https://book.world.dev.cardano.org/environments.html](https://book.world.dev.cardano.org/environments.html)
