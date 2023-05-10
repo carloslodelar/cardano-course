@@ -26,6 +26,7 @@ wget https://book.world.dev.cardano.org/environments/preview/topology.json
 wget https://book.world.dev.cardano.org/environments/preview/byron-genesis.json
 wget https://book.world.dev.cardano.org/environments/preview/shelley-genesis.json
 wget https://book.world.dev.cardano.org/environments/preview/alonzo-genesis.json
+wget https://book.world.dev.cardano.org/environments/preview/conway-genesis.json
 ```
 
 ```bash
@@ -95,6 +96,7 @@ wget https://book.world.dev.cardano.org/environments/mainnet/topology.json
 wget https://book.world.dev.cardano.org/environments/mainnet/byron-genesis.json
 wget https://book.world.dev.cardano.org/environments/mainnet/shelley-genesis.json
 wget https://book.world.dev.cardano.org/environments/mainnet/alonzo-genesis.json
+wget https://book.world.dev.cardano.org/environments/mainnet/conway-genesis.json
 ```
 
 ```

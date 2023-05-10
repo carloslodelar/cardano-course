@@ -24,16 +24,17 @@ In the following example, we will initiate a cluster during the Byron era and su
 Note: In this section of the course we will minimize the use of scripts. The intention is making the process as transparent and clear as possible.&#x20;
 {% endhint %}
 
-To keep it simple enough we will use the `cardano-cli genesis create-cardano`  command to create most of the files we will need in the local cluster. We need to start from template files:
+To simplify the process, we will utilize the "cardano-cli genesis create-cardano" command, which will create the majority of the necessary files for our local cluster. We only need to supply the following template files as our starting point.
 
 1. Configuration
 2. Byron genesis template
 3. Shelley genesis template
 4. Alonzo genesis template
+5. Conway genesis template&#x20;
 
 #### 1. The configuration files
 
-[Cardano World Testnet Templates ](https://github.com/input-output-hk/cardano-world/tree/master/nix/cardano/environments/testnet-template)is a nice starting point.&#x20;
+[Cardano World Testnet Templates ](https://github.com/input-output-hk/cardano-world/tree/master/nix/cardano/environments/testnet-template)is the source for our template files. These are the templates that IOG uses when we need to deploy a new testnet.&#x20;
 
 &#x20;Let's create a directory for our project
 
@@ -42,7 +43,7 @@ mkdir -p cluster/template
 cd cluster
 ```
 
-Download the template files and save them in the template folder we just created.&#x20;
+Download the template files and save them in the _template_ folder we just created
 
 <pre class="language-bash" data-overflow="wrap"><code class="lang-bash"><strong>wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/alonzo.json
 </strong>wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/byron.json
@@ -59,7 +60,7 @@ mkdir -p bft0 bft1 configuration
 
 We want our nodes to connect to each other, each of the nodes requires a topology file that tells the node to which nodes to connect to.&#x20;
 
-The node bft0 will run on port 3000, and node bft1 on port 3001 for node bft1.  For now we will use classic topology (not P2P).
+The node bft0 will run on port 3000, and node bft1 on port 3001.  For now, we will use classic topology (not P2P).
 
 So we create the topology file for bft0 with:
 
@@ -95,7 +96,7 @@ EOF
 
 #### 3. The genesis files
 
-Before, we downloaded the `byron.json` template. We will use it together with cardano-cli to generate our `byron-genesis.json` file. Our template looks like this:
+We will use the `byron.json` template file it together with cardano-cli to generate our `byron-genesis.json` file. Our template looks like this:
 
 ```json
 {
@@ -123,7 +124,7 @@ Before, we downloaded the `byron.json` template. We will use it together with ca
 }
 ```
 
-Note that this template uses 200 millisecond slots on Byron era. Mainnet used 20 second slots during the Byron era and uses 1 second slots during Shelley+ eras.&#x20;
+Note that this template uses 200 millisecond slots on Byron era. Mainnet slots lasted 20 seconds during the Byron era and 1 second during Shelley and later eras.&#x20;
 
 Slots were 20 times longer In Byron era because there was a block in every slot. We needed to ensure that each block had enough time to travel the world and that everybody received the block before forging a next block.  In Shelley+ eras, slots are shorter but not all slots have a block, in mainnet only 5% of the slots have a block, this is the active slot coefficient. This selection of parameters allow for Byron and Shelley epochs to have approximately the same number of blocks.&#x20;
 
