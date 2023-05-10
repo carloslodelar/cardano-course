@@ -222,7 +222,7 @@ cardano-cli genesis create-cardano \
 --byron-template template/byron.json \
 --shelley-template template/shelley.json \
 --alonzo-template template/alonzo.json \
---conway-template template/conway.json
+--conway-template template/conway.json \
 --node-config-template template/config.json
 
 ```
