@@ -251,7 +251,7 @@ Move genesis files to configuration directory to keep tings in order:
 
 ```bash
 mv node-config.json configuration/config.json
-mv shelley-genesis.json byron-genesis.json alonzo-genesis.json configuration/
+mv shelley-genesis.json byron-genesis.json alonzo-genesis.json conway-genesis.json configuration/
 ```
 
 And let's move our genesis delegate keys to their corresponding delegate nodes:
