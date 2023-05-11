@@ -16,7 +16,8 @@ Welcome to the course on Cardano Node and Cardano-CLI! This course is designed t
 * Create your own testnet and use update proposals to bring it all the way up from Byron to the latest era.&#x20;
 * How P2P topology works
 * Use the new tracing system for cardano-node
-* The new tracing system
+* Monitoring nodes
+* Running smash and token metadata servers&#x20;
 * How new features work
 
 ### Course structure
