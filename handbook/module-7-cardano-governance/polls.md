@@ -24,7 +24,7 @@ You just need to produce a couple of things after running your cluster:
 
 
 
-1. **Build the payment address we used to pay for the transactions fees:**
+1. **Build the payment address used to pay for the transactions fees:**
 
 ```bash
 cardano-cli address build \
