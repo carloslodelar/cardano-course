@@ -37,7 +37,7 @@ cardano-cli address build \
 
 ```
 cardano-cli genesis key-hash \
---verification-key-file example/delegate-keys/delegate1.vkey > delegate1.hash
+--verification-key-file example/delegate-keys/delegate1.vkey > example/delegate-keys/delegate1.hash
 ```
 
 3. **Get the pool id of pool 1**
