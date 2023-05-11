@@ -471,7 +471,7 @@ Found valid poll answer with 1 signatories
 
 ### Using dbsync on your test?&#x20;
 
-Note that the `configuration.yaml` file produced by mkfiles.sh script does not contain the hashes of the genesis files, but dbsync demands them. Therefore, if you want to use _dbsync_, you will need to manually add the hashes of Byron, Shelley and Alonzo genesis files to the `example/configuration.yaml`file. for example&#x20;
+Note that the `configuration.yaml` file produced by mkfiles.sh script does not contain the hashes of the genesis files, but dbsync demands them. Therefore, if you want to use _dbsync_, you will need to manually add the hashes of Byron, Shelley and Alonzo genesis files to the `example/configuration.yaml`file:
 
 ```
 cardano-cli byron genesis print-genesis-hash \
@@ -491,7 +491,7 @@ cardano-cli genesis hash \
 b9c80a36b643e1b0be59e5aabe9d5ca705635ac4583ff217ce7283ad96fd7d5c
 ```
 
-Add the hashes to the configuration file (by default it only contains the paths):
+Then, add the hashes to the configuration file (by default it only contains the paths):
 
 ```
 ...
@@ -505,4 +505,4 @@ ConwayGenesisFile: genesis/shelley/genesis.conway.json
 ...
 ```
 
-Finally, it is possible that dbsync complains about StartTime mismatch. If this happens, please make sure to replace the `StartTime` on `Shelley Genesis` with the value from `StartTime` on `Byron Genesis.` &#x20;
+Finally, when starting dbsync it is possible that it complains about StartTime mismatch. If this happens, please make sure to replace the `StartTime` on `Shelley Genesis` with the value from `StartTime` on `Byron Genesis,` you should be good to go.
