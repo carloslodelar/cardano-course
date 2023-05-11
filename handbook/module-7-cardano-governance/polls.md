@@ -18,9 +18,9 @@ This tutorial requires cardano-node 8.0.0 \
 
 Here we have a [tutorial ](../module-8-setting-up-a-local-cluster/create-a-local-cluster-with-mkfiles-script.md)on how to run a local cluster using `mkfiles.sh` script provided in cardano-node repository.&#x20;
 
-The examples below were created on a local cluster produced with mkfiles.sh script so you should be replicate the examples on your own cluster.&#x20;
+The examples below were created on a local cluster produced with mkfiles.sh script so you should able be replicate the examples on your own cluster.&#x20;
 
-You just need to get a couple of things after running your cluster:
+You just need to produce a couple of things after running your cluster:
 
 
 
