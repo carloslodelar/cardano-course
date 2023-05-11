@@ -46,8 +46,6 @@ cardano-cli stake-pool id \
 --cold-verification-key-file example/pools/cold1.vkey \
 --output-format hex > example/pools/pool.hex.id
 ```
-
-&#x20;
 {% endhint %}
 
 ## Create a poll
@@ -137,7 +135,7 @@ cat poll.cbor
 }
 ```
 
-Participants (SPO's) will use `poll.cbor`file to create and submit their responses&#x20;
+Participants (SPO's) will use `poll.cbor`file to create and submit their responses.&#x20;
 
 The _Delegate-key-holder_ proposing the poll will publish the poll in a transaction. To build such transaction we do:
 
