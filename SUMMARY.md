@@ -42,6 +42,7 @@
     * [Create a second stake pool before we move to Babbage era](setting-up-a-local-cluster/create-a-second-stake-pool-before-we-move-to-babbage-era.md)
     * [Redelegate genesis keys](setting-up-a-local-cluster/redelegate-genesis-keys.md)
     * [Vasil Hardfork](setting-up-a-local-cluster/vasil-hardfork.md)
+    * [Create a local cluster with mkfiles script](handbook/module-8-setting-up-a-local-cluster/create-a-local-cluster-with-mkfiles-script.md)
   * [Module 9 Simple scripts and Plutus scripts](handbook/module-9-simple-scripts-and-plutus-scripts.md)
   * [Module 10 New tracing system](handbook/module-10-new-tracing-system.md)
   * [Module 11 Running SMASH server](handbook/module-11-running-smash-server.md)

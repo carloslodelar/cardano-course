@@ -426,29 +426,31 @@ Found valid poll answer with 1 signatories
 ]
 ```
 
-#### To test this on a local cluster
+####
+
+Terminal 1
+
+```
+example/node-spo1.sh
+```
+
+Terminal 2
+
+```
+example/node-spo2.sh
+```
+
+Terminal 3
+
+```
+example/node-spo3.sh
+```
 
 {% hint style="info" %}
-To practice creating and answering polls you can create a local cluster.
+Note that you have 30 seconds to start the 3 nodes&#x20;
 {% endhint %}
 
-The examples above were done with
-
-```
-cardano-node --version 
-cardano-node 8.0.0 - linux-x86_64 - ghc-8.10 
-git rev d78924027e8ffb9c49ea2fc791648bf63d3fc3db
-```
-
-To create the local-cluster files please clone cardano-node repo and edit the file [scripts/babbage/mkfiles.sh](https://github.com/input-output-hk/cardano-node/blob/master/scripts/babbage/mkfiles.sh); you will need to comment (#) the line&#x20;
-
-```
-# echo "TestConwayHardForkAtEpoch: 0" >> "${ROOT}/configuration.yaml" 
-```
-
-this will make your local cluster start in Babbage era on epoch 0. This is relevant because by default the script starts in Conway era, but transactions won't work in Conway era just yet, so we want to stay in Babbage.&#x20;
-
-When you are ready run the `mkfiles.sh` script and start your nodes.&#x20;
+####
 
 #### Using dbsync on your test?&#x20;
 
