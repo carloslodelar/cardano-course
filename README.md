@@ -5,7 +5,7 @@ coverY: -223
 
 # Welcome!
 
-Welcome to the course on Cardano Node and Cardano-CLI! This course is designed to provide you with the knowledge and skills needed to use the Cardano Node and Cardano-CLI as an end user, a stake pool operator and a governance actor. By the end of this course, you will have a solid understanding of how to use the Cardano Node and Cardano-CLI in a variety of roles and scenarios.
+Welcome to the course on Cardano Node and Cardano-CLI! This course is designed to provide you with the knowledge and skills needed to use the Cardano Node and Cardano-CLI as an end user, a stake pool operator, governance actor or dapp developer. By the end of this course, you will have a solid understanding of how to use the Cardano Node and Cardano-CLI in a variety of roles and scenarios.
 
 ### What you will learn?
 
@@ -16,6 +16,8 @@ Welcome to the course on Cardano Node and Cardano-CLI! This course is designed t
 * Create your own testnet and use update proposals to bring it all the way up from Byron to the latest era.&#x20;
 * How P2P topology works
 * Use the new tracing system for cardano-node
+* The new tracing system
+* How new features work
 
 ### Course structure
 
