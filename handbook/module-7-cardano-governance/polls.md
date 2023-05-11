@@ -28,8 +28,9 @@ You just need to produce a couple of things after running your cluster:
 
 ```bash
 cardano-cli address build \
---payment-verification-key-file utxo1.vkey \
---out-file example/utxo-keys/utxo1.addr
+--payment-verification-key-file example/utxo-keys/utxo1.vkey \
+--out-file example/utxo-keys/utxo1.addr \
+--testnet-magic 42
 ```
 
 2. **Get the hash of delegate 1 verification key**
