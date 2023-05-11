@@ -1,3 +1,10 @@
+---
+description: >-
+  On cardano-node 8.0.0 we introduced a new subset of commands to conduct polls
+  among stake pool operators. A poll is official when it is signed by a genesis
+  delegate key.
+---
+
 # Polls
 
 {% hint style="success" %}
@@ -6,11 +13,44 @@ This tutorial requires cardano-node 8.0.0 \
 [https://github.com/input-output-hk/cardano-node/releases/tag/8.0.0](https://github.com/input-output-hk/cardano-node/releases/tag/8.0.0)
 {% endhint %}
 
+{% hint style="info" %}
+### Trying the polling feature on a local cluster
+
+Here we have a [tutorial ](../module-8-setting-up-a-local-cluster/create-a-local-cluster-with-mkfiles-script.md)on how to run a local cluster using `mkfiles.sh` script provided in cardano-node repository.&#x20;
+
+The examples below were created on a local cluster produced with mkfiles.sh script so you should be replicate the examples on your own cluster.&#x20;
+
+You just need to get a couple of things after running your cluster:
 
 
-On cardano-node 8.0.0 we introduced a new subset of commands to conduct polls among stake pool operators. A poll is official when it is signed by a genesis delegate key.&#x20;
 
-### Create a poll
+1. **Build the payment address we used to pay for the transactions fees:**
+
+```bash
+cardano-cli address build \
+--payment-verification-key-file utxo1.vkey \
+--out-file example/utxo-keys/utxo1.addr
+```
+
+2. **Get the hash of delegate 1 verification key**
+
+```
+cardano-cli genesis key-hash \
+--verification-key-file example/delegate-keys/delegate1.vkey > delegate1.hash
+```
+
+3. **Get the pool id of pool 1**
+
+```
+cardano-cli stake-pool id \
+--cold-verification-key-file example/pools/cold1.vkey \
+--output-format hex > example/pools/pool.hex.id
+```
+
+&#x20;
+{% endhint %}
+
+## Create a poll
 
 ```
 cardano-cli governance create-poll \
@@ -426,9 +466,7 @@ Found valid poll answer with 1 signatories
 ]
 ```
 
-#### You can t
-
-#### Using dbsync on your test?&#x20;
+### Using dbsync on your test?&#x20;
 
 Note that the `configuration.yaml` file produced by mkfiles.sh script does not contain the hashes of the genesis files, but dbsync demands them. Therefore, if you want to use _dbsync_, you will need to manually add the hashes of Byron, Shelley and Alonzo genesis files to the `example/configuration.yaml`file. for example&#x20;
 
