@@ -156,11 +156,11 @@ cardano-cli transaction build \
 {% endcode %}
 
 {% hint style="info" %}
-When building the transaction we can use `--required-signer-hash` or `--required-signer` .&#x20;
+When building the transaction we can use `--required-signer-hash` or&#x20;
 
+`--required-signer`&#x20;
 
-
-Since the delegate signing keys are on cold storage and `build` command requires access to a live node, in this example we are using `--required-signer-hash` \
+In our example we used `--required-signer-hash` because on a real world scenario, the delegate signing keys are on cold storage and build command requires access to a live node. \
 \
 To get the hash of a delegate key we run:
 
@@ -171,7 +171,7 @@ cardano-cli genesis key-hash --verification-key-file delegate-keys/delegate1.vke
 {% endhint %}
 
 \
-Sign the transaction with the delegate signing key and with a payment signing key.&#x20;
+Sign the transaction with the delegate signing key and with a payment signing key to pay for the transaction fees.&#x20;
 
 ```
 cardano-cli transaction sign \
@@ -181,6 +181,10 @@ cardano-cli transaction sign \
 --testnet-magic 42 \
 --out-file question.tx.signed
 ```
+
+{% hint style="info" %}
+Note that on the example the payment key is named **utxo1.skey.** This is the name given by mkfiles.sh script.  It is equivalent to a **payment.skey** that you might be familiar with.&#x20;
+{% endhint %}
 
 When we inspect the transaction (question.tx.signed)&#x20;
 
@@ -192,7 +196,6 @@ we should see something like this: &#x20;
 
 {% code overflow="wrap" %}
 ```
-
 certificates: null
 collateral inputs: []
 era: Babbage
@@ -236,9 +239,9 @@ witnesses:
 ```
 {% endcode %}
 
-Note that required signers and witnesses fields match our delegate keys data, so we are ok. &#x20;
+Note that **required signers** includes the hash of our the delegate key; and **witnesses** includes the delegate and payment keys data.  &#x20;
 
-And finally submit the transaction and usual:
+Finally, we submit the transaction as usual:
 
 ```
 cardano-cli transaction submit \
@@ -365,7 +368,7 @@ cardano-cli transaction sign \
 --out-file answer.tx.signed
 ```
 
-When we inspect the signed transaction, required signers and witnesses fields should include our cold key signature:
+When we inspect the signed transaction, **required signers** should contain our cold key hash (the pool id), and **witnesses** contains both the cold and payment key data:&#x20;
 
 ```
 cardano-cli transaction view --tx-file answer.tx.signed
