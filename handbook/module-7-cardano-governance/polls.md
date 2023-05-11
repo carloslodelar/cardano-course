@@ -426,31 +426,7 @@ Found valid poll answer with 1 signatories
 ]
 ```
 
-####
-
-Terminal 1
-
-```
-example/node-spo1.sh
-```
-
-Terminal 2
-
-```
-example/node-spo2.sh
-```
-
-Terminal 3
-
-```
-example/node-spo3.sh
-```
-
-{% hint style="info" %}
-Note that you have 30 seconds to start the 3 nodes&#x20;
-{% endhint %}
-
-####
+#### You can t
 
 #### Using dbsync on your test?&#x20;
 

@@ -44,3 +44,51 @@ CARDANO_NODE_SOCKET_PATH=example/node-spo1/node.sock
 
 Then, run a node on each terminal.  For example:
 
+Terminal 1
+
+```
+example/node-spo1.sh
+```
+
+Terminal 2
+
+```
+example/node-spo2.sh
+```
+
+Terminal 3
+
+```
+example/node-spo3.sh
+```
+
+{% hint style="info" %}
+Note that you have 30 seconds to start the 3 nodes. To give yourself more tim, you can change this line on the mkfiles.sh script:
+
+```shellscript
+START_TIME="$(${DATE} -d "now + 30 seconds" +%s)"
+
+```
+{% endhint %}
+
+After starting your nodes, make sure to set the CARDANO\_NODE\_SOCKET\_PATH on your working terminal:&#x20;
+
+```
+CARDANO_NODE_SOCKET_PATH=example/node-spo1/node.sock
+```
+
+and voilà! We have a cluster running on Babbage era with very little effort:
+
+```
+cardano-cli query tip --testnet-magic 42
+{
+    "block": 3519,
+    "epoch": 70,
+    "era": "Babbage",
+    "hash": "dd38083ef4392502218e71c6364bcfefdef1f9e6563f27fa1db2196e1c65b786",
+    "slot": 35361,
+    "slotInEpoch": 361,
+    "slotsToEpochEnd": 139,
+    "syncProgress": "100.00"
+}
+```
