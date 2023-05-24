@@ -45,11 +45,11 @@ cd cluster
 
 Download the template files and save them in the _template_ folder we just created
 
-<pre class="language-bash" data-overflow="wrap"><code class="lang-bash"><strong>wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/alonzo.json
-</strong>wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/byron.json
-wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/config.json
-wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/shelley.json
-wget -P template/ https://raw.githubusercontent.com/input-output-hk/cardano-world/master/nix/cardano/environments/testnet-template/conway.json
+<pre class="language-bash" data-overflow="wrap"><code class="lang-bash"><strong>wget -P template/ https://raw.githubusercontent.com/input-output-hk/iohk-nix/master/cardano-lib/testnet-template/alonzo.json
+</strong>wget -P template/ https://raw.githubusercontent.com/input-output-hk/iohk-nix/master/cardano-lib/testnet-template/byron.json
+wget -P template/ https://raw.githubusercontent.com/input-output-hk/iohk-nix/master/cardano-lib/testnet-template/config.json
+wget -P template/ https://raw.githubusercontent.com/input-output-hk/iohk-nix/master/cardano-lib/testnet-template/shelley.json
+wget -P template/ https://raw.githubusercontent.com/input-output-hk/iohk-nix/master/cardano-lib/testnet-template/conway.json
 </code></pre>
 
 Our system will start in Byron era and will have only 2 block producing nodes. We will add 2 Stake Pools later, when we transition to Shelley era.  Let's make a directory for each of the nodes and a configuration folder for our configuration files.&#x20;
