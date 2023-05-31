@@ -160,15 +160,10 @@ We also need a few changes to the config.json template. for now we will disable 
 {% tab title="Linux" %}
 ```
  sed -i template/config.json \
- -e 's/"EnableP2P": true/"EnableP2P": false/' \
  -e 's/"ExperimentalProtocolsEnabled": true/"ExperimentalProtocolsEnabled": false/' \
  -e 's/"ExperimentalHardForksEnabled": true/"ExperimentalHardForksEnabled": false/' \
  -e 's/"LastKnownBlockVersion-Major": 3/"LastKnownBlockVersion-Major": 0/' \
  -e 's/"LastKnownBlockVersion-Minor": 1/"LastKnownBlockVersion-Minor": 0/' \
- -e 's/"TestShelleyHardForkAtEpoch": 0/"TestShelleyHardForkAtEpoch": /' \
- -e 's/"TestAllegraHardForkAtEpoch": 0/"TestAllegraHardForkAtEpoch": /' \
- -e 's/"TestMaryHardForkAtEpoch": 0/"TestMaryHardForkAtEpoch": /' \
- -e 's/"TestAlonzoHardForkAtEpoch": 0/"TestAlonzoHardForkAtEpoch": /' \
  -e 's/""minSeverity": "Debug"/"minSeverity": "Info"/' 
 ```
 {% endtab %}
@@ -176,15 +171,10 @@ We also need a few changes to the config.json template. for now we will disable 
 {% tab title="macOS" %}
 ```
  gsed -i template/config.json \
- -e 's/"EnableP2P": true/"EnableP2P": false/' \
- -e 's/"TestEnableDevelopmentNetworkProtocols": true/"TestEnableDevelopmentNetworkProtocols": false/' \
- -e 's/"TestEnableDevelopmentHardForkEras": true/"TestEnableDevelopmentHardForkEras": false/' \
+ -e 's/"ExperimentalProtocolsEnabled": true/"ExperimentalProtocolsEnabled": false/' \
+ -e 's/"ExperimentalHardForksEnabled": true/"ExperimentalHardForksEnabled": false/' \
  -e 's/"LastKnownBlockVersion-Major": 3/"LastKnownBlockVersion-Major": 0/' \
  -e 's/"LastKnownBlockVersion-Minor": 1/"LastKnownBlockVersion-Minor": 0/' \
- -e 's/"TestShelleyHardForkAtEpoch": 0/"TestShelleyHardForkAtEpoch": /' \
- -e 's/"TestAllegraHardForkAtEpoch": 0/"TestAllegraHardForkAtEpoch": /' \
- -e 's/"TestMaryHardForkAtEpoch": 0/"TestMaryHardForkAtEpoch": /' \
- -e 's/"TestAlonzoHardForkAtEpoch": 0/"TestAlonzoHardForkAtEpoch": /' \
  -e 's/""minSeverity": "Debug"/"minSeverity": "Info"/' 
 ```
 {% endtab %}
