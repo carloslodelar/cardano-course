@@ -13,12 +13,16 @@ Moreover, it's crucial to ascertain if the new version of `cardano-node` require
     ```bash
     tar -czvf db.tar.gz ~/db
     ```
+
+
 4.  **Calculate SHA-256 Hash:** Generate the SHA-256 hash for the tarball:\
 
 
     ```bash
     sha256sum db.tar.gz > db.tar.gz.sha256
     ```
+
+
 5.  **Transfer the New Node, Data and Hash:** Transfer the new node binaries, the compressed blockchain data tarball, and the hash file to the `~/src` directory on your block producing server:\
 
 
@@ -28,6 +32,8 @@ Moreover, it's crucial to ascertain if the new version of `cardano-node` require
     scp db.tar.gz <user>@<your_node_ip>:~/src/
     scp db.tar.gz.sha256 <user>@<your_node_ip>:~/src/
     ```
+
+
 6.  **On the Block Producing Server:** Navigate to the `~/src` directory and verify the SHA-256 hash of the transferred tarball:\
 
 
@@ -36,7 +42,9 @@ Moreover, it's crucial to ascertain if the new version of `cardano-node` require
     sha256sum -c db.tar.gz.sha256
     ```
 
-    If the output says "db.tar.gz: OK", the file was transferred without corruption.
+    \
+    If the output says "db.tar.gz: OK", the file was transferred without corruption.\
+
 7.  **Check the Leadership Schedule:** Before you stop the old node, check the leadership schedule to see when your node is next scheduled to make a block:\
 
 
@@ -44,9 +52,19 @@ Moreover, it's crucial to ascertain if the new version of `cardano-node` require
     cardano-cli query leadership-schedule --testnet-magic 2 --cold-verification-key-file cold.vkey --genesis shelley-genesis.json --vrf-signing-key-file vrf.skey --current 
     ```
 
-    If your node is scheduled to make a block in the near future, you might want to delay the update until after that time.
-8. **Replace the Existing Node:** Once it's a good time to update, stop the old version of the Cardano node and replace it with the new version from the `~/src` directory.
-9.  **Extract the Blockchain Data and Replace the Existing Database:** Still in the `~/src` directory, uncompress the blockchain data tarball and replace the existing database with the new one:\
+    \
+    If your node is scheduled to make a block in the near future, you might want to delay the update until after that time.\
+
+8.  **Replace the Existing Node:** Once it's a good time to update, stop the old version of the Cardano node and replace it with the new version from the `~/src` directory.\
+
+
+    ```
+    sudo systemctl stop cardano-node.service
+    cp ~/src/cardano-node ~/src/cardano-cli /usr/local/bin/
+    ```
+
+
+9.  **Extract the Blockchain Data and Replace the Existing Database:** Still in the `~/src` directory, uncompress the blockchain database tarball and replace the existing database with the new one:\
 
 
     ```bash
@@ -54,4 +72,6 @@ Moreover, it's crucial to ascertain if the new version of `cardano-node` require
     mv ~/db ~/db.old
     mv ~/src/db ~/db
     ```
-10. **Start the New Node:** Start the new node. Check the logs to ensure it is running correctly and is using the copied blockchain data.
+
+
+10. **Start the Node:** Start the new node. Check the logs to ensure it is running correctly and is using the copied blockchain data.
