@@ -64,6 +64,7 @@ Once the database and the new binaries are ready, you can replace the old ones a
 4.  **Extract the New Database:** Navigate to `~/src/` and extract the database:
 
     ```
+    mv ~/db ~/db_backup
     tar -xzvf db.tar.gz -C ~/db
     ```
 5.  **Restart the Node:** Finally, restart the Cardano-node service:
