@@ -67,8 +67,8 @@ Once the database and the new binaries are ready, you can replace the old ones a
 3.  **Replace the Binaries:** Replace the current `cardano-node` and `cardano-cli` binaries with the new ones:
 
     ```
-    mv <path_to_new_cardano-node_binary> /usr/local/bin/cardano-node
-    mv <path_to_new_cardano-cli_binary> /usr/local/bin/cardano-cli
+    cp ~/src/cardano-node /usr/local/bin/
+    cp ~/src/cardano-cli /usr/local/bin/
     ```
 4.  **Extract the New Database:** Navigate to `~/src/` and extract the database:
 
