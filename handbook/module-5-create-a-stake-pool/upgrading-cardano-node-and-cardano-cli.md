@@ -10,8 +10,20 @@ In some instances, an update to the `cardano-node` version may require a chain r
 
 Start by building and uploading the new Cardano-node and Cardano-CLI binaries:
 
-1. **Build the New Versions:** Clone the latest version of the Cardano-node repository and compile the new versions of `cardano-node` and `cardano-cli` on the separate machine.
-2.  **Transfer the Binaries:** Transfer the new binaries to the block producing server:
+1.  **Download or Build the new versions:** Download the static binaries from [https://github.com/input-output-hk/cardano-node/releases](https://github.com/input-output-hk/cardano-node/releases) or Clone the latest version of the Cardano-node repository and compile the new versions of `cardano-node` and `cardano-cli` .\
+
+
+    Transfer the new binaries to the block producing server:
+
+    ```
+    nix build .#cardanoNodeProject.projectCross.musl64.pkg-set.config.hsPkgs.cardano-node.components.exes.cardano-node -o static/node
+    nix build .#cardanoNodeProject.projectCross.musl64.pkg-set.config.hsPkgs.cardano-cli.components.exes.cardano-cli -o static/cli
+    ```
+
+    \
+
+2.  **Transfer the Binaries:**\
+    Transfer the new binaries to the block producing server:
 
     ```
     scp <local_path_to_cardano-node> <user>@<your_node_ip>:~/src/
