@@ -58,25 +58,29 @@ Once the database and the new binaries are ready, you can replace the old ones a
     ```
     sudo systemctl stop cardano-node.service
     ```
-2.  **Backup the Current Binaries:** Before replacing them, backup your current binaries:
+2.  **Backup the existing database**
+
+    ```
+    mv ./db ./dbbackup
+    ```
+3.  **Backup the Current Binaries:** Before replacing them, backup your current binaries:
 
     ```
     mv /usr/local/bin/cardano-node /usr/local/bin/cardano-node.bak
     mv /usr/local/bin/cardano-cli /usr/local/bin/cardano-cli.bak
     ```
-3.  **Replace the Binaries:** Replace the current `cardano-node` and `cardano-cli` binaries with the new ones:
+4.  **Replace the Binaries:** Replace the current `cardano-node` and `cardano-cli` binaries with the new ones:
 
     ```
     cp ~/src/cardano-node /usr/local/bin/
     cp ~/src/cardano-cli /usr/local/bin/
     ```
-4.  **Extract the New Database:** Navigate to `~/src/` and extract the database:
+5.  **Extract the New Database:** Navigate to `~/src/` and extract the database:
 
     ```
-    mv ~/db ~/db_backup
     tar -xzvf db.tar.gz -C ~/db
     ```
-5.  **Restart the Node:** Finally, restart the Cardano-node service:
+6.  **Restart the Node:** Finally, restart the Cardano-node service:
 
     ```
     sudo systemctl start cardano-node.service
