@@ -14,8 +14,8 @@ Start by building and uploading the new Cardano-node and Cardano-CLI binaries:
 2.  **Transfer the Binaries:** Transfer the new binaries to the block producing server:
 
     ```
-    scp <local_path_to_cardano-node> <user>@<your_node_ip>:/usr/local/bin/
-    scp <local_path_to_cardano-cli> <user>@<your_node_ip>:/usr/local/bin/
+    scp <local_path_to_cardano-node> <user>@<your_node_ip>:~/src/
+    scp <local_path_to_cardano-cli> <user>@<your_node_ip>:~/src/    
     ```
 
 ### 2) Database Operations
