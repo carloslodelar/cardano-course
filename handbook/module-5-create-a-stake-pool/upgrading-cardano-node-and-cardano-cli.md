@@ -16,16 +16,11 @@ Start by building and uploading the new Cardano-node and Cardano-CLI binaries:
 
 
     ```
-    nix build .#cardanoNodeProject.projectCross.musl64.pkg-set.config.hsPkgs.cardano-node.components.exes.cardano-node -o static/node
-    nix build .#cardanoNodeProject.projectCross.musl64.pkg-set.config.hsPkgs.cardano-cli.components.exes.cardano-cli -o static/cli
-    ```
-
-    \
-    Copy the static binaries to \~/.local/bin&#x20;
-
-    ```
-    cp static/node/cardano-node ~/.local/bin
-    cp static/cli/cardano-cli ~/.local/bin
+    git checkout tags/<tag>
+    nix build .#hydraJobs.musl.cardano-node-linux
+    cd result
+    tar -xf cardano-node-x.x.x-linux.tar.gz
+    cp ./cardano-node ./cardan0-cli ~/.local/bin/
     ```
 
 ### 2) Database Operations
