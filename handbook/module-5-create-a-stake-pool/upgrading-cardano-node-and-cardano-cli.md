@@ -13,7 +13,7 @@ Start by building and uploading the new Cardano-node and Cardano-CLI binaries:
 1.  **Download or Build the new versions:** Download the static binaries from [https://github.com/input-output-hk/cardano-node/releases](https://github.com/input-output-hk/cardano-node/releases) or Clone the latest version of the Cardano-node repository and compile the new versions of `cardano-node` and `cardano-cli` .\
 
 
-    Transfer the new binaries to the block producing server:
+
 
     ```
     nix build .#cardanoNodeProject.projectCross.musl64.pkg-set.config.hsPkgs.cardano-node.components.exes.cardano-node -o static/node
@@ -21,13 +21,11 @@ Start by building and uploading the new Cardano-node and Cardano-CLI binaries:
     ```
 
     \
-
-2.  **Transfer the Binaries:**\
-    Transfer the new binaries to the block producing server:
+    Copy the static binaries to \~/.local/bin&#x20;
 
     ```
-    scp <local_path_to_cardano-node> <user>@<your_node_ip>:~/src/
-    scp <local_path_to_cardano-cli> <user>@<your_node_ip>:~/src/    
+    cp static/node/cardano-node ~/.local/bin
+    cp static/cli/cardano-cli ~/.local/bin
     ```
 
 ### 2) Database Operations
@@ -61,7 +59,7 @@ If a chain replay is required, follow these steps to sync the node and prepare t
 
     If the output says **"cardano-db.tar.gz: OK"**, the file was transferred without corruption.
 
-### 3) Replacing Binaries and Database, and Restarting the Node
+### 3) Upload binaries and atabase, and Restarting the Node
 
 Once the database and the new binaries are ready, you can replace the old ones and restart your node:
 
@@ -75,24 +73,36 @@ Once the database and the new binaries are ready, you can replace the old ones a
     ```
     mv ./db ./dbbackup
     ```
-3.  **Backup the Current Binaries:** Before replacing them, backup your current binaries:
+3.  **Transfer the Binaries:**\
+    Transfer the new binaries to the block producing server:\
+
+
+    ```
+    scp ~/.local/bin/cardano-node <user>@<your_node_ip>:~/src/
+    scp ~/.local/bin/cardnao-cli <user>@<your_node_ip>:~/src/    
+    ```
+
+
+4.  **Backup the Current Binaries:** Before replacing them, backup your current binaries:
 
     ```
     mv /usr/local/bin/cardano-node /usr/local/bin/cardano-node.bak
     mv /usr/local/bin/cardano-cli /usr/local/bin/cardano-cli.bak
     ```
-4.  **Replace the Binaries:** Replace the current `cardano-node` and `cardano-cli` binaries with the new ones:
+
+
+5.  **Replace the Binaries:** Replace the current `cardano-node` and `cardano-cli` binaries with the new ones:
 
     ```
     cp ~/src/cardano-node /usr/local/bin/
     cp ~/src/cardano-cli /usr/local/bin/
     ```
-5.  **Extract the New Database:** Navigate to `~/src/` and extract the database:
+6.  **Extract the New Database:** Navigate to `~/src/` and extract the database:
 
     ```
     tar -xzvf db.tar.gz -C ~/db
     ```
-6.  **Restart the Node:** Finally, restart the Cardano-node service:
+7.  **Restart the Node:** Finally, restart the Cardano-node service:
 
     ```
     sudo systemctl start cardano-node.service
