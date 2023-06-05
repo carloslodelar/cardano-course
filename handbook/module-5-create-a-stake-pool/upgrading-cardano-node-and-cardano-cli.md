@@ -26,7 +26,7 @@ If a chain replay is required, follow these steps to sync the node and prepare t
 2.  **Compress the Blockchain Data:** Once the new node has fully synced, compress the blockchain data into a tarball:
 
     ```
-    tar -czvf db.tar.gz ~/db
+    tar -czvf db.tar.gz ./db
     ```
 3.  **Calculate SHA-256 Hash:** Generate the SHA-256 hash for the tarball:
 
