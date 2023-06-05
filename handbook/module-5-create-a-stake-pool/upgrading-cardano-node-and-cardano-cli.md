@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Keeping the Cardano node software up-to-date is a crucial task for all stake pool operators. To ensure a smooth and safe update process, it is advisable to compile the `cardano-node` and `cardano-cli` binaries on a separate machine before uploading them to the block producing server. This minimizes the downtime of the actual stake pool server and mitigates the risk of running into build issues during the update.
+Keeping Cardano node up-to-date is a crucial task for all stake pool operators. To ensure a smooth and safe update process, it is advisable to compile the `cardano-node` and `cardano-cli` binaries on a separate machine before uploading them to the block producing server. This minimizes the downtime of the actual stake pool server and mitigates the risk of running into build issues during the update.
 
 In some instances, an update to the `cardano-node` version may require a chain replay. In these cases, it is necessary to prepare not just the binaries, but also a synchronized blockchain database on the separate machine. This pre-synced database can then be uploaded onto the block producing server, allowing the node to continue its operations without a lengthy resynchronization from the genesis block.
 
