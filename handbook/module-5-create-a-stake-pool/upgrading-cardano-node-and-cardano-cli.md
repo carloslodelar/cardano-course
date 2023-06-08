@@ -13,8 +13,6 @@ Start by building and uploading the new Cardano-node and Cardano-CLI binaries:
 1.  **Download or Build the new versions:** Download the static binaries from [https://github.com/input-output-hk/cardano-node/releases](https://github.com/input-output-hk/cardano-node/releases) or Clone the latest version of the Cardano-node repository and compile the new versions of `cardano-node` and `cardano-cli` .\
 
 
-
-
     ```
     git checkout tags/<tag>
     nix build .#hydraJobs.musl.cardano-node-linux
@@ -95,7 +93,7 @@ Once the database and the new binaries are ready, you can replace the old ones a
 6.  **Extract the New Database:** Navigate to `~/src/` and extract the database:
 
     ```
-    tar -xzvf db.tar.gz -C ~/db
+    tar -xzvf db.tar.gz -C ~/
     ```
 7.  **Restart the Node:** Finally, restart the Cardano-node service:
 
