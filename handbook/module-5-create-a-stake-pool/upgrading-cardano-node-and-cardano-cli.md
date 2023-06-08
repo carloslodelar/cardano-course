@@ -47,7 +47,7 @@ If a chain replay is required, follow these steps to sync the node and prepare t
 5.  **On the Block Producing Server:** Verify the SHA-256 hash of the transferred tarball:
 
     ```bash
-    sha256sum -c cardano-db.tar.gz.sha256
+    sha256sum -c db.tar.gz.sha256
     ```
 
     If the output says **"cardano-db.tar.gz: OK"**, the file was transferred without corruption.
