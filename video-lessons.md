@@ -54,7 +54,7 @@ Module 5 Creating a stake pool on the preview testnet (Handbook: [Module 5](crea
    1. Change pool parameters
    2. Withdraw rewards
 8. Stake pool operations part 3 (WIP)
-   1. Updating cardano-node and cardano-cli
+   1. [Updating cardano-node and cardano-cli](https://youtu.be/WcT2gyflJKg)
    2. Retiring a stake pool
 9. Bonus. Obtain signing keys for wallet addresses.&#x20;
 
