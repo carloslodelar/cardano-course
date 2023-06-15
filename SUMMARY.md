@@ -27,6 +27,7 @@
     * [Stake snapshots](create-a-stake-pool/stake-snapshots.md)
     * [Upgrading cardano-node and cardano-cli](handbook/module-5-create-a-stake-pool/upgrading-cardano-node-and-cardano-cli.md)
     * [Pool Operations/Maintenance](create-a-stake-pool/pool-maintainance.md)
+    * [Retiring a stake pool](handbook/create-a-stake-pool/retiring-a-stake-pool.md)
     * [Generate keys](create-a-stake-pool/generate-keys.md)
   * [Module 6 Monitoring our nodes](monitoring-our-nodes.md)
   * [Module 7 Cardano Governance](cardano-governance/README.md)
