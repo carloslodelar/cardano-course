@@ -49,7 +49,6 @@ Module 5 Creating a stake pool on the preview testnet (Handbook: [Module 5](crea
    2. Query leadership schedule
    3. Query KES period info
    4. Renew KES Keys and operational certificate
-      1. Fixing over incremented counter
 7. [Stake pool operations part 2](https://youtu.be/2LHCWyvM4Lc)
    1. Change pool parameters
    2. Withdraw rewards
