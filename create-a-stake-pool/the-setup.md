@@ -1,5 +1,17 @@
 # The setup
 
+{% hint style="info" %}
+**This tutorial guides you to create a stake pool on the preview testnet (testnet-magic 2).** &#x20;
+
+
+
+**Make sure to use the appropriate genesis files from** [**https://book.world.dev.cardano.org/environments.html**](https://book.world.dev.cardano.org/environments.html)\
+\
+**For pre-production testnet, just replace --testnet-magic 2 with --testnet-magic 1.**&#x20;
+
+**For mainnet use --mainnet**
+{% endhint %}
+
 A stake pool requires a number of artifacts:&#x20;
 
 * **Cold keys**: used to register a stake pool,  to control the stake pool parameters, issue operational certificate and  retiring a stake pool.
@@ -14,7 +26,7 @@ The **block producer** node will hold the KES signing key, the VRF signing key a
 
 **Relay** nodes do not need any keys.&#x20;
 
-In addition, we will need an **air gapped machine** (specially when running a pool on mainnet) **** to keep Cold keys and wallet keys secure and never exposed to the internet.&#x20;
+In addition, we will need an **air gapped machine** (specially when running a pool on mainnet) to keep Cold keys and wallet keys secure and never exposed to the internet.&#x20;
 
 The **block producer** must be well secured and **only** connect to its own relay nodes.&#x20;
 
