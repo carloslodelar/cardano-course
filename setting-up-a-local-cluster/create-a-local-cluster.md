@@ -34,7 +34,7 @@ To simplify the process, we will utilize the "cardano-cli genesis create-cardano
 
 #### 1. The configuration files
 
-[Cardano World Testnet Templates ](https://github.com/input-output-hk/cardano-world/tree/master/nix/cardano/environments/testnet-template)is the source for our template files. These are the templates that IOG uses when we need to deploy a new testnet.&#x20;
+[Cardano World Testnet Templates](https://github.com/input-output-hk/iohk-nix/tree/master/cardano-lib/testnet-template) is the source for our template files. These are the templates that IOG uses when we need to deploy a new testnet.&#x20;
 
 &#x20;Let's create a directory for our project
 
