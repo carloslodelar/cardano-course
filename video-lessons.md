@@ -52,12 +52,12 @@ Module 5 Creating a stake pool on the preview testnet (Handbook: [Module 5](crea
 7. [Stake pool operations part 2](https://youtu.be/2LHCWyvM4Lc)
    1. Change pool parameters
    2. Withdraw rewards
-8. Stake pool operations part 3 (WIP)
+8. [Stake pool operations part 3](https://www.youtube.com/watch?v=WcT2gyflJKg)
    1. [Updating cardano-node and cardano-cli](https://youtu.be/WcT2gyflJKg)
    2. [Retiring a stake pool](https://youtu.be/x4Igwc\_WaoA)
 9. Bonus. Obtain signing keys for wallet addresses.&#x20;
 
-Module 6 Monitoring our nodes
+Module 6 Monitoring our nodes (Handbook: [Module 6](monitoring-our-nodes.md))
 
 1. [Setup a monitoring server with prometheus](https://youtu.be/iqAmwhk7djE)
 2. Configure a Grafana dashboard (WIP)
