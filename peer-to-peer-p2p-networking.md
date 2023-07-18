@@ -40,11 +40,19 @@ Learn more:&#x20;
 [Interview with Networking team lead ](https://youtu.be/wnv7VCa79eo)
 {% endhint %}
 
-###
+### The P2P topology file :&#x20;
 
-#### The P2P topology file&#x20;
+The network stack for P2P introduces the following concepts:
 
-{% embed url="https://github.com/input-output-hk/cardano-node/blob/master/doc/getting-started/understanding-config-files.md" %}
+**Local Root Peers:** Local configured peers that the node should know and try to maintain a connection with. These are usually BPs or Relays that SPOs setup. These ought to be private.
+
+**Public Root Peers:** Peers from a trusted public source such as IOG relays domain name. These peers are important to have since they are a source of trusted peers, if no local root peers are configured. They differ from Local Root Peers in the fact that the node does not have to guarantee any type of invariant regarding connectivity to public root peers. They are mostly a source of peers to meet other targets such as Known Peers.
+
+**Bootstrap peers:** Can be understood as the same as Public Root Peers, with the exception/restriction that they should absolutely be from trustworthy sources. They also differ from the Public Root Peers in the sense that they will be used as a fallback for when the node is too far behind the tip.
+
+**Ledger Peers:** Peers that are registered in the ledger. These usually come from lpGetPeers
+
+**Shared Peers:** Peers that are known due to Peer Sharing protocol. These can be any kind of peer, e.g. ledger peer or a wallet peer.
 
 #### New P2P topology file format (please use it on node 1.35.6 Single Relay)
 
@@ -81,7 +89,7 @@ Learn more:&#x20;
 }
 ```
 
-### Example of topology files for a stakepool
+### Example of topology files for a stake pool
 
 ### Block Producer
 
