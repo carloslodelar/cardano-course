@@ -5,12 +5,10 @@ coverY: 0
 
 # Building the node
 
-Building the node with cabal, follow the official documentation
+To build the node with Cabal, follow the official documentation:
 
-{% embed url="https://github.com/input-output-hk/cardano-node/blob/master/doc/getting-started/install.md" %}
+{% embed url="https://github.com/input-output-hk/cardano-node-wiki/blob/main/docs/getting-started/install.md" %}
 
+To build the node with Nix, follow this documentation:
 
-
-Building the node with Nix
-
-{% embed url="https://github.com/input-output-hk/cardano-node/blob/master/doc/getting-started/building-the-node-using-nix.md" %}
+{% embed url="https://github.com/input-output-hk/cardano-node-wiki/blob/main/docs/getting-started/building-the-node-using-nix.md" %}
