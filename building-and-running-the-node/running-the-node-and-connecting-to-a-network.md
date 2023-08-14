@@ -5,15 +5,21 @@ coverY: 0
 
 # Running the node and connecting to a network
 
+### **Video lessons**
+
+* [Running the node and connecting to different networks](https://youtu.be/YlUljmlCPYs)
+
+### Handbook
+
 {% hint style="success" %}
 This tutorial has been updated to work with [cardano-node 8.0.0](https://github.com/input-output-hk/cardano-node/releases/tag/8.0.0)
 {% endhint %}
 
-### Public networks
+#### Public networks
 
 The latest supported networks can be found at [https://book.world.dev.cardano.org/environments.html](https://book.world.dev.cardano.org/environments.html)
 
-### Get configuration files for Preview Testnet
+#### Get configuration files for Preview Testnet
 
 Lets create a directory for our node files:
 
