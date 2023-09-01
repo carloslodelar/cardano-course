@@ -5,12 +5,12 @@ coverY: 0
 
 # Building the node
 
-#### Video lessons:
+## Video lessons:
 
-1. [Building the node with cabal](https://youtu.be/csqvbw3F\_BU)
+1. [Building the node with Cabal](https://youtu.be/csqvbw3F\_BU)
 2. [Building the node with Nix](https://youtu.be/iREukg3-JSM)
 
-**Documentation**
+## Documentation
 
 To build the node with Cabal, follow the official documentation:
 
