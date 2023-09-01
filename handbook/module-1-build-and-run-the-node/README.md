@@ -1,2 +1,2 @@
-# Module 1 Build and run the node
+# Module 1. Building and running the node
 

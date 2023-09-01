@@ -5,23 +5,23 @@ coverY: 0
 
 # Running the node and connecting to a network
 
-### **Video lessons**
+## Video lessons
 
 * [Running the node and connecting to different networks](https://youtu.be/YlUljmlCPYs)
 
-### Handbook
+## Handbook
 
 {% hint style="success" %}
-This tutorial has been updated to work with [cardano-node 8.0.0](https://github.com/input-output-hk/cardano-node/releases/tag/8.0.0)
+This tutorial has been updated to work with [cardano-node v.8.0.0](https://github.com/input-output-hk/cardano-node/releases/tag/8.0.0)
 {% endhint %}
 
-#### Public networks
+### Public networks
 
-The latest supported networks can be found at [https://book.world.dev.cardano.org/environments.html](https://book.world.dev.cardano.org/environments.html)
+The latest supported networks can be found at [https://book.world.dev.cardano.org/environments.html](https://book.world.dev.cardano.org/environments.html).
 
-#### Get configuration files for Preview Testnet
+### Getting configuration files for the preview testnet
 
-Lets create a directory for our node files:
+Create a directory for your node files:
 
 ```bash
 mkdir preview
@@ -67,7 +67,7 @@ Usage: cardano-node run [--topology FILEPATH]
                           ]
 ```
 
-### Running a passive node on Preview Testnet
+### Running a passive node on the preview testnet
 
 ```bash
 cardano-node run --topology topology.json \
@@ -77,13 +77,13 @@ cardano-node run --topology topology.json \
 --config config.json 
 ```
 
-Open a new terminal and Create the CARDANO\_NODE\_SOCKET\_PATH environment variable
+Open a new terminal and create the CARDANO\_NODE\_SOCKET\_PATH environment variable:
 
 ```bash
 export CARDANO_NODE_SOCKET_PATH="$HOME/preview/node.socket"
 ```
 
-Check that the node is syncing
+Check that the node is syncing:
 
 ```
 cardano-cli query tip --testnet-magic 2
@@ -91,14 +91,14 @@ cardano-cli query tip --testnet-magic 2
 
 ### Running a mainnet node
 
-Create a directory for the mainnet node
+Create a directory for the mainnet node:
 
 ```
 mkdir mainnet
 cd mainnet
 ```
 
-Get the configuration files
+Get the configuration files:
 
 ```
 wget https://book.world.dev.cardano.org/environments/mainnet/config.json
@@ -117,7 +117,7 @@ cardano-node run --topology topology.json \
 --config config.json 
 ```
 
-On a new terminal
+On the new terminal:
 
 ```
 export CARDANO_NODE_SOCKET_PATH="$HOME/mainnet/node.socket"

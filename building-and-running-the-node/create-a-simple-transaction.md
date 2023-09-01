@@ -3,17 +3,17 @@ cover: ../.gitbook/assets/CABAL (1).png
 coverY: 0
 ---
 
-# Create a simple transaction
+# Creating a simple transaction
 
-We can use `cardano-cli` to create transactions.
+You can use `cardano-cli` to create simple transactions:
 
 ```bash
 cardano-cli transaction
 ```
 
-### Create a transaction with `build-raw`
+## Creating a transaction with `build-raw`
 
-we will need the protocol parameters, so that we can later calculate the transaction fee
+To create a transaction using `build-raw`, you will need the protocol parameters. These parameters are necessary for calculating the transaction fee at a later stage:
 
 {% code overflow="wrap" %}
 ```bash
@@ -21,13 +21,13 @@ cardano-cli query protocol-parameters --testnet-magic 2 --out-file pparams.json
 ```
 {% endcode %}
 
-We need to know the transaction hash and index we will send funds from
+You will also need to know the transaction hash and index from which you intend to send funds:
 
 ```bash
 cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 2
 ```
 
-&#x20;Let's send 5,000 ada to our `paymentwithstake.addr`
+&#x20;Let's send 5,000 ada to the `paymentwithstake.addr`:
 
 ```bash
 cardano-cli transaction build-raw --babbage-era \
@@ -48,13 +48,13 @@ cardano-cli transaction calculate-min-fee --tx-body-file tx.draft \
 --witness-count 1 
 ```
 
-This will tell us the transaction fee that we need to pay, for example
+This information will enable you to determine the transaction fee that needs to be paid, for example:
 
 ```
 171353 Lovelace
 ```
 
-Now we need to rebuild the transaction body adding the fees and recalculating the change that we will send to `payment.addr`&#x20;
+Now, you need to reconstruct the transaction body by including the fees and recalculating the change that you intend to send to `payment.addr`&#x20;
 
 ```
  echo $((10000000000 - 5000000000 - 171353))
@@ -74,7 +74,7 @@ cardano-cli transaction build-raw --babbage-era \
 ```
 {% endcode %}
 
-Now we just need to sign and submit the transaction. Of course, we sign it with the `payment.skey` that we generated in the first place.&#x20;
+Sign and submit the transaction using the `payment.skey` generated earlier:&#x20;
 
 ```
 cardano-cli transaction sign \
@@ -90,9 +90,9 @@ cardano-cli transaction submit \
 --tx-file tx.signed 
 ```
 
-### Create a transaction with `build`
+## Creating a transaction with `build`
 
-Now, let's send the rest of the funds in `payment.addr` to `paymentwithstake.addr` This time we will use the build command which will automatically take care of the fees, simplifying the process
+Now, let's send the rest of the funds from `payment.addr` to `paymentwithstake.addr`. This time, you can use the build command, which automatically handles the fees, streamlining the process:
 
 {% code overflow="wrap" %}
 ```
@@ -104,7 +104,7 @@ cardano-cli transaction build --babbage-era \
 ```
 {% endcode %}
 
-Sign and submit as before
+Sign and submit:
 
 ```
 cardano-cli transaction sign \
