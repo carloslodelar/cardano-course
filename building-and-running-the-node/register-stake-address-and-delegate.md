@@ -3,18 +3,18 @@ cover: ../.gitbook/assets/CABAL (1).png
 coverY: 0
 ---
 
-# Register stake address and delegate
+# Registering a stake address and delegating
 
-Let's do somehting a little bit more interesting. Let's delegate our stake so that we can participate in the protocol and get rewarded for it.&#x20;
+In this tutorial, you will learn how to delegate stake and get rewarded for it.&#x20;
 
-We first need to register our stake key to the blockhain. This action incurs in a deposit of 2 ADA according to the protocol parameters&#x20;
+First, you need to register your stake key on the blockchain. This action incurs a deposit of two ada according to the protocol parameters:&#x20;
 
 ```
 cat pparams.json | grep stakeAddressDeposit
     "stakeAddressDeposit": 2000000,
 ```
 
-To register our stake key, we first need to produce a registration certificate. Take a look to the `cardano-cli stake-address` command
+To register the stake key, you first need to produce a registration certificate. Take a look at the `cardano-cli stake-address` command:
 
 ```bash
 cardano-cli stake-address
@@ -29,7 +29,7 @@ Available commands:
   delegation-certificate   Create a stake address delegation certificate
 ```
 
-We are interested in `registration-certificate`
+You'd be interested to use `registration-certificate`:
 
 ```bash
 cardano-cli stake-address registration-certificate \
@@ -37,7 +37,7 @@ cardano-cli stake-address registration-certificate \
 --out-file registration.cert
 ```
 
-Let's take a look of how it looks like
+This is how it looks like:
 
 ```bash
 cat registration.cert
@@ -49,7 +49,7 @@ cat registration.cert
 }
 ```
 
-Now we need to submit our certificate to the blockchain. We will use the `build` command. This time we need to use a few more options to build the transaction. We will use `--certificate-file` to include our registration certificate, and `--witness-override` to specify that this will be signed by 2 witnesses: `payment.skey` and `stake.skey`
+Now you need to submit your certificate to the blockchain. Let's use the `build` command. This time, you need to use a few more options to build the transaction. We will use `--certificate-file` to include the registration certificate, and `--witness-override` to specify that this will be signed by two witnesses – `payment.skey` and `stake.skey`:
 
 {% code overflow="wrap" %}
 ```bash
@@ -63,7 +63,7 @@ cardano-cli transaction build --babbage-era \
 ```
 {% endcode %}
 
-Sign it with both keys
+Sign it using both keys:
 
 ```
 cardano-cli transaction sign \
@@ -80,7 +80,7 @@ cardano-cli transaction submit \
 --tx-file tx.signed 
 ```
 
-Now we can delegate our stake. For that, we need to create a delegation certificate. Let's take another look to the `cardano-cli stake-address` command
+You can now delegate your stake. For this, you need to create a delegation certificate. Let's take another look at the `cardano-cli stake-address` command:
 
 ```
 cardano-cli stake-addres
@@ -96,7 +96,7 @@ Available commands:
   delegation-certificate   Create a stake address delegation certificate
 ```
 
-To produce the delegation certificate we need to know the stake pool id of the pool that we will delegate to. In this case I'll delegate to the pool that processed my registration certificate.&#x20;
+To produce the delegation certificate, you need to know the ID of the pool that you will delegate to. The example below delegates to the pool that processed the registration certificate:&#x20;
 
 ```
 cardano-cli stake-address delegation-certificate \
@@ -105,7 +105,7 @@ cardano-cli stake-address delegation-certificate \
 --out-file delegation.cert
 ```
 
-~~Rinse and repeat.~~ Build, sign and submit the transaction with the certificate
+Build, sign, and submit the transaction with the certificate:
 
 {% code overflow="wrap" %}
 ```
@@ -134,24 +134,24 @@ cardano-cli transaction submit \
 --tx-file tx.signed 
 ```
 
-#### The delegation cycle
+## The delegation cycle
 
-The delegation cycle comprises four (4) epochs:&#x20;
+The delegation cycle consists of four epochs.&#x20;
 
-The cycle starts when the stakeholder delegates his stake to a stake pool. This involves the creation of a _**Delegation Certificate**_ that is then embedded in a _**transaction**_ and _**registered**_ in the blockchain.  In our example below, this happens at any slot of _**Epoch N**_.&#x20;
+The cycle begins when a stakeholder delegates their stake to a stake pool. This process involves the creation of a _**delegation certificate**_, which is subsequently included in a _**transaction**_ and _**registered**_ on the blockchain. In the example below, this occurs at any slot within _**Epoch N**_.&#x20;
 
-Then, **** the protocol captures a stake snapshot (_**stakedist)**_ at the last slot of _**Epoch N,**_ recording 3 important pieces of information:&#x20;
+Then, the protocol captures a stake snapshot (_**stakedist)**_ at the last slot of _**Epoch N,**_, recording three important pieces of information:&#x20;
 
-1. The balance of each stake key registered in the blockchain,
-2. To which stake pool each stake key is delegated,&#x20;
+1. The balance of each stake key registered on the blockchain
+2. To which stake pool each stake key is delegated&#x20;
 3. The parameters (pool cost, margin, pledge, etc) that each stake pool has set.&#x20;
 
-This snapshot is then used at the end of _**Epoch N+1**_ to randomly select the slot leaders for _**Epoch N+2**_. This process is the essence of Ouroboros as a Proof-of-Stake consensus algorithm:  the bigger the stake, the more chances to be slot leader.  &#x20;
+This snapshot is then used at the end of _**Epoch N+1**_ to randomly select the slot leaders for _**Epoch N+2**_. This process is the essence of Ouroboros as a proof-of-stake consensus algorithm: the bigger the stake, the more chances to become a slot leader.  &#x20;
 
-During _**Epoch N+2**_ the stake pools produce the blocks they are entitled to as per the slot leader election. Naturally, stake pools that control more stake will be entitled to more blocks.
+During _**Epoch N+2**_, stake pools produce the blocks they are entitled to based on the slot leader election. Naturally, stake pools with greater control of stake will be entitled to a larger number of blocks.
 
-In the transition between _**Epoch N+2 and Epoch N+3,**_ a new snapshot registers the rewards collected. And the protocol uses the stake distribution recorded at the end of _**Epoch N**_  to calculate how much of the rewards belongs to each stake key,
+In the transition between _**Epoch N+2 and Epoch N+3,**_ a new snapshot registers the collected rewards. The protocol uses the stake distribution recorded at the end of _**Epoch N**_  to calculate how much of the rewards belong to each stake key.
 
-Finally, at the transition between _**Epoch N+3**_ and _**Epoch N+4**_  the protocol distributes the rewards to all stake keys. Which show up in wallets at the very start of _**Epoch N+4**_ and credited to the wallet's balance and will count as part of the stake for the snapshot to be taken at the last slot of _**Epoch N+4**_
+Finally, during the transition between _**Epoch N+3**_ and _**Epoch N+4**_, the protocol distributes rewards to all stake keys. These rewards appear in wallets at the beginning of _**Epoch N+4**_, are credited to the wallet's balance, and are considered part of the stake for the snapshot taken at the final slot of _**Epoch N+4**_.
 
 <figure><img src="../.gitbook/assets/delegationcycle.gif" alt=""><figcaption></figcaption></figure>
