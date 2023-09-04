@@ -3,52 +3,50 @@ cover: ../.gitbook/assets/p2p.png
 coverY: 0
 ---
 
-# Module 3 Peer-to-peer (P2P) networking
+# Module 4. Peer-to-peer (P2P) networking
 
-### What do we achieve with P2P
+## What do we achieve with P2P?
 
-* With automatic P2P, (registered) nodes can discover and establish connections with each other&#x20;
-* Nodes can establish full duplex  connections (simultaneous server and client side of the mini-protocols)
-* Nodes can maintain some static topology i.e. its own relays and bp, and trusted peers with which we always want to keep a connection.&#x20;
-* RootPeers reload with SIGHUP signal, no need to restart.&#x20;
-*   The node dynamically manages the connections:  Each node maintains a set of peers mapped into three categories:
+* Through automatic P2P, registered nodes can discover and establish connections with each other&#x20;
+* Nodes can establish full-duplex connections, operating simultaneously as servers and clients for the mini-protocols
+* Nodes can maintain certain static topologies, including their own relays and block producers, as well as trusted peers with which continuous connections are desired&#x20;
+* Root peers can be reloaded using the SIGHUP signal, eliminating the need for a restart&#x20;
+* The node can dynamically manage the connections, each node maintains a set of peers mapped into three categories:
 
     * **cold peers** ‒ existing (known) peers without an established network connection
-    * **warm peers** ‒ peers with an established bearer connection, which is only used for network measurements without implementing any of the node-to-node mini-protocols (not active).
+    * **warm peers** ‒ peers with an established bearer connection, which is only used for network measurements without implementing any of the node-to-node mini-protocols (not active)
     * **hot peers** ‒ peers that have a connection, which is being used by all three node-to-node mini-protocols (active peers)
 
     Newly discovered peers are initially added to the cold peer set. The P2P governor is then responsible for peer connection management.
-* Maintaining diversity in hop distances contributes to better block distribution times across the globally distributed network.
-* In the case of adversarial behavior, the peer can be immediately demoted from the hot, warm, or cold sets.
+* Maintaining diversity in hop distances contributes to better block distribution times across the globally distributed network
+* In the case of adversarial behavior, the peer can be immediately demoted from the hot, warm, or cold sets
 
-We classify upstream peers in 3 nested categories: Known/Established/Active
+Upstream peers are classified into three categories: known, established, and active.
 
 <figure><img src="../.gitbook/assets/Screen Shot 2023-03-10 at 13.40.58.png" alt=""><figcaption></figcaption></figure>
 
-### What is next
+## What is next?
 
 * Peer sharing&#x20;
-* Release Ouroboros Genesis
+* Ouroboros Genesis release 
 
 {% hint style="info" %}
 Learn more:&#x20;
 
 [Peer-to-peer (P2P) networking](https://docs.cardano.org/explore-cardano/cardano-network/p2p-networking)
 
-[Interview with Networking team lead ](https://youtu.be/wnv7VCa79eo)
+[Interview with the networking team lead ](https://youtu.be/wnv7VCa79eo)
 {% endhint %}
 
-###
-
-#### The P2P topology file&#x20;
+## The P2P topology file&#x20;
 
 {% embed url="https://github.com/input-output-hk/cardano-node/blob/master/doc/getting-started/understanding-config-files.md" %}
 
-#### New P2P topology file format (please use it on node 1.35.6 Single Relay)
+### The new P2P topology file format (please use it with node v.1.35.6 single relay):
 
 {% embed url="https://github.com/input-output-hk/cardano-node/issues/4559" %}
 
-### Example of a topology file for a node not involved in block production or block propagation
+### Example of a topology file for a node not involved in block production or block propagation:
 
 ```json
 {
@@ -76,9 +74,9 @@ Learn more:&#x20;
 }
 ```
 
-### Example of topology files for a stakepool
+### Example of topology files for a stake pool
 
-The block-producer node includes it's own relays (`x.x.x.x` and `y.y.y.y`) under local roots. Note that we use `"useLedgerAfterSlot": -1` to indicate that it should never use LedgerPeers.
+The block-producing node includes its own relays (`x.x.x.x` and `y.y.y.y`) under local roots. Note that the example uses `"useLedgerAfterSlot": -1` to indicate that it should never use `LedgerPeers`.
 
 ```json
 {
@@ -110,7 +108,7 @@ The block-producer node includes it's own relays (`x.x.x.x` and `y.y.y.y`) under
 }
 ```
 
-The relay `x.x.x.x`  inlcudes its own block producer node (`z.z.z.z`) and the other relay (`y.y.y.y`) under local roots, and a few other root peers under public roots. Note that this time we do want to use LedgerPeers, thus we use `"useLedgerAfterSlot": 10000000`
+The relay `x.x.x.x` includes its own block-producing node (`z.z.z.z`), the other relay (`y.y.y.y`) under local roots, and a few other root peers under public roots. Note that this time, the example does use LedgerPeers - `"useLedgerAfterSlot": 10000000`.
 
 ```json
 {
@@ -145,11 +143,11 @@ The relay `x.x.x.x`  inlcudes its own block producer node (`z.z.z.z`) and the ot
 }
 ```
 
-### Configuring the node to use P2P
+## Configuring the node to use P2P
 
-To Enable P2P, we do it from the configuration file, take for example the Preview testnet [configuration file](https://book.world.dev.cardano.org/environments/preview/config.json), it contains the field  `"EnableP2P".` It can be set to `false` or `true`
+You can enable P2P from the configuration file. For example, in the preview testnet [configuration file](https://book.world.dev.cardano.org/environments/preview/config.json), you will find the field `EnableP2P`, which can be set to either `false` or `true`.
 
-For example, on Preview testnet the default is `true` since this network is already running with P2P.  We also need to configure the Target number of _Active_, _Established_ and _Known_ Peers, together with the target of _Root_ Peers
+On the preview testnet, the default is `true` since this network is already running with P2P. You will also need to configure the target number of _active_, _established_ and _known_ peers, together with the target number of _root_ peers:
 
 <pre><code>{
 ...
