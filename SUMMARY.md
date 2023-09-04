@@ -18,7 +18,7 @@
     * [Conway genesis file](handbook/module-3-protocol-parameters-and-configuration-files/conway-genesis-file.md)
     * [Node configuration file](protocol-parameters-and-configuration-files/node-configuration-file.md)
     * [Topology file](protocol-parameters-and-configuration-files/topology-file.md)
-  * [Module 4 Peer-to-peer (P2P) networking](peer-to-peer-p2p-networking.md)
+  * [Module 4 Peer-to-peer (P2P) networking](handbook/module-4-peer-to-peer-p2p-networking.md)
   * [Module 5 Create a stake pool](create-a-stake-pool/README.md)
     * [The setup](create-a-stake-pool/the-setup.md)
     * [Generate keys](create-a-stake-pool/generate-keys.md)
