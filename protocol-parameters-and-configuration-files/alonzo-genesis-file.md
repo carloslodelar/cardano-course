@@ -5,7 +5,7 @@ coverY: 0
 
 # Alonzo genesis file
 
-#### Cardano mainnet Alonzo genesis file
+## Cardano mainnet Alonzo genesis file:
 
 {% embed url="https://book.world.dev.cardano.org/environments/mainnet/alonzo-genesis.json" %}
 

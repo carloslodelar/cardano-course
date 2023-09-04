@@ -5,7 +5,7 @@ coverY: 0
 
 # Shelley genesis file
 
-#### Cardano mainnet Shelley genesis file
+## Cardano mainnet Shelley genesis file:
 
 {% embed url="https://book.world.dev.cardano.org/environments/mainnet/shelley-genesis.json" %}
 

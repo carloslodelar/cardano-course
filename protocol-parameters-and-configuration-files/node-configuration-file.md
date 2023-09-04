@@ -5,17 +5,17 @@ coverY: 0
 
 # Node configuration file
 
-### Cardano mainnet node configuration file
+## Cardano mainnet node configuration file:
 
 {% embed url="https://book.world.dev.cardano.org/environments/mainnet/config.json" %}
 
-You can also use YAML
+You can also use YAML:
 
 {% embed url="https://raw.githubusercontent.com/input-output-hk/cardano-node/master/configuration/cardano/mainnet-config.yaml" %}
 
 ```json
 ################################################################################
-# Mainnet Cardano Node Configuration
+# Mainnet Cardano node configuration
 
 ##### Locations #####
 
@@ -35,8 +35,8 @@ RequiresNetworkMagic: RequiresNoMagic
 
 ##### Update system parameters #####
 
-# This protocol version number gets used by block producing nodes as part
-# of the system for agreeing on and synchronising protocol updates.
+# This protocol version number gets used by block-producing nodes as part
+# of the system for agreeing on and synchronizing protocol updates.
 #
 # See https://github.com/input-output-hk/cardano-node/blob/master/cardano-node/src/Cardano/Node/Protocol/Cardano.hs#L199
 LastKnownBlockVersion-Major: 3
@@ -44,7 +44,7 @@ LastKnownBlockVersion-Minor: 0
 LastKnownBlockVersion-Alt: 0
 MaxKnownMajorProtocolVersion: 2
 
-# In the Byron era some software versions are also published on the chain.
+# In the Byron era, some software versions are also published on the chain.
 # We do this only for Byron compatibility now.
 ApplicationName: cardano-sl
 ApplicationVersion: 1
@@ -60,7 +60,7 @@ TurnOnLogging: True
 TurnOnLogMetrics: True
 
 # Global logging severity filter. Messages must have at least this severity to
-# pass. Typical values would be Warning, Notice, Info or Debug.
+# pass. Typical values would be Warning, Notice, Info, or Debug.
 minSeverity: Info
 
 # Log items can be rendered with more or less verbose detail.
@@ -250,7 +250,7 @@ TraceTxSubmissionProtocol: False
 ##### Fine grained logging control #####
 
 # It is also possible to have more fine grained control over filtering of
-# trace output, and to match and route trace output to particular backends.
+# trace output and to match and route trace output to particular backends.
 # This is less efficient than the coarse trace filters above but provides
 # much more precise control.
 
