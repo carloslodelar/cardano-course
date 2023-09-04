@@ -13,7 +13,7 @@ You can also use YAML:
 
 {% embed url="https://raw.githubusercontent.com/input-output-hk/cardano-node/master/configuration/cardano/mainnet-config.yaml" %}
 
-```json
+```yaml
 ################################################################################
 # Mainnet Cardano node configuration
 
