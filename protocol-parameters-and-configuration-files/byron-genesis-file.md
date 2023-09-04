@@ -5,7 +5,7 @@ coverY: 0
 
 # Byron genesis file
 
-#### Cardano mainnet Byron genesis file
+## Cardano mainnet Byron genesis file:
 
 {% embed url="https://book.world.dev.cardano.org/environments/mainnet/byron-genesis.json" %}
 
