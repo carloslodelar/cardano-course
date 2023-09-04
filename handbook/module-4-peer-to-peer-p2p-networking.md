@@ -3,6 +3,7 @@ cover: ../.gitbook/assets/p2p.png
 coverY: 0
 ---
 
+
 # Module 4. Peer-to-peer (P2P) networking
 
 ## What do we achieve with P2P?
@@ -28,7 +29,7 @@ Upstream peers are classified into three categories: known, established, and act
 ## What is next?
 
 * Peer sharing&#x20;
-* Ouroboros Genesis release 
+* Ouroboros Genesis release
 
 {% hint style="info" %}
 Learn more:&#x20;
@@ -53,7 +54,7 @@ Learn more:&#x20;
    "localRoots":[
       {
          "accessPoints":[
-            
+
          ],
          "advertise":false,
          "valency":1
@@ -99,7 +100,7 @@ The block-producing node includes its own relays (`x.x.x.x` and `y.y.y.y`) under
    "publicRoots":[
       {
          "accessPoints":[
-            
+
          ],
          "advertise":false
       }
