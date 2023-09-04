@@ -1,3 +1,22 @@
+---
+cover: ../.gitbook/assets/p2p.png
+coverY: -329.95409836065573
+layout:
+  cover:
+    visible: true
+    size: full
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # Module 4 Peer-to-peer (P2P) networking
 
 * Through automatic P2P, registered nodes can discover and establish connections with each other
