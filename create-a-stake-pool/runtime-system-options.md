@@ -1,15 +1,15 @@
-# Runtime System Options
+# Runtime system options
 
 The Haskell runtime system is a software layer that provides a set of services that enable Haskell programs to execute. At a high level, the Haskell runtime system provides the following services:
 
-1. Memory Management: The Haskell runtime system manages the allocation and deallocation of memory used by the program. This includes allocating memory for data structures, managing the stack and heap, and freeing memory that is no longer in use.
-2. Garbage Collection: The Haskell runtime system automatically collects and frees memory that is no longer being used by the program. This ensures that memory is used efficiently and helps to prevent memory leaks.
-3. Concurrency and Parallelism: The Haskell runtime system provides support for concurrency and parallelism through features like lightweight threads, software transactional memory, and parallel arrays. This enables Haskell programs to take advantage of modern multicore processors and to execute computations in parallel.
-4. Exception Handling: The Haskell runtime system provides a mechanism for handling exceptions that occur during program execution. This includes both synchronous exceptions, which occur as a result of a program error, and asynchronous exceptions, which occur as a result of external events such as signals.
+1. Memory management: the Haskell runtime system manages the allocation and deallocation of memory used by the program. This includes allocating memory for data structures, managing the stack and heap, and freeing memory that is no longer in use.
+2. Garbage collection: the Haskell runtime system automatically collects and frees memory that is no longer being used by the program. This ensures that memory is used efficiently and helps to prevent memory leaks.
+3. Concurrency and parallelism: the Haskell runtime system provides support for concurrency and parallelism through features like lightweight threads, software transactional memory, and parallel arrays. This enables Haskell programs to take advantage of modern multicore processors and to execute computations in parallel.
+4. Exception handling: the Haskell runtime system provides a mechanism for handling exceptions that occur during program execution. This includes both synchronous exceptions, which occur as a result of a program error, and asynchronous exceptions, which occur as a result of external events such as signals.
 
 {% embed url="https://downloads.haskell.org/ghc/latest/docs/users_guide/runtime_control.html#runtime-system-rts-options" %}
 
-IOG-released binaries are built with the following RTS options (-with-rtsopts):  `-T -I0 -A16m -N2 --disable-delayed-os-memory-return` . Meaning that by default the node uses these options at runtime.  You can check it with:
+IOG-released binaries are built with the following RTS options (-with-rtsopts):  `-T -I0 -A16m -N2 --disable-delayed-os-memory-return` . This means that the node uses these options at runtime by default.  You can check it thus:
 
 ```
 cardano-node +RTS --info
@@ -36,15 +36,15 @@ cardano-node +RTS --info
  ]
 ```
 
-### Customized RTS options
+## Customized RTS options
 
-Users can choose to use different options by tweaking  `-with-rtsopts` on the node's [cabal file](https://github.com/input-output-hk/cardano-node/blob/master/cardano-node/cardano-node.cabal), and building the node with the new options. For example:
+Users have the option to select different configurations by adjusting the `-with-rtsopts` in the node's [Cabal file](https://github.com/input-output-hk/cardano-node/blob/master/cardano-node/cardano-node.cabal) and then building the node with the updated settings. For instance:
 
 ```
 ghc-options:    "-with-rtsopts=-T -I0 -A16m -N2 --disable-delayed-os-memory-return"
 ```
 
-&#x20;Users can extend and override options in `-with-rtsopts`  running cardano-node with command-line RTS options.  Find the options available with:
+&#x20;Users can extend and override options in `-with-rtsopts` by running `cardano-node` with command-line RTS options. To discover the available options, use the following command:
 
 ```
 cardano-node +RTS -?
@@ -53,7 +53,7 @@ cardano-node:
 cardano-node: Usage: <prog> <args> [+RTS <rtsopts> | -RTS <args>] ... --RTS <args>
 cardano-node:
 cardano-node:    +RTS    Indicates run time system options follow
-cardano-node:    -RTS    Indicates program arguments follow
+cardano-node:    -RTS    Indicates program arguments to follow
 cardano-node:   --RTS    Indicates that ALL subsequent arguments will be given to the
 cardano-node:            program (including any of these RTS flags)
 cardano-node:
@@ -156,7 +156,7 @@ cardano-node: Other RTS options may be available for programs compiled a differe
 cardano-node: The GHC User's Guide has full details.
 ```
 
-For example, this will extend the default options with **`-qg`** and **`-qb:`**
+For example, this will extend the default options with **`-qg`** and **`-qb:`**:
 
 ```bash
 cardano-node run --topology configuration/topology.json \
@@ -167,15 +167,13 @@ cardano-node run --topology configuration/topology.json \
 +RTS -qg -qb
 ```
 
-Where `+RTS ...`  Signal to the runtime system that we are passing runtime system options. In the above example we are using:
+Where `+RTS ...` signals to the runtime system about passing runtime system options. The above example uses:
 
-* ****[**-T**](https://downloads.haskell.org/ghc/latest/docs/users\_guide/runtime\_control.html#rts-flag--T)**:** Produce runtime-system statistics, such as the amount of time spent executing the program and in the garbage collector, the amount of memory allocated, the maximum size of the heap, and so on. The three variants give different levels of detail: `-T` collects the data but produces no output. Access the statistics using [GHC.Stats](https://downloads.haskell.org/ghc/latest/docs/libraries/base-4.18.0.0/GHC-Stats.html).
-* ****[**-N2**](https://downloads.haskell.org/ghc/latest/docs/users\_guide/using-concurrent.html#rts-options-for-smp-parallelism): Used to specify the number of threads to use for parallel execution. The `-N2` flag specifies that the Haskell runtime system should use two parallel threads.
-* **-**[**A16m**:](https://downloads.haskell.org/ghc/latest/docs/users\_guide/runtime\_control.html#rts-flag--A%20%E2%9F%A8size%E2%9F%A9) Sets the maximum heap size for the generational garbage collector to 16 megabytes.&#x20;
-* ****[**-I0:**](https://downloads.haskell.org/ghc/latest/docs/users\_guide/runtime\_control.html#rts-flag--I%20%E2%9F%A8seconds%E2%9F%A9) **** Set the amount of idle time which must pass before a idle GC is performed. Setting `-I0` disables the idle GC.
-*   ****[**--disable-delayed-os-memory-return**:](https://downloads.haskell.org/ghc/latest/docs/users\_guide/runtime\_control.html#rts-flag---disable-delayed-os-memory-return)  For accurate resident memory usage of the program as shown in memory usage reporting tools (e.g. the RSS column in top and htop). This makes it easier to check the real memory usage.
-
-
-* \-[**qg**](https://downloads.haskell.org/ghc/latest/docs/users\_guide/runtime\_control.html#rts-flag--qg%20%E2%9F%A8gen%E2%9F%A9): disables parallel GC, use sequential GC.
-* \-[**qb**](https://downloads.haskell.org/ghc/latest/docs/users\_guide/runtime\_control.html#rts-flag--qb%20%E2%9F%A8gen%E2%9F%A9): disables GC load balancing
+* [**-T**](https://downloads.haskell.org/ghc/latest/docs/users\_guide/runtime\_control.html#rts-flag--T): produces runtime-system statistics, such as the amount of time spent executing the program and in the garbage collector, the amount of memory allocated, the maximum size of the heap, and so on. The three variants provide different levels of detail: `-T` collects the data but produces no output. Access the statistics using [GHC.Stats](https://downloads.haskell.org/ghc/latest/docs/libraries/base-4.18.0.0/GHC-Stats.html).
+* [**-N2**](https://downloads.haskell.org/ghc/latest/docs/users\_guide/using-concurrent.html#rts-options-for-smp-parallelism): specifies the number of threads to use for parallel execution. The `-N2` flag indicates that the Haskell runtime system should use two parallel threads.
+* [**-A16m**](https://downloads.haskell.org/ghc/latest/docs/users\_guide/runtime\_control.html#rts-flag--A%20%E2%9F%A8size%E2%9F%A9): sets the maximum heap size for the generational garbage collector to 16 megabytes.
+* [**-I0**](https://downloads.haskell.org/ghc/latest/docs/users\_guide/runtime\_control.html#rts-flag--I%20%E2%9F%A8seconds%E2%9F%A9): specifies the amount of idle time that must pass before an idle GC is performed. Setting `-I0` disables the idle GC.
+* [--disable-delayed-os-memory-return](https://downloads.haskell.org/ghc/latest/docs/users\_guide/runtime\_control.html#rts-flag---disable-delayed-os-memory-return): this option is used for accurate resident memory usage of the program, as shown in memory usage reporting tools (eg, the RSS column in top and htop). It makes it easier to verify the real memory usage.
+* [**qg**](https://downloads.haskell.org/ghc/latest/docs/users\_guide/runtime\_control.html#rts-flag--qg%20%E2%9F%A8gen%E2%9F%A9): disables parallel GC, uses sequential GC.
+* [**qb**](https://downloads.haskell.org/ghc/latest/docs/users\_guide/runtime\_control.html#rts-flag--qb%20%E2%9F%A8gen%E2%9F%A9): disables GC load balancing.
 
