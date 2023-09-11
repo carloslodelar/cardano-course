@@ -1,6 +1,6 @@
-# Generate keys
+# Generating keys
 
-We register a stake pool with the following command:
+First, you should register a stake pool using the following command:
 
 ```
 cardano-cli stake-pool registration-certificate \
@@ -20,7 +20,9 @@ cardano-cli stake-pool registration-certificate \
 --out-file pool-registration.cert
 ```
 
-So we will need to generate all the following artifacts:
+## Generating the artifacts 
+
+You will now need to generate all the following artifacts:
 
 | `payment.vkey`   | payment verification key         |
 | ---------------- | -------------------------------- |
@@ -40,17 +42,17 @@ So we will need to generate all the following artifacts:
 | metadata url     |                                  |
 | metadata hash    |                                  |
 
-#### Lets start with a new payment and stake ke pairs:
+### Payment and stake key pairs
 
 {% hint style="info" %}
 WE WILL GENERATE KEYS IN OUR AIR-GAPPED MACHINE.&#x20;
 {% endhint %}
 
-#### Payment and stake keys
+**Payment and stake keys** 
 
 {% tabs %}
-{% tab title="With the  cardano CLI" %}
-Generate payment  keys
+{% tab title="Using the Cardano CLI" %}
+Generate payment  keys:
 
 ```bash
 cardano-cli address key-gen \
@@ -58,7 +60,7 @@ cardano-cli address key-gen \
 --signing-key-file payment.skey
 ```
 
-Generate stake keys
+Generate stake keys:
 
 ```bash
 cardano-cli stake-address key-gen \
@@ -66,7 +68,7 @@ cardano-cli stake-address key-gen \
 --signing-key-file stake.skey
 ```
 
-Generate payment address&#x20;
+Generate the payment address:&#x20;
 
 ```bash
 cardano-cli address build \
@@ -76,30 +78,29 @@ cardano-cli address build \
 --out-file payment.addr
 ```
 
-
 {% endtab %}
 
-{% tab title="From recovery phrase" %}
-Generate a recovery phrase and save it to a file&#x20;
+{% tab title="From the recovery phrase" %}
+Generate a recovery phrase and save it to a file:&#x20;
 
 ```
 cardano-address recovery-phrase generate > recoveryphrase.txt
 ```
 
-Get the root private key
+Get the root private key:
 
 ```
 cat recoveryphrase.txt | cardano-address key from-recovery-phrase Shelley > root.prv
 ```
 
-Generate the private and public keys for the index 0 address
+Generate the private and public keys for the index 0 address:
 
 ```
 cardano-address key child 1852H/1815H/0H/0/0    < root.prv > payment-0.prv
 cardano-address key public --without-chain-code < payment-0.prv > payment-0.pub
 ```
 
-Convert the private key so that it can be used within the cardano-cli
+Convert the private key so that it can be used within the `cardano-cli`:
 
 ```
 cardano-cli key convert-cardano-address-key \
@@ -108,7 +109,7 @@ cardano-cli key convert-cardano-address-key \
 --out-file payment-0.skey
 ```
 
-Get the public (verification) key compatible with cardano-cli
+Get the public (verification) key compatible with the `cardano-cli`:
 
 ```
 cardano-cli key verification-key \
@@ -116,14 +117,14 @@ cardano-cli key verification-key \
 --verification-key-file payment-0.vkey
 ```
 
-&#x20;Generate the stake keys
+&#x20;Generate the stake keys:
 
 ```
 cardano-address key child 1852H/1815H/0H/2/0 < root.prv > stake.prv
 cardano-address key public --without-chain-code < stake.prv > stake.pub
 ```
 
-Convert it&#x20;
+Convert:&#x20;
 
 ```
 cardano-cli key convert-cardano-address-key \
@@ -132,7 +133,7 @@ cardano-cli key convert-cardano-address-key \
 --out-file stake.skey
 ```
 
-Get the extended verification key
+Get the extended verification key:
 
 ```
 cardano-cli key verification-key \
@@ -140,7 +141,7 @@ cardano-cli key verification-key \
 --verification-key-file stake.evkey
 ```
 
-And the non-extended verification key&#x20;
+Also, get the non-extended verification key:&#x20;
 
 ```
 cardano-cli key non-extended-key \
@@ -148,7 +149,7 @@ cardano-cli key non-extended-key \
 --verification-key-file stake.vkey
 ```
 
-Finally, generate payment address
+Finally, generate the payment address:
 
 ```
 cardano-cli address build --testnet-magic 2 \
@@ -157,7 +158,7 @@ cardano-cli address build --testnet-magic 2 \
 --out-file payment-0.address
 ```
 
-And the stake address
+Also, generate the stake address:
 
 ```
 cardano-cli stake-address build --testnet-magic 2 \
@@ -170,10 +171,10 @@ cardano-cli stake-address build --testnet-magic 2 \
 {% endtabs %}
 
 {% hint style="info" %}
-REQUEST FUNDS FROM THE FAUCET.
+REQUEST FUNDS FROM THE FAUCET
 {% endhint %}
 
-#### Cold keys
+### Cold keys
 
 ```
 cardano-cli node key-gen \
@@ -182,7 +183,7 @@ cardano-cli node key-gen \
 --operational-certificate-issue-counter-file opcert.counter
 ```
 
-#### Key Evolving Signature  (KES) keys
+### Key evolving signature (KES) keys
 
 ```
 cardano-cli node key-gen-KES \
@@ -190,7 +191,7 @@ cardano-cli node key-gen-KES \
 --signing-key-file kes.skey
 ```
 
-#### Verifiable Random Function (VRF) keys&#x20;
+### Verifiable random function (VRF) keys&#x20;
 
 ```
 cardano-cli node key-gen-VRF \
@@ -198,15 +199,15 @@ cardano-cli node key-gen-VRF \
 --signing-key-file vrf.skey
 ```
 
-#### Upload keys block-producing node
+### Upload keys to the block-producing node
 
-on the Block producer&#x20;
+On the Block producer, run:&#x20;
 
 ```
 mkdir keys
 ```
 
-Use a USB drive to bring `kes.skey vrf.skey` and `opcert.cert` to your working machine and from there, upload&#x20;
+Use a USB drive to bring `kes.skey vrf.skey` and `opcert.cert` to your working machine and from there, upload:&#x20;
 
 ```bash
 scp kes.skey vrf.skey opcert.cert username@host:/remote/directory

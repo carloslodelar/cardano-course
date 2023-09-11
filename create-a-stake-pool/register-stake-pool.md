@@ -1,6 +1,6 @@
-# Register stake pool
+# Registering a stake pool
 
-### [Register stake address](https://github.com/input-output-hk/cardano-node/blob/master/doc/stake-pool-operations/5\_register\_key.md)
+## [Register the stake address](https://github.com/input-output-hk/cardano-node-wiki/blob/main/docs/stake-pool-operations/5_register_key.md)
 
 ```
 cardano-cli stake-address registration-certificate \
@@ -33,9 +33,9 @@ cardano-cli transaction submit \
 --tx-file tx.signed 
 ```
 
-### [Pool metadata](https://github.com/input-output-hk/cardano-node/blob/master/doc/stake-pool-operations/8\_register\_stakepool.md#create-a-json-file-with-your-pools-metadata)
+## Register a [stake pool with metadata](https://github.com/input-output-hk/cardano-node-wiki/blob/main/docs/stake-pool-operations/8_register_stakepool.md)
 
-The stake pool registration certificate optionally contains a content hash and a URL (up to 64 bytes)
+The stake pool registration certificate optionally contains a content hash and a URL (up to 64 bytes).
 
 * JSON containing:
   * **Name** of up to 50 characters&#x20;
@@ -56,7 +56,7 @@ The stake pool registration certificate optionally contains a content hash and a
 
 For example: [https://880w.short.gy/clrsp.json](https://880w.short.gy/clrsp.json)
 
-To get the metadata hash
+To get the metadata hash, run:
 
 ```
 wget https://880w.short.gy/clrsp.json
@@ -67,9 +67,9 @@ cardano-cli stake-pool metadata-hash --pool-metadata-file clrsp.json
 3c914463aa1cddb425fba48b21c4db31958ea7a30e077f756a82903f30e04905
 ```
 
-### [Register stake pool ](https://github.com/input-output-hk/cardano-node/blob/master/doc/stake-pool-operations/8\_register\_stakepool.md#generate-stake-pool-registration-certificate)
+## [Generate a stake pool registration certificate](https://github.com/input-output-hk/cardano-node-wiki/blob/main/docs/stake-pool-operations/8_register_stakepool.md#generate-stake-pool-registration-certificate)
 
-#### Create registration certificate
+### Create the registration certificate:
 
 ```
 cardano-cli stake-pool registration-certificate \
@@ -88,7 +88,7 @@ cardano-cli stake-pool registration-certificate \
 --out-file pool-registration.cert
 ```
 
-#### Create delegation certificate, to honor the pledge
+### Create the delegation certificate to honor the pledge:
 
 ```
 cardano-cli stake-address delegation-certificate \
@@ -97,7 +97,7 @@ cardano-cli stake-address delegation-certificate \
 --out-file delegation.cert
 ```
 
-#### Submit certificates
+### Submit certificates:
 
 ```
 cardano-cli transaction build \
@@ -126,9 +126,9 @@ cardano-cli transaction submit \
 --tx-file tx.signed 
 ```
 
-#### [Get delegation from the testnet faucet](https://docs.cardano.org/cardano-testnet/tools/faucet)
+### [Get delegation funds from the testnet faucet](https://docs.cardano.org/cardano-testnet/tools/faucet)
 
-The faucet only takes the beck32 pool id
+The faucet only takes the Bech32 pool ID:
 
 ```
 cardano-cli stake-pool id \
@@ -136,11 +136,11 @@ cardano-cli stake-pool id \
 --output-format bech32
 ```
 
-### [Issue Operational Certificate](https://github.com/input-output-hk/cardano-node/blob/master/doc/stake-pool-operations/7\_KES\_period.md)
+### [Issue an operational certificate](https://github.com/input-output-hk/cardano-node-wiki/blob/main/docs/stake-pool-operations/7_KES_period.md)
 
-#### Calculate current KES period
+#### Calculate the current KES period.
 
-There are 129600 slots in a KES period
+There are 129600 slots in a KES period:
 
 ```
 cat shelley-genesis.json | grep KES
@@ -148,7 +148,7 @@ cat shelley-genesis.json | grep KES
 "maxKESEvolutions": 62,
 ```
 
-Current slot is can be obtained with query tip
+The current slot can be obtained using a query tip:
 
 ```
 cardano-cli query tip --testnet-magic 2 
@@ -164,19 +164,19 @@ cardano-cli query tip --testnet-magic 2
 }
 ```
 
-Devide
+Divide:
 
 ```
 echo $((12380321 / 129600))
 ```
 
-Or in one line
+Or in one line:
 
 ```
 echo $(($(cardano-cli query tip --testnet-magic 2 | jq .slot) / 129600))
 ```
 
-On the air-gappad machine
+On the air-gapped machine, run:
 
 ```
 cardano-cli node issue-op-cert --kes-verification-key-file kes.vkey \

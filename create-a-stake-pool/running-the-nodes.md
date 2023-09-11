@@ -2,13 +2,11 @@
 
 ## Prepare topology files
 
-#### Block Producer
+This is a basic setup with x.x.x.x and y.y.y.y representing the IP addresses of the stake pool operator's relays:
 
-A basic setup where x.x.x.x and y.y.y.y are IP addresses of our own relays.&#x20;
-
-* `Valency` determines the total number of connections to local roots, i.e. if we want a hot connection with both x.x.x.x and y.y.y.y relays, we use `Valency 2.`
-* Don't use PublicRoots in our Block Producer. &#x20;
-* `UseLedgerAfterSlot` is set to -1  so that we never use ledger peers on the block producer.&#x20;
+* The `Valency` parameter determines the total number of connections to local roots. For instance, if you want a hot connection with both x.x.x.x and y.y.y.y relays, set `Valency` to 2.
+* Avoid using public roots in the block producer setup.
+* `UseLedgerAfterSlot` is configured to be -1 to ensure that ledger peers are never utilized on the block producer.
 
 ```
 {
@@ -40,12 +38,12 @@ A basic setup where x.x.x.x and y.y.y.y are IP addresses of our own relays.&#x20
 }
 ```
 
-#### Relays
+## Relays
 
-* Our relays will connect to the block producer z.z.z.z and to our other relay y.y.y.y.&#x20;
-* We use Valency 2 to tell the node maintain a hot connection with both nodes.&#x20;
-* Here we can use IOG relays (and any other trusted peer) under Public Roots&#x20;
-* Set `useLedgerAfterSlot: 1000000.` We just need to make sure that the target slot is not too old, in particular if we are syncing the chain for the first time.&#x20;
+* Your relays will connect to the block producer z.z.z.z and to your other relay y.y.y.y.&#x20;
+* Use Valency 2 to tell the node to maintain a hot connection with both nodes.&#x20;
+* Here, you can use IOG relays (or any other trusted peer) under public roots&#x20;
+* Set `useLedgerAfterSlot: 1000000.` Make sure that the target slot is not too old, in particular, if syncing the chain for the first time.&#x20;
 
 ```
 {
@@ -82,7 +80,7 @@ A basic setup where x.x.x.x and y.y.y.y are IP addresses of our own relays.&#x20
 
 ## Prepare startup scripts
 
-For the block producer
+**For the block producer:**
 
 ```bash
 #!/bin/bash
@@ -110,7 +108,7 @@ cardano-node run \
     --config "${CONFIG_FILE}" 
 ```
 
-For the Relays
+**For the relays:**
 
 ```bash
 #!/bin/bash
@@ -135,9 +133,9 @@ cardano-node run \
 {% hint style="info" %}
 **If you get an error about VRF keys:**\
 ****\
-**VRF private key file /keylocation/vrf.skey has “other” file permissions. Please remove all “other” file permissions.**\
+**VRF private key file /keylocation/vrf.skey has 'other' file permissions. Please remove all 'other' file permissions.**\
 **``**\
-**`Fix it with`**&#x20;
+**`Fix it with:`**&#x20;
 
 **``**
 
@@ -148,22 +146,22 @@ cardano-node run \
 **`chmod og-rwx vrf.skey`**
 {% endhint %}
 
-### Setup cardano-node to run as systemd service
+## Set up the Cardano node to run as `systemd` service
 
-It will be usefull to set your time zone to UTC
+It will be useful to set your time zone to UTC:
 
 ```
 sudo timedatectl set-timezone UTC
 ```
 
-Create the cardano-node.service file. We will save on `/etc/systemd/system/`
+Create the cardano-node.service file. The example saves it on `/etc/systemd/system/`:
 
 ```
 sudo nano /etc/systemd/system/cardano-node.service
 ```
 
 ```
-# The Cardano Node service (part of systemd)
+# The Cardano node service (part of systemd)
 # file: /etc/systemd/system/cardano-node.service
 
  [Unit]
@@ -193,16 +191,16 @@ sudo systemctl daemon-reload
 sudo systemctl enable cardano-node.service
 ```
 
-Useful systemctl commands:
+Useful `systemctl` commands:
 
 ```
 systemctl --help
 systemctl [OPTIONS...] COMMAND ...
 
 
-Query or send control commands to the system manager.
+Query or send control commands to the system manager:
 
-Unit Commands:
+Unit commands:
   list-units [PATTERN...]             List units currently in memory
   list-sockets [PATTERN...]           List socket units currently in memory,
                                       ordered by address
@@ -214,16 +212,16 @@ Unit Commands:
   restart UNIT...                     Start or restart one or more units
   try-restart UNIT...                 Restart one or more units if active
   reload-or-restart UNIT...           Reload one or more units if possible,
-                                      otherwise start or restart
+                                      otherwise, start or restart
   try-reload-or-restart UNIT...       If active, reload one or more units,
-                                      if supported, otherwise restart
+                                      if supported, otherwise, restart
   isolate UNIT                        Start one unit and stop all others
-  kill UNIT...                        Send signal to processes of a unit
+  kill UNIT...                        Send a signal to processes of a unit
   clean UNIT...                       Clean runtime, cache, state, logs or
-                                      configuration of unit
+                                      configuration of a unit
   is-active PATTERN...                Check whether units are active
   is-failed PATTERN...                Check whether units are failed
-  status [PATTERN...|PID...]          Show runtime status of one or more units
+  status [PATTERN...|PID...]          Show the runtime status of one or more units
 ```
 
 For example:
@@ -236,27 +234,27 @@ sudo systemctl stop cardano-node.service
 sudo systemctl start cardano-node.service
 ```
 
-**Use journalctl to inspect you node logs:**
+**Use `journalctl` to inspect your node logs:**
 
-Follow the logs in real time
+Follow the logs in real-time:
 
 ```
 journalctl --unit=cardano-node --follow
 ```
 
-Show only the actual message (pure node logs) without any metadata from journalctl
+Show only the actual message (pure node logs) without any metadata from `journalctl`:
 
 ```
 journalctl --unit=cardano-node --follow --output=cat
 ```
 
-Filter logs from a specific date
+Filter logs from a specific date:
 
 ```
 journalctl --unit=cardano-node --since=today
 ```
 
-Delete old logs
+Delete old logs:
 
 ```
 sudo journalctl --vacuum-time=5d

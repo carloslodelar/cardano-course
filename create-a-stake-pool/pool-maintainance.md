@@ -1,6 +1,6 @@
-# Pool Operations/Maintenance
+# Pool operations and maintenance
 
-### Query stake snapshot
+## Querying the stake snapshot
 
 ```bash
 cardano-cli query stake-snapshot \
@@ -8,7 +8,7 @@ cardano-cli query stake-snapshot \
 --stake-pool-id <pool_id>
 ```
 
-### Query leadership schedule
+## Querying the leadership schedule
 
 ```bash
 cardano-cli query leadership-schedule \
@@ -28,7 +28,7 @@ cardano-cli query leadership-schedule \
 --next
 ```
 
-### Check the validity of your KES keys:
+## Checking the validity of your KES keys
 
 ```bash
 cardano-cli query kes-period-info \
@@ -52,9 +52,7 @@ cardano-cli query kes-period-info \
 }
 ```
 
-
-
-### Renew KES keys and operational certificate
+## Renewing KES keys and the operational certificate
 
 ```bash
 cardano-cli node key-gen-KES \
@@ -70,11 +68,11 @@ cardano-cli node key-gen-KES \
   --out-file opcert.cert
 ```
 
-Upload the new `kes.skey` and `opcert.cert` to your BP node.
+Upload the new `kes.skey` and `opcert.cert` to your block-producing node.
 
-### Withdraw rewards
+## Withdrawing rewards
 
-Build the stake address
+Build the stake address:
 
 ```bash
 cardano-cli stake-address build \
@@ -83,7 +81,7 @@ cardano-cli stake-address build \
 --out-file stake.addr
 ```
 
-Query its balance
+Query its balance:
 
 ```bash
 cardano-cli query stake-address-info \
@@ -91,7 +89,7 @@ cardano-cli query stake-address-info \
 --address $(cat stake.addr)
 ```
 
-example output&#x20;
+Example output:&#x20;
 
 ```
 [
@@ -103,7 +101,7 @@ example output&#x20;
 ]
 ```
 
-We can use jq to parse the output, for example this jq command outputs  "address+balance" which will be useful later when we build our transaction
+You can use `jq` to parse the output, for example, this `jq` command outputs 'address+balance', which will be useful later when building your transaction:
 
 {% code overflow="wrap" %}
 ```bash
@@ -113,7 +111,7 @@ cardano-cli query stake-address-info \
 ```
 {% endcode %}
 
-output:
+Output:
 
 {% code overflow="wrap" %}
 ```
@@ -122,7 +120,7 @@ stake_test1upcezzdyhjcdcgdh28gy3w2xkfdxvs0hmee2p0v25l9uc8cgpaq2e+1579546084
 {% endcode %}
 
 \
-Build a transaction to withdraw rewards, use `--witness-override 2.` It will be signed by stake and payment keys
+Build a transaction to withdraw rewards, use `--witness-override 2.` It will be signed by stake and payment keys:
 
 <pre class="language-bash"><code class="lang-bash">cardano-cli transaction build \
 --testnet-magic 2 \
@@ -133,7 +131,7 @@ Build a transaction to withdraw rewards, use `--witness-override 2.` It will be 
 --out-file withdraw-tx.raw
 </code></pre>
 
-Or something more automatic
+Or, use this more automatic approach: 
 
 ```bash
 cardano-cli transaction build \
@@ -160,9 +158,9 @@ cardano-cli transaction submit \
 --testnet-magic 2
 ```
 
-### Changing pool parameters
+## Changing pool parameters
 
-Updating pool parameters is done with a new registration certificate. This time you will not pay the 500 ADA deposit.&#x20;
+You can update pool parameters using a new registration certificate. This time you will not pay the 500 ada deposit:&#x20;
 
 ```bash
 cardano-cli stake-pool registration-certificate \
@@ -195,7 +193,7 @@ cardano-cli transaction build \
 --out-file tx.raw
 ```
 
-Sign the `tx.raw` on your air-gapped machine
+Sign the `tx.raw` on your air-gapped machine:
 
 ```
 cardano-cli transaction sign \
@@ -207,7 +205,7 @@ cardano-cli transaction sign \
 --out-file tx.signed
 ```
 
-Back on the machine with the running node, submit `tx.signed`&#x20;
+Back on the machine with the running node, submit `tx.signed`:&#x20;
 
 ```
 cardano-cli transaction submit \
@@ -215,28 +213,28 @@ cardano-cli transaction submit \
 --tx-file tx.sigend 
 ```
 
-### Update cardano-node and cardano-cli
+## Updating cardano-node and cardano-cli
 
-1. Build cardano-node and cardano-cli on you local machine
-2. Upload the new binaries to your node server
+1. Build cardano-node and cardano-cli on your local machine
+2. Upload the new binaries to your node server:
 
 ```
 scp cardano-node cardano-cli user@host:~/ 
 ```
 
-3. Stop your node
+3. Stop your node:
 
 ```
 sudo systemctl stop cardano-node.service
 ```
 
-4. Replace the old binaries with the new ones.
+4. Replace the old binaries with the new ones:
 
 ```
 mv cardano* /usr/local/bin 
 ```
 
-5. Restart the node
+5. Restart the node:
 
 ```
 sudo systemctl start cardano-node.service
