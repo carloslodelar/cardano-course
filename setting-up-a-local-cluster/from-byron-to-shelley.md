@@ -5,13 +5,13 @@ coverY: 0
 
 # From Byron to Shelley
 
-You don't want to stay on Byron era forever, right? Of course not. Then move on to the Shelley era, but before you can do that you need to go to protocol version 1.0.0 (Ouroboros BFT). This was referred to as the Byron Reboot and was the only real hard fork in the traditional sense.  
+You don't want to stay in the Byron era forever, right? Of course not. Then move on to the Shelley era, but before you can do that you need to go to protocol version 1.0.0 (Ouroboros BFT). This was referred to as the Byron Reboot and was the only real hard fork in the traditional sense.  
 
-## Upgrade to Ouroboros BFT 
+## Upgrading to Ouroboros BFT 
 
-Update your scripts that run the nodes to include Shelley keys:
+Update your scripts that run the nodes to include Shelley keys.
 
-Create, submit, and vote an update proposal.  
+Create, submit, and vote on an update proposal:  
 
 ```bash
 cardano-cli byron governance create-update-proposal \
@@ -27,7 +27,7 @@ cardano-cli byron governance create-update-proposal \
 --installer-hash 0
 ```
 
-And submit the update proposal
+Submit the update proposal:
 
 <pre class="language-bash"><code class="lang-bash"><strong>cardano-cli byron submit-update-proposal \
 </strong><strong>--testnet-magic 42 \
@@ -42,7 +42,7 @@ Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate
 ```
 {% endcode %}
 
-Now create the votes for both of your genesis keys
+Now create the votes for both of your genesis keys:
 
 <pre class="language-bash"><code class="lang-bash"><strong>cardano-cli byron governance create-proposal-vote \
 </strong>--proposal-filepath transactions/updateprotov1.proposal \
@@ -52,7 +52,7 @@ Now create the votes for both of your genesis keys
 --output-filepath transactions/updateprotov1.000.vote
 </code></pre>
 
-Submit the first vote  
+Submit the first vote:  
 
 ```bash
 cardano-cli byron submit-proposal-vote  \
@@ -60,7 +60,7 @@ cardano-cli byron submit-proposal-vote  \
 --filepath transactions/updateprotov1.000.vote
 ```
 
-You should see `UpdateActive`
+You should see `UpdateActive`:
 
 {% code overflow="wrap" %}
 ```
@@ -86,7 +86,7 @@ cardano-cli byron submit-proposal-vote  \
 --filepath transactions/updateprotov1.001.vote
 ```
 
-This vote completes the vote threshold; the update proposal is confirmed
+This vote completes the vote threshold; the update proposal is confirmed:
 
 {% code overflow="wrap" %}
 ```
@@ -116,8 +116,7 @@ gsed -i configuration/config.json \
 
 IMPORTANT: You need to restart the nodes to pick up the new configuration.   
 
-
-As soon as you restart the second node and produce a block with it, the update proposal has received the required endorsements. It becomes a candidate, and the `epochNo` is set at which the transition will take place if it becomes a stable candidate.  
+As soon as you restart the second node and produce a block with it, the update proposal will receive the required endorsements. It becomes a candidate, and the `epochNo` is set at which the transition will take place if it becomes a stable candidate.  
 
 {% code overflow="wrap" %}
 ```
@@ -145,9 +144,9 @@ Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate
 ```
 {% endcode %}
 
-## Shelley hard fork  
+## The Shelley hard fork  
 
-Now you can upgrade to protocol version 2.0, the Shelley Era.  
+Now you can upgrade to protocol version 2.0, the Shelley era.  
 
 First, add the Shelley keys to your BFT nodes starting scripts:  
 
@@ -237,7 +236,7 @@ cardano-cli byron submit-proposal-vote  \
             --filepath transactions/updateprotov2.001.vote
 ```
 
-Then, adjust the config file again to go to protocol version 2.0
+Then, adjust the config file again to go to protocol version 2.0:
 
 {% tabs %}
 {% tab title="Linux" %}
@@ -253,7 +252,7 @@ gsed -i 's/"LastKnownBlockVersion-Major":1/"LastKnownBlockVersion-Major":2/' con
 {% endtab %}
 {% endtabs %}
 
-Restart the nodes to pick up the new configuration and endorse the proposal.  
+Restart the nodes to pick up the new configuration and endorse the proposal:  
 
 {% code overflow="wrap" %}
 ```
@@ -272,4 +271,4 @@ Event: LedgerUpdate (HardForkUpdateTransitionDone <EraIndex Byron> <EraIndex She
 ```
 {% endcode %}
 
-IMPORTANT: Take note of the epoch at which the Shelley hard fork takes place. In this case, the Shelley hard fork happened at the transition to epoch 3. The Byron epochs lasted 450 slots (10 times the security parameter k) so it happened at slot 1350.  This information will be useful later, so write it down somewhere.
+IMPORTANT: Take note of the epoch at which the Shelley hard fork takes place. In this case, the Shelley hard fork happened during the transition to epoch 3. The Byron epochs lasted 450 slots (10 times the security parameter k) so it happened at slot 1350.  This information will be useful later, so write it down somewhere.
