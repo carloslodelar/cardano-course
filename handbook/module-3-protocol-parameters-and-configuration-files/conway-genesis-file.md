@@ -5,7 +5,7 @@ coverY: 0
 
 # Conway genesis file
 
-#### Cardano mainnet Conway genesis file
+## Cardano mainnet Conway genesis file:
 
 {% embed url="https://book.world.dev.cardano.org/environments/mainnet/conway-genesis.json" %}
 
