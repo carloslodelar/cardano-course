@@ -3,9 +3,9 @@ cover: ../.gitbook/assets/cluster (1).png
 coverY: 0
 ---
 
-# Move funds to a Shelley address
+# Moving funds to a Shelley address
 
-We need to convert our Byron signing key to a corresponding Shelley era key:
+To convert your Byron signing key to a corresponding Shelley era key:
 
 ```bash
 cardano-cli key convert-byron-key \
@@ -14,7 +14,7 @@ cardano-cli key convert-byron-key \
 --byron-payment-key-type
 ```
 
-Now let's generate a new set of Shelley era keys:
+Now, generate a new set of Shelley era keys:
 
 ```bash
 cardano-cli address key-gen \
@@ -22,7 +22,7 @@ cardano-cli address key-gen \
 --signing-key-file utxo-keys/user1.payment.skey
 ```
 
-We build the address with
+Build the address with:
 
 ```bash
 cardano-cli address build \
@@ -31,7 +31,7 @@ cardano-cli address build \
 --out-file utxo-keys/user1.payment.addr
 ```
 
-Build the transaction to move the funds from the their current Byron era address to our newly created Shelley era `user1.payment.add`This address will have all the funds for now:
+Build the transaction to move the funds from the their current Byron era address to your newly-created Shelley era `user1.payment.add`. This address will have all the funds for now:
 
 ```bash
 cardano-cli transaction build-raw \

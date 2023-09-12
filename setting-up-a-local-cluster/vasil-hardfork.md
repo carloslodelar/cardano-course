@@ -3,9 +3,9 @@ cover: ../.gitbook/assets/cluster (1).png
 coverY: 0
 ---
 
-# Vasil Hardfork
+# Vasil hard fork
 
-As always, let's start by tweaking our config.json file:
+As always, start by tweaking your `config.json` file:
 
 {% tabs %}
 {% tab title="Linux" %}
@@ -23,7 +23,7 @@ gsed -i configuration/config.json \
 {% endtab %}
 {% endtabs %}
 
-Create the proposal saying that we want to move to protocol version 7.0
+Create the update proposal to move to protocol version 7.0
 
 ```bash
 cardano-cli governance create-update-proposal \
@@ -59,7 +59,7 @@ cardano-cli transaction sign \
 --out-file transactions/update.v7.proposal.txsigned
 ```
 
-```
+```bash
 cardano-cli transaction submit --testnet-magic 42 --tx-file transactions/update.v7.proposal.txsigned
 ```
 

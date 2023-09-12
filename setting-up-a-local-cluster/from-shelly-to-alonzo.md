@@ -5,9 +5,9 @@ coverY: 0
 
 # From Shelly to Alonzo
 
-### Allegra Hardfork
+## Allegra hard fork
 
-Let's continue upgrading our system to later eras. First we move from Shelley to Allegra. To achieve this we need to upgrade to protocol version 3.0
+Continue upgrading your system to later eras. First, move from Shelley to Allegra. To achieve this, upgrade to protocol version 3.0
 
 {% tabs %}
 {% tab title="Linux" %}
@@ -70,11 +70,11 @@ cardano-cli transaction submit --testnet-magic 42 \
 --tx-file transactions/update.v3.proposal.txsigned
 ```
 
-Wait for the next epoch transition to see the Allegra hardfork:
+Wait for the next epoch transition to see the Allegra hard fork.
 
-### Mary hardfork
+## Mary hard fork
 
-To get to Mary era we upgrade to protocol version 4.0&#x20;
+To get to Mary era, upgrade to protocol version 4.0  
 
 {% tabs %}
 {% tab title="Linux" %}
@@ -133,11 +133,11 @@ cardano-cli transaction submit --testnet-magic 42 \
 --tx-file transactions/update.v4.proposal.txsigned
 ```
 
-Wait for the next epoch transition to see the Mary hardfork:
+Wait for the next epoch transition to see the Mary hard fork.
 
-### Alonzo hardfork and Alonzo intra-era hardfork
+## Alonzo hard fork and Alonzo intra-era hard fork
 
-Getting to Alonzo will require the Alonzo Hardfork AND the Alonzo intra-era hardfork, this is, we will move from protocol version 4.0 to 5.0 and then to 6.0&#x20;
+Getting to Alonzo will require the Alonzo hard fork AND the Alonzo intra-era hard fork, that is, move from protocol version 4.0 to 5.0 and then to 6.0  
 
 {% tabs %}
 {% tab title="Linux" %}
@@ -196,7 +196,7 @@ cardano-cli transaction submit --testnet-magic 42 \
 --tx-file transactions/update.v5.proposal.txsigned
 ```
 
-### Alonzo intra-era hardfork
+## Alonzo intra-era hard fork
 
 {% tabs %}
 {% tab title="Linux" %}

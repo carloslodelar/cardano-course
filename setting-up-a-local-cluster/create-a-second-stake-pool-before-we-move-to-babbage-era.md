@@ -3,15 +3,15 @@ cover: ../.gitbook/assets/cluster (1).png
 coverY: 0
 ---
 
-# Create a second stake pool before we move to Babbage era
+# Creating a second stake pool before moving to the Babbage era
 
-The decentralization parameter is removed in Babbage era (Vasil Hardfork). This means that our BFT nodes will not be able to continue producing blocks in Babbage. We will need at least one more stake pool:
+The decentralization parameter is removed in the Babbage era (Vasil hard fork). This means that current BFT nodes will not be able to continue producing blocks in Babbage. You will need at least one more stake pool:
 
 ```bash
 mkdir pool2
 ```
 
-Create keys and an address to send some funds to our second pool.
+Create keys and an address to send some funds to the second pool.
 
 The payment keys
 
@@ -39,7 +39,7 @@ cardano-cli address build \
 --testnet-magic 42
 ```
 
-Build the transactions to send some funds to our second pool owner
+Build the transactions to send some funds to the second pool owner
 
 ```bash
 cardano-cli transaction build \
@@ -52,7 +52,7 @@ cardano-cli transaction build \
 --out-file transactions/tx6.raw
 ```
 
-Sign it
+Sign the transaction
 
 ```bash
 cardano-cli transaction sign \
@@ -91,7 +91,7 @@ cardano-cli node key-gen-VRF \
 --signing-key-file pool2/vrf.skey
 ```
 
-&#x20;Generate KES keys
+Generate KES keys
 
 ```bash
 cardano-cli node key-gen-KES \
@@ -110,7 +110,7 @@ cardano-cli node issue-op-cert \
 --out-file pool2/opcert.cert
 ```
 
-Create a topology file for pool2 and update pool1 topology. We will shut down bft0 and bft1 after the Vasil hardfork so we don't need to update them.&#x20;
+Create a topology file for pool2 and update pool1 topology. You will shut down bft0 and bft1 after the Vasil hard fork so there is no need to update them.
 
 ```bash
 cat > pool1/topology.json <<EOF
@@ -160,7 +160,7 @@ cat > pool2/topology.json <<EOF
 EOF
 ```
 
-And let's have a script to start the pool2 node.&#x20;
+Now write a script to start the pool2 node.  
 
 ```bash
 cat > pool2/startnode.sh <<EOF
@@ -186,7 +186,7 @@ chmod +x pool2/startnode.sh
 
 Start the node from the pool2 directory.
 
-#### Register stake key
+## Register stake key
 
 Create a registration certificate
 
@@ -228,9 +228,9 @@ cardano-cli transaction submit \
 --tx-file transactions/tx7.signed
 ```
 
-#### Register stake pool
+## Register stake pool
 
-Let's reuse the metadata file [https://git.io/JJWdJ ](https://git.io/JJWdJ)
+Reuse the metadata file [https://git.io/JJWdJ ](https://git.io/JJWdJ)
 
 ```bash
 wget https://git.io/JJWdJ -O pool2/poolmetadata.json
@@ -310,7 +310,7 @@ cardano-cli stake-pool id --cold-verification-key-file pool2/cold.vkey --output-
 
 Wait 2 epochs for pool2 to start producing blocks.
 
-#### Let's bring decentralization down to 0
+## Bring decentralization down to 0
 
 ```bash
 cardano-cli governance create-update-proposal \
@@ -355,4 +355,3 @@ Event: LedgerUpdate (HardForkUpdateInEra S (S (S (S (Z (WrapLedgerUpdate {unwrap
 ```
 {% endcode %}
 
-####
