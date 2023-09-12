@@ -2,8 +2,8 @@
 
 | Topic                | Author         | Year | Link                                                                                                    |
 | -------------------- | -------------- | ---- | ------------------------------------------------------------------------------------------------------- |
-| Hardfork combinator  | Edsko De Vries | 2020 | [There is no fork: Supporting an ever-evolving blockchain](https://www.youtube.com/watch?v=D8OTZULEsaI) |
-| Hardfork combinator  | Philipp Kant   | 2020 | [Hard Fork Combinator: full tech demo](https://youtu.be/lGCB7f095UM)                                    |
+| Hard fork combinator  | Edsko De Vries | 2020 | [There is no fork: supporting an ever-evolving blockchain](https://www.youtube.com/watch?v=D8OTZULEsaI) |
+| Hard fork combinator  | Philipp Kant   | 2020 | [Hard fork combinator: full tech demo](https://youtu.be/lGCB7f095UM)                                    |
 |                      |                |      |                                                                                                         |
 |                      |                |      |                                                                                                         |
 |                      |                |      |                                                                                                         |
