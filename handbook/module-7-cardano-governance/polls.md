@@ -1,6 +1,6 @@
 ---
 description: >-
-  On cardano-node 8.0.0 we introduced a new subset of commands to conduct polls
+  Cardano node v.8.0.0 introduced a new subset of commands to conduct polls
   among stake pool operators. A poll is official when it is signed by a genesis
   delegate key.
 ---
@@ -8,23 +8,20 @@ description: >-
 # Polls
 
 {% hint style="success" %}
-This tutorial requires cardano-node 8.0.0 \
-\
-[https://github.com/input-output-hk/cardano-node/releases/tag/8.0.0](https://github.com/input-output-hk/cardano-node/releases/tag/8.0.0)
+This tutorial requires [cardano-node v.8.0.0](https://github.com/input-output-hk/cardano-node/releases/tag/8.0.0).
 {% endhint %}
 
 {% hint style="info" %}
-### Trying the polling feature on a local cluster
 
-Here we have a [tutorial ](../module-8-setting-up-a-local-cluster/create-a-local-cluster-with-mkfiles-script.md)on how to run a local cluster using `mkfiles.sh` script provided in cardano-node repository.&#x20;
+## Working with the polling feature on a local cluster
 
-The examples below were created on a local cluster produced with mkfiles.sh script so you should able be replicate the examples on your own cluster.&#x20;
+See this [tutorial](../module-8-setting-up-a-local-cluster/create-a-local-cluster-with-mkfiles-script.md) on how to run a local cluster using `mkfiles.sh` script provided in the cardano-node repository.
 
-You just need to produce a couple of things after running your cluster:
+The examples below were created on a local cluster generated with the `mkfiles.sh` script. You should be able to replicate the examples on your own cluster.
 
+For this, you need to produce the following after running your cluster:
 
-
-1. **Build the payment address used to pay for the transactions fees:**
+1. **Build the payment address used to pay for the transaction fees:**
 
 ```bash
 cardano-cli address build \
@@ -33,14 +30,14 @@ cardano-cli address build \
 --testnet-magic 42
 ```
 
-2. **Get the hash of delegate 1 verification key**
+2. **Get the hash of delegate 1 verification key:**
 
 ```
 cardano-cli genesis key-hash \
 --verification-key-file example/delegate-keys/delegate1.vkey > example/delegate-keys/delegate1.hash
 ```
 
-3. **Get the pool id of pool 1**
+3. **Get the pool ID of pool 1:**
 
 ```
 cardano-cli stake-pool id \
@@ -49,7 +46,9 @@ cardano-cli stake-pool id \
 ```
 {% endhint %}
 
-## Create a poll
+## Creating a poll
+
+To create a poll, run:
 
 ```
 cardano-cli governance create-poll \
@@ -61,7 +60,7 @@ cardano-cli governance create-poll \
 --out-file poll.cbor > poll.json
 ```
 
-`--nonce` is an optional, yet a recommended option. It takes a UINT,  it is used as a unique identifier so that the same question can be asked at different times.&#x20;
+Note that `--nonce` is an optional but recommended option. It accepts a UINT, which serves as a unique identifier, allowing the same question to be asked at different times.
 
 {% code overflow="wrap" %}
 ```
@@ -120,11 +119,12 @@ Please submit a transaction using the resulting metadata.
 Hint (1): Use '--json-metadata-detailed-schema' and '--metadata-json-file' from the build or build-raw commands.
 Hint (2): You can redirect the standard output of this command to a JSON file to capture metadata.
 
-Note: A serialized version of the poll suitable for sharing with participants has been generated at 'poll.cbor'.
+Note that a serialized version of the poll suitable for sharing with participants has been generated at 'poll.cbor'.
+
 ```
 {% endcode %}
 
-Let's take a look to the serialized version of the poll
+Let's take a look at the serialized version of the poll:
 
 ```
 cat poll.cbor
@@ -136,9 +136,9 @@ cat poll.cbor
 }
 ```
 
-Participants (SPO's) will use `poll.cbor`file to create and submit their responses.&#x20;
+Participants (SPOs) will use the `poll.cbor` file to create and submit their responses.&#x20;
 
-The _Delegate-key-holder_ proposing the poll will publish the poll in a transaction. To build such transaction we do:
+The _delegate-key-holder_ proposing the poll will publish the poll in a transaction. To build such a transaction, run: 
 
 {% code overflow="wrap" %}
 ```
@@ -155,13 +155,13 @@ cardano-cli transaction build \
 {% endcode %}
 
 {% hint style="info" %}
-When building the transaction we can use `--required-signer-hash` or&#x20;
+When building the transaction, you can use `--required-signer-hash` or&#x20;
 
 `--required-signer`&#x20;
 
-In our example we used `--required-signer-hash` because on a real world scenario, the delegate signing keys are on cold storage and build command requires access to a live node. \
-\
-To get the hash of a delegate key we run:
+The example used `--required-signer-hash` because in a real-world scenario, the delegate signing keys are on cold storage and the build command requires access to a live node.
+
+To get the hash of a delegate key, run:
 
 ```
 cardano-cli genesis key-hash --verification-key-file delegate-keys/delegate1.vkey
@@ -169,8 +169,7 @@ cardano-cli genesis key-hash --verification-key-file delegate-keys/delegate1.vke
 ```
 {% endhint %}
 
-\
-Sign the transaction with the delegate signing key and with a payment signing key to pay for the transaction fees.&#x20;
+Sign the transaction with the delegate signing key and with a payment signing key to pay for the transaction fees:
 
 ```
 cardano-cli transaction sign \
@@ -182,16 +181,16 @@ cardano-cli transaction sign \
 ```
 
 {% hint style="info" %}
-Note that on the example the payment key is named **utxo1.skey.** This is the name given by mkfiles.sh script.  It is equivalent to a **payment.skey** that you might be familiar with.&#x20;
+Note that in the example, the payment key is named **utxo1.skey.** This is the name given by the `mkfiles.sh` script. It is equivalent to a **payment.skey** that you might be familiar with.&#x20;
 {% endhint %}
 
-When we inspect the transaction (question.tx.signed)&#x20;
+When inspecting the transaction (question.tx.signed):&#x20;
 
 ```
 cardano-cli transaction view --tx-file question.tx.signed
 ```
 
-we should see something like this: &#x20;
+you should see something like this: &#x20;
 
 {% code overflow="wrap" %}
 ```
@@ -238,9 +237,9 @@ witnesses:
 ```
 {% endcode %}
 
-Note that **required signers** includes the hash of our the delegate key; and **witnesses** includes the delegate and payment keys data.  &#x20;
+Note that the **required signers** field includes the hash of the delegate key, and the **witnesses** field includes the delegate and payment key data.  &#x20;
 
-Finally, we submit the transaction as usual:
+Finally, submit the transaction as usual:
 
 ```
 cardano-cli transaction submit \
@@ -248,7 +247,7 @@ cardano-cli transaction submit \
 --tx-file question.tx.signed
 ```
 
-We can use _**dbsync**_ to check how it was registered online:
+You can use _**db-sync**_ to check how it was registered online:
 
 ```
 cexplorer=# SELECT * FROM tx_metadata WHERE key = 94;
@@ -274,13 +273,13 @@ cexplorer=# SELECT * FROM extra_key_witness;
 
 Of course, the hash matches the hash of the delegate key. This way, when SPOs see a poll signed with any of the delegate keys (verified by the delegate key hashes) they know this is an official poll.&#x20;
 
-### Answering the poll
+## Answering the poll
 
-Use `answer-poll` to create a response. You can use the `--answer`option to record your answer right away by providing the index of your response, or omit it to access the interactive method.&#x20;
+You can use the `answer-poll` command to create a response. Use the `--answer` option to immediately record your response by providing the index of your response. Alternatively, omit it to access the interactive method.&#x20;
 
-Note that in any case we are redirecting the output to `poll-answer.json`
+Note that in any case, you are redirecting the output to `poll-answer.json`.
 
-The proponents of the poll will have distributed the `poll.cbor` file from above. As an SPO, you will need it to answer the poll. Again, it will look like this:
+The proponents of the poll will have distributed the `poll.cbor` file from above. As an SPO, you will need it to answer the poll. It will look like this:
 
 ```
 cat poll.cbor
@@ -292,7 +291,7 @@ cat poll.cbor
 }
 ```
 
-#### Using --answer
+### Using `--answer`
 
 ```
 cardano-cli governance answer-poll \
@@ -300,7 +299,7 @@ cardano-cli governance answer-poll \
 --answer 0 > poll-answer.json
 ```
 
-In this example we vote for option with index \[0], Cheeto.&#x20;
+This example votes for the option with index [0], Cheeto:
 
 {% code overflow="wrap" %}
 ```
@@ -317,7 +316,7 @@ Hint (2): You can redirect the standard output of this command to a JSON file to
 ```
 {% endcode %}
 
-#### Responding interactively
+## Responding interactively
 
 ```
 cardano-cli governance answer-poll \
@@ -344,7 +343,7 @@ Hint (2): You can redirect the standard output of this command to a JSON file to
 ```
 {% endcode %}
 
-#### Submit the response in a transaction
+## Submitting the response in a transaction
 
 ```
 cardano-cli transaction build \
@@ -367,7 +366,7 @@ cardano-cli transaction sign \
 --out-file answer.tx.signed
 ```
 
-When we inspect the signed transaction, **required signers** should contain our cold key hash (the pool id), and **witnesses** contains both the cold and payment key data:&#x20;
+When inspecting the signed transaction, **required signers** should contain the cold key hash (the pool ID), and **witnesses** should contain both the cold and payment key data:&#x20;
 
 ```
 cardano-cli transaction view --tx-file answer.tx.signed
@@ -423,7 +422,7 @@ cardano-cli transaction submit \
 --tx-file answer.tx.signed
 ```
 
-We can use _**dbsync**_ again to track responses:
+You can use _**db-sync**_ again to track responses:
 
 ```
 SELECT * FROM tx_metadata WHERE key = 94;
@@ -449,14 +448,14 @@ SELECT * FROM extra_key_witness;
 (2 rows)
 ```
 
-#### Verifying Answers <a href="#verifying-answers" id="verifying-answers"></a>
+## Verifying answers <a href="#verifying-answers" id="verifying-answers"></a>
 
-Finally, it’s possible to verify answers seen on-chain using the `governance verify-poll` command. What ‘verify’ means here is two-folds:
+Finally, it’s possible to verify answers seen on-chain using the `governance verify-poll` command. ‘Verify’ means:
 
 * It checks that an answer is valid within the context of a given survey
 * It returns the list of signatories key hashes found in the transaction;\
   in the case of a valid submission, one key hash will correspond to a known\
-  stake pool id.
+  stake pool ID.
 
 ```
 cardano-cli governance verify-poll \
@@ -468,9 +467,9 @@ Found valid poll answer with 1 signatories
 ]
 ```
 
-### Using dbsync on your test?&#x20;
+## Using db-sync on your test
 
-Note that the `configuration.yaml` file produced by mkfiles.sh script does not contain the hashes of the genesis files, but dbsync demands them. Therefore, if you want to use _dbsync_, you will need to manually add the hashes of Byron, Shelley and Alonzo genesis files to the `example/configuration.yaml`file:
+Note that the `configuration.yaml` file, produced by the `mkfiles.sh` script, does not contain the hashes of the genesis files, but db-sync demands them. Therefore, if you want to use _db-sync_, you will need to manually add the hashes of Byron, Shelley and Alonzo genesis files to the `example/configuration.yaml`file:
 
 ```
 cardano-cli byron genesis print-genesis-hash \
@@ -504,4 +503,4 @@ ConwayGenesisFile: genesis/shelley/genesis.conway.json
 ...
 ```
 
-Finally, when starting dbsync it is possible that it complains about StartTime mismatch. If this happens, please make sure to replace the `StartTime` on `Shelley Genesis` with the value from `StartTime` on `Byron Genesis,` you should be good to go.
+Finally, when starting db-sync, you might see complaints about StartTime mismatch. If this happens, please make sure to replace the `StartTime` on `Shelley Genesis` with the value from `StartTime` on `Byron Genesis.` You should be good to go.
