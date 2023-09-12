@@ -3,47 +3,47 @@ cover: ../.gitbook/assets/cluster (1).png
 coverY: 0
 ---
 
-# Create a local cluster
+# Creating a local cluster
 
 {% hint style="success" %}
-This tutorial has been updated to work with [cardano-node 8.0.0 ](https://github.com/input-output-hk/cardano-node/releases/tag/8.0.0)
+This tutorial has been updated to work with [cardano-node v.8.0.0](https://github.com/input-output-hk/cardano-node/releases/tag/8.0.0).
 {% endhint %}
 
-In certain situations, it may be necessary to set up a local cluster. To simplify this process, we offer user-friendly tools that require minimal effort to deploy. However, in order to gain a deeper comprehension of the automated tools and the underlying processes involved, we will begin by setting up the cluster manually. This hands-on approach will provide valuable insights into the steps required.
+In certain situations, it may be necessary to set up a local cluster. To simplify this process, there are user-friendly tools that require minimal effort to deploy. However, to help with a deeper comprehension of the automated tools and the underlying processes involved, this tutorial will begin by setting up the cluster manually. This hands-on approach will provide valuable insights into the steps required.
 
-In the following example, we will initiate a cluster during the Byron era and subsequently upgrade it progressively until we reach the Babbage era. By following this step-by-step process, we can better understand the evolution and advancements of the cluster as we transition through different eras.
+The following example will initiate a cluster during the Byron era and subsequently upgrade it progressively until it reaches the Babbage era. This step-by-step process will demonstrate the evolution and advancements of the cluster in its transition through different eras.
 
-### Configure the network and nodes
+## Configuring the network and nodes
 
-#### Requirements:
+### Requirements:
 
-* A linux or macOS machine, see the [Requirements](https://github.com/input-output-hk/cardano-node/blob/master/doc/getting-started/install.md) for details.&#x20;
-* cardano-node and cardano-cli in your $PATH
+* A Linux or macOS machine, see the [Requirements](https://github.com/input-output-hk/cardano-node-wiki/blob/main/docs/getting-started/install.md) for details
+* `cardano-node` and `cardano-cli` in your $PATH
 
 {% hint style="info" %}
-Note: In this section of the course we will minimize the use of scripts. The intention is making the process as transparent and clear as possible.&#x20;
+Note: This section of the course will minimize the use of scripts. The intention is to make the process as transparent and clear as possible.  
 {% endhint %}
 
-To simplify the process, we will utilize the "cardano-cli genesis create-cardano" command, which will create the majority of the necessary files for our local cluster. We only need to supply the following template files as our starting point.
+The `cardano-cli genesis create-cardano` command will be used to simplify the process. It will create most of the necessary files for the local cluster. You only need to supply the following template files as a starting point:
 
 1. Configuration
 2. Byron genesis template
 3. Shelley genesis template
 4. Alonzo genesis template
-5. Conway genesis template&#x20;
+5. Conway genesis template  
 
-#### 1. The configuration files
+### 1. The configuration files
 
-[Cardano World Testnet Templates](https://github.com/input-output-hk/iohk-nix/tree/master/cardano-lib/testnet-template) is the source for our template files. These are the templates that IOG uses when we need to deploy a new testnet.&#x20;
+[Cardano World testnet templates](https://github.com/input-output-hk/iohk-nix/tree/master/cardano-lib/testnet-template) is the source for the template files. These are the templates that IOG uses to deploy a new testnet.  
 
-&#x20;Let's create a directory for our project
+Create a directory for the project:
 
 ```bash
 mkdir -p cluster/template
 cd cluster
 ```
 
-Download the template files and save them in the _template_ folder we just created
+Download the template files and save them in the _template_ folder you just created:
 
 <pre class="language-bash" data-overflow="wrap"><code class="lang-bash"><strong>wget -P template/ https://raw.githubusercontent.com/input-output-hk/iohk-nix/master/cardano-lib/testnet-template/alonzo.json
 </strong>wget -P template/ https://raw.githubusercontent.com/input-output-hk/iohk-nix/master/cardano-lib/testnet-template/byron.json
@@ -52,17 +52,17 @@ wget -P template/ https://raw.githubusercontent.com/input-output-hk/iohk-nix/mas
 wget -P template/ https://raw.githubusercontent.com/input-output-hk/iohk-nix/master/cardano-lib/testnet-template/conway.json
 </code></pre>
 
-Our system will start in Byron era and will have only 2 block producing nodes. We will add 2 Stake Pools later, when we transition to Shelley era.  Let's make a directory for each of the nodes and a configuration folder for our configuration files.&#x20;
+The system will start in the Byron era and will have only two block-producing nodes. You will add two stake pools later when you transition to the Shelley era. Make a directory for each of the nodes and a configuration folder for your configuration files:  
 
 ```bash
 mkdir -p bft0 bft1 configuration
 ```
 
-We want our nodes to connect to each other, each of the nodes requires a topology file that tells the node to which nodes to connect to.&#x20;
+The nodes must connect to each other. Each of the nodes requires a topology file that tells it which nodes to connect to.  
 
-The node bft0 will run on port 3000, and node bft1 on port 3001.  For now, we will use classic topology (not P2P).
+The node bft0 will run on port 3000, and node bft1 – on port 3001. For now, use the classic topology (not P2P).
 
-So we create the topology file for bft0 with:
+Create the topology file for bft0 with:
 
 ```json
 cat > bft0/topology.json <<EOF
@@ -94,9 +94,9 @@ cat > bft1/topology.json <<EOF
 EOF
 ```
 
-#### 3. The genesis files
+### 2. The genesis files
 
-We will use the `byron.json` template file it together with cardano-cli to generate our `byron-genesis.json` file. Our template looks like this:
+Use the `byron.json` template file together with `cardano-cli` to generate a `byron-genesis.json` file. The template looks like this:
 
 ```json
 {
@@ -124,18 +124,18 @@ We will use the `byron.json` template file it together with cardano-cli to gener
 }
 ```
 
-Note that this template uses 200 millisecond slots on Byron era. Mainnet slots lasted 20 seconds during the Byron era and 1 second during Shelley and later eras.&#x20;
+Note that this template uses 200 millisecond slots in the Byron era. Mainnet slots lasted 20 seconds during the Byron era and one second during Shelley and later eras.  
 
-Slots were 20 times longer In Byron era because there was a block in every slot. We needed to ensure that each block had enough time to travel the world and that everybody received the block before forging a next block.  In Shelley+ eras, slots are shorter but not all slots have a block, in mainnet only 5% of the slots have a block, this is the active slot coefficient. This selection of parameters allow for Byron and Shelley epochs to have approximately the same number of blocks.&#x20;
+Slots were 20 times longer in the Byron era because there was a block in every slot. This was necessary to ensure that each block had enough time to travel the world and that everybody received the block before forging the next block. In Shelley and later eras, slots are shorter but not all slots have a block. On mainnet, only 5% of the slots have a block; this is the active slot coefficient. This selection of parameters allows for Byron and Shelley epochs to have approximately the same number of blocks.  
 
-&#x20;In our local cluster we will use 2 second slots in Byron and 0.1 seconds slots on the following eras. The `cardano-cli genesis create-cardano` automatically generates configuration files with this 20:1 ratio.&#x20;
+The local cluster uses two-second slots in Byron and 0.1-second slots in the following eras. The `cardano-cli genesis create-cardano` command automatically generates configuration files with this 20:1 ratio.  
 
-The rest of our parameters will match mainnet ones. For detailed information about the parameters, see:
+The rest of the parameters will match the mainnet ones. For detailed information about the parameters, see:
 
-1. [Byron genesis data format ](https://github.com/input-output-hk/cardano-node/blob/master/doc/reference/byron-genesis.md)
-2. [Shelley era genesis ](https://github.com/input-output-hk/cardano-node/blob/master/doc/getting-started/understanding-config-files.md)
+1. [Byron genesis data format](https://github.com/input-output-hk/cardano-node-wiki/blob/main/docs/reference/byron-genesis.md)
+2. [Shelley era genesis](https://github.com/input-output-hk/cardano-node-wiki/blob/main/docs/getting-started/understanding-config-files.md)
 
-Let's make a few changes to our shelley.json template. Since we will only have 2 nodes, we bring updateQuorum down to 2, We reduce the epoch length to 9000, the security parameter k to 45,  the shelley era slots will last 1/10th of a second; and to help our cluster to match the progression of mainnet protocol versions, we set major (protocol version) to 2. On mainnet Shelley era is protocol version 2.0&#x20;
+You can now make a few changes to the `shelley.json` template. Since there are only two nodes, bring `updateQuorum` down to 2, reduce the epoch length to 9000, the security parameter k to 45, and  the Shelley era slots will last 1/10th of a second. To help the cluster match the progression of mainnet protocol versions, set major (protocol version) to 2. On mainnet, Shelley era is protocol version 2.0:  
 
 {% tabs %}
 {% tab title="Linux" %}
@@ -154,7 +154,7 @@ sed -i template/shelley.json \
 {% endtab %}
 {% endtabs %}
 
-We also need a few changes to the config.json template. for now we will disable P2P topology, we will disable EnableDevelopment options because we want to update our cluster using proper update proposals. Initially we will state that our nodes are ready to move to Protocol Version 1.0.0 (PBFT). Logs will come very fast, we will keep the minSeverity in Info. &#x20;
+A few changes are also needed to the `config.json` template. For now, disable P2P topology and disable the `EnableDevelopment` options so you can update your cluster using proper update proposals. Initially, state that your nodes are ready to move to protocol version 1.0.0 (PBFT). Logs will come very fast, so keep the `minSeverity` in info:  
 
 {% tabs %}
 {% tab title="Linux" %}
@@ -180,7 +180,7 @@ We also need a few changes to the config.json template. for now we will disable 
 {% endtab %}
 {% endtabs %}
 
-We'll also change a couple of Byron parameters for our local cluster. Change `minThd` to `"1000000000000000"`  so that update proposals need both genesis keys positive votes to be approved. And  change `"updateImplicit"` to 450, so that update proposals expire if they have not accumulated enough votes after 450 slots. &#x20;
+Also, change a couple of Byron parameters for your local cluster. Change `minThd` to `"1000000000000000"`  so that update proposals need positive votes from both genesis keys to be approved. And change `"updateImplicit"` to 450, so that update proposals expire if they have not accumulated enough votes after 450 slots:  
 
 {% tabs %}
 {% tab title="Linux" %}
@@ -199,7 +199,7 @@ sed -i template/byron.json \
 {% endtab %}
 {% endtabs %}
 
-Now we can use the magic of `cardano-cli genesis create-cardano`
+Now you can use the magic of `cardano-cli genesis create-cardano`:
 
 {% tabs %}
 {% tab title="Linux" %}
@@ -242,23 +242,21 @@ cardano-cli genesis create-cardano \
 {% endtab %}
 {% endtabs %}
 
-Move genesis files to configuration directory to keep tings in order:
+Move genesis files to the configuration directory to keep things in order:
 
 ```bash
 mv node-config.json configuration/config.json
 mv shelley-genesis.json byron-genesis.json alonzo-genesis.json conway-genesis.json configuration/
 ```
 
-And let's move our genesis delegate keys to their corresponding delegate nodes:
+And move your genesis delegate keys to their corresponding delegate nodes:
 
 ```bash
 mv delegate-keys/byron.000* delegate-keys/shelley.000* bft0/
 mv delegate-keys/byron.001* delegate-keys/shelley.001* bft1/
 ```
 
-To make our lives easier we will create bash scripts to start our nodes.&#x20;
-
-Bft0 will run on port 3000
+To simplify the process, create bash scripts to start your nodes. Bft0 will run on port 3000:
 
 ```bash
 cat > bft0/startnode.sh <<EOF
@@ -275,7 +273,7 @@ cardano-node run \
 EOF
 ```
 
-And BFT1 on port 3001&#x20;
+And bft1 on port 3001:  
 
 ```bash
 cat > bft1/startnode.sh <<EOF
@@ -292,31 +290,31 @@ cardano-node run \
 EOF
 ```
 
-Now let's give our scripts executable permission:
+Now give your scripts executable permission:
 
 ```bash
 chmod +x bft0/startnode.sh bft1/startnode.sh 
 ```
 
-Open a new terminal for each of the nodes, go to the corresponding bft folder and run the script from there:
+Open a new terminal for each of the nodes. Go to the corresponding bft folder, and run the script from there:
 
 ```bash
 cd bft0
 ./startnode.sh
 ```
 
-Repeat for bft1. The nodes will idle until start time is reached, then they will start producing blocks.&#x20;
+Repeat for bft1. The nodes will idle until the start time is reached, and then they will start producing blocks.  
 
-Now you can set the environment variable  `CARDANO_NODE_SOCKET_PATH`
+Now you can set the environment variable `CARDANO_NODE_SOCKET_PATH`:
 
 ```bash
 export CARDANO_NODE_SOCKET_PATH=~/cluster/bft0/bft0.socket
 ```
 
-Let's query the tip of the chain to make sure everything is working as expected:&#x20;
+Next, query the tip of the chain to make sure everything is working as expected:  
 
 ```bash
 cardano-cli query tip --testnet-magic 42
 ```
 
-Great we have a network on Byron era running locally!&#x20;
+Great, you have a network on the Byron era running locally!  

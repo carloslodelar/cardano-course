@@ -3,9 +3,9 @@ cover: ../.gitbook/assets/cluster (1).png
 coverY: 0
 ---
 
-# Redelegate genesis keys
+# Redelegating genesis keys
 
-In a real-life scenario a holder of a genesis key may wish to delegate to a new key. &#x20;
+In a real-life scenario, a holder of a genesis key may wish to delegate to a new key.  
 
 Generate a new (Shelley era) delegation key pair:
 
@@ -16,7 +16,7 @@ cardano-cli genesis key-gen-delegate \
 --operational-certificate-issue-counter-file delegate-keys/new.shelley.delegate.000.certificate.counter
 ```
 
-Issue a new delegation certificate for genesis key 000
+Issue a new delegation certificate for genesis key 000:
 
 ```bash
 cardano-cli governance create-genesis-key-delegation-certificate \
@@ -26,7 +26,7 @@ cardano-cli governance create-genesis-key-delegation-certificate \
 --out-file genesis-keys/genesis.delegation.cert
 ```
 
-Submit the certificate in a transaction, we need to sign it with the genesis key.&#x20;
+Submit the certificate in a transaction. It must be signed with the genesis key:  
 
 ```bash
 cardano-cli query utxo --address $(cat utxo-keys/user1.payment.addr) --testnet-magic 42

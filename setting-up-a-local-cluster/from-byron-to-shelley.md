@@ -5,13 +5,13 @@ coverY: 0
 
 # From Byron to Shelley
 
-We don't want to stay on Byron era forever, right? Of course not. Let's move on to Shelley era, but before we do that we need to go to protocol version 1.0.0 (Ouroboros BFT),  this was referred to as Byron Reboot and was the only real hardfork in the traditional sense.&#x20;
+You don't want to stay in the Byron era forever, right? Of course not. Then move on to the Shelley era, but before you can do that you need to go to protocol version 1.0.0 (Ouroboros BFT). This was referred to as the Byron Reboot and was the only real hard fork in the traditional sense.  
 
-### Upgrade to Ouroboros BFT&#x20;
+## Upgrading to Ouroboros BFT 
 
-Let's update our scripts to run the nodes to include Shelley keys:
+Update your scripts that run the nodes to include Shelley keys.
 
-We need to Create, Submit and Vote and Update Proposal.&#x20;
+Create, submit, and vote on an update proposal:  
 
 ```bash
 cardano-cli byron governance create-update-proposal \
@@ -27,14 +27,14 @@ cardano-cli byron governance create-update-proposal \
 --installer-hash 0
 ```
 
-And submit the update proposal
+Submit the update proposal:
 
 <pre class="language-bash"><code class="lang-bash"><strong>cardano-cli byron submit-update-proposal \
 </strong><strong>--testnet-magic 42 \
 </strong><strong>--filepath transactions/updateprotov1.proposal
 </strong></code></pre>
 
-Monitor the log files from the node, we should see:&#x20;
+Monitor the log files from the node, you should see:  
 
 {% code overflow="wrap" %}
 ```
@@ -42,7 +42,7 @@ Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate
 ```
 {% endcode %}
 
-Now we create the votes for both of our genesis keys
+Now create the votes for both of your genesis keys:
 
 <pre class="language-bash"><code class="lang-bash"><strong>cardano-cli byron governance create-proposal-vote \
 </strong>--proposal-filepath transactions/updateprotov1.proposal \
@@ -52,7 +52,7 @@ Now we create the votes for both of our genesis keys
 --output-filepath transactions/updateprotov1.000.vote
 </code></pre>
 
-Submit the first vote
+Submit the first vote:  
 
 ```bash
 cardano-cli byron submit-proposal-vote  \
@@ -60,7 +60,7 @@ cardano-cli byron submit-proposal-vote  \
 --filepath transactions/updateprotov1.000.vote
 ```
 
-We should see `UpdateActive`
+You should see `UpdateActive`:
 
 {% code overflow="wrap" %}
 ```
@@ -86,7 +86,7 @@ cardano-cli byron submit-proposal-vote  \
 --filepath transactions/updateprotov1.001.vote
 ```
 
-This vote completes the vote threshold, the update proposal is confirmed
+This vote completes the vote threshold; the update proposal is confirmed:
 
 {% code overflow="wrap" %}
 ```
@@ -96,7 +96,7 @@ Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate
 ```
 {% endcode %}
 
-It's time to endorse the proposal. Let's update our config file to indicate that we are ready to move to protocol "LastKnownBlockVersion-Major": 1,
+It's time to endorse the proposal. Update your config file to indicate that you are ready to move to protocol `LastKnownBlockVersion-Major`: 1,
 
 {% tabs %}
 {% tab title="Linux" %}
@@ -114,10 +114,9 @@ gsed -i configuration/config.json \
 {% endtab %}
 {% endtabs %}
 
-IMPORTANT: We need to restart the nodes to pick-up the new configuration. \
+IMPORTANT: You need to restart the nodes to pick up the new configuration.   
 
-
-As soon as we restart the second node and produce a block with it, the update proposal has received the required endorsements. It becomes a Candidate, and we know at what epochNo the transition will take place if it becomes an Stable Candidate
+As soon as you restart the second node and produce a block with it, the update proposal will receive the required endorsements. It becomes a candidate, and the `epochNo` is set at which the transition will take place if it becomes a stable candidate.  
 
 {% code overflow="wrap" %}
 ```
@@ -127,7 +126,7 @@ Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate
 ```
 {% endcode %}
 
-2k slots later, it becomes an stable candidate
+2k slots later, it becomes a stable candidate.   
 
 {% code overflow="wrap" %}
 ```
@@ -145,11 +144,11 @@ Event: LedgerUpdate (HardForkUpdateInEra Z (WrapLedgerUpdate {unwrapLedgerUpdate
 ```
 {% endcode %}
 
-### Shelley Hardfork&#x20;
+## The Shelley hard fork  
 
-Now we can upgrade to protocol version 2.0, the Shelley Era!&#x20;
+Now you can upgrade to protocol version 2.0, the Shelley era.  
 
-First, we add the Shelley keys to our BFT nodes starting scripts:&#x20;
+First, add the Shelley keys to your BFT nodes starting scripts:  
 
 {% tabs %}
 {% tab title="Linux" %}
@@ -237,7 +236,7 @@ cardano-cli byron submit-proposal-vote  \
             --filepath transactions/updateprotov2.001.vote
 ```
 
-Then, we adjust the config file again to say we are ready to go to protocol version 2.0
+Then, adjust the config file again to go to protocol version 2.0:
 
 {% tabs %}
 {% tab title="Linux" %}
@@ -253,9 +252,7 @@ gsed -i 's/"LastKnownBlockVersion-Major":1/"LastKnownBlockVersion-Major":2/' con
 {% endtab %}
 {% endtabs %}
 
-Restart the nodes to pick the new configuration and endorse the proposal.&#x20;
-
-
+Restart the nodes to pick up the new configuration and endorse the proposal:  
 
 {% code overflow="wrap" %}
 ```
@@ -274,4 +271,4 @@ Event: LedgerUpdate (HardForkUpdateTransitionDone <EraIndex Byron> <EraIndex She
 ```
 {% endcode %}
 
-IMPORTANT: Take note of the epoch at which the Shlley hardfork will take place. TIn this case The Shelley hardfork happened at the transition to epoch 3. Our Byron epochs lasted 450 slots (10 times the security parameter k) so it happened at slot 1350.  This information will be useful later, so write it down somewhere.&#x20;
+IMPORTANT: Take note of the epoch at which the Shelley hard fork takes place. In this case, the Shelley hard fork happened during the transition to epoch 3. The Byron epochs lasted 450 slots (10 times the security parameter k) so it happened at slot 1350.  This information will be useful later, so write it down somewhere.
