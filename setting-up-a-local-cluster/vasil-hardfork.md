@@ -5,7 +5,7 @@ coverY: 0
 
 # Vasil hard fork
 
-As always, start by tweaking your `config.json` file:
+Start by tweaking your `config.json` file:
 
 {% tabs %}
 {% tab title="Linux" %}
@@ -23,7 +23,7 @@ gsed -i configuration/config.json \
 {% endtab %}
 {% endtabs %}
 
-Create the update proposal to move to protocol version 7.0
+Create the update proposal to move to protocol version 7.0:
 
 ```bash
 cardano-cli governance create-update-proposal \
