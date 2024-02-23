@@ -77,7 +77,7 @@ cardano-cli stake-pool registration-certificate \
 --vrf-verification-key-file vrf.vkey \
 --pool-pledge 9000000000 \
 --pool-cost 340000000 \
---pool-margin .05 \
+--pool-margin 0.05 \
 --pool-reward-account-verification-key-file stake.vkey \
 --pool-owner-stake-verification-key-file stake.vkey \
 --testnet-magic 2 \
